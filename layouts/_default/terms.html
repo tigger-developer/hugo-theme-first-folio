@@ -1,36 +1,50 @@
 {{/* ABOUTME: Renders a tag cloud with frequency-based font sizing */}}
-{{/* ABOUTME: Font size scales from 1rem to 3rem based on tag count */}}
+{{/* ABOUTME: Font size scales from 1rem to 3rem based on tag count; excludes drafts */}}
 {{ define "main" }}
 <h1 class="page-title">All tags</h1>
 
 {{ $max := 3.0 }}
 {{ $min := 1.0 }}
 
-{{/* Compute actual biggest and smallest counts from tag data */}}
+{{/* Build a map of tag -> published page count, skipping tags with zero */}}
+{{ $counts := dict }}
+{{ range $term := .Data.Terms.ByCount }}
+  {{ $published := where $term.Pages ".Draft" false }}
+  {{ if gt (len $published) 0 }}
+    {{ $counts = merge $counts (dict $term.Name (len $published)) }}
+  {{ end }}
+{{ end }}
+
+{{/* Compute biggest and smallest from published counts */}}
 {{ $biggest := 1 }}
 {{ $smallest := 1 }}
-{{ range $i, $term := .Data.Terms.ByCount }}
-  {{ if eq $i 0 }}
-    {{ $biggest = $term.Count }}
-    {{ $smallest = $term.Count }}
+{{ $first := true }}
+{{ range $name, $count := $counts }}
+  {{ if $first }}
+    {{ $biggest = $count }}
+    {{ $smallest = $count }}
+    {{ $first = false }}
   {{ end }}
-  {{ if gt $term.Count $biggest }}
-    {{ $biggest = $term.Count }}
+  {{ if gt $count $biggest }}
+    {{ $biggest = $count }}
   {{ end }}
-  {{ if lt $term.Count $smallest }}
-    {{ $smallest = $term.Count }}
+  {{ if lt $count $smallest }}
+    {{ $smallest = $count }}
   {{ end }}
 {{ end }}
 
 {{ $data := .Data }}
 <div class="tag-cloud">
   <ul class="tags">
-    {{ range $key, $value := .Data.Terms.ByCount }}
+    {{ range $term := .Data.Terms.ByCount }}
+    {{ $count := index $counts $term.Name }}
+    {{ if $count }}
     {{ $size := $min }}
     {{ if ne $biggest $smallest }}
-      {{ $size = (add (mul (div (sub (float $value.Count) (float $smallest)) (sub (float $biggest) (float $smallest))) (sub $max $min)) $min) }}
+      {{ $size = (add (mul (div (sub (float $count) (float $smallest)) (sub (float $biggest) (float $smallest))) (sub $max $min)) $min) }}
     {{ end }}
-    <li><a style="font-size: {{ $size }}rem;" href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/{{ $value.Name | urlize }}/">{{ $value.Name }} ({{ $value.Count }})</a></li>
+    <li><a style="font-size: {{ $size }}rem;" href="{{ $.Site.LanguagePrefix | absURL }}{{ $data.Plural }}/{{ $term.Name | urlize }}/">{{ $term.Name }} ({{ $count }})</a></li>
+    {{ end }}
     {{ end }}
   </ul>
 </div>
