@@ -3325,8 +3325,9 @@ figure.inline-image:has(.inline-image-caption-blur) {
    dominate the page. Width auto-shrinks to preserve aspect-ratio.
    margin: auto centres a portrait video that is narrower than the content area. */
 .post-hero .cfstream-container,
-.post-featured .cfstream-container {
-  max-height: 30rem;
+.post-featured .cfstream-container,
+.featured-image-col .cfstream-container {
+  max-height: 38rem;
   margin-left: auto;
   margin-right: auto;
 }
