@@ -316,6 +316,13 @@ section.body {
   margin-bottom: 3rem;
 }
 
+/* Collapse top margin when a heading leads the body content */
+section.body > :first-child,
+section.body > :first-child > h2:first-child,
+section.body > :first-child > h3:first-child {
+  margin-top: 0;
+}
+
 /* Only apply flex reordering when footnotes exist */
 section.body:has(.footnotes) {
   display: flex;
@@ -1404,6 +1411,11 @@ article .body img {
   border: 0.5rem solid var(--color-secondary) !important;
   box-sizing: border-box !important;
   display: block !important;
+}
+
+/* No-border option for img shortcode */
+figure.no-border img {
+  border: none !important;
 }
 
 code {
@@ -3254,6 +3266,32 @@ figure.inline-image:has(.inline-image-caption-blur) {
     padding-left: 0;
     padding-right: 0;
     padding-inline: 0;
+  }
+}
+
+/* Side-by-side shortcode: two items in a row, stacked on mobile */
+.side-by-side {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.side-by-side figure.inline-image {
+  float: none;
+  width: 50%;
+  margin: 0;
+  margin-block: 0;
+}
+
+@media screen and (max-width: 48em) {
+  .side-by-side {
+    flex-direction: column;
+  }
+
+  .side-by-side figure.inline-image {
+    width: 100% !important;
   }
 }
 
