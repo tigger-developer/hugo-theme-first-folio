@@ -1,0 +1,49 @@
+{{- /* ABOUTME: Pre-release gate — prompts for a passphrase before rendering the page. */ -}}
+{{- /* ABOUTME: Configured via params.prereleaseKey in hugo.yaml. No-op when absent. */ -}}
+
+{{- with .Site.Params.prereleaseKey -}}
+{{- $hash := crypto.SHA256 . -}}
+<style>.prerelease-gate { display: none; }</style>
+<script>
+(function() {
+  var storedHash = '{{ $hash }}';
+  var storageKey = 'prerelease-auth';
+
+  function hashInput(input) {
+    var encoder = new TextEncoder();
+    var data = encoder.encode(input);
+    return crypto.subtle.digest('SHA-256', data).then(function(buf) {
+      return Array.from(new Uint8Array(buf)).map(function(b) {
+        return b.toString(16).padStart(2, '0');
+      }).join('');
+    });
+  }
+
+  function showPage() {
+    document.body.classList.remove('prerelease-gate');
+  }
+
+  function authenticate() {
+    var passphrase = prompt('This site is not yet public. Enter passphrase:');
+    if (!passphrase) {
+      window.location = 'about:blank';
+      return;
+    }
+    hashInput(passphrase).then(function(inputHash) {
+      if (inputHash === storedHash) {
+        sessionStorage.setItem(storageKey, 'true');
+        showPage();
+      } else {
+        window.location = 'about:blank';
+      }
+    });
+  }
+
+  if (sessionStorage.getItem(storageKey) === 'true') {
+    showPage();
+  } else {
+    authenticate();
+  }
+})();
+</script>
+{{- end -}}
