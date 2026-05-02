@@ -1,23 +1,26 @@
 # tadg_ie Hugo Theme
 
-Live demo: [demo.theme.tadg.ie](https://demo.theme.tadg.ie) | In production: [tadg.ie](https://tadg.ie)
+[Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md)
 
+## What this is
 
+tadg_ie is a Hugo theme built to run a single site that does many different things well. It grew out of a practical problem: four separate websites - a poetry collection, an art gallery, a tech blog, and a personal site - that needed to become one, without any section feeling like a second-class citizen.
 
-A Hugo theme for multi-content-type sites with masonry layouts, galleries, and responsive design. Based on the Archie theme with extensive customizations.
+The result is a theme that handles image galleries with EXIF metadata and lightbox, long-form articles with six distinct layout options, poetry with preserved line breaks, play scripts with dialogue and stage directions, recipe cards, technical documentation with table of contents, and video streaming via Cloudflare Stream - all from the same installation, all looking like they belong together.
 
-## Features
+## What it does well
 
-- **Masonry grid layout** with CSS Grid fallback and JavaScript positioning
-- **Carousel card** - hero-sized rotating masonry card for featured content
-- **Image galleries** with lightbox and EXIF metadata support
-- **Multiple content types** with section-agnostic design
-- **Section-specific card styles** for each content type
-- **Responsive design** with em-based breakpoints (WCAG 2.1 compliant)
-- **Pagination** with per-section override
-- **18 custom shortcodes** (callout, colorbold, contactform, centre, details, dialogue, direction, formspree, ga, gallery, img, poem, popquote, quote, rawhtml, section-list, side-by-side, video) with Cloudflare Stream video support
-- **Flexible sidebar** with content, shortcodes, or section navigation
-- **Dark mode design** throughout
+**Content variety without compromise.** Poetry pages preserve every line break. Gallery pages read EXIF metadata from your images. Blog posts get hero banners or background images. Play scripts render character names in small caps with stage directions in accent colour. Each content type has its own card style on the masonry grid, but shares the same responsive framework.
+
+**Article layouts.** Six layout options controlled by a single frontmatter field: full-width banner with title overlay, hero image below title, side-by-side columns (image left or right), inline featured image, and background image with configurable blur and opacity. Plus a clean text-only default.
+
+**The masonry grid.** A hybrid CSS Grid and JavaScript approach that adapts to viewport width using em-based breakpoints (WCAG 2.1 compliant - respects browser font size). Configurable columns, gaps, and breakpoints. A carousel card rotates featured content above the grid. Pin values control homepage ordering.
+
+**18 shortcodes.** Callout boxes, collapsible details, block quotes with decorative marks, expandable quotes, poetry formatting, play dialogue and stage directions, inline images with responsive thumbnails and WebP, image galleries, side-by-side layouts, video embeds, contact forms with CAPTCHA, and more. Each documented with live examples on the [demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/).
+
+**Navigation and CTAs.** Breadcrumb trails with section hierarchy, author, and date. Signpost bars for calls to action - configurable per page or cascaded across entire sections. Table of contents as a sticky sidebar on desktop, collapsible on mobile.
+
+**Responsive throughout.** All breakpoints in em units. Sidebar collapses to a toggle on mobile. Masonry grid adjusts column count. Images serve responsive srcsets with WebP. Galleries, carousels, and layouts all adapt.
 
 ## Quick Start
 
@@ -1460,5 +1463,3 @@ Ensure both CSS files are loaded:
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.
-
-Based on the [Archie theme](https://github.com/athul/archie) by Athul Cyriac Ajay.

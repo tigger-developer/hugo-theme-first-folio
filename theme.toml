@@ -1,8 +1,8 @@
 # theme.toml for tadg_ie Hugo theme
 # Based on Archie theme with extensive customizations
 
-name = "tadg_ie"
-license = "MIT"
+name = "First Folio"
+license = "Apache-2.0"
 licenselink = "https://github.com/tigger04/theme-tadg-ie/blob/main/LICENSE"
 description = "A Hugo theme for multi-content-type sites with masonry layouts, galleries, and responsive design. Based on Archie."
 homepage = "https://github.com/tigger04/theme-tadg-ie"
