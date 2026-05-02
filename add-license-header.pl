@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 # add-license-header.pl
 # Prefix Apache 2.0 SPDX header to source files.
-# Skips files that already carry any licence marker.
+# Skips files that already carry any licence marker, dotfiles, and unhandled types.
 
 use strict;
 use warnings;
@@ -13,15 +13,13 @@ my $spdx      = 'SPDX-License-Identifier: Apache-2.0';
 my $note      = 'See LICENSE file in the repository root.';
 
 # Comment styles per extension: [open, line-prefix, close]
-# Empty open/close means line-comment style.
+# Empty open/close = line-comment style.
 my %styles = (
-    css     => ['/*',   ' * ', ' */'],
-    html    => ['<!--', ' ',   '-->'],
-    xml     => ['<!--', ' ',   '-->'],
-    pl      => ['',     '# ',  ''],
-    sh      => ['',     '# ',  ''],
-    toml    => ['',     '# ',  ''],
-    org     => ['',     '# ',  ''],
+    css  => ['/*',   ' * ', ' */'],
+    html => ['<!--', ' ',   '-->'],
+    pl   => ['',     '# ',  ''],
+    sh   => ['',     '# ',  ''],
+    toml => ['',     '# ',  ''],
 );
 
 # Lines that must remain first in the file
@@ -50,12 +48,21 @@ sub build_header {
     return join("\n", @lines) . "\n\n";
 }
 
-my $tagged = 0;
+my $tagged  = 0;
 my $skipped = 0;
 
 for my $file (@ARGV) {
     unless (-f $file) {
         warn "skip (not a file): $file\n";
+        $skipped++;
+        next;
+    }
+
+    # Skip dotfiles (.gitignore, .gitkeep, .env, etc.)
+    my $basename = $file;
+    $basename =~ s|.*/||;
+    if ($basename =~ /^\./) {
+        warn "skip (dotfile): $file\n";
         $skipped++;
         next;
     }
