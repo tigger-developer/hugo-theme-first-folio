@@ -2,60 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Reference on wanderers.lobb.ie</title>
-    <link>https://example.com/tags/reference/</link>
+    <link>http://localhost:1314/tags/reference/</link>
     <description>Recent content in Reference on wanderers.lobb.ie</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>Example Site — MIT License</copyright>
     <lastBuildDate>Mon, 01 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/reference/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1314/tags/reference/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Shortcode Showcase</title>
-      <link>https://example.com/journal/shortcode-showcase/</link>
+      <link>http://localhost:1314/journal/shortcode-showcase/</link>
       <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/shortcode-showcase/</guid>
+      <guid>http://localhost:1314/journal/shortcode-showcase/</guid>
       <description>&lt;p&gt;This page demonstrates every shortcode available in the tadg_ie theme. Use it as a visual reference.&lt;/p&gt;&#xA;&lt;h2 id=&#34;callout&#34;&gt;Callout&lt;/h2&gt;&#xA;&lt;p&gt;Four built-in types plus custom styling:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#39;callout callout-tip&#39; style=&#39;&#39;&gt;&#xA;  &lt;div class=&#34;callout-inner&#34;&gt;&#xA;    &lt;strong class=&#34;callout-title&#34;&gt;Tip&lt;/strong&gt;&#xA;    &lt;br /&gt;&#xA;    &#xA;    This is a tip callout — use it for helpful suggestions.&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#39;callout callout-info&#39; style=&#39;&#39;&gt;&#xA;  &lt;div class=&#34;callout-inner&#34;&gt;&#xA;    &lt;strong class=&#34;callout-title&#34;&gt;Info&lt;/strong&gt;&#xA;    &lt;br /&gt;&#xA;    &#xA;    This is an info callout — use it for informational notes.&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#39;callout callout-alert&#39; style=&#39;&#39;&gt;&#xA;  &lt;div class=&#34;callout-inner&#34;&gt;&#xA;    &lt;strong class=&#34;callout-title&#34;&gt;Alert&lt;/strong&gt;&#xA;    &lt;br /&gt;&#xA;    &#xA;    This is an alert callout — use it for critical information.&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#39;callout callout-warning&#39; style=&#39;&#39;&gt;&#xA;  &lt;div class=&#34;callout-inner&#34;&gt;&#xA;    &lt;strong class=&#34;callout-title&#34;&gt;Warning&lt;/strong&gt;&#xA;    &lt;br /&gt;&#xA;    &#xA;    This is a warning callout — use it for cautionary notes.&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#39;callout callout-info&#39; style=&#39;text-align: center;width: 100%; max-width: 60%; margin-left: auto; margin-right: auto;&#39;&gt;&#xA;  &lt;div class=&#34;callout-inner&#34;&gt;&#xA;    &lt;strong class=&#34;callout-title&#34;&gt;&lt;a href=&#34;https://example.com&#34;&gt;Buy Now&lt;/a&gt;&lt;/strong&gt;&#xA;    &lt;br /&gt;&#xA;    &#xA;    &lt;a href=&#34;https://example.com&#34; class=&#34;callout-link&#34;&gt;Available worldwide&lt;/a&gt;&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;div class=&#39;callout callout-custom&#39; style=&#39;background: hsl(210, 30%, 30%); color: #eee;&#39;&gt;&#xA;  &lt;div class=&#34;callout-inner&#34;&gt;&#xA;    &lt;strong class=&#34;callout-title&#34;&gt;Custom Callout&lt;/strong&gt;&#xA;    &lt;br /&gt;&#xA;    &#xA;    This callout has a custom title and background colour.&#xA;    &lt;/div&gt;&#xA;&lt;/div&gt;&#xA;&#xA;&lt;p&gt;With float positioning:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Navigation and CTA Features</title>
-      <link>https://example.com/journal/navigation-features/</link>
+      <link>http://localhost:1314/journal/navigation-features/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/navigation-features/</guid>
+      <guid>http://localhost:1314/journal/navigation-features/</guid>
       <description>&lt;p&gt;This page demonstrates the navigation features of the tadg_ie theme.&lt;/p&gt;&#xA;&lt;h2 id=&#34;breadcrumb-trail&#34;&gt;Breadcrumb Trail&lt;/h2&gt;&#xA;&lt;p&gt;The breadcrumb trail appears automatically on article pages, showing the section path, author, and date. It uses purple accents for sections and orange for metadata.&lt;/p&gt;&#xA;&lt;p&gt;Control it with frontmatter:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;breadcrumb: false&lt;/code&gt; — hide on article pages (default: true)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;breadcrumb_list: true&lt;/code&gt; — show on list/section pages (default: false)&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;hideAuthor: true&lt;/code&gt; — omit author segment&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;hideDate: true&lt;/code&gt; — omit date segment&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;signpost-cta&#34;&gt;Signpost CTA&lt;/h2&gt;&#xA;&lt;p&gt;The signpost bar appears below the banner/hero image. Configure it in frontmatter:&lt;/p&gt;</description>
     </item>
     <item>
       <title>Typography in the tadg_ie Theme</title>
-      <link>https://example.com/journal/typography-guide/</link>
+      <link>http://localhost:1314/journal/typography-guide/</link>
       <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/typography-guide/</guid>
+      <guid>http://localhost:1314/journal/typography-guide/</guid>
       <description>&lt;p&gt;This post demonstrates how standard Markdown typography renders in the tadg_ie theme. Use it as a reference when writing content.&lt;/p&gt;&#xA;&lt;h2 id=&#34;headings&#34;&gt;Headings&lt;/h2&gt;&#xA;&lt;p&gt;Headings from H2 to H6 are available. H1 is reserved for the page title.&lt;/p&gt;&#xA;&lt;h3 id=&#34;third-level&#34;&gt;Third Level&lt;/h3&gt;&#xA;&lt;h4 id=&#34;fourth-level&#34;&gt;Fourth Level&lt;/h4&gt;&#xA;&lt;h5 id=&#34;fifth-level&#34;&gt;Fifth Level&lt;/h5&gt;&#xA;&lt;h6 id=&#34;sixth-level&#34;&gt;Sixth Level&lt;/h6&gt;&#xA;&lt;h2 id=&#34;text-formatting&#34;&gt;Text Formatting&lt;/h2&gt;&#xA;&lt;p&gt;Regular paragraph text. &lt;strong&gt;Bold text&lt;/strong&gt; for emphasis. &lt;em&gt;Italic text&lt;/em&gt; for subtlety. &lt;del&gt;Strikethrough&lt;/del&gt; for corrections. &lt;code&gt;Inline code&lt;/code&gt; for technical terms.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Blockquotes are useful for highlighting important passages or attributing quotes to their sources.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Featured Image Layout</title>
-      <link>https://example.com/journal/featured-image/</link>
+      <link>http://localhost:1314/journal/featured-image/</link>
       <pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/featured-image/</guid>
+      <guid>http://localhost:1314/journal/featured-image/</guid>
       <description>&lt;p&gt;The &lt;code&gt;featured&lt;/code&gt; layout places the article&amp;rsquo;s image prominently within the content flow. Unlike the &lt;code&gt;banner&lt;/code&gt; or &lt;code&gt;hero&lt;/code&gt; layouts, the image does not span the full viewport width — it sits within the content column, scaled to fit.&lt;/p&gt;&#xA;&lt;h2 id=&#34;when-to-use-featured&#34;&gt;When to Use Featured&lt;/h2&gt;&#xA;&lt;p&gt;This layout suits articles where the image is important but not the primary focus. The image appears after the title and metadata, before the body text — a natural reading order.&lt;/p&gt;</description>
     </item>
     <item>
       <title>Configuring Dark Mode</title>
-      <link>https://example.com/journal/dark-mode-setup/</link>
+      <link>http://localhost:1314/journal/dark-mode-setup/</link>
       <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/dark-mode-setup/</guid>
+      <guid>http://localhost:1314/journal/dark-mode-setup/</guid>
       <description>&lt;p&gt;The theme supports four dark mode strategies, configured via &lt;code&gt;params.mode&lt;/code&gt; in your &lt;code&gt;hugo.yaml&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;h2 id=&#34;mode-options&#34;&gt;Mode Options&lt;/h2&gt;&#xA;&lt;h3 id=&#34;auto-recommended&#34;&gt;&lt;code&gt;auto&lt;/code&gt; (recommended)&lt;/h3&gt;&#xA;&lt;p&gt;Follows the operating system preference using &lt;code&gt;prefers-color-scheme: dark&lt;/code&gt;. When the user switches their OS to dark mode, the site follows automatically.&lt;/p&gt;&#xA;&lt;div class=&#34;code-block&#34; data-lang=&#34;yaml&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;params&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;mode&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;auto&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&#xA;&lt;h3 id=&#34;toggle&#34;&gt;&lt;code&gt;toggle&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Adds a toggle button in the header. Users can switch between light and dark mode regardless of their OS setting. Their preference is stored in &lt;code&gt;localStorage&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;div class=&#34;code-block&#34; data-lang=&#34;yaml&#34;&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;params&lt;/span&gt;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;mode&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;toggle&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&#xA;&lt;h3 id=&#34;dark&#34;&gt;&lt;code&gt;dark&lt;/code&gt;&lt;/h3&gt;&#xA;&lt;p&gt;Forces dark mode for all visitors.&lt;/p&gt;</description>
     </item>
     <item>
       <title>How the Masonry Grid Works</title>
-      <link>https://example.com/journal/masonry-explained/</link>
+      <link>http://localhost:1314/journal/masonry-explained/</link>
       <pubDate>Thu, 10 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/masonry-explained/</guid>
+      <guid>http://localhost:1314/journal/masonry-explained/</guid>
       <description>&lt;p&gt;The homepage and section list pages use a masonry grid — a layout where items of varying heights pack together without gaps, like a stone wall.&lt;/p&gt;&#xA;&lt;h2 id=&#34;the-hybrid-approach&#34;&gt;The Hybrid Approach&lt;/h2&gt;&#xA;&lt;p&gt;Pure CSS Grid gives us responsive columns but leaves vertical gaps. Pure JavaScript positioning is fragile on resize. The tadg_ie theme uses both:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&lt;strong&gt;CSS Grid&lt;/strong&gt; handles the horizontal layout — responsive columns that reflow based on viewport width.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;JavaScript&lt;/strong&gt; runs after images load and adjusts vertical positioning to fill gaps.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;This means the layout works (albeit with gaps) even when JavaScript is disabled.&lt;/p&gt;</description>
     </item>
     <item>
       <title>The Background Image Layout</title>
-      <link>https://example.com/journal/background-images/</link>
+      <link>http://localhost:1314/journal/background-images/</link>
       <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/background-images/</guid>
+      <guid>http://localhost:1314/journal/background-images/</guid>
       <description>&lt;p&gt;The &lt;code&gt;background&lt;/code&gt; layout places the article&amp;rsquo;s image behind the content, with configurable opacity and blur. The text remains fully readable while the image provides atmosphere.&lt;/p&gt;&#xA;&lt;h2 id=&#34;controlling-the-effect&#34;&gt;Controlling the Effect&lt;/h2&gt;&#xA;&lt;p&gt;Two parameters fine-tune the background:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;opacity&lt;/code&gt;&lt;/strong&gt; — how visible the image is (0.0 to 1.0). Lower values are more subtle.&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;&lt;code&gt;blur&lt;/code&gt;&lt;/strong&gt; — how much the image is blurred. Higher values create a softer, less distracting backdrop.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;This page uses &lt;code&gt;opacity: 0.15&lt;/code&gt; and &lt;code&gt;blur: 8px&lt;/code&gt; for a gentle wash of colour behind the text.&lt;/p&gt;</description>
     </item>
   </channel>

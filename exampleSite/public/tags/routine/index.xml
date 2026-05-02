@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Routine on wanderers.lobb.ie</title>
-    <link>https://example.com/tags/routine/</link>
+    <link>http://localhost:1314/tags/routine/</link>
     <description>Recent content in Routine on wanderers.lobb.ie</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>Example Site — MIT License</copyright>
     <lastBuildDate>Mon, 01 Sep 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://example.com/tags/routine/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1314/tags/routine/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Morning Routines</title>
-      <link>https://example.com/journal/morning-routines/</link>
+      <link>http://localhost:1314/journal/morning-routines/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>https://example.com/journal/morning-routines/</guid>
+      <guid>http://localhost:1314/journal/morning-routines/</guid>
       <description>&lt;p&gt;There is a particular quality to the first hour of the day, before the world has fully arrived. The kettle. The notebook. The light that comes in low and long.&lt;/p&gt;&#xA;&lt;p&gt;Morning routines are not about productivity. They are about the small rituals that make a person feel like themselves before the day asks them to be something else.&lt;/p&gt;&#xA;&lt;p&gt;The French press takes four minutes. That is enough time to write three sentences. Three sentences, over a year, is a book.&lt;/p&gt;</description>
     </item>
   </channel>
