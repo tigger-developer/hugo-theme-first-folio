@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+ Copyright (c) 2023 Taḋg Paul
+ SPDX-License-Identifier: Apache-2.0
+ See LICENSE file in the repository root.
+-->
+
 <html lang="{{ .Site.Language.Lang }}">
     {{- partial "header.html" . -}}
     <body class="{{ if eq .Params.layout "columns" }}columns-page{{ end }}{{ if .Site.Params.prereleaseKey }} prerelease-gate{{ end }}" data-grid-config='{{ .Scratch.Get "gridConfig" }}'>

@@ -1,4 +1,8 @@
 #!/usr/bin/env perl
+# Copyright (c) 2023 Taḋg Paul
+# SPDX-License-Identifier: Apache-2.0
+# See LICENSE file in the repository root.
+
 # ABOUTME: Finds Hugo content files with non-empty pin: values in frontmatter.
 # ABOUTME: Displays them sorted numerically for review and reordering.
 

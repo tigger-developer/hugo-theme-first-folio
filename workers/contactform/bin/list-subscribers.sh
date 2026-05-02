@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+# Copyright (c) 2023 Taḋg Paul
+# SPDX-License-Identifier: Apache-2.0
+# See LICENSE file in the repository root.
+
 # ABOUTME: Lists all newsletter subscribers from the Cloudflare KV store.
 # ABOUTME: Outputs tab-separated: email, name, subscribed date.
 

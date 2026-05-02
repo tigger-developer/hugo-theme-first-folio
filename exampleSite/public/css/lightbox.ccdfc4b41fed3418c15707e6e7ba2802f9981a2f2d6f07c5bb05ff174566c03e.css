@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2023 Taḋg Paul
+ * SPDX-License-Identifier: Apache-2.0
+ * See LICENSE file in the repository root.
+ */
+
 /* Simple lightbox for gallery images */
 .lightbox {
   position: fixed;
