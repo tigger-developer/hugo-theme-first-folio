@@ -1,14 +1,6 @@
 # tadg_ie Hugo Theme
 
-Live demo: https://tadg.ie
-
-# Screenshots
-## Home page
-![Light mode](screenshots/home-light.png)
-![Dark mode](screenshots/home-dark.png)
-## Gallery
-![Light mode](screenshots/gallery-light.png)
-![Dark mode](screenshots/gallery-dark.png)
+Live demo: [demo.theme.tadg.ie](https://demo.theme.tadg.ie) | In production: [tadg.ie](https://tadg.ie)
 
 
 
@@ -23,9 +15,9 @@ A Hugo theme for multi-content-type sites with masonry layouts, galleries, and r
 - **Section-specific card styles** for each content type
 - **Responsive design** with em-based breakpoints (WCAG 2.1 compliant)
 - **Pagination** with per-section override
-- **16 custom shortcodes** (callout, colorbold, contactform, details, dialogue, direction, formspree, ga, gallery, img, poem, popquote, quote, rawhtml, section-list, video) with Cloudflare Stream video support
+- **18 custom shortcodes** (callout, colorbold, contactform, centre, details, dialogue, direction, formspree, ga, gallery, img, poem, popquote, quote, rawhtml, section-list, side-by-side, video) with Cloudflare Stream video support
 - **Flexible sidebar** with content, shortcodes, or section navigation
-- **Dark mode support** with system preference detection
+- **Dark mode design** throughout
 
 ## Quick Start
 
@@ -1140,6 +1132,22 @@ layout: hero              # banner, hero, columns, featured, background
 toc: true                 # Show table of contents as right sidebar
 toc: "In this document"   # Custom TOC heading (defaults to "Table of contents:")
 tldr: "Brief summary"     # TL;DR section at top
+```
+
+### Navigation and CTA
+
+```yaml
+breadcrumb: false         # Hide breadcrumb trail (default: true for articles)
+breadcrumb_list: true     # Show breadcrumb on list/section pages (default: false)
+signpost:                 # CTA bar below banner/hero
+  text: "AVAILABLE NOW"
+  url: "https://example.com"
+signpost_footer:          # CTA bar above footnotes/tags
+  text: "BUY NOW"
+  url: "https://example.com"
+  false                   # Set to false to disable (can be cascaded)
+hideDate: true            # Hide date from breadcrumb
+hideAuthor: true          # Hide author from breadcrumb
 ```
 
 **Table of Contents:** When `toc: true`, the TOC appears as a sticky right-hand sidebar on wide screens (>60em), aligned horizontally with the article title. On narrow screens (≤ 60em), the article title and metadata appear above the TOC, followed by the article content - the title inside the post container is hidden to avoid duplication. Pages without `toc: true` use full-width layout with no extra column. Set `toc` to a string value to customize the heading text (e.g. `toc: "In this document"`); the default heading is "Table of contents:".

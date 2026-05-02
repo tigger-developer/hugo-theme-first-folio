@@ -7,7 +7,7 @@ tags:
   - reflection
 layout: columns
 image:
-  src: columns.png
+  src: columns.jpg
   alt: "A quiet Sunday study scene"
   caption: "Sunday Study"
 ---

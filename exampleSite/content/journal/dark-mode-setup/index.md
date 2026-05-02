@@ -8,7 +8,7 @@ tags:
   - reference
 layout: featured-columns-right
 image:
-  src: featured.png
+  src: featured.jpg
   alt: "A cockapoo howling at an exploding sun"
   caption: "Cockapoo Wolf Exploding Sun"
 toc: "In this guide"

@@ -8,7 +8,7 @@ tags:
   - reference
 layout: banner
 image:
-  src: banner.png
+  src: banner.jpg
   alt: "Colourful figures leaping with joy"
   caption: "Jump for Joy"
 toc: true

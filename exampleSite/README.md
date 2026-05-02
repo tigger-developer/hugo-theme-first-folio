@@ -16,7 +16,7 @@ Then open <http://localhost:1313>.
 | Section | Features Demonstrated |
 |---------|----------------------|
 | **Recipes** | Masonry card grid, sidebar mode 2 (content markdown with section-list), tags, callout/details/colorbold shortcodes, `pin`, `hideDate` |
-| **Journal** | All 7 single-page layouts (banner, hero, columns, featured-columns-right, featured, background, default), TOC, TL;DR, popquote shortcode, dark mode reference |
+| **Journal** | All 7 single-page layouts (banner, hero, columns, featured-columns-right, featured, background, default), TOC, TL;DR, popquote shortcode, dark mode reference, navigation features |
 | **Photography** | Gallery subsections, `gallery: true`, lightbox, EXIF metadata, sidebar mode 4 (root-based) |
 | **Stories** | List view, dialogue/direction/poem shortcodes, sidebar mode 3 (explicit sections) |
 | **Poetry** | Masonry cards, recursive listing, nested collections (half-remembered/), sidebar mode 4 (root-based), `hideDate` cascade, `pin`, poem shortcode |
@@ -29,44 +29,53 @@ Then open <http://localhost:1313>.
 - **Gallery view:** photography/
 
 ### Sidebar Modes
-- **Mode 1 — simple (`true`):** journal/
-- **Mode 2 — content (markdown):** Homepage, recipes/
-- **Mode 3 — explicit sections:** stories/
-- **Mode 4 — root-based:** photography/, poetry/
+- **Mode 1 - simple (`true`):** journal/
+- **Mode 2 - content (markdown):** Homepage, recipes/
+- **Mode 3 - explicit sections:** stories/
+- **Mode 4 - root-based:** photography/, poetry/
 
 ### Single-Page Layouts
 - **banner:** journal/typography-guide/
-- **hero:** journal/masonry-explained/
+- **hero:** journal/masonry-explained/, journal/navigation-features/
 - **columns:** journal/on-walking/
 - **featured-columns-right:** journal/dark-mode-setup/
 - **featured:** journal/featured-image/
 - **background:** journal/background-images/
-- **default (text-only):** journal/shortcode-showcase
+- **default (text-only):** journal/shortcode-showcase/
 
-### Shortcodes (all 14)
+### Shortcodes (all 18)
 All shortcodes are demonstrated in the [Shortcode Showcase](/journal/shortcode-showcase/) page and/or throughout the site content:
 
 | Shortcode | Showcase | Also Used In |
 |-----------|----------|-------------|
-| callout (4 types) | Yes | recipes, journal articles |
+| callout (4 types + float) | Yes | recipes, journal articles |
+| centre | Yes | - |
 | colorbold | Yes | recipes/colcannon |
-| contactform | Yes | — |
+| contactform | Documented | - |
 | details | Yes | recipes, stories |
 | dialogue | Yes | stories/the-waiting-room |
 | direction | Yes | stories/the-waiting-room |
-| formspree | Yes | — |
-| gallery | Yes (documented) | photography/ galleries |
-| img | Yes (documented) | — |
+| formspree | Documented | - |
+| ga | Yes | - |
+| gallery | Yes | photography/ galleries |
+| img (incl. noborder) | Yes | - |
 | poem | Yes | stories/morning-song, all poetry/ |
 | popquote | Yes | journal/on-walking |
-| rawhtml | Yes | — |
+| quote | Yes | - |
+| rawhtml | Yes | - |
 | section-list | Yes | homepage sidebar, recipes sidebar |
-| video | Yes | — |
+| side-by-side | Yes | - |
+| video | Documented | - |
+
+### Navigation and CTA Features
+- **Breadcrumb trail:** journal/shortcode-showcase/, journal/navigation-features/
+- **Signpost CTA (header):** journal/shortcode-showcase/, journal/navigation-features/
+- **Signpost CTA (footer):** journal/shortcode-showcase/, journal/navigation-features/
+- **TOC:** typography-guide, shortcode-showcase, dark-mode-setup, navigation-features
 
 ### Other Features
-- **Dark mode toggle:** Site-wide (`mode: toggle`)
+- **Dark mode design**
 - **Responsive grid config:** Full breakpoint configuration in hugo.yaml
-- **TOC:** typography-guide, shortcode-showcase, dark-mode-setup
 - **TL;DR summary:** typography-guide
 - **Content pinning:** soda-bread, colcannon, typography-guide, the-cartographer
 - **hideDate:** miso-aubergine, poetry/ (via cascade)
@@ -90,12 +99,11 @@ Hugo will process them automatically with responsive sizing and WebP conversion.
 
 See `hugo.yaml` for all theme parameters. Key settings demonstrated:
 
-- `params.mode: toggle` — visitors can try dark mode
-- `params.grid` — full responsive breakpoint configuration
-- `params.mainSections` — controls homepage masonry grid content
-- `menu.main` — navigation entries including Poetry and Tags
-- `params.bgImage` — background image opacity and blur defaults
-- `params.social` — both Feather and Simple Icons icon types
+- `params.grid` - full responsive breakpoint configuration
+- `params.mainSections` - controls homepage masonry grid content
+- `menu.main` - navigation entries including Poetry and Tags
+- `params.bgImage` - background image opacity and blur defaults
+- `params.social` - both Feather and Simple Icons icon types
 
 ## License
 

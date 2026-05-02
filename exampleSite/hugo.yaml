@@ -3,7 +3,7 @@
 
 baseURL: https://example.com/
 languageCode: en
-title: "The Wanderer's Notebook"
+title: wanderers.lobb.ie
 theme: tadg_ie
 copyright: "Example Site — MIT License"
 
@@ -17,6 +17,7 @@ imaging:
     disableDate: false
     disableLatLong: true
 
+
 params:
   bgImage:
     opacity: 0.2
@@ -25,6 +26,9 @@ params:
   readMore:
     type: icon
     value: icons/chevron-right-duo-thick.svg
+
+  dateFormat: "2 January 2006"
+  dateFormatShort: "02/01/26"
 
   mode: toggle
 

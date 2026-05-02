@@ -8,7 +8,7 @@ tags:
   - reference
 layout: featured
 image:
-  src: featured.png
+  src: featured.jpg
   alt: "Vibrant crowd scene"
   caption: "Galore"
 ---

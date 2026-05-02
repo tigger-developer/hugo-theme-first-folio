@@ -3,11 +3,11 @@
 <head>
 	<meta name="generator" content="Hugo 0.156.0">
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>The Wanderer&#39;s Notebook</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>wanderers.lobb.ie</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" /><meta property="og:image" content="https://example.com/"/>
-	<link rel="alternate" type="application/rss+xml" href="https://example.com/index.xml" title="The Wanderer's Notebook" />
+	<link rel="alternate" type="application/rss+xml" href="https://example.com/index.xml" title="wanderers.lobb.ie" />
 	<meta property="og:url" content="https://example.com/">
-  <meta property="og:site_name" content="The Wanderer&#39;s Notebook">
+  <meta property="og:site_name" content="wanderers.lobb.ie">
   <meta property="og:title" content="The Wanderer&#39;s Notebook">
   <meta property="og:description" content="This is a demonstration site showcasing the features of the tadg_ie Hugo theme. Browse the sections to see masonry grids, galleries, sidebars, shortcodes, and more.">
   <meta property="og:locale" content="en">
@@ -17,13 +17,13 @@
   <meta name="twitter:title" content="The Wanderer&#39;s Notebook">
   <meta name="twitter:description" content="This is a demonstration site showcasing the features of the tadg_ie Hugo theme. Browse the sections to see masonry grids, galleries, sidebars, shortcodes, and more.">
 <link rel="stylesheet" href="https://example.com/css/simple-icons.cc125cfd7958efc8dc27b5dfa6e2a9bbab933ce50b754f77e669e587c16ce857.css" type="text/css"><link rel="stylesheet" href="https://example.com/css/simple-icons.cc125cfd7958efc8dc27b5dfa6e2a9bbab933ce50b754f77e669e587c16ce857.css" type="text/css">
-	<link href="https://example.com/css/fonts.ae8943314c69667b7cdb870b931c08080028721e5f6cd920ffd8672001acf29d.css" rel="stylesheet">
+	<link href="https://example.com/css/fonts.e51b3a6b45133ab5d6ee1466a7ce13f452245ac81df5ace8e54f47e1a63010d3.css" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/main.16f3cb833b73c69966208a3c92a959f1f54f33f6ae94d7a973086725d4740793.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/main.a2afd2cd531db4ca218987ee98f756c2531135334004ca0a85238d985b770398.css" />
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/custom.6d27047ae8fd6f916e992549c154529e2d7f78c839fe1cefd8bd22534f52a5ee.css" />
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://example.com/css/dark.b8f6f39ec3fb2fad0afc2a6119c0a5cb5502689bf65c334f84866e9f6967d8f7.css"  disabled />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/custom.34d750bb292a70e402df7c8aa414127c8bbc2a68297736ff0aa01cf86a6914ae.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://example.com/css/dark.4b86129677585f88f476d5bca469215b7cd85e7f9b555d4861e800ae1844f5c1.css"  disabled />
 
 
 <style>
@@ -119,7 +119,7 @@
  
 @media (min-width: 48.0625em) and (max-width: 64em) {
   .sidebar-layout {
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: var(--sidebar-width-narrow, 12rem) 1fr;
     gap: 1rem;
   }
   .section-sidebar {
@@ -137,7 +137,7 @@
 @media (min-width: 48.0625em) {
   .section-sidebar {
     max-width: 20vw;
-    white-space: nowrap;
+    overflow-wrap: break-word;
   }
   .sidebar-collapse-title {
     list-style: none;
@@ -193,17 +193,16 @@
 
 		
 		
-		<link rel="stylesheet" type="text/css" href="https://example.com/css/custom.6d27047ae8fd6f916e992549c154529e2d7f78c839fe1cefd8bd22534f52a5ee.css">
+		<link rel="stylesheet" type="text/css" href="https://example.com/css/custom.34d750bb292a70e402df7c8aa414127c8bbc2a68297736ff0aa01cf86a6914ae.css">
 		
 		
-		<link rel="stylesheet" type="text/css" href="https://example.com/css/fonts.ae8943314c69667b7cdb870b931c08080028721e5f6cd920ffd8672001acf29d.css">
+		<link rel="stylesheet" type="text/css" href="https://example.com/css/fonts.e51b3a6b45133ab5d6ee1466a7ce13f452245ac81df5ace8e54f47e1a63010d3.css">
 		
 		
 		<link rel="stylesheet" type="text/css" href="https://example.com/css/lightbox.ccdfc4b41fed3418c15707e6e7ba2802f9981a2f2d6f07c5bb05ff174566c03e.css">
 		
 	<script src="https://example.com/js/burger-menu.js"></script>
-	<script src="https://example.com/js/lightbox.js"></script>
-</head>
+	<script src="https://example.com/js/lightbox.js"></script></head>
 
 
 <body data-grid-config='{&#34;breakpoints&#34;:{&#34;lg&#34;:64,&#34;md&#34;:48,&#34;sm&#34;:30,&#34;xl&#34;:80},&#34;columns&#34;:{&#34;lg&#34;:4,&#34;md&#34;:3,&#34;sm&#34;:2,&#34;xl&#34;:5}}'>
@@ -211,7 +210,7 @@
 		<header>
 	<div class="main">
 		<a href="/" class="header-interactive"><div class="site-logo-text">
-				The Wanderer's Notebook
+				wanderers<span class='orange-period'>.</span>lobb<span class='orange-period'>.</span>ie
 			</div></a>
 		
 
@@ -317,75 +316,101 @@
     })();
   </script>
 </aside>
-				<div class="section-content home-main-content"><div class="masonry-grid"><article class="masonry-item masonry-recipes "><div class="masonry-content">
-          <h3><a href="/recipes/soda-bread/" class="header-interactive">Soda Bread</a></h3><div class="masonry-excerpt">A quick bread that needs no yeast and no kneading.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Recipes</span><span class="masonry-date">15 Mar 2025</span></p><div class="read-more-container">
+				<div class="section-content home-main-content"><div class="masonry-grid"><article class="masonry-item masonry-recipes has-image image-dark"><div class="masonry-bg" style="background-image: url('/recipes/soda-bread/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/recipes/soda-bread/" class="header-interactive">Soda Bread</a></h3><p class="masonry-meta"><span class="masonry-section">Recipes</span><span class="masonry-date">15 Mar 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A quick bread that needs no yeast and no kneading.</div><div class="read-more-container">
               <a href="/recipes/soda-bread/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-recipes "><div class="masonry-content">
-          <h3><a href="/recipes/colcannon/" class="header-interactive">Colcannon</a></h3><div class="masonry-excerpt">Mashed potatoes with curly kale and butter — comfort food at its finest.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Recipes</span><span class="masonry-date">28 Jan 2025</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-recipes has-image image-dark"><div class="masonry-bg" style="background-image: url('/recipes/colcannon/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/recipes/colcannon/" class="header-interactive">Colcannon</a></h3><p class="masonry-meta"><span class="masonry-section">Recipes</span><span class="masonry-date">28 Jan 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">Mashed potatoes with curly kale and butter — comfort food at its finest.</div><div class="read-more-container">
               <a href="/recipes/colcannon/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-poetry "><div class="masonry-content">
-          <h3><a href="/poetry/the-cartographer/" class="header-interactive">The Cartographer</a></h3><div class="masonry-excerpt">A poem about maps and the places they miss.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Poetry</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-poetry has-image image-dark"><div class="masonry-bg" style="background-image: url('/poetry/the-cartographer/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/poetry/the-cartographer/" class="header-interactive">The Cartographer</a></h3><p class="masonry-meta"><span class="masonry-section">Poetry</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A poem about maps and the places they miss.</div><div class="read-more-container">
               <a href="/poetry/the-cartographer/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-journal has-image image-light"><div class="masonry-bg" style="background-image: url('/journal/typography-guide/banner.png'); opacity: 0.2; filter: blur(5px);"></div><div class="masonry-content">
-          <h3><a href="/journal/typography-guide/" class="header-interactive">Typography in the tadg_ie Theme</a></h3><div class="masonry-excerpt">A demonstration of heading levels, lists, code blocks, and other typographic elements.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Journal</span><span class="masonry-date">1 Jul 2025</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-journal has-image image-light"><div class="masonry-bg" style="background-image: url('/journal/typography-guide/banner.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/journal/typography-guide/" class="header-interactive">Typography in the tadg_ie Theme</a></h3><p class="masonry-meta"><span class="masonry-section">Journal</span><span class="masonry-date">1 Jul 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A demonstration of heading levels, lists, code blocks, and other typographic elements.</div><div class="read-more-container">
               <a href="/journal/typography-guide/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-photography "><div class="masonry-content masonry-overlay">
+        </div></article><article class="masonry-item masonry-photography has-image image-light"><div class="masonry-bg" style="background-image: url('/photography/anime-worlds/anime-1.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-image">
+          <a href="/photography/anime-worlds/">
+            <img src="/photography/anime-worlds/anime-1.jpg" alt="Anime Worlds" loading="lazy">
+          </a>
+        </div><div class="masonry-content masonry-overlay">
           <div class="masonry-overlay-top">
-            <h3><a href="/photography/coastal-walks/" class="header-interactive">Coastal Walks</a></h3></div><div class="masonry-footer">
+            <h3><a href="/photography/anime-worlds/" class="header-interactive">Anime Worlds</a></h3></div><div class="masonry-footer">
             <p class="masonry-meta">
               <span class="masonry-section">Photography</span>
             </p>
             <div class="read-more-container">
-              <a href="/photography/coastal-walks/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
+              <a href="/photography/anime-worlds/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
-          </div></div></article><article class="masonry-item masonry-stories "><div class="masonry-content">
-          <h3><a href="/stories/the-waiting-room/" class="header-interactive">The Waiting Room</a></h3><div class="masonry-excerpt">A short dramatic scene demonstrating the dialogue and direction shortcodes.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Stories</span><span class="masonry-date">1 Nov 2025</span></p><div class="read-more-container">
+          </div></div></article><article class="masonry-item masonry-stories has-image image-light"><div class="masonry-bg" style="background-image: url('/stories/the-waiting-room/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/stories/the-waiting-room/" class="header-interactive">The Waiting Room</a></h3><p class="masonry-meta"><span class="masonry-section">Stories</span><span class="masonry-date">1 Nov 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A short dramatic scene demonstrating the dialogue and direction shortcodes.</div><div class="read-more-container">
               <a href="/stories/the-waiting-room/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-journal "><div class="masonry-content">
-          <h3><a href="/journal/shortcode-showcase/" class="header-interactive">Shortcode Showcase</a></h3><div class="masonry-excerpt">A comprehensive demonstration of every shortcode available in the tadg_ie theme.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Journal</span><span class="masonry-date">1 Dec 2025</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-journal has-image image-dark"><div class="masonry-bg" style="background-image: url('/journal/shortcode-showcase/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/journal/shortcode-showcase/" class="header-interactive">Shortcode Showcase</a></h3><p class="masonry-meta"><span class="masonry-author">Theme Demo</span><span class="masonry-section">Journal</span><span class="masonry-date">1 Dec 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A comprehensive demonstration of every shortcode available in the tadg_ie theme.</div><div class="read-more-container">
               <a href="/journal/shortcode-showcase/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-stories "><div class="masonry-content">
-          <h3><a href="/stories/morning-song/" class="header-interactive">Morning Song</a></h3><div class="masonry-excerpt">A short poem demonstrating the poem shortcode.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Stories</span><span class="masonry-date">5 Oct 2025</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-journal has-image image-light"><div class="masonry-bg" style="background-image: url('/journal/navigation-features/hero.png'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/journal/navigation-features/" class="header-interactive">Navigation and CTA Features</a></h3><p class="masonry-meta"><span class="masonry-author">Theme Demo</span><span class="masonry-section">Journal</span><span class="masonry-date">15 Nov 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">Demonstrating breadcrumb trails, signpost CTAs, and table of contents.</div><div class="read-more-container">
+              <a href="/journal/navigation-features/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
+            </div>
+          </div>
+        </div></article><article class="masonry-item masonry-stories has-image image-light"><div class="masonry-bg" style="background-image: url('/stories/morning-song/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/stories/morning-song/" class="header-interactive">Morning Song</a></h3><p class="masonry-meta"><span class="masonry-section">Stories</span><span class="masonry-date">5 Oct 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A short poem demonstrating the poem shortcode.</div><div class="read-more-container">
               <a href="/stories/morning-song/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-stories "><div class="masonry-content">
-          <h3><a href="/stories/three-things/" class="header-interactive">Three Things I Learned from a Broken Compass</a></h3><div class="masonry-excerpt">A short reflective piece demonstrating the details and callout shortcodes.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Stories</span><span class="masonry-date">20 Sep 2025</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-stories has-image image-dark"><div class="masonry-bg" style="background-image: url('/stories/three-things/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/stories/three-things/" class="header-interactive">Three Things I Learned from a Broken Compass</a></h3><p class="masonry-meta"><span class="masonry-section">Stories</span><span class="masonry-date">20 Sep 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A short reflective piece demonstrating the details and callout shortcodes.</div><div class="read-more-container">
               <a href="/stories/three-things/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-recipes "><div class="masonry-content">
-          <h3><a href="/recipes/shakshuka/" class="header-interactive">Shakshuka</a></h3><div class="masonry-excerpt">Eggs poached in spiced tomato sauce — a one-pan wonder.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Recipes</span><span class="masonry-date">10 Sep 2025</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-recipes has-image image-dark"><div class="masonry-bg" style="background-image: url('/recipes/shakshuka/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/recipes/shakshuka/" class="header-interactive">Shakshuka</a></h3><p class="masonry-meta"><span class="masonry-section">Recipes</span><span class="masonry-date">10 Sep 2025</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">Eggs poached in spiced tomato sauce — a one-pan wonder.</div><div class="read-more-container">
               <a href="/recipes/shakshuka/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
-        </div></article><article class="masonry-item masonry-poetry "><div class="masonry-content">
-          <h3><a href="/poetry/four-fields/" class="header-interactive">Four Fields</a></h3><div class="masonry-excerpt">A poem about landscape and memory.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Poetry</span></p><div class="read-more-container">
+        </div></article><article class="masonry-item masonry-poetry has-image image-light"><div class="masonry-bg" style="background-image: url('/poetry/four-fields/hero.jpg'); opacity: 0.2; filter: blur(5px); background-position: center center;"></div><div class="masonry-content">
+          <div class="masonry-card-top">
+            <h3><a href="/poetry/four-fields/" class="header-interactive">Four Fields</a></h3><p class="masonry-meta"><span class="masonry-section">Poetry</span></p></div>
+          <div class="masonry-card-bottom"><div class="masonry-excerpt">A poem about landscape and memory.</div><div class="read-more-container">
               <a href="/poetry/four-fields/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
-            </div>
-          </div>
-        </div></article><article class="masonry-item masonry-journal has-image image-light"><div class="masonry-bg" style="background-image: url('/journal/on-walking/columns.png'); opacity: 0.2; filter: blur(5px);"></div><div class="masonry-content">
-          <h3><a href="/journal/on-walking/" class="header-interactive">On Walking</a></h3><div class="masonry-excerpt">Why walking remains the most productive form of procrastination.</div><div class="masonry-footer"><p class="masonry-meta"><span class="masonry-section">Journal</span><span class="masonry-date">15 Aug 2025</span></p><div class="read-more-container">
-              <a href="/journal/on-walking/" class="read-more-btn"><img src="/icons/chevron-right-duo-thick.svg" alt="Read more" class="read-more-icon read-more-icon-light"></a>
             </div>
           </div>
         </div></article></div>
 <nav class="pagination" aria-label="Page navigation">
 	<ul class="pagination-list"><li class="pagination-item pagination-prev pagination-disabled">
 			<span class="pagination-link" aria-disabled="true">&larr; Prev</span>
-		</li><li class="pagination-item pagination-current"><span class="pagination-link" aria-current="page">1</span></li><li class="pagination-item"><a href="/page/2/" class="pagination-link">2</a></li><li class="pagination-item pagination-next">
+		</li><li class="pagination-item pagination-current"><span class="pagination-link" aria-current="page">1</span></li><li class="pagination-item"><a href="/page/2/" class="pagination-link">2</a></li><li class="pagination-item"><a href="/page/3/" class="pagination-link">3</a></li><li class="pagination-item pagination-next">
 			<a href="/page/2/" class="pagination-link" aria-label="Next page">Next &rarr;</a>
 		</li></ul>
 </nav></div>
@@ -421,6 +446,7 @@
 	</div>
 
 	<script src="/js/masonry-init.js"></script>
+	<script src="/js/carousel.js"></script>
 </body>
 
 </html>

@@ -8,7 +8,7 @@ tags:
   - reference
 layout: hero
 image:
-  src: hero.png
+  src: hero.jpg
   alt: "Illustrated boots marching in formation"
   caption: "Save Our Boots"
 ---

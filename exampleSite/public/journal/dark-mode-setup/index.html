@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Configuring Dark Mode — The Wanderer&#39;s Notebook</title><meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="How the tadg_ie theme handles dark mode: auto-detection, manual toggle, and fixed modes." /><meta property="og:image" content="https://example.com/featured.png"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Configuring Dark Mode — wanderers.lobb.ie</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="How the tadg_ie theme handles dark mode: auto-detection, manual toggle, and fixed modes." /><meta property="og:image" content="https://example.com/featured.jpg"/>
 	<meta property="og:url" content="https://example.com/journal/dark-mode-setup/">
-  <meta property="og:site_name" content="The Wanderer&#39;s Notebook">
+  <meta property="og:site_name" content="wanderers.lobb.ie">
   <meta property="og:title" content="Configuring Dark Mode">
   <meta property="og:description" content="How the tadg_ie theme handles dark mode: auto-detection, manual toggle, and fixed modes.">
   <meta property="og:locale" content="en">
@@ -15,20 +15,20 @@
     <meta property="article:tag" content="Theme">
     <meta property="article:tag" content="Dark-Mode">
     <meta property="article:tag" content="Reference">
-    <meta property="og:image" content="https://example.com/journal/dark-mode-setup/featured.png">
+    <meta property="og:image" content="https://example.com/journal/dark-mode-setup/featured.jpg">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://example.com/journal/dark-mode-setup/featured.png">
+  <meta name="twitter:image" content="https://example.com/journal/dark-mode-setup/featured.jpg">
   <meta name="twitter:title" content="Configuring Dark Mode">
   <meta name="twitter:description" content="How the tadg_ie theme handles dark mode: auto-detection, manual toggle, and fixed modes.">
 <link rel="stylesheet" href="https://example.com/css/simple-icons.cc125cfd7958efc8dc27b5dfa6e2a9bbab933ce50b754f77e669e587c16ce857.css" type="text/css"><link rel="stylesheet" href="https://example.com/css/simple-icons.cc125cfd7958efc8dc27b5dfa6e2a9bbab933ce50b754f77e669e587c16ce857.css" type="text/css">
-	<link href="https://example.com/css/fonts.ae8943314c69667b7cdb870b931c08080028721e5f6cd920ffd8672001acf29d.css" rel="stylesheet">
+	<link href="https://example.com/css/fonts.e51b3a6b45133ab5d6ee1466a7ce13f452245ac81df5ace8e54f47e1a63010d3.css" rel="stylesheet">
 
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/main.16f3cb833b73c69966208a3c92a959f1f54f33f6ae94d7a973086725d4740793.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/main.a2afd2cd531db4ca218987ee98f756c2531135334004ca0a85238d985b770398.css" />
 	
-	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/custom.6d27047ae8fd6f916e992549c154529e2d7f78c839fe1cefd8bd22534f52a5ee.css" />
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://example.com/css/dark.b8f6f39ec3fb2fad0afc2a6119c0a5cb5502689bf65c334f84866e9f6967d8f7.css"  disabled />
+	<link rel="stylesheet" type="text/css" media="screen" href="https://example.com/css/custom.34d750bb292a70e402df7c8aa414127c8bbc2a68297736ff0aa01cf86a6914ae.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="https://example.com/css/dark.4b86129677585f88f476d5bca469215b7cd85e7f9b555d4861e800ae1844f5c1.css"  disabled />
 
 
 <style>
@@ -124,7 +124,7 @@
  
 @media (min-width: 48.0625em) and (max-width: 64em) {
   .sidebar-layout {
-    grid-template-columns: min-content 1fr;
+    grid-template-columns: var(--sidebar-width-narrow, 12rem) 1fr;
     gap: 1rem;
   }
   .section-sidebar {
@@ -142,7 +142,7 @@
 @media (min-width: 48.0625em) {
   .section-sidebar {
     max-width: 20vw;
-    white-space: nowrap;
+    overflow-wrap: break-word;
   }
   .sidebar-collapse-title {
     list-style: none;
@@ -198,22 +198,21 @@
 
 		
 		
-		<link rel="stylesheet" type="text/css" href="https://example.com/css/custom.6d27047ae8fd6f916e992549c154529e2d7f78c839fe1cefd8bd22534f52a5ee.css">
+		<link rel="stylesheet" type="text/css" href="https://example.com/css/custom.34d750bb292a70e402df7c8aa414127c8bbc2a68297736ff0aa01cf86a6914ae.css">
 		
 		
-		<link rel="stylesheet" type="text/css" href="https://example.com/css/fonts.ae8943314c69667b7cdb870b931c08080028721e5f6cd920ffd8672001acf29d.css">
+		<link rel="stylesheet" type="text/css" href="https://example.com/css/fonts.e51b3a6b45133ab5d6ee1466a7ce13f452245ac81df5ace8e54f47e1a63010d3.css">
 		
 		
 		<link rel="stylesheet" type="text/css" href="https://example.com/css/lightbox.ccdfc4b41fed3418c15707e6e7ba2802f9981a2f2d6f07c5bb05ff174566c03e.css">
 		
 	<script src="https://example.com/js/burger-menu.js"></script>
-	<script src="https://example.com/js/lightbox.js"></script>
-</head>
-<body data-grid-config='{&#34;breakpoints&#34;:{&#34;lg&#34;:64,&#34;md&#34;:48,&#34;sm&#34;:30,&#34;xl&#34;:80},&#34;columns&#34;:{&#34;lg&#34;:4,&#34;md&#34;:3,&#34;sm&#34;:2,&#34;xl&#34;:5}}'>
+	<script src="https://example.com/js/lightbox.js"></script></head>
+<body class="" data-grid-config='{&#34;breakpoints&#34;:{&#34;lg&#34;:64,&#34;md&#34;:48,&#34;sm&#34;:30,&#34;xl&#34;:80},&#34;columns&#34;:{&#34;lg&#34;:4,&#34;md&#34;:3,&#34;sm&#34;:2,&#34;xl&#34;:5}}'>
         <div class="content"><header>
 	<div class="main">
 		<a href="/" class="header-interactive"><div class="site-logo-text">
-				The Wanderer's Notebook
+				wanderers<span class='orange-period'>.</span>lobb<span class='orange-period'>.</span>ie
 			</div></a>
 		
 
@@ -257,11 +256,12 @@
   <article class="has-toc">
     
     
+    
+
     <div class="post-container soft-edge columns-layout">
       
-      <div class="title" style="padding: 2rem 2rem 0; margin-bottom: 0; margin-block-end: 0;">
-        <h1 class="title">Configuring Dark Mode</h1>
-        <div class="meta">May 20, 2025</div>
+      <div class="title" style="padding: 2rem 2rem 1rem; margin-bottom: 0; margin-block-end: 0;">
+        <h1 class="title">Configuring Dark Mode</h1><div class="meta"><span class="breadcrumb"><a href="/journal/" class="breadcrumb-seg breadcrumb-section breadcrumb-bright">Journal</a><span class="breadcrumb-seg breadcrumb-meta breadcrumb-meta-dim">20 May 2025</span></span></div>
       </div>
 
       
@@ -305,22 +305,29 @@
 </span></span><span style="display:flex;"><span>  --link-color: <span style="color:#ae81ff">#4db8ff</span>;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div></div>
 
+
+
+
+
+
+
 <div class='callout callout-tip' style=''>
   <div class="callout-inner">
-    
-    <u>Tip</u>
+    <strong class="callout-title">Tip</strong>
     <br />
-    When using &#39;auto&#39; mode, test your site with both OS light and dark mode to ensure all content is readable in both.
     
+    When using &#39;auto&#39; mode, test your site with both OS light and dark mode to ensure all content is readable in both.
     </div>
 </div>
 
+
+            
 
           </section>
         </div>
         <div class="featured-image-col">
           
-          <img src="/journal/dark-mode-setup/featured.png" alt="A cockapoo howling at an exploding sun">
+          <img src="/journal/dark-mode-setup/featured.jpg" alt="A cockapoo howling at an exploding sun">
           
           <div class="image-caption">Cockapoo Wolf Exploding Sun</div>
           
@@ -328,7 +335,7 @@
         </div>
         
       </div>
-      
+
       
       <div class="post-footer" style="padding: 0 2rem 2rem 2rem;">
         <div class="post-tags">
@@ -355,14 +362,10 @@
     
 
     
-    
-    
-    <div class="toc-mobile-title">
-      <h1>Configuring Dark Mode</h1>
-      <div class="meta">May 20, 2025</div>
-    </div><div class="toc">
-      <strong>In this guide</strong>
-      <nav id="TableOfContents">
+    <div class="toc-mobile">
+      <details class="toc-mobile-details">
+        <summary class="toc-mobile-summary">In this guide</summary>
+        <nav id="TableOfContents">
   <ul>
     <li><a href="#mode-options">Mode Options</a>
       <ul>
@@ -375,11 +378,28 @@
     <li><a href="#css-variables">CSS Variables</a></li>
   </ul>
 </nav>
+      </details>
     </div>
-    
 
     
-    
+    <div class="article-sidebar">
+      <div class="toc">
+        <strong>In this guide</strong>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#mode-options">Mode Options</a>
+      <ul>
+        <li><a href="#auto-recommended"><code>auto</code> (recommended)</a></li>
+        <li><a href="#toggle"><code>toggle</code></a></li>
+        <li><a href="#dark"><code>dark</code></a></li>
+        <li><a href="#light"><code>light</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#css-variables">CSS Variables</a></li>
+  </ul>
+</nav>
+      </div>
+      
 
 
 
@@ -401,6 +421,33 @@
 </aside>
 
 
+    </div>
+    
+    <div class="related-mobile">
+      
+
+
+
+<aside class="related-articles">
+  <h3>Related articles</h3>
+  <ul>
+    
+    <li>
+      <a href="/journal/masonry-explained/">How the Masonry Grid Works</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/background-images/">The Background Image Layout</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+  </ul>
+</aside>
+
+
+    </div>
+    
 
     </article>
 </main>

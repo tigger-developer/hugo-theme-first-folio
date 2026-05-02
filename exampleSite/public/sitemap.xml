@@ -23,6 +23,12 @@
     <loc>https://example.com/tags/theme/</loc>
     <lastmod>2025-12-01T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/tags/navigation/</loc>
+    <lastmod>2025-11-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/journal/navigation-features/</loc>
+    <lastmod>2025-11-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://example.com/tags/maps/</loc>
     <lastmod>2025-11-10T00:00:00+00:00</lastmod>
   </url><url>
@@ -72,6 +78,12 @@
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://example.com/tags/landscape/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/journal/morning-routines/</loc>
+    <lastmod>2025-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://example.com/tags/routine/</loc>
     <lastmod>2025-09-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://example.com/journal/on-walking/</loc>
@@ -158,10 +170,12 @@
     <loc>https://example.com/tags/irish/</loc>
     <lastmod>2025-01-28T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://example.com/photography/anime-worlds/</loc>
+  </url><url>
     <loc>https://example.com/photography/coastal-walks/</loc>
   </url><url>
-    <loc>https://example.com/photography/market-mornings/</loc>
-  </url><url>
     <loc>https://example.com/photography/</loc>
+  </url><url>
+    <loc>https://example.com/photography/transport-and-trains/</loc>
   </url>
 </urlset>

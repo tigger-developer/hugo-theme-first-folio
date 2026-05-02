@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on The Wanderer&#39;s Notebook</title>
+    <title>Tags on wanderers.lobb.ie</title>
     <link>https://example.com/tags/</link>
-    <description>Recent content in Tags on The Wanderer&#39;s Notebook</description>
+    <description>Recent content in Tags on wanderers.lobb.ie</description>
     <generator>Hugo</generator>
     <language>en</language>
     <copyright>Example Site — MIT License</copyright>
@@ -28,6 +28,13 @@
       <link>https://example.com/tags/theme/</link>
       <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
       <guid>https://example.com/tags/theme/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Navigation</title>
+      <link>https://example.com/tags/navigation/</link>
+      <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.com/tags/navigation/</guid>
       <description></description>
     </item>
     <item>
@@ -84,6 +91,13 @@
       <link>https://example.com/tags/landscape/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
       <guid>https://example.com/tags/landscape/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Routine</title>
+      <link>https://example.com/tags/routine/</link>
+      <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
+      <guid>https://example.com/tags/routine/</guid>
       <description></description>
     </item>
     <item>

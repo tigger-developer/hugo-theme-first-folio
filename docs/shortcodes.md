@@ -1,26 +1,27 @@
 # Shortcodes Reference
 
-The tadg_ie theme provides 17 custom shortcodes for varied content types.
+The tadg_ie theme provides 18 custom shortcodes for varied content types.
 
 ## Table of Contents
 
 1. [callout](#callout) - Styled alert/notice boxes
 2. [centre](#centre) - Centre-aligned content block
 3. [colorbold](#colorbold) - Inline accent-coloured bold text
-3. [details](#details) - Collapsible content
-4. [dialogue](#dialogue) - Character speech for plays
-5. [direction](#direction) - Stage directions
-6. [ga](#ga) - Inline Irish language text
-7. [popquote](#popquote) - Expandable quotes
-8. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
-9. [poem](#poem) - Poetry with preserved line breaks
-10. [video](#video) - HTML5 video player
-11. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
-12. [formspree](#formspree) - Formspree-backed contact form
-13. [rawhtml](#rawhtml) - Raw HTML pass-through
-14. [section-list](#section-list) - Section navigation list
-15. [img](#img) - Inline image with responsive thumbnails
-16. [gallery](#gallery) - Image gallery with lightbox
+4. [details](#details) - Collapsible content
+5. [dialogue](#dialogue) - Character speech for plays
+6. [direction](#direction) - Stage directions
+7. [ga](#ga) - Inline Irish language text
+8. [popquote](#popquote) - Expandable quotes
+9. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
+10. [poem](#poem) - Poetry with preserved line breaks
+11. [video](#video) - HTML5 video player
+12. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
+13. [formspree](#formspree) - Formspree-backed contact form
+14. [rawhtml](#rawhtml) - Raw HTML pass-through
+15. [section-list](#section-list) - Section navigation list
+16. [img](#img) - Inline image with responsive thumbnails
+17. [gallery](#gallery) - Image gallery with lightbox
+18. [side-by-side](#side-by-side) - Side-by-side content wrapper
 
 ---
 
@@ -39,6 +40,7 @@ Styled alert/callout boxes with colour-coded types.
 | `linktext` | No | Link text when `link` is used without a title (default: "More info") |
 | `align` | No | Text alignment: `left`, `center`, `right` |
 | `width` | No | Max width of the callout box, any CSS unit (`30rem`, `60%`, etc.). Box is auto-centred on the page |
+| `position` | No | Float direction: `left` or `right`. Omit for default block layout |
 | `style` | No | Inline CSS (only for `type="custom"`) |
 
 ### Usage
@@ -52,27 +54,9 @@ Styled alert/callout boxes with colour-coded types.
 {{< callout type="custom" title="Custom Title" text="Custom message" style="background: #fee;" >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-#### Light mode
-
-| Tip | Alert |
-|-----|-------|
-| ![Tip callout](screenshots/shortcodes/callout-tip.png) | ![Alert callout](screenshots/shortcodes/callout-alert.png) |
-
-| Warning | Custom |
-|---------|--------|
-| ![Warning callout](screenshots/shortcodes/callout-warning.png) | ![Custom callout](screenshots/shortcodes/callout-custom.png) |
-
-#### Dark mode
-
-| Tip | Alert |
-|-----|-------|
-| ![Tip callout dark](screenshots/shortcodes/callout-tip-dark.png) | ![Alert callout dark](screenshots/shortcodes/callout-alert-dark.png) |
-
-| Warning | Custom |
-|---------|--------|
-| ![Warning callout dark](screenshots/shortcodes/callout-warning-dark.png) | ![Custom callout dark](screenshots/shortcodes/callout-custom-dark.png) |
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#callout).
 
 ---
 
@@ -126,9 +110,9 @@ Are these only {{< colorbold "words" >}} I'm meant to frame?
 This has {{< colorbold text="no underline" underlined=false >}} here.
 ```
 
-### Visual Examples
+### Live Demo
 
-![Colorbold - underlined (default) and without underline](screenshots/shortcodes/colorbold.png)
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#colorbold).
 
 ---
 
@@ -152,11 +136,9 @@ Can include **markdown**.
 {{< /details >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-| Collapsed | Expanded |
-|-----------|----------|
-| ![Details closed](screenshots/shortcodes/details-closed.png) | ![Details open](screenshots/shortcodes/details-open.png) |
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#details).
 
 ---
 
@@ -182,9 +164,9 @@ Supports both positional and named parameters.
 {{< dialogue name="BAYANI" parenthetical="chuckling" >}}Oh is that all?{{< /dialogue >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-![Dialogue - character names with and without parenthetical](screenshots/shortcodes/dialogue.png)
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#dialogue).
 
 ---
 
@@ -205,11 +187,9 @@ Stage directions for plays. Renders in italics with secondary accent colour.
 {{< direction >}}Pause.{{< /direction >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-| Light mode | Dark mode |
-|------------|-----------|
-| ![Direction light](screenshots/shortcodes/direction.png) | ![Direction dark](screenshots/shortcodes/direction-dark.png) |
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#direction).
 
 ---
 
@@ -230,7 +210,9 @@ He greeted her with {{</* ga */>}}Dia duit, a chara{{</* /ga */>}} as she entere
 The word {{</* ga */>}}craic{{</* /ga */>}} has no direct English equivalent.
 ```
 
-### Visual Examples
+### Live Demo
+
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#ga-irish-language).
 
 ---
 
@@ -254,11 +236,9 @@ Multiple paragraphs supported.
 {{< /popquote >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-| Collapsed | Expanded |
-|-----------|----------|
-| ![Popquote closed](screenshots/shortcodes/popquote-closed.png) | ![Popquote open](screenshots/shortcodes/popquote-open.png) |
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#popquote).
 
 ---
 
@@ -324,9 +304,9 @@ Line breaks for you.
 {{< /poem >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-![Poem with preserved line breaks](screenshots/shortcodes/poem.png)
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#poem).
 
 ---
 
@@ -556,9 +536,9 @@ video:
 ---
 ```
 
-### Visual Examples
+### Live Demo
 
-![HTML5 video player](screenshots/shortcodes/video.png)
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#video).
 
 ---
 
@@ -590,11 +570,9 @@ params:
 {{< contactform newsletter="true" >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-![Contact form with newsletter checkbox](screenshots/shortcodes/contactform.png)
-
-*The screenshot above shows `newsletter="true"`. Without the newsletter parameter, the checkbox row is hidden.*
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#contact-form).
 
 ---
 
@@ -614,9 +592,9 @@ Contact form using Formspree as the backend. Simpler alternative to `contactform
 {{< formspree id="your-formspree-id" >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-![Formspree contact form](screenshots/shortcodes/formspree.png)
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#formspree).
 
 ---
 
@@ -640,9 +618,9 @@ Pass through raw HTML without markdown processing. Use for embedding widgets, if
 {{< /rawhtml >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-![Raw HTML pass-through](screenshots/shortcodes/rawhtml.png)
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#raw-html).
 
 ---
 
@@ -665,9 +643,9 @@ Renders a navigation list of site sections with chevron icons. Behaviour is cons
 {{< section-list limit="3" >}}
 ```
 
-### Visual Examples
+### Live Demo
 
-![Section navigation list](screenshots/shortcodes/section-list.png)
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#section-list).
 
 ---
 
@@ -685,6 +663,7 @@ Inline image for embedding within article text. Generates responsive thumbnails 
 | `position` | No | Placement: `left`, `right` (default), or `center` |
 | `width` | No | Width when floated - any CSS unit: `40%`, `15rem`, `30vw` (default: `40%`) |
 | `link` | No | URL to wrap the image in a link |
+| `noborder` | No | Set to `"true"` to remove the orange accent border |
 | `blur` | No | Set to `"true"` for blurred caption background |
 | `opacity` | No | Caption background opacity override |
 
@@ -698,7 +677,9 @@ Inline image for embedding within article text. Generates responsive thumbnails 
 {{< img src="mood.jpg" alt="Atmosphere" caption="Dreamy" blur="true" opacity="0.7" >}}
 ```
 
-### Visual Examples
+### Live Demo
+
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#img).
 
 ---
 
@@ -741,5 +722,31 @@ resources:
 
 Use `exclude` when you have images displayed inline (via `img` shortcode) that you don't want duplicated in the gallery grid.
 
-### Visual Examples
+### Live Demo
 
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#gallery).
+
+---
+
+## side-by-side
+
+Wrapper shortcode that places inner content side by side on desktop. Collapses to stacked layout on mobile (below 48em). Commonly used to wrap two `img` shortcodes.
+
+### Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| Inner content | Yes | Content to arrange side by side (typically two shortcodes) |
+
+### Usage
+
+```markdown
+{{</* side-by-side */>}}
+{{</* img src="cover-front.jpg" alt="Front cover" link="https://example.com" */>}}
+{{</* img src="cover-back.jpg" alt="Back cover" link="https://example.com" */>}}
+{{</* /side-by-side */>}}
+```
+
+### Live Demo
+
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#side-by-side).
