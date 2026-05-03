@@ -26,7 +26,13 @@
   }
 
   function showPage() {
-    document.body.classList.remove('prerelease-gate');
+    if (document.body) {
+      document.body.classList.remove('prerelease-gate');
+    } else {
+      document.addEventListener('DOMContentLoaded', function() {
+        document.body.classList.remove('prerelease-gate');
+      });
+    }
   }
 
   function authenticate() {
