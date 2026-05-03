@@ -522,7 +522,7 @@ body,
 }
 
 /* Issue #122, #34: Background layout text adaptation for dark images */
-/* Dark background image needs light text with soft dark shadow for readability */
+/* Default: light text with dark shadow (works for dark mode and always-dark sites) */
 .post-container.dark-bg,
 .post-container.dark-bg .post-content,
 .post-container.dark-bg .post-content h1,
@@ -548,6 +548,30 @@ body,
   text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.5),
     0 0 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Light mode override: dark-bg with low-opacity images needs dark text on light page bg */
+[data-theme="light"] .post-container.dark-bg,
+[data-theme="light"] .post-container.dark-bg .post-content,
+[data-theme="light"] .post-container.dark-bg .post-content h1,
+[data-theme="light"] .post-container.dark-bg .post-content h2,
+[data-theme="light"] .post-container.dark-bg .post-content h3,
+[data-theme="light"] .post-container.dark-bg .post-content h4,
+[data-theme="light"] .post-container.dark-bg .post-content h5,
+[data-theme="light"] .post-container.dark-bg .post-content h6 {
+  color: var(--color-text, #232333) !important;
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-theme="light"] .post-container.dark-bg .post-content .meta,
+[data-theme="light"] .post-container.dark-bg .post-content a {
+  color: var(--color-text, #232333) !important;
+}
+
+[data-theme="light"] .post-container.dark-bg .post-content h1::before,
+[data-theme="light"] .post-container.dark-bg .post-content h2::before,
+[data-theme="light"] .post-container.dark-bg .post-content h3::before {
+  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
 }
 
 /* Background Image Styling */
