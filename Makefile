@@ -26,8 +26,8 @@ sync:
 	git commit -m "make sync" || true
 	git pull
 	git push
-	git tag v2.0.0-$(shell date +%Y%m%d%H%M%S)
-	git push --tags
+#    git tag v2.0.1-$EPOCHSECONDS
+# 	git push --tags
 
 
 build: ## Build the example site
