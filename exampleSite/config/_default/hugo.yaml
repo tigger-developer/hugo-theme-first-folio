@@ -2,7 +2,7 @@
 # ABOUTME: Demonstrates all major theme features with fictional content
 
 baseURL: https://example.com/
-languageCode: en-GB-oed
+locale: en-GB-oed
 title: red-dots.example.com
 theme: ../..
 copyright: "© 2023-2026 Taḋg Paul — Apache License 2.0"

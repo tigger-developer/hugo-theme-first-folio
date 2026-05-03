@@ -16,6 +16,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,9 +38,15 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build exampleSite
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: theme-demo-live
         working-directory: exampleSite
         run: |
-          hugo --environment theme-demo-live --themesDir ../.. --minify
+          hugo \
+            --environment theme-demo-live \
+            --themesDir ../.. \
+            --minify
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

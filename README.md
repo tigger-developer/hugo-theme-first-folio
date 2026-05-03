@@ -22,6 +22,12 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 
 **Responsive throughout.** All breakpoints in em units. Sidebar collapses to a toggle on mobile. Masonry grid adjusts column count. Images serve responsive srcsets with WebP. Galleries, carousels, and layouts all adapt.
 
+## New to Hugo?
+
+If this is your first Hugo site, start with the [Quickstart guide](docs/quickstart-new-website.md). It walks through installation, creating content, previewing locally, and deploying — with links to the official Hugo docs for anything beyond the basics.
+
+For non-developers who need to edit content on an existing site, see the [Content editing guide](docs/content-editing-guide.md) — covers Markdown, front matter, images, and editing through GitHub's web interface.
+
 ## Quick Start
 
 1. Add the theme to your Hugo site:

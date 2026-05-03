@@ -1892,23 +1892,20 @@ main.list .content {
 }
 
 .masonry-date {
-  color: #bbb;
-}
-
-[data-theme="dark"] .masonry-date {
-  color: #aaa;
+  color: var(--color-text-meta, #999);
 }
 
 /* Issue #22: Frosted glass for meta text on cards with background images */
 /* Excludes gallery/overlay cards which have their own frosted glass treatment */
 .masonry-item.has-image .masonry-content:not(.masonry-overlay) .masonry-meta {
   padding: 0.2rem 0.5rem;
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 0.25rem;
   display: inline-flex;
   gap: 0.5rem;
+  color: #ffffff;
 }
 
 [data-theme="dark"] .masonry-item.has-image .masonry-content:not(.masonry-overlay) .masonry-meta {
