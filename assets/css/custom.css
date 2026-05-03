@@ -1898,6 +1898,12 @@ main.list .content {
   text-decoration: none;
 }
 
+/* Cards with background images: titles must be light — they sit on images, not the page bg */
+.masonry-item.has-image .masonry-content h3 a {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
 /* Masonry metadata */
 .masonry-meta {
   display: flex;
@@ -2357,6 +2363,8 @@ main.list .content {
 
 .carousel-card h2 a {
   text-decoration: none;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
 /* Frosted glass on meta strip in carousel */
@@ -2488,8 +2496,8 @@ main.list .content {
 
   .carousel-card.image-light .masonry-content h2 a,
   .carousel-card.image-dark .masonry-content h2 a {
-    color: var(--text-color);
-    text-shadow: none;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   }
 
   /* Revert bottom to masonry card style — no gradient scrim */

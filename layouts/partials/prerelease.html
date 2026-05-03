@@ -43,7 +43,7 @@
     }
     hashInput(passphrase).then(function(inputHash) {
       if (inputHash === storedHash) {
-        sessionStorage.setItem(storageKey, 'true');
+        localStorage.setItem(storageKey, 'true');
         showPage();
       } else {
         window.location = 'about:blank';
@@ -51,7 +51,7 @@
     });
   }
 
-  if (sessionStorage.getItem(storageKey) === 'true') {
+  if (localStorage.getItem(storageKey) === 'true') {
     showPage();
   } else {
     authenticate();
