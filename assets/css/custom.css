@@ -469,7 +469,7 @@ body,
 .post-banner .meta .author,
 .post-hero .meta .author {
   color: var(--overlay-text) !important;
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-weight: 800;
   font-stretch: 115%;
   text-shadow:
@@ -778,7 +778,7 @@ body,
   text-align: center;
   margin-top: 8px;
   font-style: italic;
-  font-family: 'IosevkaQuasiProportional Condensed', sans-serif;
+  font-family: var(--font-caption);
   font-stretch: 150%;
 }
 
@@ -816,7 +816,7 @@ body,
 
 .list-author,
 .list-date {
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   font-size: 0.8rem;
   font-style: italic;
 }
@@ -943,7 +943,7 @@ div.verse,
 pre.verse,
 .verse-block {
   white-space: pre-line !important;
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1.0rem, 2.5vw, 1.2rem);
   background: none;
   border: none;
@@ -975,13 +975,13 @@ pre.verse,
 /* Pull-quote shortcode: IM Fell Extended */
 .pull-quote blockquote,
 .pull-quote blockquote p {
-  font-family: "IM Fell Extended", serif;
+  font-family: var(--font-serif);
   font-style: normal;
   font-size: clamp(1.15rem, 4vw, 1.625rem);
 }
 
 .pull-quote figcaption {
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-style: italic;
   font-size: clamp(0.85rem, 2.5vw, 1.2rem);
 }
@@ -1049,7 +1049,7 @@ pre.verse,
   color: var(--text-color);
   text-decoration: none;
   font-size: 1rem;
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   font-weight: 500;
   transition: all 0.3s ease;
   border: 0 !important;
@@ -1157,7 +1157,7 @@ nav > a.nav-item {
   background: none;
   border: none;
   color: inherit;
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-nav);
   cursor: pointer;
   padding: 0.25rem 0.5rem;
   margin: 0;
@@ -1269,7 +1269,7 @@ h2 a.header-interactive:hover {
 /* Issue #62: Removed dropdown CSS - navigation now uses simple links only */
 
 .site-logo-text {
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   font-size: 1.5rem;
   text-decoration: none;
   vertical-align: middle;
@@ -1437,7 +1437,7 @@ header .main {
 /* List items match body text */
 ul li,
 ol li {
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   font-stretch: 115%;
 }
@@ -1963,7 +1963,7 @@ main.list .content {
 /* Masonry excerpt */
 .masonry-excerpt {
   color: var(--text-secondary);
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-weight: 400;
   font-stretch: 115%;
   font-size: 0.9rem;
@@ -2363,7 +2363,7 @@ main.list .content {
 .carousel-card h2 .heading-prefix {
   color: var(--color-primary);
   font-weight: 700;
-  font-family: 'IosevkaCustom Extended', monospace;
+  font-family: var(--font-accent);
   margin-right: 0.3em;
 }
 
@@ -2570,7 +2570,7 @@ main.list .masonry-grid {
 .sidebar-nav,
 .sidebar-nav li {
   font-size: 0.9375rem;
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-stretch: 100%;
 }
 
@@ -2673,7 +2673,7 @@ main.list .masonry-grid {
 
 .sidebar-title {
   margin: 0 0 1rem 0;
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-color);
@@ -2781,7 +2781,7 @@ main.list .masonry-grid {
 }
 
 .toc-mobile-summary {
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   font-size: 1rem;
   color: color-mix(in srgb, var(--color-border, #663399) 65%, white);
   cursor: pointer;
@@ -2806,7 +2806,7 @@ main.list .masonry-grid {
 }
 
 .toc-mobile-details ul {
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   margin-top: 0.75rem;
 }
@@ -2962,7 +2962,7 @@ main.list .masonry-grid {
 .section-nav h4::before {
   content: '#';
   color: var(--color-primary);
-  font-family: 'IosevkaCustom Extended', monospace;
+  font-family: var(--font-accent);
   font-weight: 400;
   font-style: normal;
   font-size: 1.2em;
@@ -3173,7 +3173,7 @@ main.list .masonry-grid {
 
 /* Related articles — styled to match TOC */
 .related-articles h3 {
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   font-size: 1rem;
   margin-top: 0;
   margin-bottom: 0.75rem;
@@ -3197,7 +3197,7 @@ main.list .masonry-grid {
 .related-articles li {
   padding: 0;
   text-indent: -2ch;
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   margin-bottom: 0.55em;
   line-height: 1.5;
@@ -3282,7 +3282,7 @@ figure.inline-image.inline-image-left {
 
 /* Default caption: clean text below image */
 .inline-image-caption {
-  font-family: 'IosevkaQuasiProportional Condensed', sans-serif;
+  font-family: var(--font-caption);
   font-size: 0.85rem;
   color: var(--text-muted);
   text-align: center;
@@ -3486,7 +3486,7 @@ figure.inline-image:has(.inline-image-caption-blur) {
 
 .signpost a {
   color: var(--signpost-text);
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 1rem;
   font-stretch: 115%;

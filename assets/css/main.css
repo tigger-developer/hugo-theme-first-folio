@@ -36,6 +36,16 @@
   --color-background-toc-dark: #272822;
   --color-background-draft-dark: #0066ff;
   
+  /* Font families — override these to change site fonts */
+  --font-body: 'Asap', sans-serif;
+  --font-heading: "Special Elite", monospace;
+  --font-mono: 'IosevkaCustom', 'Courier New', monospace;
+  --font-caption: 'IosevkaQuasiProportional Condensed', sans-serif;
+  --font-nav: "Special Elite", monospace;
+  --font-accent: 'IosevkaCustom Extended', monospace;
+  --font-serif: "IM Fell Extended", serif;
+  --font-gaeilge: 'Iosevka Gaeilge', Helvetica, sans-serif;
+
   /* Spacing and sizing */
   --content-max-width: 40rem;
   --content-padding: 1ch;
@@ -70,7 +80,7 @@
 
 html {
   color: var(--color-text, #232333);
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-weight: 450;
 
   font-size: var(--font-size-base, 1rem);
@@ -116,7 +126,7 @@ p {
 
 /* Irish language content uses Iosevka Gaeilge (wedge serifs) */
 :lang(ga) {
-  font-family: 'Iosevka Gaeilge', Helvetica, sans-serif;
+  font-family: var(--font-gaeilge);
 }
 
 @supports (margin-block: 1em) {
@@ -341,7 +351,7 @@ header .main {
 
 /* Headings — Issue #25: Special Elite for all headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   /* Fallback for older browsers */
   margin-top: 2em;
   margin-bottom: 0.5em;
@@ -500,7 +510,7 @@ a.breadcrumb-seg:hover {
   border-right: none;
   border-bottom: none;
   color: var(--color-text, #232333);
-  font-family: 'Asap', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9375rem;
   /* Fallback for older browsers */
   max-width: 18.75rem;
@@ -513,7 +523,7 @@ a.breadcrumb-seg:hover {
 }
 
 .toc > strong {
-  font-family: "Special Elite", monospace;
+  font-family: var(--font-heading);
   font-size: 1rem;
   display: block;
   margin-bottom: 0.75rem;
@@ -730,7 +740,7 @@ article .title {
 }
 
 .callout p {
-  font-family: 'IosevkaCustom', 'Courier New', monospace;
+  font-family: var(--font-mono);
   margin: 0;
 }
 
@@ -803,7 +813,7 @@ article .title {
   position: absolute;
   top: -2.5rem;
   left: -0.5rem;
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: var(--font-serif);
   font-size: 20rem;
   line-height: 1;
   color: var(--color-primary);
@@ -966,7 +976,7 @@ svg {
 
 .code-block[data-lang]::before {
   content: attr(data-lang);
-  font-family: 'IosevkaCustom', 'Courier New', monospace;
+  font-family: var(--font-mono);
   background: #000000;
   border-radius: 0 0 0.25rem 0.25rem;
   color: #ffffff;
@@ -1097,7 +1107,7 @@ details.styled-details > summary > span {
   margin-inline-start: 1em;
   padding: 0 0.5em;
   background-color: var(--color-background, #ffffff);
-  font-family: 'IosevkaCustom', 'Courier New', monospace;
+  font-family: var(--font-mono);
   font-weight: 600;
 }
 
