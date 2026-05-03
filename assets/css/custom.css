@@ -2469,6 +2469,7 @@ main.list .content {
   .carousel-card {
     position: relative !important;
     opacity: 1 !important;
+    visibility: visible !important;
     pointer-events: auto !important;
     transition: none !important;
     border: 1px solid var(--border-color) !important;
