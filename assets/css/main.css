@@ -7,18 +7,18 @@
 /* CSS Custom Properties */
 :root {
   /* Issue #80: Primary and secondary accent colors defined in CSS (not Hugo) */
-  --color-primary: #dc143c;
-  --color-secondary: hsl(27, 100%, 50%);
+  --color-primary: #b5122f;
+  --color-secondary: #2a7d8a;
 
   /* Light mode hover derivatives - mix with BLACK for darker variants */
   --color-primary-hover: color-mix(in srgb, var(--color-primary) 80%, black);
   --color-secondary-hover: color-mix(in srgb, var(--color-secondary) 80%, black);
 
   /* Light theme colors */
-  --color-border: #9370db;
-  --color-callout: #1e90ff;
+  --color-border: #8a7070;
+  --color-callout: #2a7d8a;
   --color-text: #232333;
-  --color-text-muted: #65659a;
+  --color-text-muted: #6b6b7a;
   --color-text-meta: #999999;
   --color-background: #ffffff;
   --color-background-code: #f1f1f1;
@@ -45,6 +45,20 @@
   --font-accent: 'IosevkaCustom Extended', monospace;
   --font-serif: "IM Fell Extended", serif;
   --font-gaeilge: 'Iosevka Gaeilge', Helvetica, sans-serif;
+
+  /* Heading prefix characters — override to change the decorative marks before headings */
+  --prefix-h1: '# ';
+  --prefix-h2: '## ';
+  --prefix-h3: '### ';
+  --prefix-h4: '#### ';
+  --prefix-h5: '##### ';
+  --prefix-h6: '###### ';
+  /* Article body: content headings shift down one level (h2 displays as h1 prefix, etc.) */
+  --prefix-article-h2: '# ';
+  --prefix-article-h3: '## ';
+  --prefix-article-h4: '### ';
+  --prefix-article-h5: '#### ';
+  --prefix-article-h6: '##### ';
 
   /* Spacing and sizing */
   --content-max-width: 40rem;
@@ -369,20 +383,20 @@ h5 { font-size: clamp(1.0rem, 2.2vw, 1.1rem); }
 h6 { font-size: clamp(0.95rem, 2vw, 1.0rem); }
 
 /* Heading hash marks — bold, primary colour */
-h1::before { color: var(--color-primary); content: '# '; font-weight: 700; font-synthesis: weight; }
-h2::before { color: var(--color-primary); content: '## '; font-weight: 700; font-synthesis: weight; }
-h3::before { color: var(--color-primary); content: '### '; font-weight: 700; font-synthesis: weight; }
-h4::before { color: var(--color-primary); content: '#### '; font-weight: 700; font-synthesis: weight; }
-h5::before { color: var(--color-primary); content: '##### '; font-weight: 700; font-synthesis: weight; }
-h6::before { color: var(--color-primary); content: '###### '; font-weight: 700; font-synthesis: weight; }
+h1::before { color: var(--color-primary); content: var(--prefix-h1); font-weight: 700; font-synthesis: weight; }
+h2::before { color: var(--color-primary); content: var(--prefix-h2); font-weight: 700; font-synthesis: weight; }
+h3::before { color: var(--color-primary); content: var(--prefix-h3); font-weight: 700; font-synthesis: weight; }
+h4::before { color: var(--color-primary); content: var(--prefix-h4); font-weight: 700; font-synthesis: weight; }
+h5::before { color: var(--color-primary); content: var(--prefix-h5); font-weight: 700; font-synthesis: weight; }
+h6::before { color: var(--color-primary); content: var(--prefix-h6); font-weight: 700; font-synthesis: weight; }
 
 /* Article body: no hash on title (h1), shift content headings down one level */
 .title h1::before { content: none; }
-article .body h2::before { content: '# '; }
-article .body h3::before { content: '## '; }
-article .body h4::before { content: '### '; }
-article .body h5::before { content: '#### '; }
-article .body h6::before { content: '##### '; }
+article .body h2::before { content: var(--prefix-article-h2); }
+article .body h3::before { content: var(--prefix-article-h3); }
+article .body h4::before { content: var(--prefix-article-h4); }
+article .body h5::before { content: var(--prefix-article-h5); }
+article .body h6::before { content: var(--prefix-article-h6); }
 
 .meta {
   color: var(--color-text-meta, #999999);
