@@ -741,10 +741,10 @@ Wrapper shortcode that places inner content side by side on desktop. Collapses t
 ### Usage
 
 ```markdown
-{{</* side-by-side */>}}
-{{</* img src="cover-front.jpg" alt="Front cover" link="https://example.com" */>}}
-{{</* img src="cover-back.jpg" alt="Back cover" link="https://example.com" */>}}
-{{</* /side-by-side */>}}
+{{< side-by-side >}}
+{{< img src="cover-front.jpg" alt="Front cover" link="https://example.com" >}}
+{{< img src="cover-back.jpg" alt="Back cover" link="https://example.com" >}}
+{{< /side-by-side >}}
 ```
 
 ### Live Demo
