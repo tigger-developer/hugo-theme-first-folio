@@ -21,7 +21,13 @@
   </div>
 </footer>
 
-{{- if eq .Site.Params.mode "dark" }}
+{{- if eq .Site.Params.mode "light" }}
+<script>
+// Force light mode — clear any saved dark preference
+document.documentElement.setAttribute('data-theme', 'light');
+localStorage.removeItem('theme-storage');
+</script>
+{{- else if eq .Site.Params.mode "dark" }}
 <script>
 // Issue #3: Dark mode — always dark
 document.documentElement.setAttribute('data-theme', 'dark');
