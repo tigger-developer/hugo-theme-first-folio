@@ -2,7 +2,5 @@
 # ABOUTME: Demonstrates all major theme features with fictional content
 
 baseURL: https://first-folio.theme.lobb.ie/
-languageCode: en-GB-oed
 title: first-folio.theme.lobb.ie
-themeDir: ../..
 copyright: © 2023-2026 Taḋg Paul — Apache License 2.0

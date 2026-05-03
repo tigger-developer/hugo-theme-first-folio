@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Coastal Walks on wanderers.lobb.ie</title>
-    <link>http://localhost:1314/photography/coastal-walks/</link>
-    <description>Recent content in Coastal Walks on wanderers.lobb.ie</description>
+    <title>Coastal Walks on first-folio.theme.lobb.ie</title>
+    <link>http://localhost:57054/photography/coastal-walks/</link>
+    <description>Recent content in Coastal Walks on first-folio.theme.lobb.ie</description>
     <generator>Hugo</generator>
-    <language>en</language>
-    <copyright>Example Site — MIT License</copyright>
-    <atom:link href="http://localhost:1314/photography/coastal-walks/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-GB-oed</language>
+    <copyright>© 2023-2026 Taḋg Paul — Apache License 2.0</copyright>
+    <atom:link href="http://localhost:57054/photography/coastal-walks/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

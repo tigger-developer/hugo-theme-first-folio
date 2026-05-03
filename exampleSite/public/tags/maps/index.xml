@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Maps on wanderers.lobb.ie</title>
-    <link>http://localhost:1314/tags/maps/</link>
-    <description>Recent content in Maps on wanderers.lobb.ie</description>
+    <title>Maps on first-folio.theme.lobb.ie</title>
+    <link>http://localhost:57054/tags/maps/</link>
+    <description>Recent content in Maps on first-folio.theme.lobb.ie</description>
     <generator>Hugo</generator>
-    <language>en</language>
-    <copyright>Example Site — MIT License</copyright>
+    <language>en-GB-oed</language>
+    <copyright>© 2023-2026 Taḋg Paul — Apache License 2.0</copyright>
     <lastBuildDate>Mon, 10 Nov 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1314/tags/maps/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:57054/tags/maps/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Cartographer</title>
-      <link>http://localhost:1314/poetry/the-cartographer/</link>
+      <link>http://localhost:57054/poetry/the-cartographer/</link>
       <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1314/poetry/the-cartographer/</guid>
+      <guid>http://localhost:57054/poetry/the-cartographer/</guid>
       <description>&lt;div class=&#34;poem&#34;&gt;&#xA;She drew the roads from memory,&#xA;the river where it used to run,&#xA;the bridge they took down in the nineties.&#xA;&#xA;She marked the shop that sold paraffin,&#xA;the tree where the owl sat every January,&#xA;the gap in the wall you could squeeze through&#xA;if you were ten and determined.&#xA;&#xA;None of this was on any official map.&#xA;All of it was true.&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

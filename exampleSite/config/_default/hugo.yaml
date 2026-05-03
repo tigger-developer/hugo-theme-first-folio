@@ -4,7 +4,7 @@
 baseURL: https://example.com/
 languageCode: en-GB-oed
 title: red-dots.example.com
-theme: first-folio
+theme: ../..
 copyright: "© 2023-2026 Taḋg Paul — Apache License 2.0"
 
 pagination:
