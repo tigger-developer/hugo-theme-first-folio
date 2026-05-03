@@ -90,7 +90,7 @@
             <span class="masonry-author">{{ .Params.author }}</span>
             {{- end -}}
             {{- if $showSection -}}
-            <span class="masonry-section">{{ $section | humanize }}</span>
+            <span class="masonry-section">{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize }}{{ end }}</span>
             {{- end -}}
             {{- if $showDate -}}
             <span class="masonry-date">{{ .Date.Format "2 Jan 2006" }}</span>

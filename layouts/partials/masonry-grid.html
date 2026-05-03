@@ -93,7 +93,7 @@
           {{- if $showSection -}}
           <div class="masonry-footer">
             <p class="masonry-meta">
-              <span class="masonry-section">{{ $section | humanize }}</span>
+              <span class="masonry-section">{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize }}{{ end }}</span>
             </p>
             <div class="read-more-container">
               <a href="{{ .RelPermalink }}" class="read-more-btn">
@@ -122,7 +122,7 @@
               <span class="masonry-author">{{ .Params.author }}</span>
               {{- end -}}
               {{- if $showSection -}}
-              <span class="masonry-section">{{ $section | humanize }}</span>
+              <span class="masonry-section">{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize }}{{ end }}</span>
               {{- end -}}
               {{- /* Issue #79: Support hideDate frontmatter */ -}}
               {{- if $showDate -}}

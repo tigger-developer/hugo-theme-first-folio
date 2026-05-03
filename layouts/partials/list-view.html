@@ -49,7 +49,7 @@
         <span class="list-view-author">{{ . }}</span>
         {{- end }}{{ end -}}
         {{- if $showSection -}}
-        <span class="list-view-section">{{ .Section | humanize }}</span>
+        <span class="list-view-section">{{ with site.GetPage .Section }}{{ .Title }}{{ else }}{{ $.Section | humanize }}{{ end }}</span>
         {{- end -}}
         {{- if and .Date (not .Params.hideDate) -}}
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>

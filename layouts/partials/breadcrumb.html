@@ -14,7 +14,8 @@
   {{- $show = .Params.breadcrumb_list | default false -}}
 {{- end -}}
 {{- if $show -}}
-{{- $section := .Section | humanize | title -}}
+{{- $sectionPage := site.GetPage .Section -}}
+{{- $section := cond (ne $sectionPage nil) $sectionPage.Title (.Section | humanize | title) -}}
 {{- $ancestors := .Ancestors -}}
 {{- $subsections := slice -}}
 {{- /* Walk ancestors (excluding home and top section) to build subsection trail */ -}}
