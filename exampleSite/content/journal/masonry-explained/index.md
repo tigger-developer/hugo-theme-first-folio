@@ -17,7 +17,7 @@ The homepage and section list pages use a masonry grid — a layout where items 
 
 ## The Hybrid Approach
 
-Pure CSS Grid gives us responsive columns but leaves vertical gaps. Pure JavaScript positioning is fragile on resize. The tadg_ie theme uses both:
+Pure CSS Grid gives us responsive columns but leaves vertical gaps. Pure JavaScript positioning is fragile on resize. The First Folio theme uses both:
 
 1. **CSS Grid** handles the horizontal layout — responsive columns that reflow based on viewport width.
 2. **JavaScript** runs after images load and adjusts vertical positioning to fill gaps.

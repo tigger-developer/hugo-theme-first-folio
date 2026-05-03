@@ -1,6 +1,6 @@
 # Shortcodes Reference
 
-The tadg_ie theme provides 18 custom shortcodes for varied content types.
+The First Folio theme provides 18 custom shortcodes for varied content types.
 
 ## Table of Contents
 

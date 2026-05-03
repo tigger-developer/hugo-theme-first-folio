@@ -1,10 +1,10 @@
-# tadg_ie Hugo Theme
+# First Folio
 
 [Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md)
 
 ## What this is
 
-tadg_ie is a Hugo theme built to run a single site that does many different things well. It grew out of a practical problem: four separate websites - a poetry collection, an art gallery, a tech blog, and a personal site - that needed to become one, without any section feeling like a second-class citizen.
+First Folio is a Hugo theme built to run a single site that does many different things well. It grew out of a practical problem: four separate websites - a poetry collection, an art gallery, a tech blog, and a personal site - that needed to become one, without any section feeling like a second-class citizen.
 
 The result is a theme that handles image galleries with EXIF metadata and lightbox, long-form articles with six distinct layout options, poetry with preserved line breaks, play scripts with dialogue and stage directions, recipe cards, technical documentation with table of contents, and video streaming via Cloudflare Stream - all from the same installation, all looking like they belong together.
 
@@ -26,17 +26,17 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 
 1. Add the theme to your Hugo site:
    ```bash
-   git submodule add https://github.com/tigger04/theme-tadg-ie.git themes/tadg_ie
+   git submodule add https://github.com/tadg-paul/hugo-theme-first-folio.git themes/first-folio
    ```
 
    Or clone directly:
    ```bash
-   git clone https://github.com/tigger04/theme-tadg-ie.git themes/tadg_ie
+   git clone https://github.com/tadg-paul/hugo-theme-first-folio.git themes/first-folio
    ```
 
 2. Update your `hugo.yaml`:
    ```yaml
-   theme: tadg_ie
+   theme: first-folio
    ```
 
 3. Create content in sections matching your site structure (e.g., `blog/`, `portfolio/`, `gallery/`)
@@ -74,7 +74,7 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 The theme provides a complete set of templates:
 
 ```
-themes/tadg_ie/
+themes/first-folio/
 ├── layouts/
 │   ├── index.html             # Homepage template
 │   ├── _default/
@@ -945,7 +945,7 @@ grid:
 ```yaml
 baseURL: https://example.com/
 title: Site Title
-theme: tadg_ie
+theme: first-folio
 
 pagination:
   pagerSize: 12   # Items per page
@@ -1377,7 +1377,7 @@ Utility scripts live in `scripts/`. Run them from the root of your Hugo project.
 Lists all content files with a `pin:` value in their frontmatter, sorted numerically. Useful for reviewing pin assignments before reordering or adding new ones.
 
 ```bash
-$ themes/tadg_ie/scripts/pins.pl
+$ themes/first-folio/scripts/pins.pl
 Pin  File
 ---  ------------------------------------------------
 100  blog/2026-01-29-dark-optimism-ai/index.org
@@ -1408,7 +1408,7 @@ Converts orgmode play scripts to use Hugo shortcodes for dialogue and stage dire
 All other content (frontmatter, `*` and `**` headers, bullet points, regular text) is preserved unchanged.
 
 ```bash
-$ themes/tadg_ie/scripts/org-play-to-shortcodes.pl content/plays/myplay/index.org
+$ themes/first-folio/scripts/org-play-to-shortcodes.pl content/plays/myplay/index.org
 Converted to shortcodes: content/plays/myplay/index.org
 ```
 
@@ -1460,6 +1460,15 @@ Ensure both CSS files are loaded:
 
 ---
 
-## License
+## Licence
 
-MIT License. See [LICENSE](LICENSE) for details.
+Copyright (c) 2023-2026 Taḋg Paul.
+
+Licensed under the Apache License, Version 2.0 (the "Licence"); you may not
+use this work except in compliance with the Licence. A copy of the Licence is
+in the [LICENSE](LICENSE) file.
+
+This theme is derived from the [Archie](https://github.com/athul/archie) Hugo
+theme by Athul Cyriac Ajay, originally licensed under the MIT Licence. See
+[NOTICE](NOTICE) and [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) for
+attribution.

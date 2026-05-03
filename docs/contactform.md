@@ -60,7 +60,7 @@ You'll receive two values:
 
 ```bash
 # Navigate to the Worker directory
-cd themes/tadg_ie/workers/contactform
+cd themes/first-folio/workers/contactform
 
 # Install dependencies (includes wrangler)
 npm install
@@ -81,7 +81,7 @@ After deploying, wrangler prints the Worker URL (e.g. `https://contactform.<your
 ### Step 5: Set Worker secrets
 
 ```bash
-cd themes/tadg_ie/workers/contactform
+cd themes/first-folio/workers/contactform
 
 # Turnstile secret key (from Step 2)
 npx wrangler secret put TURNSTILE_SECRET_KEY
@@ -139,7 +139,7 @@ When `newsletter="true"`, the form includes a required checkbox. Opted-in emails
 ### List all subscribers
 
 ```bash
-themes/tadg_ie/workers/contactform/bin/list-subscribers.sh
+themes/first-folio/workers/contactform/bin/list-subscribers.sh
 ```
 
 Outputs a tab-separated table of email, name, and subscription date. Requires `jq`.
@@ -147,7 +147,7 @@ Outputs a tab-separated table of email, name, and subscription date. Requires `j
 ### List subscribers (manual)
 
 ```bash
-cd themes/tadg_ie/workers/contactform
+cd themes/first-folio/workers/contactform
 npx wrangler kv key list --binding SUBSCRIBERS --remote
 ```
 

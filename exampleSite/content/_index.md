@@ -3,11 +3,11 @@ title: "The Wanderer's Notebook"
 sidebar:
   title: "Explore"
   content: |
-    Welcome to the demo site for the **tadg_ie** Hugo theme.
+    Welcome to the demo site for the **First Folio** Hugo theme.
 
     {{< section-list >}}
 
-    Built with [Hugo](https://gohugo.io) and the [tadg_ie theme](https://github.com/tigger04/theme-tadg-ie).
+    Built with [Hugo](https://gohugo.io) and the [First Folio theme](https://github.com/tadg-paul/hugo-theme-first-folio).
 ---
 
-This is a demonstration site showcasing the features of the tadg_ie Hugo theme. Browse the sections to see masonry grids, galleries, sidebars, shortcodes, and more.
+This is a demonstration site showcasing the features of the First Folio Hugo theme. Browse the sections to see masonry grids, galleries, sidebars, shortcodes, and more.

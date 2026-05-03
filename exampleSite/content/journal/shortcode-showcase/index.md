@@ -1,7 +1,7 @@
 ---
 title: "Shortcode Showcase"
 date: 2025-12-01
-description: "A comprehensive demonstration of every shortcode available in the tadg_ie theme."
+description: "A comprehensive demonstration of every shortcode available in the First Folio theme."
 tags:
   - theme
   - shortcodes
@@ -15,10 +15,10 @@ image:
   dark: true
 signpost:
   text: "THEME DOCUMENTATION"
-  url: "https://github.com/tigger04/theme-tadg-ie"
+  url: "https://github.com/tadg-paul/hugo-theme-first-folio"
 signpost_footer:
   text: "VIEW SOURCE ON GITHUB"
-  url: "https://github.com/tigger04/theme-tadg-ie"
+  url: "https://github.com/tadg-paul/hugo-theme-first-folio"
 resources:
   - src: "gallery-1.jpg"
     params:
@@ -37,7 +37,7 @@ resources:
       weight: 3
 ---
 
-This page demonstrates every shortcode available in the tadg_ie theme. Use it as a visual reference.
+This page demonstrates every shortcode available in the First Folio theme. Use it as a visual reference.
 
 ## Callout
 
@@ -210,7 +210,7 @@ Self-hosted contact form with Cloudflare Turnstile CAPTCHA:
 {{</* contactform newsletter="true" */>}}
 ```
 
-(Requires Cloudflare Worker configuration. See [docs/contactform.md](https://github.com/tigger04/theme-tadg-ie/blob/main/docs/contactform.md) for setup.)
+(Requires Cloudflare Worker configuration. See [docs/contactform.md](https://github.com/tadg-paul/hugo-theme-first-folio/blob/main/docs/contactform.md) for setup.)
 
 ## Formspree
 

@@ -1,11 +1,11 @@
-# ABOUTME: Hugo configuration for the tadg_ie theme example site
+# ABOUTME: Hugo configuration for the First Folio theme example site
 # ABOUTME: Demonstrates all major theme features with fictional content
 
 baseURL: https://example.com/
-languageCode: en
-title: wanderers.lobb.ie
-theme: tadg_ie
-copyright: "Example Site — MIT License"
+languageCode: en-GB-oed
+title: red-dots.example.com
+theme: first-folio
+copyright: "© 2023-2026 Taḋg Paul — Apache License 2.0"
 
 pagination:
   pagerSize: 12
@@ -72,7 +72,7 @@ params:
       url: https://bsky.app/profile/example
     - name: GitHub
       icon: github                                   # Feather icon (default)
-      url: https://github.com/tigger04/theme-tadg-ie
+      url: https://github.com/tadg-paul/hugo-theme-first-folio
     - name: Mastodon
       icon: "simple:mastodon"                        # Simple Icons
       url: https://mastodon.social/@example
@@ -80,7 +80,7 @@ params:
       icon: rss                                      # Feather icon
       url: /index.xml
 
-  subtitle: "A demo site for the tadg_ie Hugo theme"
+  subtitle: "A demo site for the First Folio Hugo theme"
 
 menu:
   main:

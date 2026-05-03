@@ -1,11 +1,11 @@
-# tadg_ie Example Site
+# First Folio Example Site
 
-A demonstration site for the [tadg_ie Hugo theme](https://github.com/tigger04/theme-tadg-ie).
+A demonstration site for the [First Folio Hugo theme](https://github.com/tadg-paul/hugo-theme-first-folio).
 
 ## Quick Start
 
 ```bash
-cd themes/tadg_ie/exampleSite
+cd themes/first-folio/exampleSite
 hugo server --themesDir ../..
 ```
 

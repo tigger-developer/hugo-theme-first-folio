@@ -1,5 +1,5 @@
 ---
-title: "Typography in the tadg_ie Theme"
+title: "Typography in the First Folio Theme"
 date: 2025-07-01
 description: "A demonstration of heading levels, lists, code blocks, and other typographic elements."
 tags:
@@ -16,7 +16,7 @@ tldr: "A comprehensive demonstration of how standard Markdown elements render in
 pin: 100
 ---
 
-This post demonstrates how standard Markdown typography renders in the tadg_ie theme. Use it as a reference when writing content.
+This post demonstrates how standard Markdown typography renders in the First Folio theme. Use it as a reference when writing content.
 
 ## Headings
 

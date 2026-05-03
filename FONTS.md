@@ -1,6 +1,6 @@
 # Font Architecture
 
-This document describes the font stack used in the tadg_ie theme.
+This document describes the font stack used in the First Folio theme.
 
 ## Active Fonts
 

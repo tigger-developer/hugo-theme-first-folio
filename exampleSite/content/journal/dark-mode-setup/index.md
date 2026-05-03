@@ -1,7 +1,7 @@
 ---
 title: "Configuring Dark Mode"
 date: 2025-05-20
-description: "How the tadg_ie theme handles dark mode: auto-detection, manual toggle, and fixed modes."
+description: "How the First Folio theme handles dark mode: auto-detection, manual toggle, and fixed modes."
 tags:
   - theme
   - dark-mode

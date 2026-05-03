@@ -1,24 +1,25 @@
-# theme.toml for tadg_ie Hugo theme
-# Based on Archie theme with extensive customizations
+# First Folio Hugo Theme
 
 name = "First Folio"
 license = "Apache-2.0"
-licenselink = "https://github.com/tigger04/theme-tadg-ie/blob/main/LICENSE"
-description = "A Hugo theme for multi-content-type sites with masonry layouts, galleries, and responsive design. Based on Archie."
-homepage = "https://github.com/tigger04/theme-tadg-ie"
-tags = ["blog", "portfolio", "gallery", "poetry", "responsive", "masonry", "multi-section", "shortcodes"]
+licenselink = "https://github.com/tadg-paul/hugo-theme-first-folio/blob/main/LICENSE"
+description = "A versatile Hugo theme for sites that do many things — galleries, blogs, poetry, plays, recipes, tech docs — without any section feeling like an afterthought."
+homepage = "https://github.com/tadg-paul/hugo-theme-first-folio"
+demosite = "https://demo.theme.tadg.ie"
+tags = ["blog", "portfolio", "gallery", "poetry", "responsive", "masonry", "multi-section", "shortcodes", "dark", "video", "cloudflare-stream"]
 features = [
-  "Masonry grid layout",
-  "Image galleries with lightbox",
-  "Multiple content types (blog, poetry, artwork, plays, stories)",
-  "Section-specific card styles",
-  "Responsive design with em-based breakpoints",
-  "Pagination with per-section override",
-  "7 custom shortcodes",
-  "Dark mode support"
+  "Masonry grid with carousel card",
+  "Image galleries with lightbox and EXIF metadata",
+  "Six article layouts (banner, hero, columns, featured, background, text-only)",
+  "18 custom shortcodes",
+  "Cloudflare Stream video support",
+  "Breadcrumb navigation and signpost CTAs",
+  "Table of contents sidebar",
+  "Responsive design with em-based breakpoints (WCAG 2.1)",
+  "Dark mode design"
 ]
 min_version = "0.128.0"
 
 [author]
-  name = "Tadg Paul"
-  homepage = "https://github.com/tigger04"
+  name = "Taḋg Paul"
+  homepage = "https://tadg.ie"
