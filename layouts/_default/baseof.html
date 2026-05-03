@@ -23,5 +23,28 @@
           }
         });
         </script>
+        {{- /* Issue #51: Background layout forces page-wide theme override.
+               Default = dark context. image.dark: false = light context.
+               Runs after footer.html theme script so it wins. Does not touch
+               localStorage — the user's preference is restored on next navigation
+               by the footer script (which handles light/dark/auto/toggle). */ -}}
+        {{- $effectiveLayout := .Params.layout -}}
+        {{- if and .Params.image.src (not .Params.layout) -}}
+          {{- $effectiveLayout = "background" -}}
+        {{- end -}}
+        {{- if eq $effectiveLayout "background" -}}
+        {{- $forceTheme := "dark" -}}
+        {{- if and (isset .Params.image "dark") (not .Params.image.dark) -}}
+          {{- $forceTheme = "light" -}}
+        {{- end -}}
+        <script>
+        (function() {
+          var theme = '{{ $forceTheme }}';
+          document.documentElement.setAttribute('data-theme', theme);
+          var darkSheet = document.getElementById('darkModeStyle');
+          if (darkSheet) { darkSheet.disabled = (theme !== 'dark'); }
+        })();
+        </script>
+        {{- end -}}
     </body>
 </html>

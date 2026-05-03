@@ -114,6 +114,9 @@
 	<!-- Issue #17: Configurable responsive grid CSS -->
 	{{- partial "grid-config.html" . -}}
 
+	<!-- Issue #51: Configurable wash for background-layout legibility -->
+	{{- partial "wash-config.html" . -}}
+
 	<!-- Custom CSS style get applied last -->
 	{{- if isset .Site.Params "customcss" }}
 		{{ range .Site.Params.customCSS }}

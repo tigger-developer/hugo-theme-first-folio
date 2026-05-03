@@ -30,7 +30,12 @@
 		</a>
 		{{ partial "navigation.html" . }}
 		{{- /* Issue #90: Dark mode toggle button */ -}}
-		{{- if eq .Site.Params.mode "toggle" -}}
+		{{- /* Issue #51: Hide toggle on background layout — theme is forced by the image */ -}}
+		{{- $effectiveLayout := .Params.layout -}}
+		{{- if and .Params.image.src (not .Params.layout) -}}
+		  {{- $effectiveLayout = "background" -}}
+		{{- end -}}
+		{{- if and (eq .Site.Params.mode "toggle") (ne $effectiveLayout "background") -}}
 		<button id="dark-mode-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; padding: 0.5rem;">
 			<svg class="feather" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
 				<circle cx="12" cy="12" r="5"></circle>

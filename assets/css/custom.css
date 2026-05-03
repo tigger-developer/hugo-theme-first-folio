@@ -548,8 +548,14 @@ body,
   filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.7));
 }
 
-/* Issue #122, #34: Background layout text adaptation for dark images */
-/* Default: light text with dark shadow (works for dark mode and always-dark sites) */
+/* Issue #122, #34, #51: Background layout is mode-independent.
+   dark-bg = dark context (default for all background layouts).
+   light-bg = light context (only when image.dark: false is explicit).
+   The image IS the page background — site theme mode is irrelevant.
+   A forced page bg colour ensures low-opacity bleed goes the right direction. */
+
+/* --- dark-bg: dark context, light text --- */
+
 .post-container.dark-bg,
 .post-container.dark-bg .post-content,
 .post-container.dark-bg .post-content h1,
@@ -558,7 +564,7 @@ body,
 .post-container.dark-bg .post-content h4,
 .post-container.dark-bg .post-content h5,
 .post-container.dark-bg .post-content h6 {
-  color: #ffffff !important;
+  color: #e8e8e8 !important;
   text-shadow:
     0 1px 2px rgba(0, 0, 0, 0.5),
     0 0 8px rgba(0, 0, 0, 0.4) !important;
@@ -566,7 +572,7 @@ body,
 
 .post-container.dark-bg .post-content .meta,
 .post-container.dark-bg .post-content a {
-  color: #ffffff !important;
+  color: #e8e8e8 !important;
 }
 
 .post-container.dark-bg .post-content h1::before,
@@ -577,28 +583,111 @@ body,
     0 0 8px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* Light mode override: dark-bg with low-opacity images needs dark text on light page bg */
-[data-theme="light"] .post-container.dark-bg,
-[data-theme="light"] .post-container.dark-bg .post-content,
-[data-theme="light"] .post-container.dark-bg .post-content h1,
-[data-theme="light"] .post-container.dark-bg .post-content h2,
-[data-theme="light"] .post-container.dark-bg .post-content h3,
-[data-theme="light"] .post-container.dark-bg .post-content h4,
-[data-theme="light"] .post-container.dark-bg .post-content h5,
-[data-theme="light"] .post-container.dark-bg .post-content h6 {
-  color: var(--color-text, #232333) !important;
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+/* Issue #51: Wash — soft tint behind each content panel for legibility.
+   Uses ::before pseudo-element so the mask fades the tint layer only,
+   not the text content. Backdrop blur on the element itself (unmasked).
+   All values from wash-config.html (params.wash / image.wash frontmatter). */
+article:has(.post-container.dark-bg) .post-content,
+article:has(.post-container.dark-bg) .article-sidebar,
+article:has(.post-container.dark-bg) .toc-mobile,
+article:has(.post-container.dark-bg) .related-mobile {
+  position: relative;
+  -webkit-backdrop-filter: blur(var(--wash-blur, 0px));
+  backdrop-filter: blur(var(--wash-blur, 0px));
 }
 
-[data-theme="light"] .post-container.dark-bg .post-content .meta,
-[data-theme="light"] .post-container.dark-bg .post-content a {
-  color: var(--color-text, #232333) !important;
+article:has(.post-container.dark-bg) .post-content::before,
+article:has(.post-container.dark-bg) .article-sidebar::before,
+article:has(.post-container.dark-bg) .toc-mobile::before,
+article:has(.post-container.dark-bg) .related-mobile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, var(--wash-opacity, 0.25));
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent, black var(--wash-grad-left, 0%),  black calc(100% - var(--wash-grad-right, 0%)),  transparent),
+    linear-gradient(to bottom, transparent, black var(--wash-grad-top, 10%), black calc(100% - var(--wash-grad-bottom, 10%)), transparent);
+  -webkit-mask-composite: destination-in;
+  mask-image:
+    linear-gradient(to right,  transparent, black var(--wash-grad-left, 0%),  black calc(100% - var(--wash-grad-right, 0%)),  transparent),
+    linear-gradient(to bottom, transparent, black var(--wash-grad-top, 10%), black calc(100% - var(--wash-grad-bottom, 10%)), transparent);
+  mask-composite: intersect;
+  pointer-events: none;
+  z-index: -1;
 }
 
-[data-theme="light"] .post-container.dark-bg .post-content h1::before,
-[data-theme="light"] .post-container.dark-bg .post-content h2::before,
-[data-theme="light"] .post-container.dark-bg .post-content h3::before {
-  text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+/* Override the base text-shadow for all text in dark-bg context. */
+article:has(.post-container.dark-bg) {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* --- light-bg: light context (image.dark: false), dark text --- */
+
+.post-container.light-bg,
+.post-container.light-bg .post-content,
+.post-container.light-bg .post-content h1,
+.post-container.light-bg .post-content h2,
+.post-container.light-bg .post-content h3,
+.post-container.light-bg .post-content h4,
+.post-container.light-bg .post-content h5,
+.post-container.light-bg .post-content h6 {
+  color: #232333 !important;
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.7),
+    0 0 8px rgba(255, 255, 255, 0.5) !important;
+}
+
+.post-container.light-bg .post-content .meta,
+.post-container.light-bg .post-content a {
+  color: #232333 !important;
+}
+
+.post-container.light-bg .post-content h1::before,
+.post-container.light-bg .post-content h2::before,
+.post-container.light-bg .post-content h3::before {
+  text-shadow:
+    0 1px 2px rgba(255, 255, 255, 0.7),
+    0 0 8px rgba(255, 255, 255, 0.5) !important;
+}
+
+/* light-bg wash */
+article:has(.post-container.light-bg) .post-content,
+article:has(.post-container.light-bg) .article-sidebar,
+article:has(.post-container.light-bg) .toc-mobile,
+article:has(.post-container.light-bg) .related-mobile {
+  position: relative;
+  -webkit-backdrop-filter: blur(var(--wash-blur, 0px));
+  backdrop-filter: blur(var(--wash-blur, 0px));
+}
+
+article:has(.post-container.light-bg) .post-content::before,
+article:has(.post-container.light-bg) .article-sidebar::before,
+article:has(.post-container.light-bg) .toc-mobile::before,
+article:has(.post-container.light-bg) .related-mobile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, var(--wash-opacity, 0.25));
+  -webkit-mask-image:
+    linear-gradient(to right,  transparent, black var(--wash-grad-left, 0%),  black calc(100% - var(--wash-grad-right, 0%)),  transparent),
+    linear-gradient(to bottom, transparent, black var(--wash-grad-top, 10%), black calc(100% - var(--wash-grad-bottom, 10%)), transparent);
+  -webkit-mask-composite: destination-in;
+  mask-image:
+    linear-gradient(to right,  transparent, black var(--wash-grad-left, 0%),  black calc(100% - var(--wash-grad-right, 0%)),  transparent),
+    linear-gradient(to bottom, transparent, black var(--wash-grad-top, 10%), black calc(100% - var(--wash-grad-bottom, 10%)), transparent);
+  mask-composite: intersect;
+  pointer-events: none;
+  z-index: -1;
+}
+
+article:has(.post-container.light-bg) {
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 255, 255, 0.5) !important;
 }
 
 /* Background Image Styling */

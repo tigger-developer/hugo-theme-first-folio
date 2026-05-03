@@ -24,9 +24,9 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 
 ## New to Hugo?
 
-If this is your first Hugo site, start with the [Quickstart guide](docs/quickstart-new-website.md). It walks through installation, creating content, previewing locally, and deploying — with links to the official Hugo docs for anything beyond the basics.
+If this is your first Hugo site, start with the [Quickstart guide](docs/quickstart-new-website.md). It walks through installation, creating content, previewing locally, and deploying - with links to the official Hugo docs for anything beyond the basics.
 
-For non-developers who need to edit content on an existing site, see the [Content editing guide](docs/content-editing-guide.md) — covers Markdown, front matter, images, and editing through GitHub's web interface.
+For non-developers who need to edit content on an existing site, see the [Content editing guide](docs/content-editing-guide.md) - covers Markdown, front matter, images, and editing through GitHub's web interface.
 
 ## Quick Start
 
@@ -205,8 +205,17 @@ image:
   src: bg-image.jpg
   opacity: 0.3      # Override default
   blur: 10px        # Override default
-  dark: true        # Dark mode variant
+  dark: true        # Dark context (default)
 ```
+
+**Mode-independent rendering:** Background layout pages are rendered independently of the site's light/dark theme mode. The image fills the viewport - the site theme is irrelevant.
+
+- `image.dark: true` (or not set) - dark context: dark page background, light text, dark wash
+- `image.dark: false` - light context: light page background, dark text, light wash
+
+When a background layout page is displayed, the entire page (navigation, TOC, sidebar, footer) is forced into the matching theme. The user's theme preference is restored on navigation to the next page. The theme toggle button is hidden on these pages.
+
+**Wash:** A configurable tinted layer behind text panels (article content, TOC sidebar, related articles) that boosts legibility over background images. The wash fades at the edges using a gradient mask - no hard borders. See [Wash Configuration](#wash-configuration).
 
 ### No Layout (text-only)
 When no `layout` is specified and no image exists, a simple text layout is used.
@@ -264,11 +273,19 @@ Both masonry cards and list-view items display a background image when `image.sr
 
 | Config key | Controls | Fallback |
 |---|---|---|
-| `params.bgImage` | Article pages (background layout) | Hardcoded defaults |
+| `params.bgImage` | Article pages (background layout), list-view items | Hardcoded defaults |
 | `params.cardImage` | Masonry cards | `params.bgImage` |
 | `params.carousel.bgImage` | Carousel cards | Hardcoded defaults |
 
-Each scope supports `opacity`, `opacityDark` (used when `image.dark: true`), and `blur`.
+Each scope supports three keys:
+
+| Key | Meaning | Used when |
+|---|---|---|
+| `opacity` | Image opacity for **light images** | `image.dark: false` or `image.dark` not set |
+| `opacityDark` | Image opacity for **dark images** | `image.dark: true` |
+| `blur` | Blur radius applied to the background image | Always |
+
+**Important:** `opacity` and `opacityDark` refer to the **image's declared lightness** (the `image.dark` frontmatter field), not the site's theme mode (light/dark). A dark image typically benefits from a higher opacity to let its mood come through, while a light image needs lower opacity to avoid washing out the text. Per-page overrides via `image.opacity` in frontmatter take precedence over both config values.
 
 On cards with background images (`.has-image`), the category and date metadata gets a frosted glass pill (`backdrop-filter: blur(8px)` with a semi-transparent background) to ensure legibility over the image. Cards without images are unaffected.
 
@@ -355,6 +372,55 @@ params:
       opacityDark: 0.9     # dark images (dark: true)
       blur: 0px
 ```
+
+---
+
+## Wash Configuration
+
+The wash is a tinted layer behind text panels (article content, TOC sidebar, related articles) on background-layout pages. It boosts legibility by darkening or lightening the area behind text without hard borders - the wash fades at the edges using a four-sided gradient mask.
+
+### Site-level configuration
+
+```yaml
+params:
+  wash:
+    opacity: 0.4                  # tint strength (0 = none, 1 = solid)
+    blur: 3px                     # backdrop blur behind text panels
+    gradient: 1rem 2rem 1rem 1rem # edge fade: left top right bottom
+```
+
+| Key | Default | Description |
+|---|---|---|
+| `opacity` | `0.25` | Alpha of the wash tint. `0` disables the wash. |
+| `blur` | `0px` | Backdrop blur radius - softens image detail behind text. |
+| `gradient` | `0% 10% 0% 10%` | How far the wash fades inward from each edge (left top right bottom). Accepts any CSS length: `%`, `rem`, `px`. |
+
+**Gradient shorthand:** `gradient` supports 1, 2, or 4 values:
+- `10%` -> all four edges
+- `5% 15%` -> horizontal vertical
+- `0% 20% 0% 10%` -> left top right bottom
+
+### Per-page override
+
+Override any wash property via `image.wash` in frontmatter:
+
+```yaml
+image:
+  src: hero.jpg
+  dark: true
+  wash:
+    opacity: 0.6
+    blur: 5px
+    gradient: 0rem 3rem 0rem 1rem
+```
+
+Resolution chain: **page frontmatter** > **site params** > **built-in defaults**.
+
+### Dark vs light context
+
+The wash colour is determined by the background layout context:
+- **Dark context** (`image.dark: true` or not set): dark wash (`rgba(0,0,0,opacity)`)
+- **Light context** (`image.dark: false`): light wash (`rgba(255,255,255,opacity)`)
 
 ---
 
@@ -961,25 +1027,37 @@ params:
   # Visual header always uses the top-level 'title' field
   browserTitle: "Author Name - Site Title"
 
-  # Background image defaults for article pages (background layout)
+  # Background image defaults for article pages (background layout) and list-view items.
+  # opacity/opacityDark select on the IMAGE's declared lightness (image.dark frontmatter),
+  # NOT the site's theme mode. Per-page image.opacity overrides both.
   bgImage:
-    opacity: 0.3        # light images (image.dark: false or unset)
-    opacityDark: 0.4    # dark images (image.dark: true)
+    opacity: 0.3        # used when image.dark: false (or image.dark not set)
+    opacityDark: 0.4    # used when image.dark: true
     blur: 2px
 
-  # Masonry card bg image defaults (falls back to bgImage if not set)
+  # Masonry card bg image defaults (falls back to bgImage if not set).
+  # Same opacity/opacityDark logic: selects on image.dark, not theme mode.
   cardImage:
-    opacity: 0.3
-    opacityDark: 0.4
+    opacity: 0.3        # used when image.dark: false (or image.dark not set)
+    opacityDark: 0.4    # used when image.dark: true
     blur: 2px
 
-  # Carousel card configuration
+  # Carousel card configuration.
+  # bgImage opacity/opacityDark: same logic — selects on image.dark, not theme mode.
   carousel:
     interval: 6         # seconds between slides
     bgImage:
-      opacity: 0.8
-      opacityDark: 0.9
+      opacity: 0.8      # used when image.dark: false (or image.dark not set)
+      opacityDark: 0.9  # used when image.dark: true
       blur: 0px
+
+  # Wash: tinted layer behind text panels on background-layout pages.
+  # Boosts legibility over background images. Fades at edges via gradient mask.
+  # Per-page override via image.wash in frontmatter.
+  wash:
+    opacity: 0.25       # tint strength (0 = none, 1 = solid)
+    blur: 0px           # backdrop blur behind text panels
+    gradient: 0% 10% 0% 10%  # edge fade: left top right bottom (any CSS length)
 
   # Read more button on masonry cards
   readMore:

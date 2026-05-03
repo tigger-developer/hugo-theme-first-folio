@@ -36,9 +36,15 @@
     {{- end -}}
   {{- end -}}
 
+  {{- /* Issue #51: Resolve opacity — opacityDark when image.dark: true, else opacity */ -}}
+  {{- $imageDark := .Params.image.dark | default false -}}
+  {{- $listOpacityLight := $.Site.Params.bgImage.opacity | default 0.15 -}}
+  {{- $listOpacityDark := $.Site.Params.bgImage.opacityDark | default $listOpacityLight -}}
+  {{- $listOpacity := cond $imageDark $listOpacityDark $listOpacityLight -}}
+
   <li class="list-view-item{{ if $bgImageUrl }} has-image{{ end }}">
     {{- if $bgImageUrl -}}
-    <div class="list-view-bg" style="background-image: url('{{ $bgImageUrl }}'); opacity: {{ $.Site.Params.bgImage.opacity | default 0.15 }}; filter: blur({{ $.Site.Params.bgImage.blur | default "5px" }});"></div>
+    <div class="list-view-bg" style="background-image: url('{{ $bgImageUrl }}'); opacity: {{ $listOpacity }}; filter: blur({{ $.Site.Params.bgImage.blur | default "5px" }});"></div>
     {{- end -}}
     <article class="list-view-content">
       <h3 class="list-view-title">
