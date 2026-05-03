@@ -3177,6 +3177,10 @@ main.list .masonry-grid {
   font-size: 1rem;
   margin-top: 0;
   margin-bottom: 0.75rem;
+  color: var(--color-border, #663399);
+}
+
+[data-theme="dark"] .related-articles h3 {
   color: color-mix(in srgb, var(--color-border, #663399) 65%, white);
 }
 

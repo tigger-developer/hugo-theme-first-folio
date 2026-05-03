@@ -493,7 +493,7 @@ a.breadcrumb-seg:hover {
 }
 
 .toc {
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--sidebar-bg, rgba(0, 0, 0, 0.03));
   border-radius: 0.5rem;
   border-left: 2px solid var(--color-border, #663399);
   border-top: none;
@@ -517,6 +517,10 @@ a.breadcrumb-seg:hover {
   font-size: 1rem;
   display: block;
   margin-bottom: 0.75rem;
+  color: var(--color-border, #663399);
+}
+
+[data-theme="dark"] .toc > strong {
   color: color-mix(in srgb, var(--color-border, #663399) 65%, white);
 }
 
