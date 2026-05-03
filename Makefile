@@ -20,6 +20,16 @@ else
 	@bash tests/one_off/run_tests.sh
 endif
 
+sync:
+
+	git add --all
+	git commit -m "make sync" || true
+	git pull
+	git push
+	git tag v2.0.0-$(shell date +%Y%m%d%H%M%S)
+	git push --tags
+
+
 build: ## Build the example site
 	@cd exampleSite && hugo --themesDir ../..
 
