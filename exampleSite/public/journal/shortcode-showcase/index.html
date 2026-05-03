@@ -1,4 +1,961 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=51034&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Shortcode Showcase — red-dots.example.com</title><meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="A comprehensive demonstration of every shortcode available in the First Folio theme." /><meta property="og:image" content="http://localhost:51034/hero.jpg"/>
+	<meta property="og:url" content="http://localhost:51034/journal/shortcode-showcase/">
+  <meta property="og:site_name" content="red-dots.example.com">
+  <meta property="og:title" content="Shortcode Showcase">
+  <meta property="og:description" content="A comprehensive demonstration of every shortcode available in the First Folio theme.">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="journal">
+    <meta property="article:published_time" content="2025-12-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-12-01T00:00:00+00:00">
+    <meta property="article:tag" content="Theme">
+    <meta property="article:tag" content="Shortcodes">
+    <meta property="article:tag" content="Reference">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Shortcode Showcase">
+  <meta name="twitter:description" content="A comprehensive demonstration of every shortcode available in the First Folio theme.">
+<link rel="stylesheet" href="http://localhost:51034/css/simple-icons.cc125cfd7958efc8dc27b5dfa6e2a9bbab933ce50b754f77e669e587c16ce857.css" type="text/css"><link rel="stylesheet" href="http://localhost:51034/css/simple-icons.cc125cfd7958efc8dc27b5dfa6e2a9bbab933ce50b754f77e669e587c16ce857.css" type="text/css">
+	<link href="http://localhost:51034/css/fonts.fa73feec55fa30fae7abab9b99b9f33d80c040159ccfed5d9ebe38c6590e0759.css" rel="stylesheet">
+
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:51034/css/main.6291cdb05fe6ec73bdd85a8543f7850d8c885d2ff8afa49a2a1563dbcce3c9e8.css" />
+	
+	<link rel="stylesheet" type="text/css" media="screen" href="http://localhost:51034/css/custom.1635d19ff231f4ea41172c3f733519515aa21c6296ef8508a226112728155cc9.css" />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="http://localhost:51034/css/dark.db79a9ee16fab9eef89221740fb4d8f7fa8780f3249d34f4fd97eab9a914596f.css"  disabled />
 
 
 
-<script src="/livereload.js?mindelay=10&amp;v=2&amp;port=57054&amp;path=livereload" data-no-instant defer></script>
+
+<style>
+ 
+:root {
+  --content-max-width: 100rem;
+  --sidebar-width: 15rem;
+  --sidebar-width-narrow: 12rem;
+  --grid-gap: 1.5rem;
+}
+
+ 
+@media (max-width: 30em) {
+  .homepage-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (min-width: 30.0625em) and (max-width: 48em) {
+  .homepage-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 48.0625em) and (max-width: 64em) {
+  .homepage-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 64.0625em) and (max-width: 80em) {
+  .homepage-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+ 
+@media (max-width: 30em) {
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .masonry-item {
+    transform: none !important;
+    margin-top: 0 !important;
+  }
+  .masonry-grid.masonry-active {
+    height: auto !important;
+  }
+}
+@media (min-width: 30.0625em) and (max-width: 48em) {
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+@media (min-width: 48.0625em) and (max-width: 64em) {
+  .masonry-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 64.0625em) and (max-width: 80em) {
+  .masonry-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 80.0625em) {
+  .masonry-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+ 
+@media (max-width: 48em) {
+  .sidebar-layout .section-content .masonry-grid {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
+@media (min-width: 48.0625em) and (max-width: 64em) {
+  .sidebar-layout .section-content .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 64.0625em) and (max-width: 80em) {
+  .sidebar-layout .section-content .masonry-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 80.0625em) {
+  .sidebar-layout .section-content .masonry-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+ 
+ 
+@media (min-width: 48.0625em) and (max-width: 64em) {
+  .sidebar-layout {
+    grid-template-columns: var(--sidebar-width-narrow, 12rem) 1fr;
+    gap: 1rem;
+  }
+  .section-sidebar {
+    font-size: 0.875rem;
+  }
+  .sidebar-title {
+    font-size: 1rem;
+  }
+  .section-nav a {
+    padding: 0.375rem 0.5rem;
+    font-size: 0.8125rem;
+  }
+}
+ 
+@media (min-width: 48.0625em) {
+  .section-sidebar {
+    max-width: 20vw;
+    overflow-wrap: break-word;
+  }
+  .sidebar-collapse-title {
+    list-style: none;
+    cursor: default;
+    pointer-events: none;
+    font-family: "Special Elite", monospace;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin: 0 0 1rem 0;
+  }
+  .sidebar-collapse-title::-webkit-details-marker {
+    display: none;
+  }
+  .sidebar-collapse-title::after {
+    display: none;
+  }
+}
+ 
+@media (max-width: 48em) {
+  .sidebar-layout {
+    display: block !important;
+  }
+  .section-sidebar {
+    position: static;
+    margin-bottom: 0.5rem;
+  }
+   
+  .sidebar-collapse-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: "Special Elite", monospace;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    color: var(--text-color);
+    list-style: none;
+  }
+  .sidebar-collapse-title::-webkit-details-marker {
+    display: none;
+  }
+  .sidebar-collapse-title::after {
+    content: '\25BC';
+    font-size: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+  .sidebar-collapse[open] > .sidebar-collapse-title::after {
+    transform: rotate(180deg);
+  }
+}
+</style>
+
+
+
+<style>
+  :root {
+    --wash-opacity: 0.25;
+    --wash-blur: 0px;
+    --wash-grad-left: 0%;
+    --wash-grad-top: 10%;
+    --wash-grad-right: 0%;
+    --wash-grad-bottom: 10%;
+  }
+</style>
+
+		
+		
+		<link rel="stylesheet" type="text/css" href="http://localhost:51034/css/custom.1635d19ff231f4ea41172c3f733519515aa21c6296ef8508a226112728155cc9.css">
+		
+		
+		<link rel="stylesheet" type="text/css" href="http://localhost:51034/css/fonts.fa73feec55fa30fae7abab9b99b9f33d80c040159ccfed5d9ebe38c6590e0759.css">
+		
+		
+		<link rel="stylesheet" type="text/css" href="http://localhost:51034/css/lightbox.ccdfc4b41fed3418c15707e6e7ba2802f9981a2f2d6f07c5bb05ff174566c03e.css">
+		
+	<script src="http://localhost:51034/js/burger-menu.js"></script>
+	<script src="http://localhost:51034/js/lightbox.js"></script></head>
+<body class="" data-grid-config='{&#34;breakpoints&#34;:{&#34;lg&#34;:64,&#34;md&#34;:48,&#34;sm&#34;:30,&#34;xl&#34;:80},&#34;columns&#34;:{&#34;lg&#34;:4,&#34;md&#34;:3,&#34;sm&#34;:2,&#34;xl&#34;:5}}'>
+        <div class="content"><header>
+	<div class="main">
+		<a href="/" class="header-interactive"><div class="site-logo-text">
+				red-dots<span class='orange-period'>.</span>example<span class='orange-period'>.</span>com
+			</div></a>
+		
+
+
+
+
+<button class="burger-menu" aria-label="Toggle menu" id="burger-toggle">
+  <span class="burger-line"></span>
+  <span class="burger-line"></span>
+  <span class="burger-line"></span>
+</button>
+
+<nav id="main-nav"><a href="/recipes/" class="nav-item">Recipes</a>
+  <a href="/journal/" class="nav-item nav-item-active">Journal</a>
+  <a href="/photography/" class="nav-item">Photography</a>
+  <a href="/stories/" class="nav-item">Stories</a>
+  <a href="/poetry/" class="nav-item">Poetry</a>
+  <a href="/tags/" class="nav-item">Tags</a>
+  
+</nav>
+<button id="dark-mode-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; padding: 0.5rem;">
+			<svg class="feather" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+				<circle cx="12" cy="12" r="5"></circle>
+				<line x1="12" y1="1" x2="12" y2="3"></line>
+				<line x1="12" y1="21" x2="12" y2="23"></line>
+				<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+				<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+				<line x1="1" y1="12" x2="3" y2="12"></line>
+				<line x1="21" y1="12" x2="23" y2="12"></line>
+				<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+				<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+			</svg>
+		</button>
+		<script src="/js/themetoggle.js"></script></div>
+</header>
+
+
+<script src="http://localhost:51034/js/auth.js"></script>
+
+<main>
+  <article class="has-toc">
+    
+    
+    
+    
+    <div class="post-container soft-edge">
+      <div class="post-content">
+        <div class="title">
+          <h1 class="title">Shortcode Showcase</h1><div class="meta"><span class="breadcrumb"><a href="/journal/" class="breadcrumb-seg breadcrumb-section breadcrumb-bright">Journal</a><span class="breadcrumb-seg breadcrumb-meta breadcrumb-meta-bright">Theme Demo</span><span class="breadcrumb-seg breadcrumb-meta breadcrumb-meta-dim">1 December 2025</span></span></div>
+        </div>
+
+        
+        
+        
+        <div class="post-hero">
+          <img src="/journal/shortcode-showcase/hero.jpg" alt="Creative tools and typography arranged as a flat lay">
+          
+        </div>
+        
+        
+
+
+<div class="signpost">
+  <a href="https://github.com/tadg-paul/hugo-theme-first-folio">THEME DOCUMENTATION</a><span class="signpost-arrow"> &#8594;</span>
+</div>
+        
+
+        
+        
+
+        
+        <section class="body">
+          <p>This page demonstrates every shortcode available in the First Folio theme. Use it as a visual reference.</p>
+<h2 id="callout">Callout</h2>
+<p>Four built-in types plus custom styling:</p>
+
+
+
+
+
+
+
+
+
+<div class='callout callout-tip' style=''>
+  <div class="callout-inner">
+    <strong class="callout-title">Tip</strong>
+    <br />
+    
+    This is a tip callout — use it for helpful suggestions.
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class='callout callout-info' style=''>
+  <div class="callout-inner">
+    <strong class="callout-title">Info</strong>
+    <br />
+    
+    This is an info callout — use it for informational notes.
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class='callout callout-alert' style=''>
+  <div class="callout-inner">
+    <strong class="callout-title">Alert</strong>
+    <br />
+    
+    This is an alert callout — use it for critical information.
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class='callout callout-warning' style=''>
+  <div class="callout-inner">
+    <strong class="callout-title">Warning</strong>
+    <br />
+    
+    This is a warning callout — use it for cautionary notes.
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class='callout callout-info' style='text-align: center;width: 100%; max-width: 60%; margin-left: auto; margin-right: auto;'>
+  <div class="callout-inner">
+    <strong class="callout-title"><a href="https://example.com">Buy Now</a></strong>
+    <br />
+    
+    <a href="https://example.com" class="callout-link">Available worldwide</a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class='callout callout-custom' style='background: hsl(210, 30%, 30%); color: #eee;'>
+  <div class="callout-inner">
+    <strong class="callout-title">Custom Callout</strong>
+    <br />
+    
+    This callout has a custom title and background colour.
+    </div>
+</div>
+
+<p>With float positioning:</p>
+
+
+
+
+
+
+
+
+
+<div class='callout callout-tip callout-float-right' style=''>
+  <div class="callout-inner">
+    <strong class="callout-title">Tip</strong>
+    <br />
+    
+    This callout floats to the right of the content.
+    </div>
+</div>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. The callout sits alongside this paragraph text, demonstrating the float position parameter.</p>
+<h2 id="centre">Centre</h2>
+
+
+
+
+<div class="text-center">
+
+This text is centred using the centre shortcode.
+
+</div>
+
+<h2 id="colorbold">Colorbold</h2>
+<p>Inline highlighted text in the theme&rsquo;s secondary accent colour:</p>
+<p>This recipe calls for 
+
+
+<span class="colorbold colorbold-underlined">really good butter</span> — the kind from a farmers&rsquo; market.</p>
+<p>Without the underline: 
+
+
+<span class="colorbold">no underline here</span>.</p>
+<h2 id="details">Details</h2>
+<p>Collapsible content using the HTML <code>&lt;details&gt;</code> element:</p>
+
+
+<details class="styled-details">
+  <summary><span>Click to expand this section</span></summary>
+  <div class="details-content">
+    <p>This content is hidden by default. It can contain <strong>bold text</strong>, <em>italic text</em>, <code>code</code>, and other Markdown formatting.</p>
+<ul>
+<li>List items work too</li>
+<li>As do other block elements</li>
+</ul>
+  </div>
+</details>
+
+<h2 id="dialogue">Dialogue</h2>
+<p>For plays and screenplays — character name in small caps with optional parenthetical:</p>
+<div class="dialogue">
+  <p class="dialogue-name">ELENA</p>
+  <p class="dialogue-text">Have you seen the forecast?</p>
+</div>
+
+<div class="dialogue">
+  <p class="dialogue-name">MARCUS <span class="dialogue-parenthetical">(checking his phone)</span></p>
+  <p class="dialogue-text">Rain again. Third day running.</p>
+</div>
+
+<div class="dialogue">
+  <p class="dialogue-name">ELENA <span class="dialogue-parenthetical">(sighing)</span></p>
+  <p class="dialogue-text">At least the garden is happy.</p>
+</div>
+
+<h2 id="direction">Direction</h2>
+<p>Stage directions for dramatic scripts:</p>
+
+
+<p class="stage-direction">The cafe. Morning light through rain-streaked windows. ELENA and MARCUS at a corner table.</p>
+
+
+
+<p class="stage-direction">Pause. The sound of rain intensifies.</p>
+
+<h2 id="ga-irish-language">Ga (Irish language)</h2>
+<p>Inline Irish language text with the correct font and <code>lang=&quot;ga&quot;</code> attribute:</p>
+<p>He greeted her with 
+
+
+
+
+<span lang="ga">Dia duit, a chara</span> as she entered.</p>
+<h2 id="gallery">Gallery</h2>
+<p>Displays page image resources as a responsive grid with lightbox:</p>
+<div class="gallery-grid"><div class="gallery-item">
+    <a href="/journal/shortcode-showcase/gallery-1.jpg"
+       class="gallery-image-link"
+       data-lightbox="gallery"
+       data-title="Amber gradient"
+       data-caption="Warm tones">
+      <picture><source type="image/webp"
+                srcset="/journal/shortcode-showcase/gallery-1_hu_c218852439078fcf.webp 400w, /journal/shortcode-showcase/gallery-1_hu_7483ab155967a885.webp 800w"
+                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"><img src="/journal/shortcode-showcase/gallery-1_hu_1e3ea0643c07d61d.jpg"
+             srcset="/journal/shortcode-showcase/gallery-1_hu_1e3ea0643c07d61d.jpg 400w, /journal/shortcode-showcase/gallery-1_hu_b081cc490b5d7c43.jpg 800w, /journal/shortcode-showcase/gallery-1_hu_65edc3f48402242a.jpg 1600w"
+             sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+             alt="Amber gradient - Warm tones"
+             loading="lazy"
+             class="gallery-image">
+      </picture><span class="gallery-item-caption">Warm tones</span></a>
+  </div><div class="gallery-item">
+    <a href="/journal/shortcode-showcase/gallery-2.jpg"
+       class="gallery-image-link"
+       data-lightbox="gallery"
+       data-title="Emerald gradient"
+       data-caption="Cool tones">
+      <picture><source type="image/webp"
+                srcset="/journal/shortcode-showcase/gallery-2_hu_77742751ce6455a0.webp 400w, /journal/shortcode-showcase/gallery-2_hu_8db264f810b83d8f.webp 800w"
+                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"><img src="/journal/shortcode-showcase/gallery-2_hu_1e5d338fa3510ab3.jpg"
+             srcset="/journal/shortcode-showcase/gallery-2_hu_1e5d338fa3510ab3.jpg 400w, /journal/shortcode-showcase/gallery-2_hu_37af1276b41d0b44.jpg 800w, /journal/shortcode-showcase/gallery-2_hu_cfe2072cb0513c6b.jpg 1600w"
+             sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+             alt="Emerald gradient - Cool tones"
+             loading="lazy"
+             class="gallery-image">
+      </picture><span class="gallery-item-caption">Cool tones</span></a>
+  </div><div class="gallery-item">
+    <a href="/journal/shortcode-showcase/gallery-3.jpg"
+       class="gallery-image-link"
+       data-lightbox="gallery"
+       data-title="Violet gradient"
+       data-caption="Deep tones">
+      <picture><source type="image/webp"
+                srcset="/journal/shortcode-showcase/gallery-3_hu_6121f35bc3a20356.webp 400w, /journal/shortcode-showcase/gallery-3_hu_c7b59b2f27201c60.webp 800w"
+                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"><img src="/journal/shortcode-showcase/gallery-3_hu_e2af5230af4d97a7.jpg"
+             srcset="/journal/shortcode-showcase/gallery-3_hu_e2af5230af4d97a7.jpg 400w, /journal/shortcode-showcase/gallery-3_hu_7bbd3c4707f4af99.jpg 800w, /journal/shortcode-showcase/gallery-3_hu_96fae1e59a023cc5.jpg 1600w"
+             sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+             alt="Violet gradient - Deep tones"
+             loading="lazy"
+             class="gallery-image">
+      </picture><span class="gallery-item-caption">Deep tones</span></a>
+  </div><div class="gallery-item">
+    <a href="/journal/shortcode-showcase/hero.jpg"
+       class="gallery-image-link"
+       data-lightbox="gallery"
+       data-title="hero.jpg"
+       data-caption="">
+      <picture><source type="image/webp"
+                srcset="/journal/shortcode-showcase/hero_hu_3454dc99133d6911.webp 400w, /journal/shortcode-showcase/hero_hu_3be564590318a08b.webp 800w"
+                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"><img src="/journal/shortcode-showcase/hero_hu_7ca4937a5e6e43a3.jpg"
+             srcset="/journal/shortcode-showcase/hero_hu_7ca4937a5e6e43a3.jpg 400w, /journal/shortcode-showcase/hero_hu_42053c91001de0a2.jpg 800w, /journal/shortcode-showcase/hero_hu_43457349dc6bf865.jpg 1600w"
+             sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+             alt="hero.jpg"
+             loading="lazy"
+             class="gallery-image">
+      </picture></a>
+  </div></div>
+<h2 id="img">Img</h2>
+<p>The <code>img</code> shortcode embeds a page resource image with positioning, caption, and optional blur:</p>
+<figure class="inline-image inline-image-right" style="width: 40%;"><picture><source type="image/webp"
+            srcset="/journal/shortcode-showcase/sample-a_hu_206d3e88f40df3e4.webp 400w, /journal/shortcode-showcase/sample-a_hu_54c970f3267e3b5b.webp 800w, /journal/shortcode-showcase/sample-a_hu_3fb803ec448e721b.webp 1600w"
+            sizes="(max-width: 600px) 100vw, 40%"><img src="/journal/shortcode-showcase/sample-a_hu_8a4547d6eeb3668a.jpg"
+         srcset="/journal/shortcode-showcase/sample-a_hu_c8fa6e21d345e78e.jpg 400w, /journal/shortcode-showcase/sample-a_hu_8a4547d6eeb3668a.jpg 800w, /journal/shortcode-showcase/sample-a_hu_ff913689155e9960.jpg 1600w"
+         sizes="(max-width: 600px) 100vw, 40%"
+         alt="Purple gradient demo image"
+         loading="lazy"
+         class="inline-image-img">
+  </picture><figcaption class="inline-image-caption">A demo image</figcaption></figure>
+<p>This paragraph demonstrates the <code>img</code> shortcode floated to the right. The image sits alongside the text, wrapping naturally. The shortcode generates responsive thumbnails with WebP support, matching the gallery behaviour.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p>With the <code>noborder</code> parameter to remove the accent border:</p>
+<figure class="inline-image inline-image-center no-border" style="width: 50%;"><picture><source type="image/webp"
+            srcset="/journal/shortcode-showcase/sample-b_hu_e5f11b8c910912e.webp 400w, /journal/shortcode-showcase/sample-b_hu_c8c1e16728445617.webp 800w, /journal/shortcode-showcase/sample-b_hu_1c94cbab5a98d02c.webp 1600w"
+            sizes="(max-width: 600px) 100vw, 50%"><img src="/journal/shortcode-showcase/sample-b_hu_c24dc6f85b2e50b5.jpg"
+         srcset="/journal/shortcode-showcase/sample-b_hu_cd66111a894ac54e.jpg 400w, /journal/shortcode-showcase/sample-b_hu_c24dc6f85b2e50b5.jpg 800w, /journal/shortcode-showcase/sample-b_hu_a16acbdac97d47c1.jpg 1600w"
+         sizes="(max-width: 600px) 100vw, 50%"
+         alt="Blue gradient demo image"
+         loading="lazy"
+         class="inline-image-img">
+  </picture></figure>
+<h2 id="poem">Poem</h2>
+<p>Preserves line breaks exactly as written — essential for verse:</p>
+<div class="poem">
+The rain falls soft on Connacht stone,
+on field and wall and empty lane,
+on everything I've ever known
+and some things I won't know again.
+</div>
+
+<h2 id="popquote">Popquote</h2>
+<p>Expandable quote with a summary line:</p>
+
+
+<details class="styled-details">
+  <summary>
+    <span>The best time to plant a tree was twenty years ago&hellip;</span>
+  </summary>
+  <div class="details-content">
+    <p>The best time to plant a tree was twenty years ago. The second best time is now.</p>
+<p>This shortcode is useful for long quotations that would interrupt the flow of an article. The reader can choose to expand it.</p>
+
+  </div>
+</details>
+
+<h2 id="quote">Quote</h2>
+<p>Pull-quote with decorative quotation marks and optional attribution:</p>
+<figure class="pull-quote">
+  <blockquote>
+    Be yourself; everyone else is already taken.
+  </blockquote>
+  <figcaption>Oscar Wilde</figcaption>
+</figure>
+
+<figure class="pull-quote">
+  <blockquote>
+    A quote without attribution still gets the decorative marks.
+  </blockquote>
+</figure>
+
+<h2 id="raw-html">Raw HTML</h2>
+<p>Passes HTML through without Markdown processing:</p>
+
+
+<div style="padding: 1rem; border: 2px dashed var(--border-color, #ddd); border-radius: 0.5rem; text-align: center;">
+  <p style="margin: 0;">This is raw HTML passed through the <code>rawhtml</code> shortcode.</p>
+</div>
+
+
+
+<h2 id="section-list">Section List</h2>
+<p>Renders navigation links to site sections:</p>
+
+
+<nav class="sidebar-nav">
+  <ul><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/recipes/" class="sidebar-link">Recipes</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/journal/" class="sidebar-link">Journal</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/photography/" class="sidebar-link">Photography</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/stories/" class="sidebar-link">Stories</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/poetry/" class="sidebar-link">Poetry</a>
+        </li></ul>
+</nav>
+
+<p>With a limit parameter to show recent items per section:</p>
+
+
+<nav class="sidebar-nav">
+  <ul><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/recipes/" class="sidebar-link">Recipes</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/journal/" class="sidebar-link">Journal</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/photography/" class="sidebar-link">Photography</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/stories/" class="sidebar-link">Stories</a>
+        </li><li>
+          <span class="sidebar-chevron-wrapper">
+            <img src="/icons/chevron-right-thick.svg" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+            <img src="/icons/chevron-right-thick-white.svg" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+          </span>
+          <a href="/poetry/" class="sidebar-link">Poetry</a>
+        </li></ul>
+</nav>
+
+<h2 id="side-by-side">Side-by-Side</h2>
+<p>Places two items side by side on desktop, stacked on mobile:</p>
+<div class="side-by-side">
+<figure class="inline-image inline-image-right"><picture><source type="image/webp"
+            srcset="/journal/shortcode-showcase/sample-a_hu_206d3e88f40df3e4.webp 400w, /journal/shortcode-showcase/sample-a_hu_54c970f3267e3b5b.webp 800w, /journal/shortcode-showcase/sample-a_hu_3fb803ec448e721b.webp 1600w"
+            sizes="(max-width: 600px) 100vw, 38vw"><img src="/journal/shortcode-showcase/sample-a_hu_8a4547d6eeb3668a.jpg"
+         srcset="/journal/shortcode-showcase/sample-a_hu_c8fa6e21d345e78e.jpg 400w, /journal/shortcode-showcase/sample-a_hu_8a4547d6eeb3668a.jpg 800w, /journal/shortcode-showcase/sample-a_hu_ff913689155e9960.jpg 1600w"
+         sizes="(max-width: 600px) 100vw, 38vw"
+         alt="Purple gradient"
+         loading="lazy"
+         class="inline-image-img">
+  </picture></figure>
+<figure class="inline-image inline-image-right"><picture><source type="image/webp"
+            srcset="/journal/shortcode-showcase/sample-b_hu_e5f11b8c910912e.webp 400w, /journal/shortcode-showcase/sample-b_hu_c8c1e16728445617.webp 800w, /journal/shortcode-showcase/sample-b_hu_1c94cbab5a98d02c.webp 1600w"
+            sizes="(max-width: 600px) 100vw, 38vw"><img src="/journal/shortcode-showcase/sample-b_hu_c24dc6f85b2e50b5.jpg"
+         srcset="/journal/shortcode-showcase/sample-b_hu_cd66111a894ac54e.jpg 400w, /journal/shortcode-showcase/sample-b_hu_c24dc6f85b2e50b5.jpg 800w, /journal/shortcode-showcase/sample-b_hu_a16acbdac97d47c1.jpg 1600w"
+         sizes="(max-width: 600px) 100vw, 38vw"
+         alt="Blue gradient"
+         loading="lazy"
+         class="inline-image-img">
+  </picture></figure>
+</div>
+
+<h2 id="video">Video</h2>
+<p>Embeds a local video file with HTML5 player controls:</p>
+<div class="code-block" data-lang="text"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>{{&lt; video &#34;/videos/sample.mp4&#34; &gt;}}</span></span></code></pre></div></div>
+<p>(Place a video file at <code>static/videos/sample.mp4</code> to see this in action.)</p>
+<h2 id="contact-form">Contact Form</h2>
+<p>Self-hosted contact form with Cloudflare Turnstile CAPTCHA:</p>
+<div class="code-block" data-lang="text"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>{{&lt; contactform newsletter=&#34;true&#34; &gt;}}</span></span></code></pre></div></div>
+<p>(Requires Cloudflare Worker configuration. See <a href="https://github.com/tadg-paul/hugo-theme-first-folio/blob/main/docs/contactform.md">docs/contactform.md</a> for setup.)</p>
+<h2 id="formspree">Formspree</h2>
+<p>A simpler contact form using Formspree as the backend:</p>
+<div class="code-block" data-lang="text"><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>{{&lt; formspree id=&#34;your-form-id&#34; &gt;}}</span></span></code></pre></div></div>
+<p>(Replace with your actual Formspree form ID.)</p>
+
+          
+
+
+<div class="signpost signpost-footer">
+  <a href="https://github.com/tadg-paul/hugo-theme-first-folio">VIEW SOURCE ON GITHUB</a><span class="signpost-arrow"> &#8594;</span>
+</div>
+        </section>
+        <div class="post-tags">
+          
+          
+          <nav class="nav tags">
+            <ul class="tags">
+              
+              <li><a href="/tags/theme">theme</a></li>
+              
+              <li><a href="/tags/shortcodes">shortcodes</a></li>
+              
+              <li><a href="/tags/reference">reference</a></li>
+              
+            </ul>
+          </nav>
+          
+          
+        </div>
+      </div>
+    </div>
+    
+
+    
+    <div class="toc-mobile">
+      <details class="toc-mobile-details">
+        <summary class="toc-mobile-summary">Shortcodes</summary>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#callout">Callout</a></li>
+    <li><a href="#centre">Centre</a></li>
+    <li><a href="#colorbold">Colorbold</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#dialogue">Dialogue</a></li>
+    <li><a href="#direction">Direction</a></li>
+    <li><a href="#ga-irish-language">Ga (Irish language)</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#img">Img</a></li>
+    <li><a href="#poem">Poem</a></li>
+    <li><a href="#popquote">Popquote</a></li>
+    <li><a href="#quote">Quote</a></li>
+    <li><a href="#raw-html">Raw HTML</a></li>
+    <li><a href="#section-list">Section List</a></li>
+    <li><a href="#side-by-side">Side-by-Side</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#contact-form">Contact Form</a></li>
+    <li><a href="#formspree">Formspree</a></li>
+  </ul>
+</nav>
+      </details>
+    </div>
+
+    
+    <div class="article-sidebar">
+      <div class="toc">
+        <strong>Shortcodes</strong>
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#callout">Callout</a></li>
+    <li><a href="#centre">Centre</a></li>
+    <li><a href="#colorbold">Colorbold</a></li>
+    <li><a href="#details">Details</a></li>
+    <li><a href="#dialogue">Dialogue</a></li>
+    <li><a href="#direction">Direction</a></li>
+    <li><a href="#ga-irish-language">Ga (Irish language)</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#img">Img</a></li>
+    <li><a href="#poem">Poem</a></li>
+    <li><a href="#popquote">Popquote</a></li>
+    <li><a href="#quote">Quote</a></li>
+    <li><a href="#raw-html">Raw HTML</a></li>
+    <li><a href="#section-list">Section List</a></li>
+    <li><a href="#side-by-side">Side-by-Side</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#contact-form">Contact Form</a></li>
+    <li><a href="#formspree">Formspree</a></li>
+  </ul>
+</nav>
+      </div>
+      
+
+
+
+
+
+<aside class="related-articles">
+  <h3>Related articles</h3>
+  <ul>
+    
+    <li>
+      <a href="/journal/navigation-features/">Navigation and CTA Features</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/typography-guide/">Typography in the First Folio Theme</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/featured-image/">The Featured Image Layout</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/dark-mode-setup/">Configuring Dark Mode</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/masonry-explained/">How the Masonry Grid Works</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+  </ul>
+</aside>
+
+
+    </div>
+    
+    <div class="related-mobile">
+      
+
+
+
+
+
+<aside class="related-articles">
+  <h3>Related articles</h3>
+  <ul>
+    
+    <li>
+      <a href="/journal/navigation-features/">Navigation and CTA Features</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/typography-guide/">Typography in the First Folio Theme</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/featured-image/">The Featured Image Layout</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/dark-mode-setup/">Configuring Dark Mode</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+    <li>
+      <a href="/journal/masonry-explained/">How the Masonry Grid Works</a>
+      <span class="related-section">journal</span>
+    </li>
+    
+  </ul>
+</aside>
+
+
+    </div>
+    
+
+    </article>
+</main>
+
+
+<footer>
+  <div style="display:flex; justify-content: center;"><a class="soc" href="https://bsky.app/profile/example" rel="me" title="BlueSky"><i class="si si-bluesky"></i></a><a class="border"></a><a class="soc" href="https://github.com/tadg-paul/hugo-theme-first-folio" rel="me" title="GitHub"><svg class="feather">
+	<use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#github" />
+</svg></a><a class="border"></a><a class="soc" href="https://mastodon.social/@example" rel="me" title="Mastodon"><i class="si si-mastodon"></i></a><a class="border"></a><a class="soc" href="/index.xml" rel="me" title="RSS"><svg class="feather">
+	<use href="/svg/feather-sprite.51cf5647cb1987f769b616558f2620fd9423d72058490231b391bf6aa3744b55.svg#rss" />
+</svg></a><a class="border"></a></div>
+  <div class="footer-info" style="text-align: center;">
+     © 2023-2026 Taḋg Paul — Apache License 2.0 
+  </div>
+</footer>
+<script>
+
+(function() {
+  var saved = localStorage.getItem('theme-storage');
+  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  var theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+  
+  var darkSheet = document.getElementById('darkModeStyle');
+  if (darkSheet) {
+    darkSheet.disabled = (theme !== 'dark');
+  }
+})();
+</script>
+
+</div>
+        <script>
+         
+        document.querySelectorAll('div.src[class*="src-"]').forEach(function(el) {
+          var lang = Array.from(el.classList).find(function(c) { return c.startsWith('src-'); });
+          if (lang) {
+            el.classList.add('code-block');
+            el.dataset.lang = lang.slice(4);
+          }
+        });
+        </script></body>
+</html>

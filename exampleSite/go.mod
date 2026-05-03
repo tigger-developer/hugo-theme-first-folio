@@ -1,0 +1,11 @@
+// There is no actual go module or hugo module here.
+// This is apparently how exampleSites are deployed.
+// It is one big vainglorious hack. I feel dirty.
+
+module github.com/tadg-paul/hugo-theme-first-folio/exampleSite
+
+go 1.25.8
+
+require github.com/tadg-paul/hugo-theme-first-folio v0.0.0
+
+replace github.com/tadg-paul/hugo-theme-first-folio => ../

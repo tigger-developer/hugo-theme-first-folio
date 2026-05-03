@@ -1,201 +1,201 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on first-folio.theme.lobb.ie</title>
-    <link>http://localhost:57054/tags/</link>
-    <description>Recent content in Tags on first-folio.theme.lobb.ie</description>
+    <title>Tags on red-dots.example.com</title>
+    <link>http://localhost:51034/tags/</link>
+    <description>Recent content in Tags on red-dots.example.com</description>
     <generator>Hugo</generator>
-    <language>en-GB-oed</language>
+    <language>en</language>
     <copyright>© 2023-2026 Taḋg Paul — Apache License 2.0</copyright>
     <lastBuildDate>Mon, 01 Dec 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:57054/tags/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:51034/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reference</title>
-      <link>http://localhost:57054/tags/reference/</link>
+      <link>http://localhost:51034/tags/reference/</link>
       <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/reference/</guid>
+      <guid>http://localhost:51034/tags/reference/</guid>
       <description></description>
     </item>
     <item>
       <title>Shortcodes</title>
-      <link>http://localhost:57054/tags/shortcodes/</link>
+      <link>http://localhost:51034/tags/shortcodes/</link>
       <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/shortcodes/</guid>
+      <guid>http://localhost:51034/tags/shortcodes/</guid>
       <description></description>
     </item>
     <item>
       <title>Theme</title>
-      <link>http://localhost:57054/tags/theme/</link>
+      <link>http://localhost:51034/tags/theme/</link>
       <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/theme/</guid>
+      <guid>http://localhost:51034/tags/theme/</guid>
       <description></description>
     </item>
     <item>
       <title>Navigation</title>
-      <link>http://localhost:57054/tags/navigation/</link>
+      <link>http://localhost:51034/tags/navigation/</link>
       <pubDate>Sat, 15 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/navigation/</guid>
+      <guid>http://localhost:51034/tags/navigation/</guid>
       <description></description>
     </item>
     <item>
       <title>Maps</title>
-      <link>http://localhost:57054/tags/maps/</link>
+      <link>http://localhost:51034/tags/maps/</link>
       <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/maps/</guid>
+      <guid>http://localhost:51034/tags/maps/</guid>
       <description></description>
     </item>
     <item>
       <title>Poetry</title>
-      <link>http://localhost:57054/tags/poetry/</link>
+      <link>http://localhost:51034/tags/poetry/</link>
       <pubDate>Mon, 10 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/poetry/</guid>
+      <guid>http://localhost:51034/tags/poetry/</guid>
       <description></description>
     </item>
     <item>
       <title>Drama</title>
-      <link>http://localhost:57054/tags/drama/</link>
+      <link>http://localhost:51034/tags/drama/</link>
       <pubDate>Sat, 01 Nov 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/drama/</guid>
+      <guid>http://localhost:51034/tags/drama/</guid>
       <description></description>
     </item>
     <item>
       <title>Reflection</title>
-      <link>http://localhost:57054/tags/reflection/</link>
+      <link>http://localhost:51034/tags/reflection/</link>
       <pubDate>Sat, 20 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/reflection/</guid>
+      <guid>http://localhost:51034/tags/reflection/</guid>
       <description></description>
     </item>
     <item>
       <title>Eggs</title>
-      <link>http://localhost:57054/tags/eggs/</link>
+      <link>http://localhost:51034/tags/eggs/</link>
       <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/eggs/</guid>
+      <guid>http://localhost:51034/tags/eggs/</guid>
       <description></description>
     </item>
     <item>
       <title>Middle-Eastern</title>
-      <link>http://localhost:57054/tags/middle-eastern/</link>
+      <link>http://localhost:51034/tags/middle-eastern/</link>
       <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/middle-eastern/</guid>
+      <guid>http://localhost:51034/tags/middle-eastern/</guid>
       <description></description>
     </item>
     <item>
       <title>Quick</title>
-      <link>http://localhost:57054/tags/quick/</link>
+      <link>http://localhost:51034/tags/quick/</link>
       <pubDate>Wed, 10 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/quick/</guid>
+      <guid>http://localhost:51034/tags/quick/</guid>
       <description></description>
     </item>
     <item>
       <title>Landscape</title>
-      <link>http://localhost:57054/tags/landscape/</link>
+      <link>http://localhost:51034/tags/landscape/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/landscape/</guid>
+      <guid>http://localhost:51034/tags/landscape/</guid>
       <description></description>
     </item>
     <item>
       <title>Routine</title>
-      <link>http://localhost:57054/tags/routine/</link>
+      <link>http://localhost:51034/tags/routine/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/routine/</guid>
+      <guid>http://localhost:51034/tags/routine/</guid>
       <description></description>
     </item>
     <item>
       <title>Walking</title>
-      <link>http://localhost:57054/tags/walking/</link>
+      <link>http://localhost:51034/tags/walking/</link>
       <pubDate>Fri, 15 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/walking/</guid>
+      <guid>http://localhost:51034/tags/walking/</guid>
       <description></description>
     </item>
     <item>
       <title>Memory</title>
-      <link>http://localhost:57054/tags/memory/</link>
+      <link>http://localhost:51034/tags/memory/</link>
       <pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/memory/</guid>
+      <guid>http://localhost:51034/tags/memory/</guid>
       <description></description>
     </item>
     <item>
       <title>Family</title>
-      <link>http://localhost:57054/tags/family/</link>
+      <link>http://localhost:51034/tags/family/</link>
       <pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/family/</guid>
+      <guid>http://localhost:51034/tags/family/</guid>
       <description></description>
     </item>
     <item>
       <title>Night</title>
-      <link>http://localhost:57054/tags/night/</link>
+      <link>http://localhost:51034/tags/night/</link>
       <pubDate>Fri, 18 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/night/</guid>
+      <guid>http://localhost:51034/tags/night/</guid>
       <description></description>
     </item>
     <item>
       <title>Typography</title>
-      <link>http://localhost:57054/tags/typography/</link>
+      <link>http://localhost:51034/tags/typography/</link>
       <pubDate>Tue, 01 Jul 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/typography/</guid>
+      <guid>http://localhost:51034/tags/typography/</guid>
       <description></description>
     </item>
     <item>
       <title>Japanese</title>
-      <link>http://localhost:57054/tags/japanese/</link>
+      <link>http://localhost:51034/tags/japanese/</link>
       <pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/japanese/</guid>
+      <guid>http://localhost:51034/tags/japanese/</guid>
       <description></description>
     </item>
     <item>
       <title>Vegetarian</title>
-      <link>http://localhost:57054/tags/vegetarian/</link>
+      <link>http://localhost:51034/tags/vegetarian/</link>
       <pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/vegetarian/</guid>
+      <guid>http://localhost:51034/tags/vegetarian/</guid>
       <description></description>
     </item>
     <item>
       <title>Layouts</title>
-      <link>http://localhost:57054/tags/layouts/</link>
+      <link>http://localhost:51034/tags/layouts/</link>
       <pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/layouts/</guid>
+      <guid>http://localhost:51034/tags/layouts/</guid>
       <description></description>
     </item>
     <item>
       <title>Dark-Mode</title>
-      <link>http://localhost:57054/tags/dark-mode/</link>
+      <link>http://localhost:51034/tags/dark-mode/</link>
       <pubDate>Tue, 20 May 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/dark-mode/</guid>
+      <guid>http://localhost:51034/tags/dark-mode/</guid>
       <description></description>
     </item>
     <item>
       <title>Masonry</title>
-      <link>http://localhost:57054/tags/masonry/</link>
+      <link>http://localhost:51034/tags/masonry/</link>
       <pubDate>Thu, 10 Apr 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/masonry/</guid>
+      <guid>http://localhost:51034/tags/masonry/</guid>
       <description></description>
     </item>
     <item>
       <title>Baking</title>
-      <link>http://localhost:57054/tags/baking/</link>
+      <link>http://localhost:51034/tags/baking/</link>
       <pubDate>Sat, 15 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/baking/</guid>
+      <guid>http://localhost:51034/tags/baking/</guid>
       <description></description>
     </item>
     <item>
       <title>Bread</title>
-      <link>http://localhost:57054/tags/bread/</link>
+      <link>http://localhost:51034/tags/bread/</link>
       <pubDate>Sat, 15 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/bread/</guid>
+      <guid>http://localhost:51034/tags/bread/</guid>
       <description></description>
     </item>
     <item>
       <title>Comfort-Food</title>
-      <link>http://localhost:57054/tags/comfort-food/</link>
+      <link>http://localhost:51034/tags/comfort-food/</link>
       <pubDate>Tue, 28 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/comfort-food/</guid>
+      <guid>http://localhost:51034/tags/comfort-food/</guid>
       <description></description>
     </item>
     <item>
       <title>Irish</title>
-      <link>http://localhost:57054/tags/irish/</link>
+      <link>http://localhost:51034/tags/irish/</link>
       <pubDate>Tue, 28 Jan 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/tags/irish/</guid>
+      <guid>http://localhost:51034/tags/irish/</guid>
       <description></description>
     </item>
   </channel>

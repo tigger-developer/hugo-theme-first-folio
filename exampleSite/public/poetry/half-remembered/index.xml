@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Half-Remembered on first-folio.theme.lobb.ie</title>
-    <link>http://localhost:57054/poetry/half-remembered/</link>
-    <description>Recent content in Half-Remembered on first-folio.theme.lobb.ie</description>
+    <title>Half-Remembered on red-dots.example.com</title>
+    <link>http://localhost:51034/poetry/half-remembered/</link>
+    <description>Recent content in Half-Remembered on red-dots.example.com</description>
     <generator>Hugo</generator>
-    <language>en-GB-oed</language>
+    <language>en</language>
     <copyright>© 2023-2026 Taḋg Paul — Apache License 2.0</copyright>
     <lastBuildDate>Tue, 12 Aug 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:57054/poetry/half-remembered/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:51034/poetry/half-remembered/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Harbour</title>
-      <link>http://localhost:57054/poetry/half-remembered/harbour/</link>
+      <link>http://localhost:51034/poetry/half-remembered/harbour/</link>
       <pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/poetry/half-remembered/harbour/</guid>
+      <guid>http://localhost:51034/poetry/half-remembered/harbour/</guid>
       <description>&lt;div class=&#34;poem&#34;&gt;&#xA;At low tide the harbour empties&#xA;to mud and the ribs of old boats.&#xA;The water goes out like a secret&#xA;someone decided to keep.&#xA;&#xA;We sat on the wall and ate chips.&#xA;The vinegar stung a cut on my thumb.&#xA;You said something about the future.&#xA;The gulls were not interested.&#xA;&#xA;The tide came back, as tides do,&#xA;and covered everything&#xA;we had been looking at.&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Thread</title>
-      <link>http://localhost:57054/poetry/half-remembered/thread/</link>
+      <link>http://localhost:51034/poetry/half-remembered/thread/</link>
       <pubDate>Tue, 05 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/poetry/half-remembered/thread/</guid>
+      <guid>http://localhost:51034/poetry/half-remembered/thread/</guid>
       <description>&lt;div class=&#34;poem&#34;&gt;&#xA;In the sewing box: a thimble,&#xA;three buttons from a coat&#xA;nobody remembers wearing,&#xA;and a length of thread&#xA;still knotted at one end.&#xA;&#xA;She could fix anything.&#xA;The thread is evidence.&#xA;The knot is proof of intention.&#xA;The coat is gone&#xA;but the buttons remain,&#xA;patient as stones.&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Glass</title>
-      <link>http://localhost:57054/poetry/half-remembered/glass/</link>
+      <link>http://localhost:51034/poetry/half-remembered/glass/</link>
       <pubDate>Fri, 01 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/poetry/half-remembered/glass/</guid>
+      <guid>http://localhost:51034/poetry/half-remembered/glass/</guid>
       <description>&lt;div class=&#34;poem&#34;&gt;&#xA;There was a pane of glass&#xA;in the back door&#xA;that had a bubble in it.&#xA;&#xA;When you looked through the bubble,&#xA;the garden bent.&#xA;The apple tree swam.&#xA;&#xA;They replaced the door eventually.&#xA;The new glass was perfect.&#xA;I never looked through it.&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

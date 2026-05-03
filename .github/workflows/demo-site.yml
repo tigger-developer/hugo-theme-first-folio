@@ -4,7 +4,7 @@ name: Deploy demo site to Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["master"]
   workflow_dispatch:
 
 permissions:
@@ -45,7 +45,6 @@ jobs:
         run: |
           hugo \
             --environment theme-demo-live \
-            --themesDir ../.. \
             --minify
 
       - name: Upload artifact

@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Landscape on first-folio.theme.lobb.ie</title>
-    <link>http://localhost:57054/tags/landscape/</link>
-    <description>Recent content in Landscape on first-folio.theme.lobb.ie</description>
+    <title>Landscape on red-dots.example.com</title>
+    <link>http://localhost:51034/tags/landscape/</link>
+    <description>Recent content in Landscape on red-dots.example.com</description>
     <generator>Hugo</generator>
-    <language>en-GB-oed</language>
+    <language>en</language>
     <copyright>© 2023-2026 Taḋg Paul — Apache License 2.0</copyright>
     <lastBuildDate>Mon, 01 Sep 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:57054/tags/landscape/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:51034/tags/landscape/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Four Fields</title>
-      <link>http://localhost:57054/poetry/four-fields/</link>
+      <link>http://localhost:51034/poetry/four-fields/</link>
       <pubDate>Mon, 01 Sep 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/poetry/four-fields/</guid>
+      <guid>http://localhost:51034/poetry/four-fields/</guid>
       <description>&lt;div class=&#34;poem&#34;&gt;&#xA;The first field is the one you crossed at seven,&#xA;grass to the waist, the dog ahead.&#xA;The second is the one you saw from the train,&#xA;gold in September, already someone else&#39;s.&#xA;&#xA;The third field you walked through arguing.&#xA;The rain came. You kept arguing.&#xA;The fourth field is the one you dream about:&#xA;flat, enormous, and always just behind you.&#xA;&lt;/div&gt;</description>
     </item>
     <item>
       <title>Harbour</title>
-      <link>http://localhost:57054/poetry/half-remembered/harbour/</link>
+      <link>http://localhost:51034/poetry/half-remembered/harbour/</link>
       <pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:57054/poetry/half-remembered/harbour/</guid>
+      <guid>http://localhost:51034/poetry/half-remembered/harbour/</guid>
       <description>&lt;div class=&#34;poem&#34;&gt;&#xA;At low tide the harbour empties&#xA;to mud and the ribs of old boats.&#xA;The water goes out like a secret&#xA;someone decided to keep.&#xA;&#xA;We sat on the wall and ate chips.&#xA;The vinegar stung a cut on my thumb.&#xA;You said something about the future.&#xA;The gulls were not interested.&#xA;&#xA;The tide came back, as tides do,&#xA;and covered everything&#xA;we had been looking at.&#xA;&lt;/div&gt;</description>
     </item>
   </channel>

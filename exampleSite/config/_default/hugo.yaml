@@ -4,7 +4,11 @@
 baseURL: https://example.com/
 locale: en-GB-oed
 title: red-dots.example.com
-theme: ../..
+
+module:
+  imports:
+    - path: github.com/tadg-paul/hugo-theme-first-folio
+
 copyright: "© 2023-2026 Taḋg Paul — Apache License 2.0"
 
 pagination:
