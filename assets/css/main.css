@@ -8,7 +8,7 @@
 :root {
   /* Issue #80: Primary and secondary accent colors defined in CSS (not Hugo) */
   --color-primary: #b5122f;
-  --color-secondary: #2a7d8a;
+  --color-secondary: #12b5a0;
 
   /* Light mode hover derivatives - mix with BLACK for darker variants */
   --color-primary-hover: color-mix(in srgb, var(--color-primary) 80%, black);
