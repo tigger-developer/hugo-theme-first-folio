@@ -583,7 +583,7 @@ a.breadcrumb-seg:hover {
     margin-top: 1rem;
     position: sticky;
     top: 1.25rem;
-    background: rgba(255, 255, 255, 0.06);
+    background: var(--sidebar-bg, rgba(0, 0, 0, 0.03));
     border-radius: 0.5rem;
     border-left: 2px solid var(--color-border, #663399);
     padding: 1rem 1.25rem;
@@ -599,7 +599,7 @@ a.breadcrumb-seg:hover {
   article.has-toc .article-sidebar .related-articles {
     padding: 1.25rem 0 0;
     margin-top: 1.25rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    border-top: 1px solid var(--sidebar-border, rgba(0, 0, 0, 0.08));
     background: none;
     border-left: none;
     border-radius: 0;
