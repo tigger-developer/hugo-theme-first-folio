@@ -1976,31 +1976,32 @@ main.list .content {
    Content-Type Specific Masonry Styles
    ================================================ */
 
-/* Artwork cards: image-dominant with text overlay */
+/* Gallery cards: image-dominant with text overlay */
+/* Issue #50: Section-agnostic selector — applies to any gallery card, not just artwork */
 /* Issue #89: Frosted glass overlay for text legibility */
-.masonry-artwork {
+.masonry-item:has(.masonry-overlay) {
   position: relative;
   padding: 0;
 }
 
-.masonry-artwork .masonry-bg {
-  /* Remove blur from background for artwork cards - show unblurred image */
+.masonry-item:has(.masonry-overlay) .masonry-bg {
+  /* Remove blur from background for gallery cards - show unblurred image */
   filter: none !important;
   opacity: 1 !important;
 }
 
-.masonry-artwork {
+.masonry-item:has(.masonry-overlay) {
   border: none !important;
 }
 
-.masonry-artwork .masonry-image {
+.masonry-item:has(.masonry-overlay) .masonry-image {
   position: relative;
   overflow: hidden;
   width: 100%;
   border-radius: 8px;
 }
 
-.masonry-artwork .masonry-image img {
+.masonry-item:has(.masonry-overlay) .masonry-image img {
   width: 100%;
   height: auto;
   display: block;
@@ -2008,12 +2009,12 @@ main.list .content {
   transition: transform 0.3s ease;
 }
 
-.masonry-artwork:hover .masonry-image img {
+.masonry-item:has(.masonry-overlay):hover .masonry-image img {
   transform: scale(1.05);
 }
 
 /* Text overlay container - spans full card for positioning */
-.masonry-artwork .masonry-overlay {
+.masonry-item:has(.masonry-overlay) .masonry-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -2027,7 +2028,7 @@ main.list .content {
 }
 
 /* Top group: title and description */
-.masonry-artwork .masonry-overlay-top {
+.masonry-item:has(.masonry-overlay) .masonry-overlay-top {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -2036,7 +2037,7 @@ main.list .content {
 }
 
 /* Individual frosted glass effect on each text element */
-.masonry-artwork .masonry-overlay h3 {
+.masonry-item:has(.masonry-overlay) .masonry-overlay h3 {
   font-size: 1rem;
   margin-bottom: 0;
   padding: 0.25rem 0.5rem;
@@ -2049,16 +2050,16 @@ main.list .content {
   color: #ffffff;
 }
 
-.masonry-artwork .masonry-overlay h3 a {
+.masonry-item:has(.masonry-overlay) .masonry-overlay h3 a {
   text-shadow: none;
   color: #ffffff;
 }
 
-.masonry-artwork .masonry-overlay h3::before {
+.masonry-item:has(.masonry-overlay) .masonry-overlay h3::before {
   color: var(--color-primary);
 }
 
-.masonry-artwork .masonry-excerpt {
+.masonry-item:has(.masonry-overlay) .masonry-excerpt {
   font-size: 0.85rem;
   margin-bottom: 0;
   padding: 0.25rem 0.5rem;
@@ -2071,7 +2072,7 @@ main.list .content {
 }
 
 /* Footer positioned at bottom, spans full width for flexbox */
-.masonry-artwork .masonry-footer {
+.masonry-item:has(.masonry-overlay) .masonry-footer {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -2080,7 +2081,7 @@ main.list .content {
   gap: 0.5rem;
 }
 
-.masonry-artwork .masonry-overlay .masonry-section {
+.masonry-item:has(.masonry-overlay) .masonry-overlay .masonry-section {
   padding: 0.25rem 0.5rem;
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
@@ -2090,39 +2091,39 @@ main.list .content {
   color: #ffffff;
 }
 
-/* Chevron/read-more button styling for artwork cards */
-.masonry-artwork .read-more-btn {
+/* Chevron/read-more button styling for gallery cards */
+.masonry-item:has(.masonry-overlay) .read-more-btn {
   padding: 0.25rem 0.5rem;
   background: transparent;
   border-radius: 4px;
   display: inline-block;
 }
 
-/* Dark mode overrides for artwork cards */
+/* Dark mode overrides for gallery cards */
 /* Issue #90: Reduced opacity from 0.5 to 0.3 for lighter text backgrounds */
 /* All text remains white in both light and dark mode for consistency on frosted glass */
 @media (prefers-color-scheme: dark) {
-  .masonry-artwork .masonry-overlay h3 {
+  .masonry-item:has(.masonry-overlay) .masonry-overlay h3 {
     background: rgba(0, 0, 0, 0.3);
     color: #ffffff;
   }
 
-  .masonry-artwork .masonry-overlay h3 a {
+  .masonry-item:has(.masonry-overlay) .masonry-overlay h3 a {
     color: #ffffff;
   }
 
-  .masonry-artwork .masonry-overlay h3::before {
+  .masonry-item:has(.masonry-overlay) .masonry-overlay h3::before {
     color: var(--color-primary);
   }
 
   /* Description: white text in dark mode too */
-  .masonry-artwork .masonry-excerpt {
+  .masonry-item:has(.masonry-overlay) .masonry-excerpt {
     color: #ffffff;
     text-shadow: 0 0 2px #000;
   }
 
   /* Category: frosted glass in dark mode with white text */
-  .masonry-artwork .masonry-overlay .masonry-section {
+  .masonry-item:has(.masonry-overlay) .masonry-overlay .masonry-section {
     background: rgba(0, 0, 0, 0.3);
     color: #ffffff;
   }
