@@ -2852,6 +2852,7 @@ main.list .masonry-grid {
 }
 
 /* Issue #21: Background image layer — same pattern as .masonry-bg */
+/* List view images are decorative hints, not feature images — force low opacity */
 .list-view-bg {
   position: absolute;
   top: 0;
@@ -2863,6 +2864,8 @@ main.list .masonry-grid {
   background-repeat: no-repeat;
   z-index: 0;
   pointer-events: none;
+  opacity: 0.12 !important;
+  filter: blur(4px) !important;
 }
 
 /* Content sits above background — uniform padding on all sides */
