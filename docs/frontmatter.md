@@ -1,0 +1,313 @@
+<!-- Version: 1.0 | Last updated: 2026-05-05 -->
+
+# Frontmatter Reference
+
+Every content page in Hugo uses YAML frontmatter (between `---` markers) to control how it is displayed. This reference covers all frontmatter fields supported by the First Folio theme.
+
+---
+
+## Basic fields
+
+```yaml
+---
+title: "Page Title"
+date: 2026-01-15
+draft: true
+description: "Short description for cards and metadata"
+author: "Author Name"
+tags:
+  - tag1
+  - tag2
+---
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | yes | Page title. Displayed in headings, cards, browser tab. |
+| `date` | yes | Publication date. Used for sorting and display. |
+| `draft` | no | `true` hides the page from production builds. |
+| `description` | no | Short text shown on masonry cards. Defaults to Hugo's auto-summary if not set. |
+| `author` | no | Author name. Displayed on article pages and cards. |
+| `tags` | no | List of tags for taxonomy. |
+
+---
+
+## Layout
+
+Controls how the article page is rendered.
+
+```yaml
+layout: banner
+```
+
+| Value | Description |
+|-------|-------------|
+| `banner` | Full-width image banner with title overlaid. |
+| `hero` | Large image above the article content. |
+| `featured` | Image floated beside content. |
+| `background` | Image behind the entire article. Forces dark mode for the page. |
+| `columns` | Two-column layout with image. |
+| `featured-columns-left` | Image on left, content on right. |
+| `featured-columns-right` | Content on left, image on right. |
+| *(not set)* | If `image.src` is set but no layout is specified, defaults to `background`. Otherwise, a plain text article. |
+
+---
+
+## Image
+
+Controls the article's featured image. Used by all layout types and by masonry cards on the homepage.
+
+```yaml
+image:
+  src: hero.jpg
+  alt: "Descriptive text for accessibility"
+  caption: "Photo credit or description"
+  opacity: 0.7
+  blur: 3px
+  position: "center top"
+  size: cover
+```
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `src` | - | Image filename. Must be in the same page bundle directory. |
+| `alt` | title | Alt text for accessibility. Falls back to caption, then title. |
+| `caption` | - | Caption displayed below the image (banner and hero layouts). |
+| `opacity` | site default | Image opacity override for this page. `1.0` = full image, lower = darker. |
+| `blur` | site default | Blur override for this page. |
+| `position` | `center center` | CSS `object-position` / `background-position` for image cropping. |
+| `size` | `cover` | CSS `background-size` for background layout. |
+
+### Card-specific image overrides
+
+Different images or crops can be specified for cards and carousel:
+
+```yaml
+image:
+  src: hero.jpg              # used on the article page
+  card_src: card-crop.jpg    # used on masonry cards instead
+  card_position: center top  # crop position on cards
+  carousel_src: wide.jpg     # used on carousel cards instead
+  carousel_position: center  # crop position on carousel
+```
+
+| Field | Description |
+|-------|-------------|
+| `card_src` | Alternative image for masonry cards. Falls back to `src`. |
+| `card_position` | CSS position for the card image. Falls back to `position`. |
+| `carousel_src` | Alternative image for carousel cards. Falls back to `card_src`, then `src`. |
+| `carousel_position` | CSS position for the carousel image. Falls back to `card_position`, then `position`. |
+
+---
+
+## Wash overrides
+
+Per-page overrides for the wash (tinted overlay behind text). These override the site-level `params.wash` and `params.banner.wash` settings.
+
+### Background-layout wash
+
+```yaml
+image:
+  wash:
+    opacity: 0.4
+    blur: 2px
+    gradient: "10% 20% 10% 20%"
+```
+
+### Banner-layout wash
+
+```yaml
+image:
+  banner_wash:
+    opacity: 0.4
+    blur: 3px
+    gradient: "25% 35% 25% 35%"
+```
+
+---
+
+## Video
+
+Embeds a video (Cloudflare Stream or iframe) in hero or columns layouts.
+
+```yaml
+video:
+  id: "abc123def456"
+  caption: "Video description"
+```
+
+| Field | Description |
+|-------|-------------|
+| `id` | Cloudflare Stream video ID, or a full URL for iframe embed. |
+| `caption` | Caption displayed below the video. |
+
+**Note:** Video is not supported in `banner` or `background` layouts. Hugo emits a warning if attempted.
+
+---
+
+## Homepage controls
+
+### Pin
+
+Pins a page to the top of the homepage masonry grid for its section.
+
+```yaml
+pin: 10
+```
+
+Lower numbers appear first. Pages without `pin` appear after all pinned pages, sorted by date.
+
+### Carousel
+
+Adds a page to the rotating carousel above the masonry grid.
+
+```yaml
+carousel: 1
+```
+
+Lower numbers appear first. A page can have both `carousel` and `pin` - it appears in the carousel and is excluded from the grid to avoid duplication.
+
+---
+
+## Display options
+
+```yaml
+hideDate: true
+hideAuthor: true
+toc: true
+tocTitle: "Contents"
+tldr: "A one-sentence summary shown at the top of the article."
+contentLang: ga
+```
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `hideDate` | `false` | Hides the publication date on cards and article pages. |
+| `hideAuthor` | `false` | Hides the author name. |
+| `toc` | `false` | Enables a table of contents sidebar. Set to `true` or a string (used as the ToC heading). |
+| `tocTitle` | `"Contents"` | Custom heading for the table of contents. |
+| `tldr` | - | Summary box displayed at the top of the article. |
+| `contentLang` | - | Language code (e.g. `ga` for Irish). Applies language-specific font styling. |
+
+---
+
+## Signpost (call to action)
+
+Displays a prominent call-to-action link on the article page.
+
+```yaml
+signpost:
+  text: "BUY THE BOOK"
+  url: "https://example.com/book"
+
+signpost_footer:
+  text: "VIEW ON GITHUB"
+  url: "https://github.com/example"
+```
+
+`signpost` appears near the top of the article. `signpost_footer` appears at the bottom.
+
+---
+
+## Display title
+
+Overrides the rendered title without changing the page's metadata title.
+
+```yaml
+displayTitle: "A *Formatted* Title"
+```
+
+Supports inline Markdown formatting (bold, italic).
+
+---
+
+## Breadcrumb
+
+Controls breadcrumb navigation on the article page.
+
+```yaml
+breadcrumb: false
+```
+
+Set to `false` to hide breadcrumbs on a specific page. Breadcrumbs are shown by default.
+
+---
+
+## Gallery mode
+
+For image collection pages (e.g. photography galleries).
+
+```yaml
+gallery: true
+featured_image: "hero.jpg"
+```
+
+| Field | Description |
+|-------|-------------|
+| `gallery` | `true` enables gallery card rendering (image-dominant with text overlay). |
+| `featured_image` | The image from the page bundle to use as the card thumbnail. |
+
+---
+
+## Section index fields
+
+These fields go in `_index.md` files (branch bundles) that define sections.
+
+```yaml
+---
+title: Photography
+description: "A collection of images"
+list_style: cards
+list_recursive: true
+sidebar: true
+grid:
+  columns:
+    xl: 6
+---
+```
+
+| Field | Default | Description |
+|-------|---------|-------------|
+| `list_style` | `cards` | How pages in this section are listed. Options: `cards` (masonry grid), `list` (list view), `gallery` (gallery grid). |
+| `list_recursive` | `false` | Include pages from sub-sections in the listing. |
+| `sidebar` | `false` | Show a sidebar on the section listing page. |
+| `grid` | site default | Per-section grid configuration override (see [Configuration Reference](config.md#grid-configuration)). |
+
+---
+
+## Build control
+
+```yaml
+_build:
+  list: false
+```
+
+Setting `_build.list: false` excludes a page from section listings and the homepage grid while keeping the page itself accessible via its URL. Useful for pages linked only from the carousel or navigation.
+
+---
+
+## Full example
+
+```yaml
+---
+title: "The Cartographer"
+date: 2025-11-10
+description: "A poem about maps and the places they miss."
+tags:
+  - poetry
+  - maps
+author: "Author Name"
+layout: hero
+pin: 80
+carousel: 1
+image:
+  src: hero.jpg
+  alt: "Antique map with compass rose"
+  caption: "Where the roads used to run"
+  card_position: center top
+signpost:
+  text: "READ THE COLLECTION"
+  url: /poetry/
+toc: true
+---
+```

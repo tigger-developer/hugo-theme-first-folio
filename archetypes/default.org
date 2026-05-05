@@ -34,7 +34,6 @@ description: ""
 #   src: "image.jpg"           # Path to image file
 #   alt: "Image description"   # Alt text for accessibility
 #   caption: "Image caption"   # Optional caption below image
-#   dark: false                # Set true if image works better in dark mode
-#   opacity: 0.2               # For background layout (0.0-1.0)
-#   blur: 5px                  # For background layout
+#   opacity: 0.7               # Image opacity (0.0-1.0, lower = darker)
+#   blur: 2px                  # Image blur
 ---
