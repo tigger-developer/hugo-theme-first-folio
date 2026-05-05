@@ -47,7 +47,7 @@
   --caption-shadow: rgba(0, 0, 0, 0.6);
   --overlay-text: #ffffff;
   --overlay-text-shadow: rgba(0, 0, 0, 0.9);
-  --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 0.5) 75%);
+  --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.5)) var(--card-desc-wash-gradient, 75%));
   --card-excerpt-color: #ccc;
   --frosted-glass-bg: rgba(0, 0, 0, 0.35);
   --frosted-glass-text: #ffffff;
@@ -83,7 +83,7 @@
     --caption-shadow: rgba(0, 0, 0, 0.8);
     --overlay-text: #1a1a1a;
     --overlay-text-shadow: rgba(255, 255, 255, 0.9);
-    --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 0.5) 75%);
+    --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.5)) var(--card-desc-wash-gradient, 75%));
     --card-excerpt-color: #ccc;
     --frosted-glass-bg: rgba(0, 0, 0, 0.4);
     --frosted-glass-text: #ffffff;
@@ -116,7 +116,7 @@
   --overlay-strong: rgba(255, 255, 255, 0.4);
   --caption-bg: rgba(0, 0, 0, 0.55);
   --caption-text: rgba(180, 180, 180, 1);
-  --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, 0.5) 75%);
+  --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.5)) var(--card-desc-wash-gradient, 75%));
   --card-excerpt-color: #ccc;
   --frosted-glass-bg: rgba(0, 0, 0, 0.4);
   --frosted-glass-text: #ffffff;
@@ -1900,14 +1900,15 @@ main.list .content {
   position: absolute;
   inset: -0.3rem -0.6rem;
   z-index: -1;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, var(--card-title-wash-opacity, 0.2));
+  backdrop-filter: blur(var(--card-title-wash-blur, 6px));
+  -webkit-backdrop-filter: blur(var(--card-title-wash-blur, 6px));
   mask-image:
-    linear-gradient(to bottom, transparent, black 20%, black 80%, transparent),
-    linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    linear-gradient(to bottom, transparent, black var(--card-title-wash-grad-v, 20%), black calc(100% - var(--card-title-wash-grad-v, 20%)), transparent),
+    linear-gradient(to right, transparent, black var(--card-title-wash-grad-h, 8%), black calc(100% - var(--card-title-wash-grad-h, 8%)), transparent);
   -webkit-mask-image:
-    linear-gradient(to bottom, transparent, black 20%, black 80%, transparent),
-    linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    linear-gradient(to bottom, transparent, black var(--card-title-wash-grad-v, 20%), black calc(100% - var(--card-title-wash-grad-v, 20%)), transparent),
+    linear-gradient(to right, transparent, black var(--card-title-wash-grad-h, 8%), black calc(100% - var(--card-title-wash-grad-h, 8%)), transparent);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
 }
@@ -2051,15 +2052,14 @@ main.list .content {
   pointer-events: auto;
 }
 
-/* Issue #52: Gallery card title — soft-edged wash behind text */
-/* Gallery card title — hard-edged frosted pill (image is full opacity, needs stronger wash) */
+/* Issue #52: Gallery card title — frosted pill (image is full opacity, needs stronger wash) */
 .masonry-item:has(.masonry-overlay) .masonry-overlay h3 {
   font-size: 1rem;
   margin-bottom: 0;
   padding: 0.25rem 0.5rem;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, var(--card-gallery-title-wash-opacity, 0.35));
+  backdrop-filter: blur(var(--card-gallery-title-wash-blur, 5px));
+  -webkit-backdrop-filter: blur(var(--card-gallery-title-wash-blur, 5px));
   border-radius: 4px;
   display: inline-block;
   width: auto;
@@ -2099,7 +2099,7 @@ main.list .content {
   pointer-events: auto;
   gap: 0.5rem;
   padding: 2rem 1rem 1rem;
-  background: var(--card-scrim);
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-gallery-desc-wash-opacity, 0.5)) var(--card-gallery-desc-wash-gradient, 75%));
   border-radius: 0 0 8px 8px;
 }
 

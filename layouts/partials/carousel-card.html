@@ -18,10 +18,10 @@
 
 {{- /* Carousel config */ -}}
 {{- $interval := $site.Params.carousel.interval | default 6 -}}
-{{- $carouselOpacity := $site.Params.carousel.bgImage.opacity | default ($site.Params.bgImage.opacity | default 0.8) -}}
-{{- $carouselBlur := $site.Params.carousel.bgImage.blur | default ($site.Params.bgImage.blur | default "5px") -}}
-{{- $masonryOpacity := $site.Params.cardImage.opacity | default ($site.Params.bgImage.opacity | default 0.8) -}}
-{{- $masonryBlur := $site.Params.cardImage.blur | default ($site.Params.bgImage.blur | default "5px") -}}
+{{- $carouselOpacity := $site.Params.carousel.bgImage.opacity | default ($site.Params.bgImage.opacity | default 0.9) -}}
+{{- $carouselBlur := $site.Params.carousel.bgImage.blur | default ($site.Params.bgImage.blur | default "0px") -}}
+{{- $masonryOpacity := $site.Params.cardImage.opacity | default ($site.Params.bgImage.opacity | default 0.9) -}}
+{{- $masonryBlur := $site.Params.cardImage.blur | default ($site.Params.bgImage.blur | default "3px") -}}
 
 {{- if gt (len $carouselPages) 0 -}}
 <div class="carousel-container" data-interval="{{ $interval }}"

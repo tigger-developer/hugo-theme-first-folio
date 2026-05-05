@@ -1,0 +1,32 @@
+{{/* ABOUTME: Generates CSS custom properties for masonry card and gallery card wash */}}
+{{/* ABOUTME: Controls title wash and description scrim on cards */}}
+
+{{/* Regular cards: cardImage.title.wash and cardImage.description.wash */}}
+{{- $cardTitle := .Site.Params.cardImage.title.wash | default dict -}}
+{{- $cardDesc := .Site.Params.cardImage.description.wash | default dict -}}
+
+{{/* Gallery cards: cardGalleryImage.title.wash and cardGalleryImage.description.wash */}}
+{{- $galTitle := .Site.Params.cardGalleryImage.title.wash | default dict -}}
+{{- $galDesc := .Site.Params.cardGalleryImage.description.wash | default dict -}}
+
+<style>
+  :root {
+    /* Regular card title wash */
+    --card-title-wash-opacity: {{ $cardTitle.opacity | default 0.2 }};
+    --card-title-wash-blur: {{ $cardTitle.blur | default "6px" }};
+    --card-title-wash-grad-v: {{ $cardTitle.gradientV | default "20%" }};
+    --card-title-wash-grad-h: {{ $cardTitle.gradientH | default "8%" }};
+
+    /* Regular card description wash (bottom-up scrim) */
+    --card-desc-wash-opacity: {{ $cardDesc.opacity | default 0.5 }};
+    --card-desc-wash-gradient: {{ $cardDesc.gradient | default "75%" }};
+
+    /* Gallery card title wash */
+    --card-gallery-title-wash-opacity: {{ $galTitle.opacity | default 0.35 }};
+    --card-gallery-title-wash-blur: {{ $galTitle.blur | default "5px" }};
+
+    /* Gallery card description wash (bottom-up scrim) */
+    --card-gallery-desc-wash-opacity: {{ $galDesc.opacity | default 0.5 }};
+    --card-gallery-desc-wash-gradient: {{ $galDesc.gradient | default "75%" }};
+  }
+</style>
