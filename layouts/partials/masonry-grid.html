@@ -56,8 +56,8 @@
     {{- end -}}
 
     {{- /* Resolve card opacity and blur: cardImage > bgImage fallback */ -}}
-    {{- $bgOpacity := $.Site.Params.cardImage.opacity | default ($.Site.Params.bgImage.opacity | default 0.8) -}}
-    {{- $bgBlur := $.Site.Params.cardImage.blur | default ($.Site.Params.bgImage.blur | default "5px") -}}
+    {{- $bgOpacity := $.Site.Params.cardImage.opacity | default ($.Site.Params.bgImage.opacity | default 0.9) -}}
+    {{- $bgBlur := $.Site.Params.cardImage.blur | default ($.Site.Params.bgImage.blur | default "3px") -}}
 
     <article{{ if .Params.contentLang }} lang="{{ .Params.contentLang }}"{{ end }} class="masonry-item masonry-{{ $section }} {{ $imageClass }}">
       {{- /* Background image layer - separate div for proper stacking */ -}}

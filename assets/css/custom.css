@@ -498,7 +498,7 @@ body,
 }
 
 /* Override overlay text colors based on image lightness (from frontmatter), not theme mode */
-/* Issue #34: Dark images (image.dark: true) - light text with soft dark shadow */
+/* Issue #52: Banner title text — always light on dark */
 .post-banner.dark-banner .title h1,
 .post-banner.dark-banner .title .meta,
 .post-banner.dark-banner .title .author,
@@ -524,11 +524,9 @@ body,
 }
 
 
-/* Issue #122, #34, #51: Background layout is mode-independent.
-   dark-bg = dark context (default for all background layouts).
-   light-bg = light context (only when image.dark: false is explicit).
+/* Issue #52: Background layout — always dark context.
    The image IS the page background — site theme mode is irrelevant.
-   A forced page bg colour ensures low-opacity bleed goes the right direction. */
+   Dark backing ensures opacity always darkens the image for text readability. */
 
 /* --- dark-bg: dark context, light text --- */
 
@@ -600,75 +598,8 @@ article:has(.post-container.dark-bg) {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 0 8px rgba(0, 0, 0, 0.4) !important;
 }
 
-/* --- light-bg: light context (image.dark: false), dark text --- */
-
-.post-container.light-bg,
-.post-container.light-bg .post-content,
-.post-container.light-bg .post-content h1,
-.post-container.light-bg .post-content h2,
-.post-container.light-bg .post-content h3,
-.post-container.light-bg .post-content h4,
-.post-container.light-bg .post-content h5,
-.post-container.light-bg .post-content h6 {
-  color: #232333 !important;
-  text-shadow:
-    0 1px 2px rgba(255, 255, 255, 0.7),
-    0 0 8px rgba(255, 255, 255, 0.5) !important;
-}
-
-.post-container.light-bg .post-content .meta,
-.post-container.light-bg .post-content a {
-  color: #232333 !important;
-}
-
-.post-container.light-bg .post-content h1::before,
-.post-container.light-bg .post-content h2::before,
-.post-container.light-bg .post-content h3::before {
-  text-shadow:
-    0 1px 2px rgba(255, 255, 255, 0.7),
-    0 0 8px rgba(255, 255, 255, 0.5) !important;
-}
-
-/* light-bg wash */
-article:has(.post-container.light-bg) .post-content,
-article:has(.post-container.light-bg) .article-sidebar,
-article:has(.post-container.light-bg) .toc-mobile,
-article:has(.post-container.light-bg) .related-mobile {
-  position: relative;
-  -webkit-backdrop-filter: blur(var(--wash-blur, 0px));
-  backdrop-filter: blur(var(--wash-blur, 0px));
-}
-
-article:has(.post-container.light-bg) .post-content::before,
-article:has(.post-container.light-bg) .article-sidebar::before,
-article:has(.post-container.light-bg) .toc-mobile::before,
-article:has(.post-container.light-bg) .related-mobile::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(255, 255, 255, var(--wash-opacity, 0.25));
-  -webkit-mask-image:
-    linear-gradient(to right,  transparent, black var(--wash-grad-left, 0%),  black calc(100% - var(--wash-grad-right, 0%)),  transparent),
-    linear-gradient(to bottom, transparent, black var(--wash-grad-top, 10%), black calc(100% - var(--wash-grad-bottom, 10%)), transparent);
-  -webkit-mask-composite: destination-in;
-  mask-image:
-    linear-gradient(to right,  transparent, black var(--wash-grad-left, 0%),  black calc(100% - var(--wash-grad-right, 0%)),  transparent),
-    linear-gradient(to bottom, transparent, black var(--wash-grad-top, 10%), black calc(100% - var(--wash-grad-bottom, 10%)), transparent);
-  mask-composite: intersect;
-  pointer-events: none;
-  z-index: -1;
-}
-
-article:has(.post-container.light-bg) {
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7), 0 0 8px rgba(255, 255, 255, 0.5) !important;
-}
-
 /* Issue #52: Details/summary on background-layout pages — frosted glass instead of solid bg */
-article:has(.post-container.dark-bg) details.styled-details > summary > span,
-article:has(.post-container.light-bg) details.styled-details > summary > span {
+article:has(.post-container.dark-bg) details.styled-details > summary > span {
   background-color: transparent;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -677,10 +608,6 @@ article:has(.post-container.light-bg) details.styled-details > summary > span {
 
 article:has(.post-container.dark-bg) details.styled-details > summary > span {
   background-color: rgba(0, 0, 0, 0.3);
-}
-
-article:has(.post-container.light-bg) details.styled-details > summary > span {
-  background-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Background Image Styling */
@@ -1911,35 +1838,12 @@ main.list .content {
   transition: box-shadow 0.2s ease;
 }
 
-/* Issue #52: Image cards — backing colour determined by image.dark flag.
-   Dark backing + opacity = image darkens, light text.
-   Light backing + opacity = image lightens, dark text. */
-.masonry-item.image-dark {
+/* Issue #52: Image cards — always dark backing. Opacity darkens the image for text readability. */
+.masonry-item.has-image {
   background: #1a1a1e;
 }
 
-.masonry-item.image-light {
-  background: #f5f5f5;
-}
 
-/* Issue #52: Light-image card overrides — flip wash/scrim/text to dark-on-light */
-.masonry-item.image-light .masonry-content:not(.masonry-overlay) .masonry-meta {
-  background: rgba(255, 255, 255, 0.5);
-  color: #1a1a1a;
-}
-
-.masonry-item.image-light .masonry-card-bottom {
-  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.65) 70%);
-}
-
-.masonry-item.image-light .masonry-card-bottom .masonry-excerpt {
-  color: #1a1a1a;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-}
-
-.masonry-item.image-light .masonry-content:not(.masonry-overlay) h3 a::after {
-  background: rgba(255, 255, 255, 0.3);
-}
 
 /* Background image layer - separate div for proper stacking */
 .masonry-bg {
@@ -2013,16 +1917,12 @@ main.list .content {
   text-decoration: none;
 }
 
-/* Issue #52: Card title colour follows image.dark context */
-.masonry-item.image-dark .masonry-content h3 a {
+/* Issue #52: Card title — always light on dark backing */
+.masonry-item.has-image .masonry-content h3 a {
   color: rgba(255, 255, 255, 0.85);
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.masonry-item.image-light .masonry-content h3 a {
-  color: #1a1a1a;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
-}
 
 /* Masonry metadata */
 .masonry-meta {
@@ -2064,21 +1964,13 @@ main.list .content {
 /* Image-aware title text on carousel cards — frosted glass is semi-transparent
    so title colour still needs to account for the underlying image lightness. */
 
-/* Carousel: dark image (image.dark: true) — light title on frosted glass */
-.carousel-card.image-dark .masonry-content h2 a {
+/* Issue #52: Carousel title — always light on dark */
+.carousel-card.has-image .masonry-content h2 a {
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* Carousel: light image (image.dark: false) — dark title on frosted glass */
-.carousel-card.image-light .masonry-content h2 a {
-  color: #1a1a1a;
-}
 
-.carousel-card.image-light h2::after {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.carousel-card.image-dark h2::after {
+.carousel-card.has-image h2::after {
   background: rgba(0, 0, 0, 0.2);
 }
 
@@ -2159,12 +2051,13 @@ main.list .content {
   pointer-events: auto;
 }
 
-/* Individual frosted glass effect on each text element */
+/* Issue #52: Gallery card title — soft-edged wash behind text */
+/* Gallery card title — hard-edged frosted pill (image is full opacity, needs stronger wash) */
 .masonry-item:has(.masonry-overlay) .masonry-overlay h3 {
   font-size: 1rem;
   margin-bottom: 0;
   padding: 0.25rem 0.5rem;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 4px;
@@ -2194,24 +2087,26 @@ main.list .content {
   text-shadow: 0 0 2px #000;
 }
 
-/* Footer positioned at bottom, spans full width for flexbox */
+/* Footer positioned at bottom, spans full width with bottom-up scrim */
 .masonry-item:has(.masonry-overlay) .masonry-footer {
-  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   pointer-events: auto;
   gap: 0.5rem;
+  padding: 2rem 1rem 1rem;
+  background: var(--card-scrim);
+  border-radius: 0 0 8px 8px;
 }
 
 .masonry-item:has(.masonry-overlay) .masonry-overlay .masonry-section {
   padding: 0.25rem 0.5rem;
-  background: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 4px;
   display: inline-block;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Chevron/read-more button styling for gallery cards */
@@ -2222,35 +2117,7 @@ main.list .content {
   display: inline-block;
 }
 
-/* Dark mode overrides for gallery cards */
-/* Issue #90: Reduced opacity from 0.5 to 0.3 for lighter text backgrounds */
-/* All text remains white in both light and dark mode for consistency on frosted glass */
-@media (prefers-color-scheme: dark) {
-  .masonry-item:has(.masonry-overlay) .masonry-overlay h3 {
-    background: rgba(0, 0, 0, 0.3);
-    color: #ffffff;
-  }
 
-  .masonry-item:has(.masonry-overlay) .masonry-overlay h3 a {
-    color: #ffffff;
-  }
-
-  .masonry-item:has(.masonry-overlay) .masonry-overlay h3::before {
-    color: var(--color-primary);
-  }
-
-  /* Description: white text in dark mode too */
-  .masonry-item:has(.masonry-overlay) .masonry-excerpt {
-    color: #ffffff;
-    text-shadow: 0 0 2px #000;
-  }
-
-  /* Category: frosted glass in dark mode with white text */
-  .masonry-item:has(.masonry-overlay) .masonry-overlay .masonry-section {
-    background: rgba(0, 0, 0, 0.3);
-    color: #ffffff;
-  }
-}
 
 /* Poetry cards: text-focused with verse styling */
 .masonry-poetry .masonry-content {
@@ -2536,20 +2403,6 @@ main.list .content {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-/* Issue #52: Light-image carousel overrides */
-.carousel-card.image-light .masonry-meta {
-  background: rgba(255, 255, 255, 0.5);
-  color: #1a1a1a;
-}
-
-.carousel-card.image-light .carousel-card-bottom {
-  background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.25) 30%, rgba(255, 255, 255, 0.65) 70%);
-}
-
-.carousel-card.image-light .carousel-card-bottom .masonry-excerpt {
-  color: #1a1a1a;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
-}
 
 .carousel-card-bottom .read-more-container {
   flex-shrink: 0;
@@ -2648,8 +2501,7 @@ main.list .content {
     display: none;
   }
 
-  .carousel-card.image-light .masonry-content h2 a,
-  .carousel-card.image-dark .masonry-content h2 a {
+  .carousel-card.has-image .masonry-content h2 a {
     color: #ffffff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   }
