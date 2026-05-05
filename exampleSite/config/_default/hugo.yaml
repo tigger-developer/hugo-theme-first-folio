@@ -30,7 +30,9 @@ params:
   dateFormat: "2 January 2006"
   dateFormatShort: "02/01/26"
 
-  mode: toggle
+  ambience:
+    default: dark
+    toggle: true
 
   mainSections:
     - recipes

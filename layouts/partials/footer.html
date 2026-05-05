@@ -21,20 +21,19 @@
   </div>
 </footer>
 
-{{- if eq .Site.Params.mode "light" }}
+{{- $ambienceDefault := .Site.Params.ambience.default | default "auto" -}}
+{{- $ambienceToggle := .Site.Params.ambience.toggle | default true -}}
+{{- if and (not $ambienceToggle) (eq $ambienceDefault "light") }}
 <script>
-// Force light mode — clear any saved dark preference
 document.documentElement.setAttribute('data-theme', 'light');
 localStorage.removeItem('theme-storage');
 </script>
-{{- else if eq .Site.Params.mode "dark" }}
+{{- else if and (not $ambienceToggle) (eq $ambienceDefault "dark") }}
 <script>
-// Issue #3: Dark mode — always dark
 document.documentElement.setAttribute('data-theme', 'dark');
 </script>
-{{- else if eq .Site.Params.mode "auto" }}
+{{- else if and (not $ambienceToggle) (eq $ambienceDefault "auto") }}
 <script>
-// Issue #3: Auto mode — follow system preference
 (function() {
   var mq = window.matchMedia('(prefers-color-scheme: dark)');
   function apply(dark) {
@@ -44,15 +43,17 @@ document.documentElement.setAttribute('data-theme', 'dark');
   mq.addEventListener('change', function(e) { apply(e.matches); });
 })();
 </script>
-{{- else if eq .Site.Params.mode "toggle" }}
+{{- else if $ambienceToggle }}
 <script>
-// Issue #3: Toggle mode — restore saved preference, fall back to system
+// Toggle mode — restore saved preference, fall back to default
 (function() {
   var saved = localStorage.getItem('theme-storage');
-  var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  var theme = saved || (prefersDark ? 'dark' : 'light');
+  var defaultTheme = '{{ $ambienceDefault }}';
+  if (defaultTheme === 'auto') {
+    defaultTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  var theme = saved || defaultTheme;
   document.documentElement.setAttribute('data-theme', theme);
-  // Ensure darkModeStyle stylesheet matches the resolved theme
   var darkSheet = document.getElementById('darkModeStyle');
   if (darkSheet) {
     darkSheet.disabled = (theme !== 'dark');

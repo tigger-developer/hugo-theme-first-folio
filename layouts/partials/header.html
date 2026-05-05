@@ -57,9 +57,15 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ $customThemeStyle.Permalink }}" />
 	{{- end }}
 
-	{{- if or (eq .Site.Params.mode "auto") (eq .Site.Params.mode "dark") (eq .Site.Params.mode "toggle") -}}
+	{{- $ambienceDefault := .Site.Params.ambience.default | default "auto" -}}
+	{{- $ambienceToggle := .Site.Params.ambience.toggle | default true -}}
+	{{- $needsDarkCSS := or (ne $ambienceDefault "light") $ambienceToggle -}}
+	{{- if $needsDarkCSS -}}
 		{{ $darkstyle := resources.Get "css/dark.css" | fingerprint }}
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="{{ $darkstyle.Permalink }}" {{ if eq .Site.Params.mode "auto" }}media="(prefers-color-scheme: dark)"{{ end }} {{ if eq .Site.Params.mode "toggle" }}disabled{{ end }} />
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="{{ $darkstyle.Permalink }}"
+			{{- if eq $ambienceDefault "auto" }} media="(prefers-color-scheme: dark)"{{ end -}}
+			{{- if eq $ambienceDefault "light" }} disabled{{ end -}}
+		/>
 	{{- end -}}
 
 	<!-- Mathjax support -->
