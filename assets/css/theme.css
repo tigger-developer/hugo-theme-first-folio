@@ -627,6 +627,7 @@ article:has(.post-container.dark-bg) details.styled-details > summary > span {
   align-items: center;
   justify-content: center;
   margin: 0 auto 0.5rem;
+  background: #1a1a1e;
 }
 
 @media screen and (max-width: 47.99rem) {

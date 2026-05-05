@@ -52,9 +52,9 @@
 	{{ $style := resources.Get "css/main.css" | fingerprint }}
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ $style.Permalink }}" />
 
-	{{- with resources.Get "css/custom.css" }}
-	{{ $customThemeStyle := . | fingerprint }}
-	<link rel="stylesheet" type="text/css" media="screen" href="{{ $customThemeStyle.Permalink }}" />
+	{{- with resources.Get "css/theme.css" }}
+	{{ $themeStyle := . | fingerprint }}
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ $themeStyle.Permalink }}" />
 	{{- end }}
 
 	{{- $ambienceDefault := .Site.Params.ambience.default | default "auto" -}}

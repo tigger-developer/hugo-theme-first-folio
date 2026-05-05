@@ -44,7 +44,6 @@ params:
   useCDN: false
 
   customcss:
-    - css/custom.css
     - css/fonts.css
     - css/lightbox.css
 
