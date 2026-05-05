@@ -9,7 +9,6 @@ tags:
 image:
   src: hero.jpg
   alt: "Golden thread trailing across dark fabric"
-  dark: true
 ---
 
 {{< poem >}}

@@ -4,7 +4,7 @@
 
 module github.com/tadg-paul/hugo-theme-first-folio/exampleSite
 
-go 1.25.8
+go 1.26.2
 
 require github.com/tadg-paul/hugo-theme-first-folio v0.0.0
 

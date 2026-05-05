@@ -26,7 +26,6 @@
 
     {{- /* Determine background image URL */ -}}
     {{- $bgImageUrl := "" -}}
-    {{- $imageDark := false -}}
     {{- if $isGallery -}}
       {{- /* Gallery page - use featured_image or first resource image */ -}}
       {{- if .Params.featured_image -}}
@@ -44,7 +43,6 @@
     {{- else if .Params.image -}}
       {{- if .Params.image.src -}}
         {{- $bgImageUrl = printf "%s%s" .RelPermalink (.Params.image.card_src | default .Params.image.src) -}}
-        {{- $imageDark = .Params.image.dark | default false -}}
       {{- end -}}
     {{- end -}}
 
@@ -55,17 +53,10 @@
     {{- $imageClass := "" -}}
     {{- if $bgImageUrl -}}
       {{- $imageClass = "has-image" -}}
-      {{- if $imageDark -}}
-        {{- $imageClass = printf "%s image-dark" $imageClass -}}
-      {{- else -}}
-        {{- $imageClass = printf "%s image-light" $imageClass -}}
-      {{- end -}}
     {{- end -}}
 
     {{- /* Resolve card opacity and blur: cardImage > bgImage fallback */ -}}
-    {{- $cardOpacityLight := $.Site.Params.cardImage.opacity | default ($.Site.Params.bgImage.opacity | default 0.15) -}}
-    {{- $cardOpacityDark := $.Site.Params.cardImage.opacityDark | default $cardOpacityLight -}}
-    {{- $bgOpacity := cond $imageDark $cardOpacityDark $cardOpacityLight -}}
+    {{- $bgOpacity := $.Site.Params.cardImage.opacity | default ($.Site.Params.bgImage.opacity | default 0.8) -}}
     {{- $bgBlur := $.Site.Params.cardImage.blur | default ($.Site.Params.bgImage.blur | default "5px") -}}
 
     <article{{ if .Params.contentLang }} lang="{{ .Params.contentLang }}"{{ end }} class="masonry-item masonry-{{ $section }} {{ $imageClass }}">

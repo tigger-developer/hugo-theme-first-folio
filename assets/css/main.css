@@ -38,9 +38,10 @@
   
   /* Font families — override these to change site fonts */
   --font-body: 'Asap', sans-serif;
-  --font-heading: "Special Elite", monospace;
+  --font-heading: 'Asap', sans-serif;
   --font-mono: 'IosevkaCustom', 'Courier New', monospace;
   --font-caption: 'IosevkaQuasiProportional Condensed', sans-serif;
+  --font-site-title: "Special Elite", monospace;
   --font-nav: "Special Elite", monospace;
   --font-accent: 'IosevkaCustom Extended', monospace;
   --font-serif: "IM Fell Extended", serif;

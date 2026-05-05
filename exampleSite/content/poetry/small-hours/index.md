@@ -9,7 +9,6 @@ hideDate: true
 image:
   src: hero.jpg
   alt: "Empty city streets at 3am"
-  dark: true
 ---
 
 {{< poem >}}

@@ -12,7 +12,6 @@ layout: hero
 image:
   src: hero.jpg
   alt: "Creative tools and typography arranged as a flat lay"
-  dark: true
 signpost:
   text: "THEME DOCUMENTATION"
   url: "https://github.com/tadg-paul/hugo-theme-first-folio"

@@ -9,7 +9,6 @@ tags:
 image:
   src: hero.jpg
   alt: "Shakshuka in a cast iron skillet"
-  dark: true
 ---
 
 One pan, twenty minutes, and the satisfaction of cracking eggs into a bubbling sauce.

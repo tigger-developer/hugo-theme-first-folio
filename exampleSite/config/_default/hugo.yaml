@@ -23,10 +23,6 @@ imaging:
 
 
 params:
-  bgImage:
-    opacity: 0.2
-    blur: 5px
-
   readMore:
     type: icon
     value: icons/chevron-right-duo-thick.svg

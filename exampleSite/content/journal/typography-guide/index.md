@@ -9,7 +9,7 @@ tags:
 layout: banner
 image:
   src: banner.jpg
-  alt: "Colourful figures leaping with joy"
+  alt: "Colourful paint splatter typography on black background"
   caption: "Jump for Joy"
 toc: true
 tldr: "A comprehensive demonstration of how standard Markdown elements render in this theme."

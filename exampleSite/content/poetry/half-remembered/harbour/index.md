@@ -9,7 +9,6 @@ tags:
 image:
   src: hero.jpg
   alt: "Misty harbour at dawn with fishing boats"
-  dark: false
 ---
 
 {{< poem >}}

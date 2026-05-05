@@ -1,0 +1,58 @@
+{{/* ABOUTME: Generates banner wash CSS custom properties from config and page frontmatter */}}
+{{/* ABOUTME: Controls the tinted overlay behind banner title text for legibility */}}
+
+{{/* Resolution chain: page image.banner_wash > site params.banner.wash > defaults */}}
+{{- $siteBannerWash := .Site.Params.banner.wash | default dict -}}
+{{- $pageBannerWash := .Params.image.banner_wash | default dict -}}
+
+{{- $opacity := 0.3 -}}
+{{- with $pageBannerWash.opacity -}}{{- $opacity = . -}}
+{{- else -}}{{- with $siteBannerWash.opacity -}}{{- $opacity = . -}}{{- end -}}
+{{- end -}}
+
+{{- $blur := "2px" -}}
+{{- with $pageBannerWash.blur -}}{{- $blur = . -}}
+{{- else -}}{{- with $siteBannerWash.blur -}}{{- $blur = . -}}{{- end -}}
+{{- end -}}
+
+{{/* Gradient edges: left top right bottom — how far the fade extends inward.
+     Banner needs heavier fade at all edges to avoid box-in-box appearance. */}}
+{{- $gradientRaw := "20% 30% 20% 30%" -}}
+{{- with $pageBannerWash.gradient -}}{{- $gradientRaw = . -}}
+{{- else -}}{{- with $siteBannerWash.gradient -}}{{- $gradientRaw = . -}}{{- end -}}
+{{- end -}}
+
+{{/* Parse gradient string into four values */}}
+{{- $parts := split $gradientRaw " " -}}
+{{- $gradLeft := "20%" -}}
+{{- $gradTop := "30%" -}}
+{{- $gradRight := "20%" -}}
+{{- $gradBottom := "30%" -}}
+{{- if eq (len $parts) 4 -}}
+  {{- $gradLeft = index $parts 0 -}}
+  {{- $gradTop = index $parts 1 -}}
+  {{- $gradRight = index $parts 2 -}}
+  {{- $gradBottom = index $parts 3 -}}
+{{- else if eq (len $parts) 2 -}}
+  {{- $gradLeft = index $parts 0 -}}
+  {{- $gradTop = index $parts 1 -}}
+  {{- $gradRight = index $parts 0 -}}
+  {{- $gradBottom = index $parts 1 -}}
+{{- else if eq (len $parts) 1 -}}
+  {{- $gradLeft = index $parts 0 -}}
+  {{- $gradTop = index $parts 0 -}}
+  {{- $gradRight = index $parts 0 -}}
+  {{- $gradBottom = index $parts 0 -}}
+{{- end -}}
+
+<style>
+  :root {
+    --banner-wash-opacity: {{ $opacity }};
+    --banner-wash-blur: {{ $blur }};
+    --banner-wash-grad-left: {{ $gradLeft }};
+    --banner-wash-grad-top: {{ $gradTop }};
+    --banner-wash-grad-right: {{ $gradRight }};
+    --banner-wash-grad-bottom: {{ $gradBottom }};
+    --banner-wash-color: 0, 0, 0;
+  }
+</style>

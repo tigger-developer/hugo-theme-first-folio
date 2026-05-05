@@ -6,10 +6,10 @@ tags:
   - poetry
   - maps
 pin: 80
+carousel: 1
 image:
   src: hero.jpg
   alt: "Antique map with compass rose"
-  dark: true
 ---
 
 {{< poem >}}

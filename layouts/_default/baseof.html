@@ -34,9 +34,6 @@
         {{- end -}}
         {{- if eq $effectiveLayout "background" -}}
         {{- $forceTheme := "dark" -}}
-        {{- if and (isset .Params.image "dark") (not .Params.image.dark) -}}
-          {{- $forceTheme = "light" -}}
-        {{- end -}}
         <script>
         (function() {
           var theme = '{{ $forceTheme }}';

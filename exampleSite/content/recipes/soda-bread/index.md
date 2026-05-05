@@ -9,8 +9,7 @@ tags:
 pin: 1
 image:
   src: hero.jpg
-  alt: "Freshly baked Irish soda bread"
-  dark: true
+  alt: "Freshly baked Irish soda bread on a wooden board"
 ---
 
 Soda bread is the simplest bread you can make. Four ingredients, no yeast, no kneading, no proving. From bowl to table in under an hour.

@@ -7,8 +7,7 @@ tags:
   - shortcodes
 image:
   src: hero.jpg
-  alt: "Dawn light through a bedroom window"
-  dark: false
+  alt: "Kettle on a kitchen counter at dawn, blackbird silhouette outside"
 ---
 
 A demonstration of the poem shortcode, which preserves line breaks exactly as written.

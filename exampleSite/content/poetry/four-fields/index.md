@@ -8,7 +8,6 @@ tags:
 image:
   src: hero.jpg
   alt: "Four green fields stretching to a misty horizon"
-  dark: false
 ---
 
 {{< poem >}}

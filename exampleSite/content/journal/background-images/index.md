@@ -11,8 +11,6 @@ image:
   src: background.jpg
   alt: "An atmospheric scene"
   caption: "Be Careful What You Wish For"
-  opacity: 0.15
-  blur: 8px
 ---
 
 The `background` layout places the article's image behind the content, with configurable opacity and blur. The text remains fully readable while the image provides atmosphere.

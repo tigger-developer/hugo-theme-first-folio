@@ -7,8 +7,7 @@ tags:
   - memory
 image:
   src: hero.jpg
-  alt: "Frosted glass windowpane with condensation"
-  dark: false
+  alt: "Cracked glass with light refracting through it"
 ---
 
 {{< poem >}}

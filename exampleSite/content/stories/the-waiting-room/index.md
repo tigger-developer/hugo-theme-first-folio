@@ -5,10 +5,10 @@ description: "A short dramatic scene demonstrating the dialogue and direction sh
 tags:
   - drama
   - shortcodes
+carousel: 3
 image:
   src: hero.jpg
-  alt: "Empty hospital waiting room"
-  dark: false
+  alt: "Empty hospital waiting room, fluorescent lighting"
 ---
 
 A short scene demonstrating the theme's theatrical shortcodes.

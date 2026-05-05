@@ -117,6 +117,9 @@
 	<!-- Issue #51: Configurable wash for background-layout legibility -->
 	{{- partial "wash-config.html" . -}}
 
+	<!-- Issue #52: Configurable wash for banner title legibility -->
+	{{- partial "banner-wash-config.html" . -}}
+
 	<!-- Custom CSS style get applied last -->
 	{{- if isset .Site.Params "customcss" }}
 		{{ range .Site.Params.customCSS }}

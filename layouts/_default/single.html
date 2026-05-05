@@ -8,7 +8,7 @@
       {{- warnf "page '%s': video frontmatter is not supported in banner layout; use hero or columns instead" .Page.File.Path -}}
     {{- end -}}
     {{ if .Params.image.src }}
-    <div class="post-banner soft-edge{{ if .Params.image.dark }} dark-banner{{ end }}">
+    <div class="post-banner soft-edge dark-banner">
       <img src="{{ .RelPermalink }}{{ .Params.image.src }}" alt="{{ if .Params.image.alt }}{{ .Params.image.alt }}{{ else if .Params.image.caption }}{{ .Params.image.caption }}{{ else }}{{ .Title }}{{ end }}" class="soft-edge"{{ if or .Params.image.blur .Params.image.opacity .Params.image.position }} style="{{ with .Params.image.blur }}filter: blur({{ . }});{{ end }}{{ with .Params.image.opacity }} opacity: {{ . }};{{ end }}{{ with .Params.image.position }} object-position: {{ . }};{{ end }}"{{ end }}>
       <div class="banner-overlay soft-edge"></div>
       <div class="title">
@@ -142,17 +142,10 @@
       {{- warnf "page '%s': video frontmatter is not supported in background layout; use hero or columns instead" .Page.File.Path -}}
     {{- end -}}
     {{ if ne $effectiveLayout "hero" }}{{ partial "signpost.html" . }}{{ end }}
-    {{- /* Issue #51: Background layout = dark context by default.
-         Only image.dark: false explicitly opts into light context.
-         Opacity: defaults to opacityDark (dark context); uses opacity only for light-bg. */ -}}
-    {{- $isDarkBg := true -}}
-    {{- if and (isset .Params.image "dark") (not .Params.image.dark) -}}
-      {{- $isDarkBg = false -}}
-    {{- end -}}
-    {{- $bgOpacity := cond $isDarkBg (.Site.Params.bgImage.opacityDark | default .Site.Params.bgImage.opacity) .Site.Params.bgImage.opacity -}}
+    {{- /* Issue #52: Always dark context. Opacity darkens the image for text readability. */ -}}
+    {{- $bgOpacity := .Site.Params.bgImage.opacity | default 0.7 -}}
     {{- with .Params.image.opacity -}}{{- $bgOpacity = . -}}{{- end -}}
-    {{- $bgClass := cond $isDarkBg "dark-bg" "light-bg" -}}
-    <div class="post-container{{ if and .Params.image (eq $effectiveLayout "background") }} {{ $bgClass }}{{ end }} soft-edge"{{ if and .Params.image (eq $effectiveLayout "background") }} style="--background-image: url('{{ .RelPermalink }}{{ .Params.image.src }}'); --image-opacity: {{ $bgOpacity }}; --image-blur: {{ if .Params.image.blur }}{{ .Params.image.blur }}{{ else }}{{ .Site.Params.bgImage.blur }}{{ end }}{{ with .Params.image.size }}; --background-size: {{ . }}{{ end }};"{{ end }}>
+    <div class="post-container{{ if and .Params.image (eq $effectiveLayout "background") }} dark-bg{{ end }} soft-edge"{{ if and .Params.image (eq $effectiveLayout "background") }} style="--background-image: url('{{ .RelPermalink }}{{ .Params.image.src }}'); --image-opacity: {{ $bgOpacity }}; --image-blur: {{ if .Params.image.blur }}{{ .Params.image.blur }}{{ else }}{{ .Site.Params.bgImage.blur | default "2px" }}{{ end }}{{ with .Params.image.size }}; --background-size: {{ . }}{{ end }};"{{ end }}>
       <div class="post-content">
         <div class="title">
           <h1 class="title">{{ partial "display-title.html" . }}</h1>

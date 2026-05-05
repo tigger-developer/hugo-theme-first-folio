@@ -36,11 +36,7 @@
     {{- end -}}
   {{- end -}}
 
-  {{- /* Issue #51: Resolve opacity — opacityDark when image.dark: true, else opacity */ -}}
-  {{- $imageDark := .Params.image.dark | default false -}}
-  {{- $listOpacityLight := $.Site.Params.bgImage.opacity | default 0.15 -}}
-  {{- $listOpacityDark := $.Site.Params.bgImage.opacityDark | default $listOpacityLight -}}
-  {{- $listOpacity := cond $imageDark $listOpacityDark $listOpacityLight -}}
+  {{- $listOpacity := $.Site.Params.bgImage.opacity | default 0.8 -}}
 
   <li class="list-view-item{{ if $bgImageUrl }} has-image{{ end }}">
     {{- if $bgImageUrl -}}

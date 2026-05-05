@@ -10,7 +10,6 @@ hideDate: true
 image:
   src: hero.jpg
   alt: "Miso-glazed aubergine with sesame seeds"
-  dark: true
 ---
 
 This is the dish that makes people reconsider aubergine. The miso glaze caramelises into something deeply savoury and slightly sweet.

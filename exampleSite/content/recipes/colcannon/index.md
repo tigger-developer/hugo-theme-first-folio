@@ -7,10 +7,10 @@ tags:
   - comfort-food
   - vegetarian
 pin: 50
+carousel: 2
 image:
   src: hero.jpg
   alt: "Traditional Irish colcannon with melting butter"
-  dark: true
 ---
 
 Colcannon is the sort of food that doesn't photograph well but tastes like home. It's mashed potatoes with greens, and that's {{< colorbold "all it needs to be" >}}.

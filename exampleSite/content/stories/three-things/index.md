@@ -8,7 +8,6 @@ tags:
 image:
   src: hero.jpg
   alt: "Old brass compass on a weathered map"
-  dark: true
 ---
 
 I bought a compass at a market in Galway. It was brass, heavy, and completely unreliable. It pointed south-southwest regardless of where you stood. I kept it anyway.

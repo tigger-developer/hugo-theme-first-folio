@@ -9,7 +9,7 @@ tags:
 author: "Theme Demo"
 layout: hero
 image:
-  src: hero.png
+  src: hero.jpg
   alt: "Navigation features demo"
 toc: "Navigation features"
 signpost:
