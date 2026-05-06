@@ -129,6 +129,9 @@
 	<!-- Issue #52: Configurable wash for card titles and descriptions -->
 	{{- partial "card-wash-config.html" . -}}
 
+	<!-- Configurable heading prefix characters -->
+	{{- partial "heading-prefix-config.html" . -}}
+
 	<!-- Custom CSS style get applied last -->
 	{{- if isset .Site.Params "customcss" }}
 		{{ range .Site.Params.customCSS }}

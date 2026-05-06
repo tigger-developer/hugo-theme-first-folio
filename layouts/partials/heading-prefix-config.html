@@ -1,0 +1,29 @@
+{{/* ABOUTME: Generates CSS custom properties for heading prefix characters */}}
+{{/* ABOUTME: Controls the decorative marks before headings in all contexts */}}
+
+{{- $hp := .Site.Params.headingPrefix | default dict -}}
+
+<style>
+  :root {
+    /* Card, carousel, list, gallery title prefix */
+    --prefix-card: '{{ $hp.card | default "›" }} ';
+    --prefix-carousel: '{{ $hp.carousel | default "›" }} ';
+    --prefix-list: '{{ $hp.list | default "" }}';
+    --prefix-page: '{{ $hp.page | default "›" }} ';
+
+    /* Article body heading prefixes */
+    --prefix-h1: '{{ $hp.h1 | default "›" }} ';
+    --prefix-h2: '{{ $hp.h2 | default "»" }} ';
+    --prefix-h3: '{{ $hp.h3 | default "›" }} ';
+    --prefix-h4: '{{ $hp.h4 | default "›" }} ';
+    --prefix-h5: '{{ $hp.h5 | default "›" }} ';
+    --prefix-h6: '{{ $hp.h6 | default "›" }} ';
+
+    /* Article body: content headings shift down one level */
+    --prefix-article-h2: '{{ $hp.h1 | default "›" }} ';
+    --prefix-article-h3: '{{ $hp.h2 | default "»" }} ';
+    --prefix-article-h4: '{{ $hp.h3 | default "›" }} ';
+    --prefix-article-h5: '{{ $hp.h4 | default "›" }} ';
+    --prefix-article-h6: '{{ $hp.h5 | default "›" }} ';
+  }
+</style>

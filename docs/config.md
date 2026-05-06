@@ -217,6 +217,31 @@ All values above are the defaults. Per-section overrides are supported via `grid
 
 ---
 
+## Cloudflare Stream (video)
+
+Configuration for video embedding via Cloudflare Stream.
+
+```yaml
+params:
+  cloudflareStream:
+    customerCode: "abc123"         # Cloudflare customer subdomain code (required)
+    videoDefaults:
+      autoplay: false
+      muted: true
+      loop: false
+      controls: true
+      preload: false
+      primarycolor: "#ff6600"
+      letterboxcolor: "#000000"
+```
+
+| Key | Description |
+|-----|-------------|
+| `customerCode` | The customer subdomain code from Cloudflare Stream. Required for video playback. |
+| `videoDefaults.*` | Site-wide defaults for video player behaviour. Per-page frontmatter overrides these. See [Frontmatter Reference](frontmatter.md#video) for all fields. |
+
+---
+
 ## Social links
 
 Displayed as icons in the footer.

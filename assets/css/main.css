@@ -47,19 +47,9 @@
   --font-serif: "IM Fell Extended", serif;
   --font-gaeilge: 'Iosevka Gaeilge', Helvetica, sans-serif;
 
-  /* Heading prefix characters — override to change the decorative marks before headings */
-  --prefix-h1: '# ';
-  --prefix-h2: '## ';
-  --prefix-h3: '### ';
-  --prefix-h4: '#### ';
-  --prefix-h5: '##### ';
-  --prefix-h6: '###### ';
-  /* Article body: content headings shift down one level (h2 displays as h1 prefix, etc.) */
-  --prefix-article-h2: '# ';
-  --prefix-article-h3: '## ';
-  --prefix-article-h4: '### ';
-  --prefix-article-h5: '#### ';
-  --prefix-article-h6: '##### ';
+  /* Heading prefix characters — set via heading-prefix-config.html partial from hugo.yaml */
+  /* Defaults: # for cards/carousel/page, ## for h2, ### for h3, etc. */
+  /* See params.headingPrefix in docs/config.md */
 
   /* Spacing and sizing */
   --content-max-width: 40rem;
@@ -391,8 +381,8 @@ h4::before { color: var(--color-primary); content: var(--prefix-h4); font-weight
 h5::before { color: var(--color-primary); content: var(--prefix-h5); font-weight: 700; font-synthesis: weight; }
 h6::before { color: var(--color-primary); content: var(--prefix-h6); font-weight: 700; font-synthesis: weight; }
 
-/* Article body: no hash on title (h1), shift content headings down one level */
-.title h1::before { content: none; }
+/* Article page title prefix — configurable via headingPrefix.page */
+.title h1::before { content: var(--prefix-page); }
 article .body h2::before { content: var(--prefix-article-h2); }
 article .body h3::before { content: var(--prefix-article-h3); }
 article .body h4::before { content: var(--prefix-article-h4); }

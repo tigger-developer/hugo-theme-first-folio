@@ -128,18 +128,44 @@ image:
 
 ## Video
 
-Embeds a video (Cloudflare Stream or iframe) in hero or columns layouts.
+Embeds a Cloudflare Stream video in hero or columns layouts.
 
 ```yaml
 video:
   id: "abc123def456"
   caption: "Video description"
+  autoplay: true
+  muted: true
+  loop: true
+  controls: true
+  preload: true
+  starttime: 5
+  primarycolor: "#ff6600"
+  letterboxcolor: "#000000"
+  poster_image: "thumbnail.jpg"
+  width: 1920
+  height: 1080
 ```
 
-| Field | Description |
-|-------|-------------|
-| `id` | Cloudflare Stream video ID, or a full URL for iframe embed. |
-| `caption` | Caption displayed below the video. |
+| Field | Default | Description |
+|-------|---------|-------------|
+| `id` | - | Cloudflare Stream video ID. Required. |
+| `caption` | - | Caption displayed below the video. |
+| `autoplay` | site default | Auto-play on page load. |
+| `muted` | site default | Start with audio muted. |
+| `loop` | site default | Loop playback continuously. |
+| `controls` | site default | Show player controls. |
+| `preload` | site default | Preload video data before play. |
+| `starttime` | - | Start playback at this time (seconds). |
+| `primarycolor` | - | Player UI primary colour. |
+| `letterboxcolor` | - | Colour of letterbox bars. |
+| `poster_image` | - | Custom poster/thumbnail. Can be a filename (relative to page bundle), a site-root path (`/images/poster.jpg`), or a full URL. |
+| `width` | auto-detected | Video width for aspect ratio calculation. |
+| `height` | auto-detected | Video height for aspect ratio calculation. |
+
+**Precedence:** Page frontmatter overrides site-level `cloudflareStream.videoDefaults`. Omitting a field falls through to the site default; omitting both lets Cloudflare apply its own default.
+
+**Aspect ratio** is resolved in order: frontmatter `width`/`height` > `data/video-inventory.yaml` > Cloudflare Stream API (requires env vars) > 16:9 CSS fallback.
 
 **Note:** Video is not supported in `banner` or `background` layouts. Hugo emits a warning if attempted.
 

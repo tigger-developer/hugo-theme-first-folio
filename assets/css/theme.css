@@ -2355,16 +2355,13 @@ main.list .content {
   -webkit-mask-composite: source-in;
 }
 
+.carousel-card h2::before {
+  content: var(--prefix-carousel);
+}
+
 .carousel-card h2.no-prefix::before,
 .carousel-card .masonry-content h2.no-prefix::before {
   content: none;
-}
-
-.carousel-card h2 .heading-prefix {
-  color: var(--color-primary);
-  font-weight: 800;
-  font-family: var(--font-accent);
-  margin-right: 0.3em;
 }
 
 .carousel-card h2 a {
@@ -2931,6 +2928,7 @@ main.list .masonry-grid {
    so it retains standard markdown markers from main.css.
    ============================================ */
 
+/* Masonry card title prefix */
 .masonry-content h1::before,
 .masonry-content h2::before,
 .masonry-content h3::before,
@@ -2949,7 +2947,6 @@ main.list .masonry-grid {
 .grid-item-content h4::before,
 .grid-item-content h5::before,
 .grid-item-content h6::before,
-.list-view-title::before,
 .poem-content h1::before,
 .poem-content h2::before,
 .poem-content h3::before,
@@ -2961,7 +2958,18 @@ main.list .masonry-grid {
 .poem-item h2::before,
 .poem-item h3::before,
 .section-nav h4::before {
-  content: '#';
+  content: var(--prefix-card);
+  color: var(--color-primary);
+  font-family: var(--font-accent);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2em;
+  margin-right: 0.2em;
+}
+
+/* List view title prefix */
+.list-view-title::before {
+  content: var(--prefix-list);
   color: var(--color-primary);
   font-family: var(--font-accent);
   font-weight: 400;
