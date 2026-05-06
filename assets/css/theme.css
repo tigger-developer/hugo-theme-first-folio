@@ -1972,9 +1972,7 @@ main.list .content {
 }
 
 
-.carousel-card.has-image h2::after {
-  background: rgba(0, 0, 0, 0.2);
-}
+
 
 
 /* Masonry excerpt */
@@ -2343,8 +2341,9 @@ main.list .content {
   position: absolute;
   inset: -0.5rem -1rem;
   z-index: -1;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, var(--carousel-title-wash-opacity, 0.2));
+  backdrop-filter: blur(var(--carousel-title-wash-blur, 6px));
+  -webkit-backdrop-filter: blur(var(--carousel-title-wash-blur, 6px));
   mask-image:
     linear-gradient(to bottom, transparent, black 25%, black 75%, transparent),
     linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -2389,7 +2388,7 @@ main.list .content {
   gap: 1rem;
   margin: auto -2rem -1.5rem;
   padding: 3rem 2rem 1.5rem;
-  background: var(--card-scrim);
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--carousel-desc-wash-opacity, 0.5)) var(--carousel-desc-wash-gradient, 75%));
   border-radius: 0 0 8px 8px;
 }
 

@@ -1,13 +1,17 @@
-{{/* ABOUTME: Generates CSS custom properties for masonry card and gallery card wash */}}
-{{/* ABOUTME: Controls title wash and description scrim on cards */}}
+{{/* ABOUTME: Generates CSS custom properties for card, gallery card, and carousel wash */}}
+{{/* ABOUTME: Controls title wash and description scrim on all card types */}}
 
-{{/* Regular cards: cardImage.title.wash and cardImage.description.wash */}}
+{{/* Regular cards */}}
 {{- $cardTitle := .Site.Params.cardImage.title.wash | default dict -}}
 {{- $cardDesc := .Site.Params.cardImage.description.wash | default dict -}}
 
-{{/* Gallery cards: cardGalleryImage.title.wash and cardGalleryImage.description.wash */}}
+{{/* Gallery cards */}}
 {{- $galTitle := .Site.Params.cardGalleryImage.title.wash | default dict -}}
 {{- $galDesc := .Site.Params.cardGalleryImage.description.wash | default dict -}}
+
+{{/* Carousel */}}
+{{- $carouselTitle := .Site.Params.carousel.title.wash | default dict -}}
+{{- $carouselDesc := .Site.Params.carousel.description.wash | default dict -}}
 
 <style>
   :root {
@@ -28,5 +32,13 @@
     /* Gallery card description wash (bottom-up scrim) */
     --card-gallery-desc-wash-opacity: {{ $galDesc.opacity | default 0.5 }};
     --card-gallery-desc-wash-gradient: {{ $galDesc.gradient | default "75%" }};
+
+    /* Carousel title wash */
+    --carousel-title-wash-opacity: {{ $carouselTitle.opacity | default 0.2 }};
+    --carousel-title-wash-blur: {{ $carouselTitle.blur | default "6px" }};
+
+    /* Carousel description wash (bottom-up scrim) */
+    --carousel-desc-wash-opacity: {{ $carouselDesc.opacity | default 0.5 }};
+    --carousel-desc-wash-gradient: {{ $carouselDesc.gradient | default "75%" }};
   }
 </style>

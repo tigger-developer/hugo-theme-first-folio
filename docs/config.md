@@ -282,6 +282,11 @@ params:
     - gallery
     - poetry
 
+  # Hugo's content model requires sections to be branch bundles
+  # (directories with _index.md and child pages). A leaf bundle
+  # (a single index.md with no children) is not a section — Hugo
+  # does not expose it as one, so the homepage grid cannot find it.
+
   customCSS:                                # additional CSS files
     - css/custom.css
     - css/fonts.css
