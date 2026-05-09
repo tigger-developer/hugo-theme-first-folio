@@ -17,28 +17,40 @@
   :root {
     /* Regular card title wash */
     --card-title-wash-opacity: {{ $cardTitle.opacity | default 0.2 }};
-    --card-title-wash-blur: {{ $cardTitle.blur | default "6px" }};
-    --card-title-wash-grad-v: {{ $cardTitle.gradientV | default "20%" }};
-    --card-title-wash-grad-h: {{ $cardTitle.gradientH | default "8%" }};
+    --card-title-wash-blur: {{ $cardTitle.blur | default "5px" }};
+    --card-title-wash-grad-v: {{ $cardTitle.gradientV | default "10%" }};
+    --card-title-wash-grad-h: {{ $cardTitle.gradientH | default "10%" }};
 
-    /* Regular card description wash (bottom-up scrim) */
-    --card-desc-wash-opacity: {{ $cardDesc.opacity | default 0.5 }};
-    --card-desc-wash-gradient: {{ $cardDesc.gradient | default "75%" }};
+    /* Regular card description wash (bottom-up scrim)
+       coverage: how much of the card is shaded from the bottom up
+       gradient: what % of the shaded area is fade (0% = hard edge, 100% = all fade) */
+    --card-desc-wash-opacity: {{ $cardDesc.opacity | default 0.35 }};
+    --card-desc-wash-coverage: {{ $cardDesc.coverage | default "50%" }};
+    --card-desc-wash-gradient: {{ $cardDesc.gradient | default "50%" }};
+    --card-desc-wash-blur: {{ $cardDesc.blur | default "5px" }};
 
     /* Gallery card title wash */
-    --card-gallery-title-wash-opacity: {{ $galTitle.opacity | default 0.35 }};
+    --card-gallery-title-wash-opacity: {{ $galTitle.opacity | default 0.2 }};
     --card-gallery-title-wash-blur: {{ $galTitle.blur | default "5px" }};
+    --card-gallery-title-wash-grad-v: {{ $galTitle.gradientV | default "10%" }};
+    --card-gallery-title-wash-grad-h: {{ $galTitle.gradientH | default "10%" }};
 
     /* Gallery card description wash (bottom-up scrim) */
-    --card-gallery-desc-wash-opacity: {{ $galDesc.opacity | default 0.5 }};
-    --card-gallery-desc-wash-gradient: {{ $galDesc.gradient | default "75%" }};
+    --card-gallery-desc-wash-opacity: {{ $galDesc.opacity | default 0.35 }};
+    --card-gallery-desc-wash-coverage: {{ $galDesc.coverage | default "20%" }};
+    --card-gallery-desc-wash-gradient: {{ $galDesc.gradient | default "50%" }};
+    --card-gallery-desc-wash-blur: {{ $galDesc.blur | default "5px" }};
 
     /* Carousel title wash */
     --carousel-title-wash-opacity: {{ $carouselTitle.opacity | default 0.2 }};
-    --carousel-title-wash-blur: {{ $carouselTitle.blur | default "6px" }};
+    --carousel-title-wash-blur: {{ $carouselTitle.blur | default "5px" }};
+    --carousel-title-wash-grad-v: {{ $carouselTitle.gradientV | default "10%" }};
+    --carousel-title-wash-grad-h: {{ $carouselTitle.gradientH | default "10%" }};
 
     /* Carousel description wash (bottom-up scrim) */
-    --carousel-desc-wash-opacity: {{ $carouselDesc.opacity | default 0.5 }};
-    --carousel-desc-wash-gradient: {{ $carouselDesc.gradient | default "75%" }};
+    --carousel-desc-wash-opacity: {{ $carouselDesc.opacity | default 0.3 }};
+    --carousel-desc-wash-coverage: {{ $carouselDesc.coverage | default "35%" }};
+    --carousel-desc-wash-gradient: {{ $carouselDesc.gradient | default "50%" }};
+    --carousel-desc-wash-blur: {{ $carouselDesc.blur | default "5px" }};
   }
 </style>

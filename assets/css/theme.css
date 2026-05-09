@@ -47,7 +47,7 @@
   --caption-shadow: rgba(0, 0, 0, 0.6);
   --overlay-text: #ffffff;
   --overlay-text-shadow: rgba(0, 0, 0, 0.9);
-  --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.5)) var(--card-desc-wash-gradient, 75%));
+  --card-scrim: linear-gradient(to top, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.35)) 0%, transparent var(--card-desc-wash-coverage, 50%));
   --card-excerpt-color: #ccc;
   --frosted-glass-bg: rgba(0, 0, 0, 0.35);
   --frosted-glass-text: #ffffff;
@@ -83,7 +83,7 @@
     --caption-shadow: rgba(0, 0, 0, 0.8);
     --overlay-text: #1a1a1a;
     --overlay-text-shadow: rgba(255, 255, 255, 0.9);
-    --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.5)) var(--card-desc-wash-gradient, 75%));
+    --card-scrim: linear-gradient(to top, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.35)) 0%, transparent var(--card-desc-wash-coverage, 50%));
     --card-excerpt-color: #ccc;
     --frosted-glass-bg: rgba(0, 0, 0, 0.4);
     --frosted-glass-text: #ffffff;
@@ -116,7 +116,7 @@
   --overlay-strong: rgba(255, 255, 255, 0.4);
   --caption-bg: rgba(0, 0, 0, 0.55);
   --caption-text: rgba(180, 180, 180, 1);
-  --card-scrim: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.5)) var(--card-desc-wash-gradient, 75%));
+  --card-scrim: linear-gradient(to top, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.35)) 0%, transparent var(--card-desc-wash-coverage, 50%));
   --card-excerpt-color: #ccc;
   --frosted-glass-bg: rgba(0, 0, 0, 0.4);
   --frosted-glass-text: #ffffff;
@@ -1846,6 +1846,63 @@ main.list .content {
 
 
 
+
+
+/* Progressive blur layer — fades via mask, sits between image and scrim */
+.masonry-blur-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--card-desc-wash-coverage, 50%);
+  backdrop-filter: blur(var(--card-desc-wash-blur, 5px));
+  -webkit-backdrop-filter: blur(var(--card-desc-wash-blur, 5px));
+  mask-image: linear-gradient(to top, black 0%, black calc(100% - var(--card-desc-wash-gradient, 50%)), transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, black calc(100% - var(--card-desc-wash-gradient, 50%)), transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Gallery cards use their own blur variables */
+.masonry-item:has(.masonry-overlay) .masonry-blur-layer {
+  height: var(--card-gallery-desc-wash-coverage, 20%);
+  backdrop-filter: blur(var(--card-gallery-desc-wash-blur, 5px));
+  -webkit-backdrop-filter: blur(var(--card-gallery-desc-wash-blur, 5px));
+  mask-image: linear-gradient(to top, black 0%, black calc(100% - var(--card-gallery-desc-wash-gradient, 50%)), transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, black calc(100% - var(--card-gallery-desc-wash-gradient, 50%)), transparent 100%);
+}
+
+/* Carousel blur layer */
+.carousel-blur-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--carousel-desc-wash-coverage, 35%);
+  backdrop-filter: blur(var(--carousel-desc-wash-blur, 5px));
+  -webkit-backdrop-filter: blur(var(--carousel-desc-wash-blur, 5px));
+  mask-image: linear-gradient(to top, black 0%, black calc(100% - var(--carousel-desc-wash-gradient, 50%)), transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, black calc(100% - var(--carousel-desc-wash-gradient, 50%)), transparent 100%);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+}
+
+/* Bottom-up description scrim — coverage is % of the card height */
+.masonry-item.has-image::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--card-desc-wash-coverage, 50%);
+  background: linear-gradient(to top, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.35)) 0%, rgba(0, 0, 0, var(--card-desc-wash-opacity, 0.35)) calc(100% - var(--card-desc-wash-gradient, 50%)), transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+}
+
 /* Background image layer - separate div for proper stacking */
 .masonry-bg {
   position: absolute;
@@ -1856,7 +1913,7 @@ main.list .content {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
 }
 
@@ -1869,7 +1926,7 @@ main.list .content {
 /* Masonry content wrapper */
 .masonry-content {
   position: relative;
-  z-index: 1;
+  z-index: 4;
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -1902,14 +1959,14 @@ main.list .content {
   inset: -0.3rem -0.6rem;
   z-index: -1;
   background: rgba(0, 0, 0, var(--card-title-wash-opacity, 0.2));
-  backdrop-filter: blur(var(--card-title-wash-blur, 6px));
-  -webkit-backdrop-filter: blur(var(--card-title-wash-blur, 6px));
+  backdrop-filter: blur(var(--card-title-wash-blur, 5px));
+  -webkit-backdrop-filter: blur(var(--card-title-wash-blur, 5px));
   mask-image:
-    linear-gradient(to bottom, transparent, black var(--card-title-wash-grad-v, 20%), black calc(100% - var(--card-title-wash-grad-v, 20%)), transparent),
-    linear-gradient(to right, transparent, black var(--card-title-wash-grad-h, 8%), black calc(100% - var(--card-title-wash-grad-h, 8%)), transparent);
+    linear-gradient(to bottom, transparent, black var(--card-title-wash-grad-v, 10%), black calc(100% - var(--card-title-wash-grad-v, 10%)), transparent),
+    linear-gradient(to right, transparent, black var(--card-title-wash-grad-h, 10%), black calc(100% - var(--card-title-wash-grad-h, 10%)), transparent);
   -webkit-mask-image:
-    linear-gradient(to bottom, transparent, black var(--card-title-wash-grad-v, 20%), black calc(100% - var(--card-title-wash-grad-v, 20%)), transparent),
-    linear-gradient(to right, transparent, black var(--card-title-wash-grad-h, 8%), black calc(100% - var(--card-title-wash-grad-h, 8%)), transparent);
+    linear-gradient(to bottom, transparent, black var(--card-title-wash-grad-v, 10%), black calc(100% - var(--card-title-wash-grad-v, 10%)), transparent),
+    linear-gradient(to right, transparent, black var(--card-title-wash-grad-h, 10%), black calc(100% - var(--card-title-wash-grad-h, 10%)), transparent);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
 }
@@ -2028,6 +2085,20 @@ main.list .content {
   transform: scale(1.05);
 }
 
+/* Bottom-up description scrim for gallery cards */
+.masonry-item:has(.masonry-overlay)::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--card-gallery-desc-wash-coverage, 20%);
+  background: linear-gradient(to top, rgba(0, 0, 0, var(--card-gallery-desc-wash-opacity, 0.35)) 0%, rgba(0, 0, 0, var(--card-gallery-desc-wash-opacity, 0.35)) calc(100% - var(--card-gallery-desc-wash-gradient, 50%)), transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+}
+
 /* Text overlay container - spans full card for positioning */
 .masonry-item:has(.masonry-overlay) .masonry-overlay {
   position: absolute;
@@ -2040,6 +2111,7 @@ main.list .content {
   flex-direction: column;
   justify-content: space-between;
   pointer-events: none;
+  z-index: 4;
 }
 
 /* Top group: title and description */
@@ -2051,23 +2123,39 @@ main.list .content {
   pointer-events: auto;
 }
 
-/* Issue #52: Gallery card title — frosted pill (image is full opacity, needs stronger wash) */
+/* Gallery card title — same ::after wash pattern as regular cards and carousel */
 .masonry-item:has(.masonry-overlay) .masonry-overlay h3 {
   font-size: 1rem;
   margin-bottom: 0;
   padding: 0.25rem 0.5rem;
-  background: rgba(0, 0, 0, var(--card-gallery-title-wash-opacity, 0.35));
-  backdrop-filter: blur(var(--card-gallery-title-wash-blur, 5px));
-  -webkit-backdrop-filter: blur(var(--card-gallery-title-wash-blur, 5px));
-  border-radius: 4px;
   display: inline-block;
   width: auto;
   color: #ffffff;
+  position: relative;
 }
 
 .masonry-item:has(.masonry-overlay) .masonry-overlay h3 a {
+  position: relative;
   text-shadow: none;
   color: #ffffff;
+}
+
+.masonry-item:has(.masonry-overlay) .masonry-overlay h3 a::after {
+  content: "";
+  position: absolute;
+  inset: -0.3rem -0.6rem;
+  z-index: -1;
+  background: rgba(0, 0, 0, var(--card-gallery-title-wash-opacity, 0.2));
+  backdrop-filter: blur(var(--card-gallery-title-wash-blur, 5px));
+  -webkit-backdrop-filter: blur(var(--card-gallery-title-wash-blur, 5px));
+  mask-image:
+    linear-gradient(to bottom, transparent, black var(--card-gallery-title-wash-grad-v, 10%), black calc(100% - var(--card-gallery-title-wash-grad-v, 10%)), transparent),
+    linear-gradient(to right, transparent, black var(--card-gallery-title-wash-grad-h, 10%), black calc(100% - var(--card-gallery-title-wash-grad-h, 10%)), transparent);
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent, black var(--card-gallery-title-wash-grad-v, 10%), black calc(100% - var(--card-gallery-title-wash-grad-v, 10%)), transparent),
+    linear-gradient(to right, transparent, black var(--card-gallery-title-wash-grad-h, 10%), black calc(100% - var(--card-gallery-title-wash-grad-h, 10%)), transparent);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
 }
 
 .masonry-item:has(.masonry-overlay) .masonry-overlay h3::before {
@@ -2098,7 +2186,6 @@ main.list .content {
   pointer-events: auto;
   gap: 0.5rem;
   padding: 2rem 1rem 1rem;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--card-gallery-desc-wash-opacity, 0.5)) var(--card-gallery-desc-wash-gradient, 75%));
   border-radius: 0 0 8px 8px;
 }
 
@@ -2230,7 +2317,8 @@ main.list .content {
   margin-bottom: -2rem;
   margin-left: -2rem;
   padding: 3rem 2rem 1.25rem;
-  background: var(--card-scrim);
+  position: relative;
+  z-index: 4;
 }
 
 .masonry-card-bottom .masonry-excerpt {
@@ -2342,14 +2430,14 @@ main.list .content {
   inset: -0.5rem -1rem;
   z-index: -1;
   background: rgba(0, 0, 0, var(--carousel-title-wash-opacity, 0.2));
-  backdrop-filter: blur(var(--carousel-title-wash-blur, 6px));
-  -webkit-backdrop-filter: blur(var(--carousel-title-wash-blur, 6px));
+  backdrop-filter: blur(var(--carousel-title-wash-blur, 5px));
+  -webkit-backdrop-filter: blur(var(--carousel-title-wash-blur, 5px));
   mask-image:
-    linear-gradient(to bottom, transparent, black 25%, black 75%, transparent),
-    linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    linear-gradient(to bottom, transparent, black var(--carousel-title-wash-grad-v, 10%), black calc(100% - var(--carousel-title-wash-grad-v, 10%)), transparent),
+    linear-gradient(to right, transparent, black var(--carousel-title-wash-grad-h, 10%), black calc(100% - var(--carousel-title-wash-grad-h, 10%)), transparent);
   -webkit-mask-image:
-    linear-gradient(to bottom, transparent, black 25%, black 75%, transparent),
-    linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    linear-gradient(to bottom, transparent, black var(--carousel-title-wash-grad-v, 10%), black calc(100% - var(--carousel-title-wash-grad-v, 10%)), transparent),
+    linear-gradient(to right, transparent, black var(--carousel-title-wash-grad-h, 10%), black calc(100% - var(--carousel-title-wash-grad-h, 10%)), transparent);
   mask-composite: intersect;
   -webkit-mask-composite: source-in;
 }
@@ -2380,7 +2468,20 @@ main.list .content {
   color: var(--frosted-glass-text);
 }
 
-/* Bottom gradient scrim for excerpt legibility */
+/* Bottom-up description scrim for carousel */
+.carousel-card::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--carousel-desc-wash-coverage, 35%);
+  background: linear-gradient(to top, rgba(0, 0, 0, var(--carousel-desc-wash-opacity, 0.3)) 0%, rgba(0, 0, 0, var(--carousel-desc-wash-opacity, 0.3)) calc(100% - var(--carousel-desc-wash-gradient, 50%)), transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+  border-radius: 0 0 8px 8px;
+}
+
 .carousel-card-bottom {
   display: flex;
   align-items: flex-end;
@@ -2388,7 +2489,6 @@ main.list .content {
   gap: 1rem;
   margin: auto -2rem -1.5rem;
   padding: 3rem 2rem 1.5rem;
-  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.15) 40%, rgba(0, 0, 0, var(--carousel-desc-wash-opacity, 0.5)) var(--carousel-desc-wash-gradient, 75%));
   border-radius: 0 0 8px 8px;
 }
 
@@ -2415,7 +2515,7 @@ main.list .content {
   top: 0;
   bottom: 0;
   width: 3rem;
-  z-index: 2;
+  z-index: 5;
   background: transparent;
   border: none;
   color: var(--text-color);
@@ -2544,7 +2644,7 @@ main.list .masonry-grid {
 .sidebar-layout {
   display: grid;
   grid-template-columns: var(--sidebar-width, 15rem) 1fr;
-  gap: 2rem;
+  gap: var(--grid-gap, 1.5rem);
   /* Issue #91: Remove margin-top to align sidebar with content on section pages */
   margin-top: 0;
 }
@@ -2555,6 +2655,8 @@ main.list .masonry-grid {
   position: sticky;
   top: 2rem;
   align-self: start;
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid var(--color-secondary);
   border-radius: 8px;
   padding: 1rem;

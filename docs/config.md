@@ -121,6 +121,14 @@ params:
     bgImage:
       opacity: 0.9       # carousel image opacity
       blur: 0px          # carousel image blur
+    title:
+      wash:
+        opacity: 0.2     # title wash tint strength
+        blur: 6px        # title wash backdrop blur
+    description:
+      wash:
+        opacity: 0.5     # bottom scrim max opacity
+        gradient: "75%"  # where scrim reaches full opacity (% from top of scrim)
 ```
 
 | Key | Default | Description |
@@ -128,6 +136,10 @@ params:
 | `interval` | `6` | Seconds between automatic slide transitions. |
 | `bgImage.opacity` | `0.9` | Image opacity on carousel cards. Falls back to `bgImage.opacity` if not set. |
 | `bgImage.blur` | `0px` | Image blur on carousel cards. Falls back to `bgImage.blur` if not set. |
+| `title.wash.opacity` | `0.2` | Tint strength behind the carousel title. |
+| `title.wash.blur` | `6px` | Backdrop blur behind the carousel title. |
+| `description.wash.opacity` | `0.5` | Maximum opacity of the bottom scrim gradient. |
+| `description.wash.gradient` | `75%` | Where the scrim reaches full opacity (% from top of scrim area). |
 
 ---
 
@@ -173,6 +185,29 @@ params:
 | `gradient` | `20% 30% 20% 30%` | Edge fade distances. Banner uses heavier fade than background-layout to avoid a visible box over the image. |
 
 Per-page override: set `image.banner_wash` in frontmatter (see [Frontmatter Reference](frontmatter.md)).
+
+---
+
+## Heading prefixes
+
+Controls the decorative character or symbol displayed before headings in each context.
+
+```yaml
+params:
+  headingPrefix:
+    card: "›"            # masonry card titles
+    carousel: "›"        # carousel titles
+    list: ""             # list view titles (empty = no prefix)
+    page: "›"            # article page title
+    h1: "›"              # in-content h1
+    h2: "»"              # in-content h2
+    h3: "›"              # in-content h3
+    h4: "›"              # in-content h4
+    h5: "›"              # in-content h5
+    h6: "›"              # in-content h6
+```
+
+Set any value to `""` to remove the prefix. Supports any text, Unicode character, or emoji.
 
 ---
 

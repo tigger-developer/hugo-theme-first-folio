@@ -1,5 +1,7 @@
 ---
 title: "The Wanderer's Notebook"
+cascade:
+  author: Taḋg Paul
 sidebar:
   title: "Explore"
   content: |

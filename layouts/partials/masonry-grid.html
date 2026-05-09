@@ -57,12 +57,13 @@
 
     {{- /* Resolve card opacity and blur: cardImage > bgImage fallback */ -}}
     {{- $bgOpacity := $.Site.Params.cardImage.opacity | default ($.Site.Params.bgImage.opacity | default 0.9) -}}
-    {{- $bgBlur := $.Site.Params.cardImage.blur | default ($.Site.Params.bgImage.blur | default "3px") -}}
+    {{- $bgBlur := $.Site.Params.cardImage.blur | default ($.Site.Params.bgImage.blur | default "2px") -}}
 
     <article{{ if .Params.contentLang }} lang="{{ .Params.contentLang }}"{{ end }} class="masonry-item masonry-{{ $section }} {{ $imageClass }}">
       {{- /* Background image layer - separate div for proper stacking */ -}}
       {{- if $bgImageUrl -}}
       <div class="masonry-bg" style="background-image: url('{{ $bgImageUrl }}'); opacity: {{ $bgOpacity }}; filter: blur({{ $bgBlur }}); background-position: {{ $bgPosition }};"></div>
+      <div class="masonry-blur-layer"></div>
       {{- end -}}
 
       {{- /* Gallery cards: image-dominant with text overlay */ -}}

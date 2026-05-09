@@ -57,6 +57,11 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ $themeStyle.Permalink }}" />
 	{{- end }}
 
+	{{- with resources.Get "css/lightbox.css" }}
+	{{ $lightboxStyle := . | fingerprint }}
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ $lightboxStyle.Permalink }}" />
+	{{- end }}
+
 	{{- $ambienceDefault := .Site.Params.ambience.default | default "auto" -}}
 	{{- $ambienceToggle := .Site.Params.ambience.toggle | default true -}}
 	{{- $needsDarkCSS := or (ne $ambienceDefault "light") $ambienceToggle -}}
@@ -139,6 +144,10 @@
 		<link rel="stylesheet" type="text/css" href="{{ $customstyle.Permalink }}">
 		{{ end }}
 	{{- end -}}
+	<!-- Core theme JS -->
+	<script src="{{ absURL "js/burger-menu.js" }}"></script>
+	<script src="{{ absURL "js/lightbox.js" }}"></script>
+
 	{{- range .Site.Params.customJS }}
 	{{- if or (hasPrefix . "http://") (hasPrefix . "https://") }}
 	<script src="{{ . }}"></script>

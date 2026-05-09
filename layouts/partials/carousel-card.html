@@ -66,6 +66,7 @@
              style="--carousel-bg-opacity: {{ $carouselOpacity }}; --masonry-bg-opacity: {{ $masonryOpacity }};">
       {{- if $bgImageUrl -}}
       <div class="masonry-bg" style="background-image: url('{{ $bgImageUrl }}'); background-position: {{ $bgPosition }};"></div>
+      <div class="carousel-blur-layer"></div>
       {{- end -}}
 
       <div class="masonry-content">
