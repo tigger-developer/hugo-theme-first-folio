@@ -1956,7 +1956,7 @@ main.list .content {
 .masonry-item.has-image .masonry-content:not(.masonry-overlay) h3 a::after {
   content: "";
   position: absolute;
-  inset: -0.3rem -0.6rem;
+  inset: -0.1rem -0.4rem;
   z-index: -1;
   background: rgba(0, 0, 0, var(--card-title-wash-opacity, 0.2));
   backdrop-filter: blur(var(--card-title-wash-blur, 5px));
@@ -2444,6 +2444,8 @@ main.list .content {
 
 .carousel-card h2::before {
   content: var(--prefix-carousel);
+  color: #ed3949ff;
+  margin-right: 0.2em;
 }
 
 .carousel-card h2.no-prefix::before,
@@ -3060,7 +3062,7 @@ main.list .masonry-grid {
 .poem-item h3::before,
 .section-nav h4::before {
   content: var(--prefix-card);
-  color: var(--color-primary);
+  color: #ed3949ff;
   font-family: var(--font-accent);
   font-weight: 400;
   font-style: normal;
