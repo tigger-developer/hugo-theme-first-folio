@@ -6,6 +6,6 @@ module github.com/tadg-paul/hugo-theme-first-folio/exampleSite
 
 go 1.26.2
 
-require github.com/tadg-paul/hugo-theme-first-folio v0.0.0
+require github.com/tadg-paul/hugo-theme-first-folio v1.0.4
 
 replace github.com/tadg-paul/hugo-theme-first-folio => ../
