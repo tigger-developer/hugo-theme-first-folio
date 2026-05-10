@@ -73,5 +73,19 @@
     }
   });
 
-  startTimer();
+  // Don't start ticking while the prerelease gate is hiding the page
+  if (document.documentElement.classList.contains("prerelease-gating")) {
+    var obs = new MutationObserver(function () {
+      if (!document.documentElement.classList.contains("prerelease-gating")) {
+        obs.disconnect();
+        startTimer();
+      }
+    });
+    obs.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  } else {
+    startTimer();
+  }
 })();

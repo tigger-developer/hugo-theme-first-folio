@@ -4,16 +4,21 @@
  See LICENSE file in the repository root.
 -->
 
-{{- /* ABOUTME: Pre-release gate — prompts for a passphrase before rendering the page. */ -}}
-{{- /* ABOUTME: Configured via params.prereleaseKey in hugo.yaml. No-op when absent. */ -}}
+{{- /* ABOUTME: Pre-release gate — hides the page until the user enters the passphrase. */ -}}
+{{- /* ABOUTME: Configured via params.prereleaseKey in hugo.yaml. Emits nothing when absent. */ -}}
 
 {{- with .Site.Params.prereleaseKey -}}
 {{- $hash := crypto.SHA256 . -}}
-<style>.prerelease-gate { display: none; }</style>
+<style>html.prerelease-gating { opacity: 0 !important; pointer-events: none; }</style>
 <script>
+document.documentElement.classList.add('prerelease-gating');
 (function() {
   var storedHash = '{{ $hash }}';
   var storageKey = 'prerelease-auth';
+
+  function showPage() {
+    document.documentElement.classList.remove('prerelease-gating');
+  }
 
   function hashInput(input) {
     var encoder = new TextEncoder();
@@ -25,22 +30,13 @@
     });
   }
 
-  function showPage() {
-    if (document.body) {
-      document.body.classList.remove('prerelease-gate');
-    } else {
-      document.addEventListener('DOMContentLoaded', function() {
-        document.body.classList.remove('prerelease-gate');
-      });
-    }
-  }
-
-  function authenticate() {
-    var passphrase = prompt('This site is not yet public. Enter passphrase:');
-    if (!passphrase) {
-      window.location = 'about:blank';
+  function gate() {
+    if (localStorage.getItem(storageKey) === 'true') {
+      showPage();
       return;
     }
+    var passphrase = prompt('This site is not yet public. Enter passphrase:');
+    if (!passphrase) { window.location = 'about:blank'; return; }
     hashInput(passphrase).then(function(inputHash) {
       if (inputHash === storedHash) {
         localStorage.setItem(storageKey, 'true');
@@ -51,10 +47,10 @@
     });
   }
 
-  if (localStorage.getItem(storageKey) === 'true') {
-    showPage();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', gate);
   } else {
-    authenticate();
+    gate();
   }
 })();
 </script>

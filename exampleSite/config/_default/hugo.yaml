@@ -23,6 +23,7 @@ imaging:
 
 
 params:
+  # prereleaseKey: testpass
   # Colour mode
   ambience:
     default: dark         # auto | light | dark

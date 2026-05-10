@@ -7,7 +7,7 @@
 
 <html lang="{{ .Site.Language.Lang }}">
     {{- partial "header.html" . -}}
-    <body class="{{ if eq .Params.layout "columns" }}columns-page{{ end }}{{ if .Site.Params.prereleaseKey }} prerelease-gate{{ end }}" data-grid-config='{{ .Scratch.Get "gridConfig" }}'>
+    <body class="{{ if eq .Params.layout "columns" }}columns-page{{ end }}" data-grid-config='{{ .Scratch.Get "gridConfig" }}'>
         <div class="content">
         {{- partial "head.html" . -}}
         {{- block "main" . }}{{- end }}
