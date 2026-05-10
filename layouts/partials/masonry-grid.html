@@ -107,14 +107,15 @@
           <div class="masonry-card-top">
             <h3><a href="{{ .RelPermalink }}" class="header-interactive">{{ .Title }}</a></h3>
             {{- $showDate := and .Date (not .Params.hideDate) -}}
-            {{- $showAuthor := and .Params.author (not .Params.hideAuthor) -}}
+            {{- $cardShowsAuthor := $.Site.Params.cardImage.showAuthor }}{{- if eq $cardShowsAuthor nil -}}{{- $cardShowsAuthor = true -}}{{- end -}}
+            {{- $showAuthor := and .Params.author (not .Params.hideAuthor) $cardShowsAuthor -}}
             {{- if or $showSection $showDate $showAuthor -}}
             <p class="masonry-meta">
-              {{- if $showAuthor -}}
-              <span class="masonry-author">{{ .Params.author }}</span>
-              {{- end -}}
               {{- if $showSection -}}
               <span class="masonry-section">{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize }}{{ end }}</span>
+              {{- end -}}
+              {{- if $showAuthor -}}
+              <span class="masonry-author">{{ .Params.author }}</span>
               {{- end -}}
               {{- /* Issue #79: Support hideDate frontmatter */ -}}
               {{- if $showDate -}}

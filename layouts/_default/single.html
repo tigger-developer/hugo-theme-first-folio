@@ -145,7 +145,9 @@
     {{- /* Issue #52: Always dark context. Opacity darkens the image for text readability. */ -}}
     {{- $bgOpacity := .Site.Params.bgImage.opacity | default 0.7 -}}
     {{- with .Params.image.opacity -}}{{- $bgOpacity = . -}}{{- end -}}
-    <div class="post-container{{ if and .Params.image (eq $effectiveLayout "background") }} dark-bg{{ end }} soft-edge"{{ if and .Params.image (eq $effectiveLayout "background") }} style="--background-image: url('{{ .RelPermalink }}{{ .Params.image.src }}'); --image-opacity: {{ $bgOpacity }}; --image-blur: {{ if .Params.image.blur }}{{ .Params.image.blur }}{{ else }}{{ .Site.Params.bgImage.blur | default "2px" }}{{ end }}{{ with .Params.image.size }}; --background-size: {{ . }}{{ end }};"{{ end }}>
+    {{- $isBg := and .Params.image (eq $effectiveLayout "background") -}}
+    <div class="post-wrapper{{ if $isBg }} dark-bg{{ end }}"{{ if $isBg }} style="--background-image: url('{{ .RelPermalink }}{{ .Params.image.src }}'); --image-opacity: {{ $bgOpacity }}; --image-blur: {{ if .Params.image.blur }}{{ .Params.image.blur }}{{ else }}{{ .Site.Params.bgImage.blur | default "2px" }}{{ end }}{{ with .Params.image.size }}; --background-size: {{ . }}{{ end }};"{{ end }}>
+    <div class="post-container{{ if $isBg }} dark-bg{{ end }} soft-edge">
       <div class="post-content">
         <div class="title">
           <h1 class="title">{{ partial "display-title.html" . }}</h1>

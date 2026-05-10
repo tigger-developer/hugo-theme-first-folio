@@ -1,7 +1,7 @@
 ---
 title: "The Wanderer's Notebook"
 cascade:
-  author: Taḋg Paul
+  author: Christopher Robin
 sidebar:
   title: "Explore"
   content: |
@@ -11,5 +11,3 @@ sidebar:
 
     Built with [Hugo](https://gohugo.io) and the [First Folio theme](https://github.com/tadg-paul/hugo-theme-first-folio).
 ---
-
-This is a demonstration site showcasing the features of the First Folio Hugo theme. Browse the sections to see masonry grids, galleries, sidebars, shortcodes, and more.

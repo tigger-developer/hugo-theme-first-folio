@@ -9,9 +9,14 @@ tags:
 toc: "Shortcodes"
 author: "Theme Demo"
 layout: hero
+carousel: true
 image:
   src: hero.jpg
   alt: "Creative tools and typography arranged as a flat lay"
+  card_src: sample-a.jpg    # used on masonry cards instead
+  card_position: center center # crop position on cards
+  carousel_src: gallery-2.jpg     # used on carousel cards instead
+  carousel_position: center  # crop position on carousel  
 signpost:
   text: "THEME DOCUMENTATION"
   url: "https://github.com/tadg-paul/hugo-theme-first-folio"
@@ -102,12 +107,6 @@ Stage directions for dramatic scripts:
 {{< direction >}}The cafe. Morning light through rain-streaked windows. ELENA and MARCUS at a corner table.{{< /direction >}}
 
 {{< direction >}}Pause. The sound of rain intensifies.{{< /direction >}}
-
-## Ga (Irish language)
-
-Inline Irish language text with the correct font and `lang="ga"` attribute:
-
-He greeted her with {{< ga >}}Dia duit, a chara{{< /ga >}} as she entered.
 
 ## Gallery
 

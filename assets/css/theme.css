@@ -43,7 +43,6 @@
   --overlay-strong: rgba(0, 0, 0, 0.4);
   --caption-bg: rgba(0, 0, 0, 0.3);
   --caption-text: rgba(255, 255, 255, 1);
-  --content-max-width: 80rem;
   --caption-shadow: rgba(0, 0, 0, 0.6);
   --overlay-text: #ffffff;
   --overlay-text-shadow: rgba(0, 0, 0, 0.9);
@@ -481,10 +480,11 @@ body,
 .post-banner h1::before,
 .post-banner h2::before,
 .post-banner h3::before,
+.post-banner .title h1::before,
 .post-hero h1::before,
 .post-hero h2::before,
 .post-hero h3::before {
-  color: var(--color-primary) !important;
+  color: #ed3949ff !important;
   text-shadow:
     0 1px 2px var(--overlay-text-shadow),
     0 0 6px var(--overlay-text-shadow) !important;
@@ -559,8 +559,7 @@ body,
 
 /* Issue #51: Wash — soft tint behind each content panel for legibility.
    Uses ::before pseudo-element so the mask fades the tint layer only,
-   not the text content. Backdrop blur on the element itself (unmasked).
-   All values from wash-config.html (params.wash / image.wash frontmatter). */
+   not the text content. All values from wash-config.html. */
 article:has(.post-container.dark-bg) .post-content,
 article:has(.post-container.dark-bg) .article-sidebar,
 article:has(.post-container.dark-bg) .toc-mobile,
@@ -1236,6 +1235,11 @@ nav > a.nav-item.nav-item-active:hover {
   animation: none !important;
 }
 
+/* Issue #52: image cards keep their light title colour on hover */
+.masonry-item.has-image .masonry-content h3 a.header-interactive:hover {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
 /* Issue #61: List view titles - underline only on hover, no background */
 /* Issue #75: No wavy underline, use border-bottom on hover instead */
 .list-view-title a.header-interactive {
@@ -1634,6 +1638,11 @@ main.list .content {
   margin-block-start: 0;
 }
 
+/* Section page title prefix override */
+.page-header h1::before {
+  content: var(--prefix-section-title);
+}
+
 .page-description {
   text-align: left;
   margin-top: 0.5rem;
@@ -1948,12 +1957,13 @@ main.list .content {
   }
 }
 
-/* Frosted glass behind masonry card title — same pattern as carousel/banner */
-.masonry-item.has-image .masonry-content:not(.masonry-overlay) h3 a {
+/* Wash behind masonry card title — covers prefix + title together */
+.masonry-item.has-image .masonry-content:not(.masonry-overlay) h3 {
   position: relative;
+  display: inline-block;
 }
 
-.masonry-item.has-image .masonry-content:not(.masonry-overlay) h3 a::after {
+.masonry-item.has-image .masonry-content:not(.masonry-overlay) h3::after {
   content: "";
   position: absolute;
   inset: -0.1rem -0.4rem;
@@ -1994,30 +2004,55 @@ main.list .content {
 
 .masonry-section {
   color: var(--color-secondary);
-  font-weight: 500;
+  font-weight: 600;
   text-transform: capitalize;
 }
 
 .masonry-author {
   color: var(--text-muted);
-  font-style: italic;
+  font-weight: 600;
+  opacity: 0.85;
 }
 
 .masonry-date {
   color: var(--color-text-meta, #999);
+  font-style: italic;
 }
 
-/* Issue #22: Frosted glass for meta text on cards with background images */
-/* Excludes gallery/overlay cards which have their own frosted glass treatment */
+/* Cards with images have dark backing — meta text needs to be light */
+.masonry-item.has-image .masonry-author,
+.masonry-item.has-image .masonry-date {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Issue #22: Frosted glass per-pill for meta items on image cards */
+/* Excludes gallery/overlay cards which have their own treatment */
 .masonry-item.has-image .masonry-content:not(.masonry-overlay) .masonry-meta {
-  padding: 0.2rem 0.5rem;
+  display: inline-flex;
+  gap: 0.25rem 0;
+  color: var(--frosted-glass-text);
+}
+
+.masonry-item.has-image .masonry-content:not(.masonry-overlay) .masonry-meta > span {
+  padding: 0.1rem 0.4rem;
   background: var(--frosted-glass-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 0.25rem;
-  display: inline-flex;
-  gap: 0.5rem;
-  color: var(--frosted-glass-text);
+  text-shadow: none;
+}
+
+/* Section pill: inverted — accent colour background, dark text, no shadow */
+.masonry-item.has-image .masonry-content:not(.masonry-overlay) .masonry-meta > .masonry-section {
+  background: var(--color-secondary);
+  color: #1a1a1a;
+  text-shadow: none;
+}
+
+/* Date pill: outlined ghost — transparent bg, subtle border */
+.masonry-item.has-image .masonry-content:not(.masonry-overlay) .masonry-meta > .masonry-date {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* Image-aware title text on carousel cards — frosted glass is semi-transparent
@@ -2036,7 +2071,7 @@ main.list .content {
 .masonry-excerpt {
   color: var(--text-secondary);
   font-family: var(--font-body);
-  font-weight: 400;
+  font-weight: 600;
   font-stretch: 115%;
   font-size: 0.9rem;
   line-height: 1.5;
@@ -2127,7 +2162,7 @@ main.list .content {
 .masonry-item:has(.masonry-overlay) .masonry-overlay h3 {
   font-size: 1rem;
   margin-bottom: 0;
-  padding: 0.25rem 0.5rem;
+  padding: 0;
   display: inline-block;
   width: auto;
   color: #ffffff;
@@ -2140,10 +2175,10 @@ main.list .content {
   color: #ffffff;
 }
 
-.masonry-item:has(.masonry-overlay) .masonry-overlay h3 a::after {
+.masonry-item:has(.masonry-overlay) .masonry-overlay h3::after {
   content: "";
   position: absolute;
-  inset: -0.3rem -0.6rem;
+  inset: -0.1rem -0.4rem;
   z-index: -1;
   background: rgba(0, 0, 0, var(--card-gallery-title-wash-opacity, 0.2));
   backdrop-filter: blur(var(--card-gallery-title-wash-blur, 5px));
@@ -2171,7 +2206,7 @@ main.list .content {
   display: inline-block;
   max-width: 100%;
   color: #ffffff;
-  text-shadow: 0 0 2px #000;
+  text-shadow: 1px 2px 3px rgba(127, 127, 127, 0.6);
 }
 
 /* Footer positioned at bottom, spans full width with bottom-up scrim */
@@ -2297,26 +2332,26 @@ main.list .content {
   flex-shrink: 0;
 }
 
-.masonry-card-top .masonry-meta {
+.masonry-card-top .masonry-meta,
+.carousel-card-top .masonry-meta,
+.masonry-item.has-image .masonry-card-top .masonry-meta,
+.masonry-item.has-image .carousel-card-top .masonry-meta {
   display: inline-flex;
   align-self: flex-start;
   margin: 0;
   font-size: 0.7rem;
-  padding: 0.1rem 0.35rem;
+  padding: 0;
   gap: 0.35rem;
 }
 
-/* Masonry card bottom — excerpt + chevron with gradient scrim */
+/* Masonry card bottom — excerpt + chevron */
 .masonry-card-bottom {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  margin-top: auto;
-  margin-right: -2rem;
-  margin-bottom: -2rem;
-  margin-left: -2rem;
-  padding: 3rem 2rem 1.25rem;
+  margin: auto -1.25rem -1.25rem -1.25rem;
+  padding: 2rem 1rem 1rem;
   position: relative;
   z-index: 4;
 }
@@ -2325,7 +2360,7 @@ main.list .content {
   margin-bottom: 0;
   flex: 1;
   color: var(--card-excerpt-color);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 2px 3px rgba(127, 127, 127, 0.6);
 }
 
 .masonry-card-bottom .read-more-container {
@@ -2399,6 +2434,13 @@ main.list .content {
   flex-grow: 0;
 }
 
+/* Desktop only: space between carousel title and meta strip */
+@media screen and (min-width: 48em) {
+  .carousel-card-top {
+    gap: 0.5rem;
+  }
+}
+
 .carousel-card .masonry-meta {
   display: inline-flex;
   align-self: flex-start;
@@ -2412,8 +2454,8 @@ main.list .content {
   font-size: 1.6rem;
   font-weight: 800;
   font-stretch: 115%;
-  line-height: 1.3;
-  padding: 0.4rem 0.6rem;
+  line-height: 1.1;
+  padding: 0;
   position: relative;
   display: inline-block;
 }
@@ -2427,7 +2469,7 @@ main.list .content {
 .carousel-card h2::after {
   content: "";
   position: absolute;
-  inset: -0.5rem -1rem;
+  inset: -0.1rem -0.4rem;
   z-index: -1;
   background: rgba(0, 0, 0, var(--carousel-title-wash-opacity, 0.2));
   backdrop-filter: blur(var(--carousel-title-wash-blur, 5px));
@@ -2442,10 +2484,9 @@ main.list .content {
   -webkit-mask-composite: source-in;
 }
 
-.carousel-card h2::before {
+.carousel-card .masonry-content h2::before {
   content: var(--prefix-carousel);
   color: #ed3949ff;
-  margin-right: 0.2em;
 }
 
 .carousel-card h2.no-prefix::before,
@@ -2453,21 +2494,39 @@ main.list .content {
   content: none;
 }
 
-.carousel-card h2 a {
+.carousel-card h2 a,
+.carousel-card h2 a:hover,
+.carousel-card h2 a.header-interactive:hover {
   text-decoration: none;
-  color: #ffffff;
+  color: #ffffff !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* Frosted glass on meta strip in carousel */
+/* Frosted glass per-pill on carousel meta items */
 .carousel-card .masonry-meta {
   margin-bottom: 0;
-  padding: 0.2rem 0.5rem;
+  gap: 0.25rem 0;
+  color: var(--frosted-glass-text);
+}
+
+.carousel-card .masonry-meta > span {
+  padding: 0.1rem 0.4rem;
   background: var(--frosted-glass-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-radius: 4px;
-  color: var(--frosted-glass-text);
+  text-shadow: none;
+}
+
+.carousel-card .masonry-meta > .masonry-section {
+  background: var(--color-secondary);
+  color: #1a1a1a;
+  text-shadow: none;
+}
+
+.carousel-card .masonry-meta > .masonry-date {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* Bottom-up description scrim for carousel */
@@ -2489,8 +2548,8 @@ main.list .content {
   align-items: flex-end;
   justify-content: space-between;
   gap: 1rem;
-  margin: auto -2rem -1.5rem;
-  padding: 3rem 2rem 1.5rem;
+  margin: auto -1.25rem -1.25rem -1.25rem;
+  padding: 2rem 1rem 1rem;
   border-radius: 0 0 8px 8px;
 }
 
@@ -2499,7 +2558,7 @@ main.list .content {
   flex: 1;
   font-size: 1rem;
   color: var(--card-excerpt-color);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  text-shadow: 1px 2px 3px rgba(127, 127, 127, 0.6);
 }
 
 
@@ -2520,7 +2579,7 @@ main.list .content {
   z-index: 5;
   background: transparent;
   border: none;
-  color: var(--text-color);
+  color: rgba(255, 255, 255, 0.65);
   font-size: 2.5rem;
   cursor: pointer;
   opacity: 0;
@@ -2585,6 +2644,7 @@ main.list .content {
   /* Revert to masonry card content layout */
   .carousel-card .masonry-content {
     height: auto;
+    min-height: 12rem;
     padding: 1.25rem;
   }
 
@@ -2600,27 +2660,32 @@ main.list .content {
     display: none;
   }
 
+  /* Carousel meta strip should match regular masonry card style on mobile */
+  .carousel-card .masonry-meta {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.35rem;
+    gap: 0.35rem;
+  }
+
   .carousel-card.has-image .masonry-content h2 a {
     color: #ffffff;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
   }
 
-  /* Revert bottom to masonry card style — no gradient scrim */
+  /* Revert bottom to masonry card style — match .masonry-card-bottom exactly */
   .carousel-card-bottom {
     flex-direction: row;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 0.5rem;
-    margin: 0;
-    padding: 0.5rem 0 0;
+    align-items: flex-end;
+    margin: auto -1.25rem -1.25rem -1.25rem;
+    padding: 2rem 1rem 1rem;
     background: none;
     border-radius: 0;
   }
 
   .carousel-card-bottom .masonry-excerpt {
     font-size: 0.9rem;
-    color: var(--text-secondary);
-    text-shadow: none;
+    color: var(--card-excerpt-color);
+    text-shadow: 1px 2px 3px rgba(127, 127, 127, 0.6);
   }
 
   .carousel-card .read-more-icon {
@@ -3063,22 +3128,12 @@ main.list .masonry-grid {
 .section-nav h4::before {
   content: var(--prefix-card);
   color: #ed3949ff;
-  font-family: var(--font-accent);
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.2em;
-  margin-right: 0.2em;
 }
 
 /* List view title prefix */
 .list-view-title::before {
   content: var(--prefix-list);
   color: var(--color-primary);
-  font-family: var(--font-accent);
-  font-weight: 400;
-  font-style: normal;
-  font-size: 1.2em;
-  margin-right: 0.2em;
 }
 
 /* ============================================

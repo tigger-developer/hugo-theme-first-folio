@@ -55,6 +55,7 @@ params:
   cardImage:
     opacity: 0.9         # card image opacity
     blur: 3px            # card image blur
+    showAuthor: true     # show author name on card meta (default true)
     title:
       wash:
         opacity: 0.2     # title wash tint strength
@@ -118,6 +119,7 @@ Controls the rotating hero card above the masonry grid on the homepage.
 params:
   carousel:
     interval: 6          # seconds between slides
+    showAuthor: true     # show author name on carousel meta (default true)
     bgImage:
       opacity: 0.9       # carousel image opacity
       blur: 0px          # carousel image blur
@@ -195,17 +197,22 @@ Controls the decorative character or symbol displayed before headings in each co
 ```yaml
 params:
   headingPrefix:
-    card: "›"            # masonry card titles
-    carousel: "›"        # carousel titles
-    list: ""             # list view titles (empty = no prefix)
-    page: "›"            # article page title
-    h1: "›"              # in-content h1
-    h2: "»"              # in-content h2
-    h3: "›"              # in-content h3
-    h4: "›"              # in-content h4
-    h5: "›"              # in-content h5
-    h6: "›"              # in-content h6
+    card: "#"            # masonry card titles (homepage and section grids)
+    carousel: "#"        # carousel card titles (rotating hero)
+    list: ""             # list-view items (sections with list_style: list)
+    page: "#"            # article page title (banner, hero, etc.)
+    sectionTitle: "#"    # section page titles (e.g. /blog/, /poetry/)
+    h1: "#"              # body content: heading level 1
+    h2: "##"             # body content: heading level 2
+    h3: "###"            # body content: heading level 3
+    h4: "####"           # body content: heading level 4
+    h5: "#####"          # body content: heading level 5
+    h6: "######"         # body content: heading level 6
 ```
+
+Set any value to `""` to suppress the prefix entirely (no glyph, no spacing).
+
+`h1`–`h6` apply to headings *inside* article body content (`# Heading 1`, `## Heading 2`, etc. in markdown). `page` applies to the article's main title (the page header).
 
 Set any value to `""` to remove the prefix. Supports any text, Unicode character, or emoji.
 
@@ -225,6 +232,19 @@ params:
 
 ---
 
+## Content width
+
+Controls the maximum width of the page content (article body, masonry grid, etc.).
+
+```yaml
+params:
+  contentMaxWidth: 80rem      # caps article body and grid width
+```
+
+Default `80rem`. Affects both article pages and section list pages uniformly.
+
+---
+
 ## Grid configuration
 
 Controls the responsive masonry grid layout.
@@ -232,7 +252,6 @@ Controls the responsive masonry grid layout.
 ```yaml
 params:
   grid:
-    contentMaxWidth: 100rem
     sidebarWidth: 15rem
     sidebarWidthNarrow: 12rem
     gap: 1.5rem
@@ -247,6 +266,8 @@ params:
       lg: 4
       xl: 5
 ```
+
+(`grid.contentMaxWidth` is still accepted as a legacy alias for `contentMaxWidth`.)
 
 All values above are the defaults. Per-section overrides are supported via `grid` in section `_index.md` frontmatter.
 

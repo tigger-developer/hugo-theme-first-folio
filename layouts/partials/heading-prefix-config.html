@@ -1,29 +1,67 @@
 {{/* ABOUTME: Generates CSS custom properties for heading prefix characters */}}
-{{/* ABOUTME: Controls the decorative marks before headings in all contexts */}}
+{{/* ABOUTME: Controls the decorative marks before titles and headings in all contexts.
+     - card         prefix on masonry card titles
+     - carousel     prefix on carousel card titles
+     - list         prefix on list-view items (sections with list_style: list)
+     - page         prefix on the article page title (banner, hero, etc.)
+     - sectionTitle prefix on section page titles (e.g. /blog/, /poetry/)
+     - h1..h6       prefix on each heading level inside article body content
+     Set any value to "" to suppress the prefix entirely (no glyph, no spacing). */}}
 
-{{- $hp := .Site.Params.headingPrefix | default dict -}}
+{{- $hp := .Site.Params.headingprefix | default dict -}}
+
+{{/* Non-breaking space (U+00A0) keeps the prefix glued to the title text. */}}
+{{- $thinSpace := printf "%c" 0x00A0 -}}
+
+{{- $resolve := dict
+  "card"         (printf "#%s" $thinSpace)
+  "carousel"     (printf "#%s" $thinSpace)
+  "list"         ""
+  "page"         (printf "#%s" $thinSpace)
+  "sectiontitle" (printf "#%s" $thinSpace)
+  "h1"           (printf "#%s" $thinSpace)
+  "h2"           (printf "##%s" $thinSpace)
+  "h3"           (printf "###%s" $thinSpace)
+  "h4"           (printf "####%s" $thinSpace)
+  "h5"           (printf "#####%s" $thinSpace)
+  "h6"           (printf "######%s" $thinSpace) -}}
+
+{{- $values := dict -}}
+{{- range $key, $default := $resolve -}}
+  {{- $val := $default -}}
+  {{- if isset $hp $key -}}
+    {{- $set := index $hp $key -}}
+    {{- if eq $set "" -}}
+      {{- $val = "" -}}
+    {{- else -}}
+      {{- $val = printf "%s%s" $set $thinSpace -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $values = merge $values (dict $key $val) -}}
+{{- end -}}
 
 <style>
   :root {
-    /* Card, carousel, list, gallery title prefix */
-    --prefix-card: '{{ $hp.card | default "›" }}';
-    --prefix-carousel: '{{ $hp.carousel | default "›" }}';
-    --prefix-list: '{{ $hp.list | default "" }}';
-    --prefix-page: '{{ $hp.page | default "›" }}';
+    /* Title prefixes */
+    --prefix-card:          '{{ index $values "card" }}';
+    --prefix-carousel:      '{{ index $values "carousel" }}';
+    --prefix-list:          '{{ index $values "list" }}';
+    --prefix-page:          '{{ index $values "page" }}';
+    --prefix-section-title: '{{ index $values "sectiontitle" }}';
 
     /* Article body heading prefixes */
-    --prefix-h1: '{{ $hp.h1 | default "›" }} ';
-    --prefix-h2: '{{ $hp.h2 | default "»" }} ';
-    --prefix-h3: '{{ $hp.h3 | default "›" }} ';
-    --prefix-h4: '{{ $hp.h4 | default "›" }} ';
-    --prefix-h5: '{{ $hp.h5 | default "›" }} ';
-    --prefix-h6: '{{ $hp.h6 | default "›" }} ';
+    --prefix-h1: '{{ index $values "h1" }}';
+    --prefix-h2: '{{ index $values "h2" }}';
+    --prefix-h3: '{{ index $values "h3" }}';
+    --prefix-h4: '{{ index $values "h4" }}';
+    --prefix-h5: '{{ index $values "h5" }}';
+    --prefix-h6: '{{ index $values "h6" }}';
 
-    /* Article body: content headings shift down one level */
-    --prefix-article-h2: '{{ $hp.h1 | default "›" }} ';
-    --prefix-article-h3: '{{ $hp.h2 | default "»" }} ';
-    --prefix-article-h4: '{{ $hp.h3 | default "›" }} ';
-    --prefix-article-h5: '{{ $hp.h4 | default "›" }} ';
-    --prefix-article-h6: '{{ $hp.h5 | default "›" }} ';
+    /* Article body: each heading level uses its own configured glyph */
+    --prefix-article-h2: '{{ index $values "h2" }}';
+    --prefix-article-h3: '{{ index $values "h3" }}';
+    --prefix-article-h4: '{{ index $values "h4" }}';
+    --prefix-article-h5: '{{ index $values "h5" }}';
+    --prefix-article-h6: '{{ index $values "h6" }}';
   }
 </style>

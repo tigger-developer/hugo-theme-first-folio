@@ -3,7 +3,7 @@
 
 baseURL: https://example.com/
 locale: en-GB-oed
-title: red-dots.example.com
+title: red.dots.innit
 
 module:
   imports:
@@ -36,15 +36,16 @@ params:
   # Carousel
   carousel:
     interval: 6
+    showAuthor: true
     bgImage:
       opacity: 0.9
       blur: 0px
     title:
       wash:
         opacity: 0.2     # title wash tint strength
-        blur: 5px           # title wash backdrop blur
+        blur: 3px           # title wash backdrop blur
         gradientV: 10%    # vertical gradient fade at edges
-        gradientH: 10%     # horizontal gradient fade at edges
+        gradientH: 20%     # horizontal gradient fade at edges
     description:
       wash:
         opacity: 0.3
@@ -55,13 +56,14 @@ params:
   # Masonry card image and wash
   cardImage:
     opacity: 0.9
+    showAuthor: false
     blur: 2px
     title:
       wash:
-        opacity: 0.2     # title wash tint strength
-        blur: 5px           # title wash backdrop blur
+        opacity: 0.1     # title wash tint strength
+        blur: 3px           # title wash backdrop blur
         gradientV: 10%    # vertical gradient fade at edges
-        gradientH: 10%     # horizontal gradient fade at edges
+        gradientH: 20%     # horizontal gradient fade at edges
     description:
       wash:
         opacity: 0.35         # footer scrim max opacity
@@ -73,10 +75,10 @@ params:
   cardGalleryImage:
     title:
       wash:
-        opacity: 0.2     # title wash tint strength
-        blur: 5px           # title wash backdrop blur
+        opacity: 0.1     # title wash tint strength
+        blur: 3px           # title wash backdrop blur
         gradientV: 10%    # vertical gradient fade at edges
-        gradientH: 10%     # horizontal gradient fade at edges
+        gradientH: 20%     # horizontal gradient fade at edges
     description:
       wash:
         opacity: 0.35
@@ -88,7 +90,7 @@ params:
 
   # Background-layout article wash
   wash:
-    opacity: 0.25
+    opacity: 0.35
     blur: 0px
     gradient: "0% 10% 0% 10%"
 
@@ -99,18 +101,18 @@ params:
       blur: 2px
       gradient: "20% 30% 20% 30%"
 
-  # Heading prefixes
   headingPrefix:
-    card: "›"
-    carousel: "›"
-    list: ""
-    page: "›"
-    h1: "›"
-    h2: "»"
-    h3: "›"
-    h4: "›"
-    h5: "›"
-    h6: "›"
+    card: "✱"         # prefix for masonry cards and gallery cards
+    carousel: "✱"     # prefix for carousel cards
+    list: "✱"         # prefix for article titles in list views (home, section, taxonomy)
+    sectionTitle: "#"  # prefix for section titles (e.g. "Recipes")
+    page: "#"         # prefix for article titles on individual pages
+    h1: "✱"           # prefix for H1 headings
+    h2: "✱"           # prefix for H2 headings
+    h3: "✱"           # prefix for H3 headings
+    h4: "✱"           # prefix for H4 headings
+    h5: "✱"           # prefix for H5 headings
+    h6: "✱"           # prefix for H6 headings
 
   # Read more button
   readMore:
@@ -129,10 +131,11 @@ params:
 
   useCDN: false
 
+  contentMaxWidth: 80rem          # max content area width (article body and grid)
+
   grid:
-    contentMaxWidth: 100rem
-    sidebarWidth: 12rem
-    sidebarWidthNarrow: 12rem
+    sidebarWidth: 15rem           # sidebar column width at desktop
+    sidebarWidthNarrow: 12rem     # sidebar column width at tablet
     gap: 1.5rem
     breakpoints:
       sm: 30em
@@ -159,10 +162,13 @@ params:
       icon: rss                                      # Feather icon
       url: /index.xml
 
-  subtitle: "A demo site for the First Folio Hugo theme"
+  subtitle: "A demo of the [First Folio](https://github.com/tadg-paul/hugo-theme-first-folio) theme. All content and authors are fictitious."
 
 menu:
   main:
+    - name: Home
+      url: /
+      weight: 1
     - name: Recipes
       url: /recipes/
       weight: 10

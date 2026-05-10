@@ -373,7 +373,7 @@ h4 { font-size: clamp(1.05rem, 2.5vw, 1.2rem); }
 h5 { font-size: clamp(1.0rem, 2.2vw, 1.1rem); }
 h6 { font-size: clamp(0.95rem, 2vw, 1.0rem); }
 
-/* Heading hash marks — bold, primary colour */
+/* Heading prefix glyphs — bold, primary colour. Spacing is baked into the prefix value. */
 h1::before { color: var(--color-primary); content: var(--prefix-h1); font-weight: 700; font-synthesis: weight; }
 h2::before { color: var(--color-primary); content: var(--prefix-h2); font-weight: 700; font-synthesis: weight; }
 h3::before { color: var(--color-primary); content: var(--prefix-h3); font-weight: 700; font-synthesis: weight; }

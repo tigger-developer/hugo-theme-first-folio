@@ -10,18 +10,17 @@ The First Folio theme provides 18 custom shortcodes for varied content types.
 4. [details](#details) - Collapsible content
 5. [dialogue](#dialogue) - Character speech for plays
 6. [direction](#direction) - Stage directions
-7. [ga](#ga) - Inline Irish language text
-8. [popquote](#popquote) - Expandable quotes
-9. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
-10. [poem](#poem) - Poetry with preserved line breaks
-11. [video](#video) - HTML5 video player
-12. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
-13. [formspree](#formspree) - Formspree-backed contact form
-14. [rawhtml](#rawhtml) - Raw HTML pass-through
-15. [section-list](#section-list) - Section navigation list
-16. [img](#img) - Inline image with responsive thumbnails
-17. [gallery](#gallery) - Image gallery with lightbox
-18. [side-by-side](#side-by-side) - Side-by-side content wrapper
+7. [popquote](#popquote) - Expandable quotes
+8. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
+9. [poem](#poem) - Poetry with preserved line breaks
+10. [video](#video) - HTML5 video player
+11. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
+12. [formspree](#formspree) - Formspree-backed contact form
+13. [rawhtml](#rawhtml) - Raw HTML pass-through
+14. [section-list](#section-list) - Section navigation list
+15. [img](#img) - Inline image with responsive thumbnails
+16. [gallery](#gallery) - Image gallery with lightbox
+17. [side-by-side](#side-by-side) - Side-by-side content wrapper
 
 ---
 
@@ -190,29 +189,6 @@ Stage directions for plays. Renders in italics with secondary accent colour.
 ### Live Demo
 
 See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#direction).
-
----
-
-## ga
-
-Inline Irish language text. Wraps content in `<span lang="ga">`, triggering the `:lang(ga)` CSS rule which applies Iosevka Gaeilge (wedge serif variant). Use this for Irish words or phrases within English text. For whole articles in Irish, use `contentLang: ga` in front matter instead.
-
-### Parameters
-
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| Inner content | Yes | Irish language text |
-
-### Usage
-
-```markdown
-He greeted her with {{</* ga */>}}Dia duit, a chara{{</* /ga */>}} as she entered.
-The word {{</* ga */>}}craic{{</* /ga */>}} has no direct English equivalent.
-```
-
-### Live Demo
-
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#ga-irish-language).
 
 ---
 

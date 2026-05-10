@@ -27,8 +27,8 @@
 {{- $colLg := $pageCols.lg | default ($siteCols.lg | default 4) -}}
 {{- $colXl := $pageCols.xl | default ($siteCols.xl | default 5) -}}
 
-{{/* Layout: page → site → default */}}
-{{- $contentMaxWidth := $pageGrid.contentMaxWidth | default ($siteGrid.contentMaxWidth | default "100rem") -}}
+{{/* Layout: page → site (top-level) → site (legacy under grid) → default */}}
+{{- $contentMaxWidth := $pageGrid.contentMaxWidth | default (.Site.Params.contentMaxWidth | default ($siteGrid.contentMaxWidth | default "80rem")) -}}
 {{- $sidebarWidth := $pageGrid.sidebarWidth | default ($siteGrid.sidebarWidth | default "15rem") -}}
 {{- $sidebarWidthNarrow := $pageGrid.sidebarWidthNarrow | default ($siteGrid.sidebarWidthNarrow | default "12rem") -}}
 {{- $gridGap := $pageGrid.gap | default ($siteGrid.gap | default "1.5rem") -}}
