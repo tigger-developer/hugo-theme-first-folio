@@ -136,17 +136,17 @@ params:
   grid:
     sidebarWidth: 15rem           # sidebar column width at desktop
     sidebarWidthNarrow: 12rem     # sidebar column width at tablet
-    gap: 1.5rem
+    gap: 1.5rem                   # grid gap between items
     breakpoints:
-      sm: 30em
-      md: 48em
-      lg: 64em
-      xl: 80em
+      sm: 30em                    # small / mobile
+      md: 48em                    # medium / tablet
+      lg: 64em                    # large / desktop
+      xl: 80em                    # extra large / wide desktop
     columns:
-      sm: 2
-      md: 3
-      lg: 4
-      xl: 5
+      sm: 2                       # columns at small breakpoint
+      md: 2                       # columns at medium breakpoint
+      lg: 3                       # columns at large breakpoint
+      xl: 4                       # columns at extra large breakpoint
 
   social:
     - name: BlueSky
