@@ -1,8 +1,23 @@
-<!-- Version: 1.0 | Last updated: 2026-05-05 -->
+<!-- Version: 1.1 | Last updated: 2026-05-10 -->
 
 # Configuration Reference
 
 All configuration lives in `hugo.yaml` (or `hugo.toml` / `hugo.json`) under the `params` key. Every parameter has a sensible hardcoded default - a site works with no `params` block at all.
+
+---
+
+## Pre-release gate
+
+Hides the site behind a passphrase prompt. The page renders fully but stays invisible until the visitor enters the correct passphrase. Not a security feature - the passphrase is checked client-side as a SHA-256 hash - just enough to keep a work-in-progress site out of search indexes and casual browsing.
+
+```yaml
+params:
+  prereleaseKey: "your-passphrase-here"
+```
+
+When unset (or empty), no prompt is shown and the site behaves normally. When set, every page prompts on first visit; the result is stored in `localStorage` so the visitor is not re-prompted on subsequent navigation.
+
+The visitor sees `prompt('This site is not yet public. Enter passphrase:')`. Wrong passphrase or cancel redirects to `about:blank`.
 
 ---
 
@@ -33,7 +48,7 @@ Controls how images appear behind text - on background-layout articles, masonry 
 ```yaml
 params:
   bgImage:
-    opacity: 0.7        # image opacity (0.0–1.0). Lower = darker.
+    opacity: 0.7         # image opacity (0.0-1.0). Lower = darker.
     blur: 2px            # blur applied to the image
 ```
 
@@ -53,20 +68,28 @@ Controls images on masonry cards (the homepage grid).
 ```yaml
 params:
   cardImage:
-    opacity: 0.9         # card image opacity
-    blur: 3px            # card image blur
-    showAuthor: true     # show author name on card meta (default true)
+    opacity: 0.9         # card image opacity (falls back to bgImage.opacity)
+    blur: 2px            # card image blur (falls back to bgImage.blur)
+    showAuthor: true     # show author name on card meta
     title:
       wash:
         opacity: 0.2     # title wash tint strength
-        blur: 6px        # title wash backdrop blur
-        gradientV: "20%" # vertical gradient fade at edges
-        gradientH: "8%"  # horizontal gradient fade at edges
+        blur: 5px        # title wash backdrop blur
+        gradientV: "10%" # vertical gradient fade at edges
+        gradientH: "10%" # horizontal gradient fade at edges
     description:
       wash:
-        opacity: 0.5     # bottom scrim max opacity
-        gradient: "75%"  # where scrim reaches full opacity (% from top of scrim)
+        opacity: 0.35    # bottom scrim max opacity
+        coverage: "50%"  # how much of the card the scrim covers, from the bottom up
+        gradient: "50%"  # what % of the scrim area is fade (0% = hard edge, 100% = all fade)
+        blur: 5px        # backdrop blur behind the scrim
 ```
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `opacity` | inherits `bgImage.opacity` | Image opacity on cards. |
+| `blur` | inherits `bgImage.blur` | Image blur on cards. |
+| `showAuthor` | `true` | Show the author name in the card meta strip. |
 
 ### Title wash
 
@@ -75,9 +98,9 @@ A soft-edged tinted layer behind the card title text. Uses gradient masking so t
 | Key | Default | Description |
 |-----|---------|-------------|
 | `title.wash.opacity` | `0.2` | Tint strength behind the title. |
-| `title.wash.blur` | `6px` | Backdrop blur behind the title. |
-| `title.wash.gradientV` | `20%` | How far the vertical fade extends inward from each edge. Higher = more fade. |
-| `title.wash.gradientH` | `8%` | How far the horizontal fade extends inward from each edge. |
+| `title.wash.blur` | `5px` | Backdrop blur behind the title. |
+| `title.wash.gradientV` | `10%` | How far the vertical fade extends inward from each edge. Higher = more fade. |
+| `title.wash.gradientH` | `10%` | How far the horizontal fade extends inward from each edge. |
 
 ### Description wash
 
@@ -85,8 +108,10 @@ A bottom-up gradient scrim behind the card excerpt/description area.
 
 | Key | Default | Description |
 |-----|---------|-------------|
-| `description.wash.opacity` | `0.5` | Maximum opacity at the bottom of the scrim. |
-| `description.wash.gradient` | `75%` | The point (from the top of the scrim area) where the gradient reaches full opacity. Lower = scrim starts being opaque earlier. |
+| `description.wash.opacity` | `0.35` | Maximum opacity at the bottom of the scrim. |
+| `description.wash.coverage` | `50%` | What share of the card the scrim covers, measured from the bottom up. |
+| `description.wash.gradient` | `50%` | What share of the scrim area is fade. `0%` = hard edge, `100%` = pure fade. |
+| `description.wash.blur` | `5px` | Backdrop blur behind the scrim. |
 
 ---
 
@@ -99,15 +124,19 @@ params:
   cardGalleryImage:
     title:
       wash:
-        opacity: 0.35    # frosted pill opacity
-        blur: 5px        # frosted pill blur
+        opacity: 0.2     # title wash tint strength
+        blur: 5px        # title wash backdrop blur
+        gradientV: "10%" # vertical gradient fade at edges
+        gradientH: "10%" # horizontal gradient fade at edges
     description:
       wash:
-        opacity: 0.5     # footer scrim max opacity
-        gradient: "75%"  # where scrim reaches full opacity
+        opacity: 0.35    # footer scrim max opacity
+        coverage: "20%"  # how much of the card the scrim covers, from the bottom up
+        gradient: "50%"  # what % of scrim area is fade
+        blur: 5px        # backdrop blur behind the scrim
 ```
 
-Gallery card titles use a hard-edged frosted pill rather than the soft-edged gradient mask of regular cards, because the image is at full opacity and needs stronger contrast.
+The same `title.wash` and `description.wash` keys as regular cards (see above) apply here. The defaults differ to suit image-dominant cards.
 
 ---
 
@@ -119,29 +148,38 @@ Controls the rotating hero card above the masonry grid on the homepage.
 params:
   carousel:
     interval: 6          # seconds between slides
-    showAuthor: true     # show author name on carousel meta (default true)
+    showAuthor: true     # show author name on carousel meta
     bgImage:
-      opacity: 0.9       # carousel image opacity
-      blur: 0px          # carousel image blur
+      opacity: 0.9       # carousel image opacity (falls back to bgImage.opacity)
+      blur: 0px          # carousel image blur (falls back to bgImage.blur)
     title:
       wash:
         opacity: 0.2     # title wash tint strength
-        blur: 6px        # title wash backdrop blur
+        blur: 5px        # title wash backdrop blur
+        gradientV: "10%" # vertical gradient fade at edges
+        gradientH: "10%" # horizontal gradient fade at edges
     description:
       wash:
-        opacity: 0.5     # bottom scrim max opacity
-        gradient: "75%"  # where scrim reaches full opacity (% from top of scrim)
+        opacity: 0.3     # bottom scrim max opacity
+        coverage: "35%"  # how much of the card the scrim covers, from the bottom up
+        gradient: "50%"  # what % of scrim area is fade
+        blur: 5px        # backdrop blur behind the scrim
 ```
 
 | Key | Default | Description |
 |-----|---------|-------------|
 | `interval` | `6` | Seconds between automatic slide transitions. |
-| `bgImage.opacity` | `0.9` | Image opacity on carousel cards. Falls back to `bgImage.opacity` if not set. |
-| `bgImage.blur` | `0px` | Image blur on carousel cards. Falls back to `bgImage.blur` if not set. |
+| `showAuthor` | `true` | Show the author name on carousel meta. |
+| `bgImage.opacity` | inherits `bgImage.opacity` | Image opacity on carousel cards. |
+| `bgImage.blur` | inherits `bgImage.blur` | Image blur on carousel cards. |
 | `title.wash.opacity` | `0.2` | Tint strength behind the carousel title. |
-| `title.wash.blur` | `6px` | Backdrop blur behind the carousel title. |
-| `description.wash.opacity` | `0.5` | Maximum opacity of the bottom scrim gradient. |
-| `description.wash.gradient` | `75%` | Where the scrim reaches full opacity (% from top of scrim area). |
+| `title.wash.blur` | `5px` | Backdrop blur behind the carousel title. |
+| `title.wash.gradientV` | `10%` | Vertical fade distance. |
+| `title.wash.gradientH` | `10%` | Horizontal fade distance. |
+| `description.wash.opacity` | `0.3` | Maximum opacity at the bottom of the scrim. |
+| `description.wash.coverage` | `35%` | What share of the card the scrim covers, from the bottom up. |
+| `description.wash.gradient` | `50%` | What share of the scrim area is fade. |
+| `description.wash.blur` | `5px` | Backdrop blur behind the scrim. |
 
 ---
 
@@ -152,8 +190,8 @@ Controls the tinted overlay behind text panels on background-layout article page
 ```yaml
 params:
   wash:
-    opacity: 0.25        # tint strength (0 = none, 1 = solid)
-    blur: 0px            # backdrop blur behind text panels
+    opacity: 0.25              # tint strength (0 = none, 1 = solid)
+    blur: 0px                  # backdrop blur behind text panels
     gradient: "0% 10% 0% 10%"  # edge fade: left top right bottom
 ```
 
@@ -175,8 +213,8 @@ Controls the tinted overlay behind the title on banner-layout pages.
 params:
   banner:
     wash:
-      opacity: 0.3       # wash tint strength
-      blur: 2px          # backdrop blur
+      opacity: 0.3                 # wash tint strength
+      blur: 2px                    # backdrop blur
       gradient: "20% 30% 20% 30%"  # edge fade: left top right bottom
 ```
 
@@ -212,9 +250,9 @@ params:
 
 Set any value to `""` to suppress the prefix entirely (no glyph, no spacing).
 
-`h1`–`h6` apply to headings *inside* article body content (`# Heading 1`, `## Heading 2`, etc. in markdown). `page` applies to the article's main title (the page header).
+`h1`-`h6` apply to headings *inside* article body content (`# Heading 1`, `## Heading 2`, etc. in markdown). `page` applies to the article's main title (the page header).
 
-Set any value to `""` to remove the prefix. Supports any text, Unicode character, or emoji.
+Supports any text, Unicode character, or emoji.
 
 ---
 
@@ -229,6 +267,38 @@ params:
     value: icons/chevron-right-duo-thick.svg # icon path or text string
     valueDark: ""                            # optional dark-mode variant icon
 ```
+
+---
+
+## Site logo
+
+The site logo appears in the header. Two variants can be provided for light and dark modes.
+
+```yaml
+params:
+  mainImage: /images/logo-light.svg       # logo for light mode
+  mainImageDark: /images/logo-dark.svg    # logo for dark mode (optional)
+```
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `mainImage` | - | Path to the logo image. When set, replaces the text site title in the header. |
+| `mainImageDark` | - | Alternate logo shown in dark mode. Falls back to `mainImage` if absent. |
+
+When neither is set, the site title is rendered as text.
+
+---
+
+## Open Graph image
+
+Default Open Graph image used in social media previews when a page does not provide its own `image.src`.
+
+```yaml
+params:
+  og_image: /images/social-card.jpg
+```
+
+Per-page `image.src` (in frontmatter) takes precedence.
 
 ---
 
@@ -298,6 +368,19 @@ params:
 
 ---
 
+## Table of contents
+
+Default heading for the table of contents on pages where `toc: true` is set in frontmatter.
+
+```yaml
+params:
+  tocTitle: "Contents"
+```
+
+Default `"Table of contents:"`. Override per-page by setting `tocTitle` (or a string value for `toc:`) in frontmatter.
+
+---
+
 ## Social links
 
 Displayed as icons in the footer.
@@ -320,11 +403,43 @@ Icons can be Feather icons (bare name) or Simple Icons (prefixed with `simple:`)
 
 ---
 
+## Footer text links
+
+Plain-text links shown alongside the social icons in the footer (e.g. legal pages, contact, colophon).
+
+```yaml
+params:
+  footerLinks:
+    - name: About
+      url: /about/
+    - name: Colophon
+      url: /colophon/
+```
+
+Rendered as `· name · name` between the copyright text and the social icons.
+
+---
+
+## Taxonomy listing filter
+
+Controls which page types appear in tag and term listings.
+
+```yaml
+params:
+  excludedTypes:
+    - page
+```
+
+Default `["page"]` (pages of type `page` are excluded from tag/term listings, so standalone pages like `/about/` do not clutter tag pages). Override to include or exclude more types as needed.
+
+---
+
 ## Other settings
 
 ```yaml
 params:
   browserTitle: "Custom Browser Tab Title"  # overrides site title in <title> only
+  description: "Default meta description"   # fallback site-wide meta description
   dateFormat: "2 January 2006"              # Go date format for article pages
   dateFormatShort: "02/01/06"               # short format for cards
   subtitle: "A tagline for the site"
@@ -340,7 +455,7 @@ params:
 
   # Hugo's content model requires sections to be branch bundles
   # (directories with _index.md and child pages). A leaf bundle
-  # (a single index.md with no children) is not a section — Hugo
+  # (a single index.md with no children) is not a section - Hugo
   # does not expose it as one, so the homepage grid cannot find it.
 
   customCSS:                                # additional CSS files
@@ -350,6 +465,21 @@ params:
   customJS:                                 # additional JavaScript files
     - js/lightbox.js
 ```
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `browserTitle` | site `title` | Overrides the site title in the `<title>` tag only. |
+| `description` | - | Fallback meta description used when a page has no `description` of its own. |
+| `dateFormat` | `2 January 2006` | Go date format for full article pages. |
+| `dateFormatShort` | `:date_medium` | Short date format for cards and lists. |
+| `subtitle` | - | Optional tagline rendered on the homepage. Supports Markdown. |
+| `useCDN` | `false` | When `true`, load Simple Icons from jsDelivr CDN instead of local copy. |
+| `mathjax` | `false` | Enable MathJax for maths rendering. |
+| `katex` | `false` | Enable KaTeX for maths rendering. |
+| `favicon` | - | Path to favicon. Supports `.png`, `.svg`, `.ico`. |
+| `mainSections` | `["blog"]` | Sections to feature on the homepage masonry grid. |
+| `customCSS` | - | Additional CSS files loaded after the theme styles. |
+| `customJS` | - | Additional JavaScript files loaded in the head. |
 
 ---
 
@@ -373,3 +503,10 @@ Lower weight = appears first in navigation.
 ## Full example
 
 See `exampleSite/config/_default/hugo.yaml` for a complete working configuration.
+
+---
+
+## Changelog
+
+- **1.1** (2026-05-10): Added `prereleaseKey`, `mainImage` / `mainImageDark`, `og_image`, `footerLinks`, `excludedTypes`, `tocTitle`, site-level `description`, `carousel.showAuthor`. Corrected stale defaults across `cardImage`, `cardGalleryImage`, and `carousel` wash sections. Added missing wash sub-keys: `coverage` and `blur` on description washes, `gradientV` / `gradientH` on gallery card title wash.
+- **1.0** (2026-05-05): Initial reference covering ambience, image/wash settings, heading prefixes, grid, and basic site settings.
