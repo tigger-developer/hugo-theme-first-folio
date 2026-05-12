@@ -44,7 +44,12 @@
 {{- if gt (len $sortedImages) 0 -}}
 <div class="gallery-grid">
   {{- range $index, $image := $sortedImages -}}
-  {{- /* Initialize metadata variables */ -}}
+  {{- /* Initialize metadata variables.
+       $title and $caption track only "real" values (from frontmatter or EXIF).
+       $altTitle is used purely for the <img alt> + lightbox data — it falls
+       back to the filename if no real title exists, but $title stays empty
+       so the gallery view doesn't render ugly filenames like "anime-1.jpg"
+       as visible titles under each thumbnail. */ -}}
   {{- $title := "" -}}
   {{- $caption := "" -}}
 
@@ -74,16 +79,18 @@
     {{- end -}}
   {{- end -}}
 
-  {{- /* Priority 3: Filename fallback (lowest priority) */ -}}
-  {{- if not $title -}}
-    {{- $title = $image.Name -}}
+  {{- /* Priority 3: Filename fallback applies ONLY to alt/lightbox text,
+       not to the visible-title span. */ -}}
+  {{- $altTitle := $title -}}
+  {{- if not $altTitle -}}
+    {{- $altTitle = $image.Name -}}
   {{- end -}}
 
   {{- /* Build alt text: use explicit alt param, or title, or concatenation */ -}}
-  {{- $alt := $image.Params.alt | default $title -}}
-  {{- if and $title $caption -}}
+  {{- $alt := $image.Params.alt | default $altTitle -}}
+  {{- if and $altTitle $caption -}}
     {{- if not $image.Params.alt -}}
-      {{- $alt = printf "%s - %s" $title $caption -}}
+      {{- $alt = printf "%s - %s" $altTitle $caption -}}
     {{- end -}}
   {{- end -}}
 
@@ -96,7 +103,7 @@
     <a href="{{ $image.RelPermalink }}"
        class="gallery-image-link"
        data-lightbox="gallery"
-       data-title="{{ $title }}"
+       data-title="{{ $altTitle }}"
        data-caption="{{ $caption }}">
       <picture>
         {{- /* WebP source for modern browsers */ -}}
@@ -112,6 +119,9 @@
              loading="lazy"
              class="gallery-image">
       </picture>
+      {{- if $title -}}
+      <span class="gallery-item-title">{{ $title }}</span>
+      {{- end -}}
       {{- if $caption -}}
       <span class="gallery-item-caption">{{ $caption }}</span>
       {{- end -}}
