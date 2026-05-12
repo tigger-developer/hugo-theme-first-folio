@@ -56,16 +56,20 @@
     {{- $caption = . -}}
   {{- end -}}
 
-  {{- /* Priority 2: EXIF data (if frontmatter not set) */ -}}
-  {{- with $image.Exif -}}
-    {{- if not $title -}}
-      {{- with .Tags.DocumentName -}}
-        {{- $title = . -}}
+  {{- /* Priority 2: EXIF data (if frontmatter not set).
+       Hugo v0.155+ Image.Meta replaces the deprecated Image.Exif; in the new
+       API, .Meta.Exif is the tags collection itself — no nested .Tags namespace. */ -}}
+  {{- with $image.Meta -}}
+    {{- with .Exif -}}
+      {{- if not $title -}}
+        {{- with .DocumentName -}}
+          {{- $title = . -}}
+        {{- end -}}
       {{- end -}}
-    {{- end -}}
-    {{- if not $caption -}}
-      {{- with .Tags.ImageDescription -}}
-        {{- $caption = . -}}
+      {{- if not $caption -}}
+        {{- with .ImageDescription -}}
+          {{- $caption = . -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}

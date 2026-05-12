@@ -11,14 +11,14 @@ features = [
   "Masonry grid with carousel card",
   "Image galleries with lightbox and EXIF metadata",
   "Six article layouts (banner, hero, columns, featured, background, text-only)",
-  "18 custom shortcodes",
+  "19 custom shortcodes",
   "Cloudflare Stream video support",
   "Breadcrumb navigation and signpost CTAs",
   "Table of contents sidebar",
   "Responsive design with em-based breakpoints (WCAG 2.1)",
   "Dark mode design"
 ]
-min_version = "0.128.0"
+min_version = "0.155.0"
 
 [author]
   name = "Taḋg Paul"
