@@ -151,14 +151,68 @@ This shortcode is useful for long quotations that would interrupt the flow of an
 
 ## Quote
 
-Pull-quote with decorative quotation marks and optional attribution:
+Pull-quote with decorative quotation marks. Two paths: the back-compat `attribution=` for a single-line credit, and the structured-fields path for richer testimonial layouts (name, role, organisation, photo, featured modifier).
+
+### Back-compat — single-line `attribution`
 
 {{< quote attribution="Oscar Wilde" >}}
 Be yourself; everyone else is already taken.
 {{< /quote >}}
 
+### Unattributed
+
 {{< quote >}}
 A quote without attribution still gets the decorative marks.
+{{< /quote >}}
+
+### Structured — name only
+
+{{< quote name="Frodo Baggins" >}}
+There and back again, and many adventures along the way.
+{{< /quote >}}
+
+### Structured — name and role
+
+{{< quote name="Sherlock Holmes" role="Consulting Detective" >}}
+When you have eliminated the impossible, whatever remains, however improbable, must be the truth.
+{{< /quote >}}
+
+### Structured — name and organisation
+
+{{< quote name="Hermione Granger" organization="Ministry of Magic" >}}
+Books! And cleverness! There are more important things — friendship and bravery.
+{{< /quote >}}
+
+### Structured — name, role, organisation, page-resource photo, featured
+
+{{< quote name="Aragorn" role="Ranger of the North" organization="Heirs of Isildur" photo="sample-a.jpg" featured=true >}}
+The road goes ever on and on, down from the door where it began.
+{{< /quote >}}
+
+### Structured — photo from site-root path
+
+{{< quote name="Gandalf" role="Wizard" photo="/icons/chevron-right-thick.svg" >}}
+All we have to decide is what to do with the time that is given us.
+{{< /quote >}}
+
+### Structured — photo from absolute URL
+
+{{< quote name="Bilbo Baggins" role="Hobbit of the Shire" photo="https://example.com/portrait.jpg" >}}
+It's a dangerous business, going out your door.
+{{< /quote >}}
+
+### Edge case — unresolvable photo emits a build warning and omits the `<img>`
+
+{{< quote name="Tom Bombadil" role="Master of Wood, Water and Hill" photo="missing-file.jpg" >}}
+Hey dol! Merry dol! Ring a dong dillo!
+{{< /quote >}}
+
+### Back-compat precedence — `attribution=` set alongside structured fields uses `attribution=`
+
+When both are set on the same shortcode, `attribution=` wins and the structured fields (including any photo) are ignored. Sites migrating from the legacy form can leave both during the transition.
+
+{{< quote attribution="Oscar Wilde" name="Should Be Ignored" photo="sample-a.jpg" >}}
+The truth is rarely pure and never simple.
 {{< /quote >}}
 
 ## Raw HTML

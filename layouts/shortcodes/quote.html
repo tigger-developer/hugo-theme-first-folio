@@ -4,20 +4,74 @@
  See LICENSE file in the repository root.
 -->
 
-{{- /* ABOUTME: Pull-quote shortcode — block-form blockquote with decorative quote marks and optional attribution. */}}
-{{- /* ABOUTME: Body content is markdown; attribution is rendered as a figcaption with an em-dash prefix via CSS. */}}
-{{- /* Usage: */}}
-{{- /*   {{< quote attribution="A. Person" >}} */}}
-{{- /*   The actual quote text — can include **markdown** and span multiple lines. */}}
-{{- /*   {{< /quote >}} */}}
-{{- /* Optional: omit attribution for an unattributed pull-quote. */}}
+{{- /* ABOUTME: Pull-quote shortcode. Back-compat `attribution=` path + structured testimonial path. */ -}}
+{{- /* ABOUTME: Structured fields: name, role, organization, photo, featured. See docs/shortcodes.md. */ -}}
 
+{{- /* Resolution chain — when `attribution` is set, all structured fields are ignored (back-compat). */ -}}
 {{- $attribution := .Get "attribution" -}}
-<figure class="pull-quote">
+{{- $name := .Get "name" -}}
+{{- $role := .Get "role" -}}
+{{- $organization := .Get "organization" -}}
+{{- $photo := .Get "photo" -}}
+{{- $featured := .Get "featured" -}}
+
+{{- /* Resolve photo URL using the same pattern as video-embed.html's poster_image:
+       absolute URL (http/https prefix) -> verbatim
+       site-root path (leading /)       -> verbatim (Hugo emits as-is)
+       relative filename                -> page resource via .Page.Resources.GetMatch
+     Only consulted when attribution is empty (back-compat path ignores it). */ -}}
+{{- $photoURL := "" -}}
+{{- if and (not $attribution) $photo -}}
+  {{- if or (hasPrefix $photo "http://") (hasPrefix $photo "https://") -}}
+    {{- $photoURL = $photo -}}
+  {{- else if hasPrefix $photo "/" -}}
+    {{- $photoURL = $photo -}}
+  {{- else -}}
+    {{- $res := .Page.Resources.GetMatch $photo -}}
+    {{- if $res -}}
+      {{- $photoURL = $res.RelPermalink -}}
+    {{- else -}}
+      {{- warnf "quote shortcode on %s: photo %q cannot be resolved as page resource, site-root path, or absolute URL" .Page.Path $photo -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Build the "role line" — joins role + organization with ", " when both are set;
+       otherwise renders whichever single one is set. */ -}}
+{{- $roleLine := "" -}}
+{{- if and $role $organization -}}
+  {{- $roleLine = printf "%s, %s" $role $organization -}}
+{{- else if $role -}}
+  {{- $roleLine = $role -}}
+{{- else if $organization -}}
+  {{- $roleLine = $organization -}}
+{{- end -}}
+
+{{- /* Featured modifier class on the outer figure.
+       Hugo's .Get returns a bool when the shortcode is called with `featured=true`
+       (bare) and a string when called with `featured="true"`. Accept either. */ -}}
+{{- $isFeatured := false -}}
+{{- if or (eq $featured true) (eq $featured "true") -}}
+  {{- $isFeatured = true -}}
+{{- end -}}
+{{- $figureClass := "pull-quote" -}}
+{{- if and (not $attribution) $isFeatured -}}
+  {{- $figureClass = "pull-quote pull-quote-featured" -}}
+{{- end -}}
+
+<figure class="{{ $figureClass }}">
   <blockquote>
     {{ .Inner | markdownify }}
   </blockquote>
-  {{- with $attribution }}
-  <figcaption>{{ . }}</figcaption>
-  {{- end }}
+  {{- if $attribution -}}
+  <figcaption>{{ $attribution }}</figcaption>
+  {{- else if or $name $roleLine -}}
+  <figcaption class="pull-quote-attribution">
+    {{- if $photoURL }}<img class="pull-quote-photo" src="{{ $photoURL }}" alt="{{ $name }}">{{ end -}}
+    <span class="pull-quote-attribution-text">
+      {{- with $name }}<span class="pull-quote-name">{{ . }}</span>{{ end -}}
+      {{- with $roleLine }}<span class="pull-quote-role">{{ . }}</span>{{ end -}}
+    </span>
+  </figcaption>
+  {{- end -}}
 </figure>
