@@ -139,7 +139,13 @@
 			{{- end -}}
 
 			{{- /* Render based on list_style */ -}}
-			{{- if eq $listStyle "gallery" -}}
+			{{- if eq $listStyle "prose" -}}
+				{{- /* Issue #54: prose mode renders signpost + .Content + signpost-footer only.
+				     .Content is already rendered above (homepage-content div). Suppress carousel,
+				     masonry, gallery, list and pagination — author composes the body with shortcodes. */ -}}
+				{{ partial "signpost.html" . }}
+				{{ partial "signpost-footer.html" . }}
+			{{- else if eq $listStyle "gallery" -}}
 				{{- /* Gallery mode: show sections as gallery cards */ -}}
 				{{ partial "gallery-section.html" (dict "pages" .Site.Sections "context" . "Site" .Site) }}
 			{{- else if eq $listStyle "list" -}}
@@ -153,7 +159,10 @@
 				{{ partial "masonry-grid.html" (dict "pages" $paginator.Pages "showSection" true "Site" .Site) }}
 			{{- end -}}
 
+			{{- /* Issue #54: pagination is meaningless in prose mode. */ -}}
+			{{- if ne $listStyle "prose" -}}
 			{{ partial "pagination.html" $paginator }}
+			{{- end -}}
 
 			{{- if $showSidebar -}}
 				</div>

@@ -116,7 +116,16 @@
 		{{ end }}
 	{{- end -}}
 
-	{{- if eq $listStyle "gallery" -}}
+	{{- if eq $listStyle "prose" -}}
+		{{- /* Issue #54: prose mode renders signpost + .Content + signpost-footer only.
+		     Carousel, masonry, gallery, list and pagination are all suppressed. The
+		     .Content rendering above already handles the body; here we only need the
+		     signpost partials. The single.html template wraps these around .Content;
+		     for prose mode we replicate that structure inline (signpost before, then
+		     .Content is already rendered above, signpost-footer after). */ -}}
+		{{ partial "signpost.html" . }}
+		{{ partial "signpost-footer.html" . }}
+	{{- else if eq $listStyle "gallery" -}}
 		{{ partial "gallery-section.html" (dict "pages" $paginator.Pages "context" . "Site" .Site) }}
 	{{- else if eq $listStyle "list" -}}
 		{{ partial "list-view.html" (dict "pages" $paginator.Pages "showSection" false "Site" .Site) }}
@@ -149,7 +158,10 @@
 		{{ partial "masonry-grid.html" (dict "pages" $masonryPages "showSection" false "Site" .Site) }}
 	{{- end -}}
 
+	{{- /* Issue #54: pagination is meaningless in prose mode (no list of pages). */ -}}
+	{{- if ne $listStyle "prose" -}}
 	{{ partial "pagination.html" $paginator }}
+	{{- end -}}
 
 	{{- if $showSidebar -}}
 		</div>

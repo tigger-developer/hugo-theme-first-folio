@@ -185,6 +185,9 @@ menu:
     - name: Poetry
       url: /poetry/
       weight: 45
+    - name: Profile
+      url: /profile/
+      weight: 48
     - name: Tags
       url: /tags/
       weight: 50
