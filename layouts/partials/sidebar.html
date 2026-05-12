@@ -48,7 +48,7 @@
             <img src="{{ relURL "icons/chevron-right-thick.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
             <img src="{{ relURL "icons/chevron-right-thick-white.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
           </span>
-          <a href="{{ $section.RelPermalink }}" class="sidebar-link">{{ $section.Title }}</a>
+          <a href="{{ $section.RelPermalink }}" class="sidebar-link">{{ $section.LinkTitle }}</a>
         </li>
         {{- end -}}
       {{- end -}}
@@ -67,7 +67,7 @@
             <img src="{{ relURL "icons/chevron-right-thick.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
             <img src="{{ relURL "icons/chevron-right-thick-white.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
           </span>
-          <a href="{{ .RelPermalink }}" class="sidebar-link">{{ .Title }}</a>
+          <a href="{{ .RelPermalink }}" class="sidebar-link">{{ .LinkTitle }}</a>
         </li>
       {{- end -}}
     </ul>
@@ -84,7 +84,7 @@
             <img src="{{ relURL "icons/chevron-right-thick.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
             <img src="{{ relURL "icons/chevron-right-thick-white.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
           </span>
-          <a href="{{ .RelPermalink }}" class="sidebar-link">{{ .Title }}</a>
+          <a href="{{ .RelPermalink }}" class="sidebar-link">{{ .LinkTitle }}</a>
         </li>
       {{- end -}}
     </ul>

@@ -1,5 +1,6 @@
 ---
-title: "Poetry"
+title: "Poetry and Verse"
+linkTitle: "Poetry"
 description: "Verse and fragments."
 list_style: cards
 list_recursive: true

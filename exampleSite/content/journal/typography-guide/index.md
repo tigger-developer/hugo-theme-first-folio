@@ -1,5 +1,6 @@
 ---
-title: "Typography"
+title: "A Comprehensive Guide to Typography in the First Folio Theme"
+linkTitle: "Typography"
 date: 2025-07-01
 description: "A demonstration of typography in the First Folio theme."
 tags:

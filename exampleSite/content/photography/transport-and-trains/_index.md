@@ -1,5 +1,6 @@
 ---
-title: "Transport and Trains"
+title: "Vintage and Modern Railways: Transport and Trains Through the Years"
+linkTitle: "Trains"
 description: "Steam, steel, and the romance of the railway."
 gallery: true
 ---

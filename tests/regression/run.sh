@@ -42,6 +42,28 @@ build_fixture() {
     fi
 }
 
+# Build the exampleSite once per run; share the build path across tests.
+# Tests query the rendered HTML in this directory with htmlq (tier 2 per WEB.md).
+# The exampleSite is the canonical fixture per #54's solution: example content
+# in exampleSite/ doubles as the test target.
+EXAMPLESITE_BUILD=""
+# shellcheck disable=SC2329  # invoked from per-test scripts that source this driver indirectly
+build_examplesite() {
+    if [[ -n "$EXAMPLESITE_BUILD" && -d "$EXAMPLESITE_BUILD" ]]; then
+        echo "$EXAMPLESITE_BUILD"
+        return 0
+    fi
+    EXAMPLESITE_BUILD="$(mktemp -d -t "ff-examplesite-XXXXXX")"
+    if hugo --quiet --source "$THEME_ROOT/exampleSite" --destination "$EXAMPLESITE_BUILD" 2>/dev/null; then
+        echo "$EXAMPLESITE_BUILD"
+        return 0
+    else
+        printf 'build_examplesite: hugo build failed\n' >&2
+        EXAMPLESITE_BUILD=""
+        return 1
+    fi
+}
+
 # shellcheck disable=SC2329  # invoked via the EXIT trap
 cleanup_fixtures() {
     # mktemp-created temp dirs are the documented exception in CODING.md
@@ -52,6 +74,9 @@ cleanup_fixtures() {
             rm -rf "$out"
         fi
     done
+    if [[ -n "$EXAMPLESITE_BUILD" && -d "$EXAMPLESITE_BUILD" ]]; then
+        rm -rf "$EXAMPLESITE_BUILD"
+    fi
 }
 trap cleanup_fixtures EXIT
 
