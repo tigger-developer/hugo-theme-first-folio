@@ -1235,9 +1235,11 @@ nav > a.nav-item.nav-item-active:hover {
   animation: none !important;
 }
 
-/* Issue #52: image cards keep their light title colour on hover */
+/* Issue #53: card title hover tints to the accent colour (--color-secondary).
+   Restores the pre-Issue #52 behaviour where image-card titles shifted to the
+   accent on hover. The previous fade-to-rgba(255,255,255,0.85) was the miss. */
 .masonry-item.has-image .masonry-content h3 a.header-interactive:hover {
-  color: rgba(255, 255, 255, 0.85) !important;
+  color: var(--color-secondary) !important;
 }
 
 /* Issue #61: List view titles - underline only on hover, no background */
@@ -2500,6 +2502,15 @@ main.list .content {
   text-decoration: none;
   color: #ffffff !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  animation: none !important;
+}
+
+/* Issue #53 AC53.2: hover tints to the accent colour (--color-secondary),
+   matching the masonry image-card hover. Same specificity as the block above;
+   source order wins on :hover only, so the base colour stays #ffffff. */
+.carousel-card h2 a:hover,
+.carousel-card h2 a.header-interactive:hover {
+  color: var(--color-secondary) !important;
 }
 
 /* Frosted glass per-pill on carousel meta items */
