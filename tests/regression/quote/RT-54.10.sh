@@ -15,12 +15,12 @@ run_test() {
     if ! build=$(build_examplesite); then return 1; fi
     local page="$build/journal/shortcode-showcase/index.html"
 
-    # Look for any .pull-quote-photo with src containing "missing-file".
+    # Look for any .pull-quote-photo with src containing "intentionally-missing-file".
     local srcs
     srcs=$(htmlq -f "$page" -a src '.pull-quote-photo' 2>/dev/null)
 
-    if grep -qF "missing-file" <<< "$srcs"; then
-        printf '    found .pull-quote-photo referencing missing-file (should be omitted)\n' >&2
+    if grep -qF "intentionally-missing-file" <<< "$srcs"; then
+        printf '    found .pull-quote-photo referencing intentionally-missing-file (should be omitted)\n' >&2
         printf '    srcs:\n%s\n' "$srcs" | sed 's/^/      /' >&2
         return 1
     fi

@@ -1,8 +1,8 @@
-<!-- Version: 1.1 | Last updated: 2026-05-10 -->
+<!-- Version: 1.2 | Last updated: 2026-05-12 -->
 
 # Shortcodes Reference
 
-The First Folio theme provides 18 custom shortcodes for varied content types.
+The First Folio theme provides 19 custom shortcodes for varied content types.
 
 ## Table of Contents
 
@@ -15,14 +15,15 @@ The First Folio theme provides 18 custom shortcodes for varied content types.
 7. [popquote](#popquote) - Alias for `details`; retained for existing content
 8. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
 9. [poem](#poem) - Poetry with preserved line breaks
-10. [video](#video) - HTML5 video player
-11. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
-12. [formspree](#formspree) - Formspree-backed contact form
-13. [rawhtml](#rawhtml) - Raw HTML pass-through
-14. [section-list](#section-list) - Section navigation list
-15. [img](#img) - Inline image with responsive thumbnails
-16. [gallery](#gallery) - Image gallery with lightbox
-17. [side-by-side](#side-by-side) - Side-by-side content wrapper
+10. [stat / stats](#stat--stats) - Number+label "stats rows" with optional responsive grid
+11. [video](#video) - HTML5 video player
+12. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
+13. [formspree](#formspree) - Formspree-backed contact form
+14. [rawhtml](#rawhtml) - Raw HTML pass-through
+15. [section-list](#section-list) - Section navigation list
+16. [img](#img) - Inline image with responsive thumbnails
+17. [gallery](#gallery) - Image gallery with lightbox
+18. [side-by-side](#side-by-side) - Side-by-side content wrapper
 
 ---
 
@@ -224,29 +225,48 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## quote
 
-Pull-quote with a decorative opening quotation mark and an optional attribution line. Block-form shortcode - the body is markdown and can span multiple lines, contain inline formatting, links, and other shortcodes.
+Pull-quote with a decorative opening quotation mark and optional attribution. Block-form shortcode — the body is markdown and can span multiple lines, contain inline formatting, links, and other shortcodes.
 
 Distinct from [`popquote`](#popquote) / [`details`](#details), which render a collapsible disclosure widget. `quote` is an always-visible featured pull-quote intended to draw the eye within the flow of an article.
+
+Two attribution paths: a back-compat single-line `attribution=` for casual literary quotes, and a structured testimonial path (`name` / `role` / `organization` / `photo` / `featured`) for richer named-speaker layouts.
 
 ### Parameters
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| `attribution` | No | Source of the quote - rendered as a right-aligned caption, automatically prefixed with an em-dash |
-| Inner content | Yes | The quote text itself; supports full markdown |
+| `attribution` | No | Single-line attribution. When set, all structured fields below are ignored (back-compat). |
+| `name` | No | Speaker's name — rendered with the heaviest weight in the structured attribution. |
+| `role` | No | Speaker's role — rendered on a secondary line below the name. |
+| `organization` | No | Speaker's organisation — joined to the role with a comma when both are set, or rendered alone otherwise. |
+| `photo` | No | Path to a speaker portrait. Resolution chain: bare filename (page resource) > leading-slash (site-root path) > `http://` / `https://` (absolute URL). Unresolvable photos emit a build warning and the `<img>` is omitted. |
+| `featured` | No | `true` applies a stronger visual treatment (larger type, more padding, larger photo). Use sparingly — for hero-style testimonials. |
+| Inner content | Yes | The quote text itself; supports full markdown. |
 
 ### Usage
 
-With attribution:
+Back-compat single-line attribution:
 
 ```markdown
 {{< quote attribution="A. Person" >}}
-The actual quote text - can include **bold**, *italic*, [links](https://example.com),
-and span multiple lines.
+The actual quote text — can include **bold**, *italic*, [links](https://example.com).
 {{< /quote >}}
 ```
 
-Without attribution:
+Structured testimonial:
+
+```markdown
+{{< quote
+    name="A. Client"
+    role="Director"
+    organization="Example Co"
+    photo="client.jpg"
+    featured=true >}}
+Working with them clarified what we'd been circling for years.
+{{< /quote >}}
+```
+
+Unattributed (decorative quote mark, no caption):
 
 ```markdown
 {{< quote >}}
@@ -254,12 +274,24 @@ An unattributed pull-quote.
 {{< /quote >}}
 ```
 
+### Photo resolution chain
+
+The `photo` parameter resolves in three tiers, identical to the `video` shortcode's `poster_image`:
+
+1. **Page resource** — bare filename like `client.jpg` is looked up against the page bundle's resources.
+2. **Site-root path** — leading-slash path like `/portraits/client.jpg` is used verbatim from the site root.
+3. **Absolute URL** — `http://` or `https://` prefix is used verbatim.
+
+If none resolve, `<img>` is omitted from the output and Hugo emits a stderr WARN naming the offending filename. **This is by design**: the warning surfaces typos and missing assets at build time rather than silently failing. The theme's `RT-54.11` regression test asserts the warning fires, using an intentionally-missing demo file (`intentionally-missing-file.jpg`) in `exampleSite/content/journal/shortcode-showcase/`.
+
 ### Styling
 
-- Large decorative opening quotation mark (`"`) in the theme's primary accent colour (`--color-primary`), positioned top-left at ~7rem tall
-- Quote body in italic, slightly larger than body text, full body colour in both light and dark mode
-- Attribution caption right-aligned in a muted shade (faded to ~65% of the body colour), prefixed with an em-dash via CSS
-- Responsive: on screens narrower than ~32rem the decorative quote mark shrinks and the indent tightens
+- Large decorative opening quotation mark (`"`) coloured by `--pull-quote-mark` (red at 0.3 alpha in light mode, 0.6 alpha in dark mode — tuned per mode for legibility under the body text the mark sits behind), positioned top-left.
+- Quote body in serif, slightly larger than body text, full body colour in both modes.
+- Back-compat `attribution=` renders right-aligned with an em-dash prefix.
+- Structured attribution renders below the quote as: optional photo (circular crop, 3rem / 4rem when featured), name (weighted), role line (smaller, muted).
+- `pull-quote-featured` modifier class on the outer `<figure>` enables larger typography and more padding.
+- Responsive: on screens narrower than ~32rem the decorative quote mark shrinks and the indent tightens.
 
 ---
 
@@ -287,6 +319,74 @@ Line breaks for you.
 ### Live Demo
 
 See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#poem).
+
+---
+
+## stat / stats
+
+A pair of shortcodes for portfolio- or consultancy-style "stats rows" — a large number with a short label, individually or in a responsive grid. The `stat` block can be used standalone inline, or wrapped in `stats` for a row-of-numbers layout that reflows responsively.
+
+### `stat` parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `number` | Yes | The headline figure. String, not numeric — supports `"80"`, `"20"`, `"£500k"`, `"4.7"`, etc. |
+| `label` | Yes | Caption shown below the number. |
+| `prefix` | No | Small glyph or text before the number (e.g. `"~"`, `"£"`, `"$"`). |
+| `suffix` | No | Small glyph or text after the number (e.g. `"+"`, `"%"`, `"k"`, `"/5"`). |
+
+### `stats` parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| `columns` | No | Fixed column count (`columns=4`). Default behaviour without this parameter is responsive `auto-fit` columns. |
+| Inner content | Yes | One or more nested `stat` shortcodes. |
+
+### Usage
+
+Standalone:
+
+```markdown
+{{< stat number="80" label="Countries" >}}
+```
+
+Prefix and suffix:
+
+```markdown
+{{< stat number="20" label="Years" prefix="~" suffix="+" >}}
+```
+
+Responsive grid (auto-fit columns — reflows from N across to fewer columns as the viewport narrows):
+
+```markdown
+{{< stats >}}
+{{< stat number="40" label="Years experience" >}}
+{{< stat number="80" label="Countries advised" >}}
+{{< stat number="200" suffix="+" label="Parties advised" >}}
+{{< /stats >}}
+```
+
+Fixed-column grid (override the auto-fit default):
+
+```markdown
+{{< stats columns=4 >}}
+{{< stat prefix="£" number="500" suffix="k" label="Saved" >}}
+{{< stat number="12" label="Awards" >}}
+{{< stat number="4.7" suffix="/5" label="Score" >}}
+{{< stat number="99.9" suffix="%" label="Uptime" >}}
+{{< /stats >}}
+```
+
+### Styling
+
+- `.stat-value` in the accent font, large clamp-sized typography (`clamp(2rem, 5vw, 3rem)`), `--color-primary`.
+- `.stat-prefix` / `.stat-suffix` ~50% of value size, slightly muted.
+- `.stat-label` body font, small, slightly letter-spaced.
+- `.stats-grid` uses CSS Grid with `auto-fit, minmax(8rem, 1fr)` by default; `columns=N` emits an inline `style="grid-template-columns: repeat(N, 1fr)"` override.
+
+### Live Demo
+
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#stats).
 
 ---
 
@@ -735,4 +835,5 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## Changelog
 
+- **1.2** (2026-05-12): #54 documentation. Rewrote the `quote` section to cover the structured-attribution path (`name`, `role`, `organization`, `photo`, `featured`) added in #54 item 1, including the photo resolution chain (page resource > site-root > absolute URL) and the intentional-warning demo. Added a new `stat / stats` section for the shortcodes added in #54 item 3. Corrected the `--pull-quote-mark` alpha values quoted in the styling notes (light 0.3, dark 0.6).
 - **1.1** (2026-05-10): Clarified that `popquote` renders identical HTML to `details` and is retained as an alias for backward compatibility; new content should use `details`. Restored the `center` shortcode name in the ToC and H2 heading (previously OED-normalized to `centre` by sanitize because the identifier was not in backticks); the section title is now backticked so future sanitize passes will leave it alone, with an explicit `{#centre}` anchor attribute to keep the URL fragment stable across sanitize runs.

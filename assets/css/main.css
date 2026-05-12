@@ -10,6 +10,13 @@
   --color-primary: #b5122f;
   --color-secondary: #12b5a0;
 
+  /* Decorative quote-mark colour. Same hue as the dark-mode value (so the mark
+     keeps its identity across modes), but tuned per mode for legibility against
+     the body text it sits behind: 0.3 alpha in light (black text), 0.6 in dark
+     (white text). The "image always backed by a dark card" rule doesn't apply —
+     the mark is a graphic inline with body text, not text over an image. */
+  --pull-quote-mark: rgba(220, 20, 60, 0.3);
+
   /* Light mode hover derivatives - mix with BLACK for darker variants */
   --color-primary-hover: color-mix(in srgb, var(--color-primary) 80%, black);
   --color-secondary-hover: color-mix(in srgb, var(--color-secondary) 80%, black);
@@ -821,8 +828,7 @@ article .title {
   font-family: var(--font-serif);
   font-size: 20rem;
   line-height: 1;
-  color: var(--color-primary);
-  opacity: 0.6;
+  color: var(--pull-quote-mark);
   pointer-events: none;
   user-select: none;
   z-index: 0;

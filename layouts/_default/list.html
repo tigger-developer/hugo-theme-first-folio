@@ -94,6 +94,12 @@
 		{{ end }}
 	</header>
 
+	{{- /* Issue #54: prose mode brackets .Content with signpost (top) and signpost-footer
+	     (bottom), matching the article-page ordering. */ -}}
+	{{- if eq $listStyle "prose" -}}
+	{{ partial "signpost.html" . }}
+	{{- end -}}
+
 	{{- /* Section content from _index.md - above sidebar-layout unless sidebar enabled */ -}}
 	{{- if not $showSidebar -}}
 	{{ if .Content }}
@@ -101,6 +107,10 @@
 		{{ .Content }}
 	</div>
 	{{ end }}
+	{{- end -}}
+
+	{{- if eq $listStyle "prose" -}}
+	{{ partial "signpost-footer.html" . }}
 	{{- end -}}
 
 	{{- /* Start sidebar-layout if sidebar enabled */ -}}
@@ -117,14 +127,9 @@
 	{{- end -}}
 
 	{{- if eq $listStyle "prose" -}}
-		{{- /* Issue #54: prose mode renders signpost + .Content + signpost-footer only.
-		     Carousel, masonry, gallery, list and pagination are all suppressed. The
-		     .Content rendering above already handles the body; here we only need the
-		     signpost partials. The single.html template wraps these around .Content;
-		     for prose mode we replicate that structure inline (signpost before, then
-		     .Content is already rendered above, signpost-footer after). */ -}}
-		{{ partial "signpost.html" . }}
-		{{ partial "signpost-footer.html" . }}
+		{{- /* Issue #54: prose mode renders only .Content (rendered above) bracketed
+		     by signpost / signpost-footer (rendered around it above). Nothing here.
+		     Carousel, masonry, gallery, list and pagination are all suppressed. */ -}}
 	{{- else if eq $listStyle "gallery" -}}
 		{{ partial "gallery-section.html" (dict "pages" $paginator.Pages "context" . "Site" .Site) }}
 	{{- else if eq $listStyle "list" -}}

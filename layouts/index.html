@@ -12,11 +12,22 @@
 	<div class="content">
 		{{ partial "head.html" . }}
 		<main class="home{{ if .Params.sidebar }} home-with-sidebar{{ end }}">
+			{{- /* Read list_style early so we can render signposts around .Content for prose mode. */ -}}
+			{{- $listStyle := .Params.list_style | default "cards" -}}
+			{{- /* Check for sidebar configuration */ -}}
+			{{- $showSidebar := .Params.sidebar | default false -}}
+
 			<div class="site-description">
 				{{- if isset .Site.Params "subtitle" -}}
 				<p>{{ .Site.Params.Subtitle | .Page.RenderString }}</p>
 				{{- end -}}
 			</div>
+
+			{{- /* Issue #54: prose mode wraps .Content with the signpost (top) and
+			     signpost-footer (bottom) partials, matching the article-page ordering. */ -}}
+			{{- if eq $listStyle "prose" -}}
+			{{ partial "signpost.html" . }}
+			{{- end -}}
 
 			{{ if .Content }}
 			<div class="homepage-content">
@@ -24,11 +35,9 @@
 			</div>
 			{{ end }}
 
-			{{- /* Check for sidebar configuration */ -}}
-			{{- $showSidebar := .Params.sidebar | default false -}}
-
-			{{- /* Read list_style from frontmatter, default to cards (masonry) */ -}}
-			{{- $listStyle := .Params.list_style | default "cards" -}}
+			{{- if eq $listStyle "prose" -}}
+			{{ partial "signpost-footer.html" . }}
+			{{- end -}}
 
 			{{- /* Build page collections for all layout types */ -}}
 			{{- /* Issue #1: Use mainSections from config instead of hardcoded names */ -}}
@@ -140,11 +149,9 @@
 
 			{{- /* Render based on list_style */ -}}
 			{{- if eq $listStyle "prose" -}}
-				{{- /* Issue #54: prose mode renders signpost + .Content + signpost-footer only.
-				     .Content is already rendered above (homepage-content div). Suppress carousel,
-				     masonry, gallery, list and pagination — author composes the body with shortcodes. */ -}}
-				{{ partial "signpost.html" . }}
-				{{ partial "signpost-footer.html" . }}
+				{{- /* Issue #54: prose mode body is rendered above (homepage-content),
+				     bracketed by signpost / signpost-footer partials directly above the
+				     content block (not here). Nothing to render in this branch. */ -}}
 			{{- else if eq $listStyle "gallery" -}}
 				{{- /* Gallery mode: show sections as gallery cards */ -}}
 				{{ partial "gallery-section.html" (dict "pages" .Site.Sections "context" . "Site" .Site) }}

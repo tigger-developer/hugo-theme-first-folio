@@ -26,10 +26,10 @@ run_test() {
         return 1
     fi
 
-    if grep -qF "missing-file.jpg" "$tmp_err"; then
+    if grep -qF "intentionally-missing-file.jpg" "$tmp_err"; then
         return 0
     fi
-    printf '    expected stderr WARN mentioning missing-file.jpg\n' >&2
+    printf '    expected stderr WARN mentioning intentionally-missing-file.jpg\n' >&2
     printf '    stderr was:\n%s\n' "$(cat "$tmp_err")" | sed 's/^/      /' >&2
     return 1
 }

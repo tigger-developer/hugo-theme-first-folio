@@ -203,7 +203,9 @@ It's a dangerous business, going out your door.
 
 ### Edge case — unresolvable photo emits a build warning and omits the `<img>`
 
-{{< quote name="Tom Bombadil" role="Master of Wood, Water and Hill" photo="missing-file.jpg" >}}
+The filename `intentionally-missing-file.jpg` below does not exist in the page bundle; it's the demo for the unresolvable-photo path. Running `hugo` or `hugo server` will print a WARN line on stderr referencing the filename. The `<img>` element is omitted from the rendered HTML — the attribution still renders, just without a photo. This warning is **intentional** and exercises `RT-54.11` in the theme's regression suite.
+
+{{< quote name="Tom Bombadil" role="Master of Wood, Water and Hill" photo="intentionally-missing-file.jpg" >}}
 Hey dol! Merry dol! Ring a dong dillo!
 {{< /quote >}}
 

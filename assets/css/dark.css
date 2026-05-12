@@ -16,6 +16,10 @@
   /* Dark mode hover derivatives - mix with WHITE for lighter variants */
   --color-primary-hover: color-mix(in srgb, var(--color-primary) 80%, white);
   --color-secondary-hover: color-mix(in srgb, var(--color-secondary) 80%, white);
+
+  /* Decorative quote-mark colour. Same hue as --color-primary, alpha baked in.
+     Dark mode: 0.6 (lighter red reads well on dark background). */
+  --pull-quote-mark: rgba(220, 20, 60, 0.6);
 }
 
 body {

@@ -1,4 +1,4 @@
-<!-- Version: 1.0 | Last updated: 2026-05-05 -->
+<!-- Version: 1.1 | Last updated: 2026-05-12 -->
 
 # Frontmatter Reference
 
@@ -204,6 +204,7 @@ toc: true
 tocTitle: "Contents"
 tldr: "A one-sentence summary shown at the top of the article."
 contentLang: ga
+linkTitle: "Short Label"
 ```
 
 | Field | Default | Description |
@@ -214,6 +215,7 @@ contentLang: ga
 | `tocTitle` | `"Contents"` | Custom heading for the table of contents. |
 | `tldr` | - | Summary box displayed at the top of the article. |
 | `contentLang` | - | Language code (e.g. `ga` for Irish). Applies language-specific font styling. |
+| `linkTitle` | `title` | Short label shown in auto-generated navigation contexts: sidebar, breadcrumb (both top-section and sub-section segments), and related-articles strips. The page's own `<h1>` and `<title>` tag continue to use `title`. Use this when a long SEO-oriented `title` would clutter a sidebar or breadcrumb. Hugo built-in (`.LinkTitle` falls back to `.Title` when unset, so pages without `linkTitle` are unaffected). |
 
 ---
 
@@ -232,6 +234,8 @@ signpost_footer:
 ```
 
 `signpost` appears near the top of the article. `signpost_footer` appears at the bottom.
+
+Also rendered, in the same positions, on **section index pages** (`_index.md`) that use `list_style: prose` (see [Section index fields](#section-index-fields)). The signposts bracket the `.Content` body the same way as on article pages.
 
 ---
 
@@ -294,10 +298,44 @@ grid:
 
 | Field | Default | Description |
 |-------|---------|-------------|
-| `list_style` | `cards` | How pages in this section are listed. Options: `cards` (masonry grid), `list` (list view), `gallery` (gallery grid). |
+| `list_style` | `cards` | How pages in this section are listed. Options: `cards` (masonry grid), `list` (list view), `gallery` (gallery grid), `prose` (free-form landing page — see below). |
 | `list_recursive` | `false` | Include pages from sub-sections in the listing. |
 | `sidebar` | `false` | Show a sidebar on the section listing page. |
 | `grid` | site default | Per-section grid configuration override (see [Configuration Reference](config.md#grid-configuration)). |
+
+### `list_style: prose`
+
+A free-form landing-page layout. The page renders only its `.Content` body — no carousel, no masonry grid, no pagination. Optional `signpost` and `signpost_footer` frontmatter render above and below the body (same partials as on article pages). Authors compose the page with shortcodes inside the body — testimonials via `quote`, stats rows via `stats`, hero copy as prose.
+
+Applies to both the root homepage (`content/_index.md`) and any section index page (`content/<section>/_index.md`).
+
+```yaml
+---
+title: "About"
+list_style: prose
+signpost:
+  text: "GET IN TOUCH"
+  url: /contact/
+signpost_footer:
+  text: "READ THE JOURNAL"
+  url: /journal/
+---
+
+A consultancy practice. Three decades across financial services and the public sector.
+
+{{< stats >}}
+{{< stat number="20" suffix="+" label="Years experience" >}}
+{{< stat number="80" label="Countries advised" >}}
+{{< /stats >}}
+
+## What clients say
+
+{{< quote name="A. Client" role="Director" organization="Example Co" featured=true >}}
+Clarity where there was none.
+{{< /quote >}}
+```
+
+See `exampleSite/content/profile/_index.md` for a live demo.
 
 ---
 
@@ -337,3 +375,10 @@ signpost:
 toc: true
 ---
 ```
+
+---
+
+## Changelog
+
+- **1.1** (2026-05-12): #54 documentation. Added `linkTitle` to the Display Options section (#54 item 4 — short label for sidebar / breadcrumb / related-articles nav contexts; Hugo built-in falls back to `title` when unset). Added `list_style: prose` to the Section Index Fields section with a dedicated subsection and full example (#54 item 2 — free-form landing-page layout). Noted that `signpost` and `signpost_footer` also render on `list_style: prose` section pages, bracketing `.Content` the same way as on article pages.
+- **1.0** (2026-05-05): Initial frontmatter reference covering basic fields, layouts, image/video, homepage controls, signpost, display title, breadcrumb, gallery, section-index, and build control.
