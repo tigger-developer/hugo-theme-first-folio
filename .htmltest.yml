@@ -1,0 +1,33 @@
+# htmltest configuration — link/anchor/asset integrity check for the built exampleSite.
+# Run via `make smoke`. Reads the build at the path set in DirectoryPath.
+
+DirectoryPath: "/tmp/ff-smoke-build"
+
+# Internal scope: catch broken links and missing assets in the demo content.
+CheckInternal: true
+CheckInternalHash: true
+
+# External scope: disabled. Offline-friendly and avoids flakes from third-party outages.
+CheckExternal: false
+CheckMailto: false
+
+# Hash handling: empty fragment (#) is intentional CSS hook in some shortcodes; allow it.
+IgnoreEmptyHref: true
+IgnoreInternalEmptyHash: true
+
+# Trailing-slash noise: Hugo's taxonomy template renders /tags/foo without a trailing
+# slash. The server resolves it fine; flagging every tag link as a "directory missing
+# trailing slash" is stylistic noise that drowns real signal.
+IgnoreDirectoryMissingTrailingSlash: true
+
+# Empty alt is the WCAG-correct way to mark decorative images (read-more chevrons,
+# light/dark icon swaps). htmltest's default treats present-but-empty alt as a
+# problem; here we treat it as the deliberate semantic choice it is. Truly-missing
+# alt is still flagged (IgnoreAltMissing is left false).
+IgnoreAltEmpty: true
+
+# Default URL — for content rendered with absolute baseURL, helps htmltest resolve correctly.
+# The exampleSite is built with --baseURL https://example.com/ implicitly via its config.
+
+# Log level: 1=debug, 2=info, 3=warning, 4=error. 2 is right for routine runs.
+LogLevel: 2
