@@ -1,3 +1,5 @@
+<!-- Version: 1.1 | Last updated: 2026-05-10 -->
+
 # Shortcodes Reference
 
 The First Folio theme provides 18 custom shortcodes for varied content types.
@@ -5,12 +7,12 @@ The First Folio theme provides 18 custom shortcodes for varied content types.
 ## Table of Contents
 
 1. [callout](#callout) - Styled alert/notice boxes
-2. [centre](#centre) - Centre-aligned content block
+2. [`center`](#centre) - Centre-aligned content block
 3. [colorbold](#colorbold) - Inline accent-coloured bold text
 4. [details](#details) - Collapsible content
 5. [dialogue](#dialogue) - Character speech for plays
 6. [direction](#direction) - Stage directions
-7. [popquote](#popquote) - Expandable quotes
+7. [popquote](#popquote) - Alias for `details`; retained for existing content
 8. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
 9. [poem](#poem) - Poetry with preserved line breaks
 10. [video](#video) - HTML5 video player
@@ -59,7 +61,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ---
 
-## centre
+## `center` {#centre}
 
 Centre-aligned content block. Wraps inner content in a `<div class="text-center">`.
 
@@ -194,14 +196,16 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## popquote
 
-Expandable quote using the same collapsible styling as `details`.
+Alias for [`details`](#details). Produces identical HTML (`<details class="styled-details">…</details>`). The name dates from a use pattern of revealing aphorism-like quotes one at a time, but the rendering is a generic collapsible disclosure widget, not a pull-quote.
+
+For new content, prefer `details` - its name matches the underlying HTML element and removes the implied (but absent) relationship with [`quote`](#quote). `popquote` is retained for backward compatibility with existing content; there is no plan to remove it.
 
 ### Parameters
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
 | First positional | Yes | Opening/summary text |
-| Inner content | Yes | Full quote content (supports markdown) |
+| Inner content | Yes | Full body content (supports markdown) |
 
 ### Usage
 
@@ -222,7 +226,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 Pull-quote with a decorative opening quotation mark and an optional attribution line. Block-form shortcode - the body is markdown and can span multiple lines, contain inline formatting, links, and other shortcodes.
 
-Distinct from [`popquote`](#popquote) which is a collapsible expandable quote; `quote` is an always-visible featured pull-quote intended to draw the eye within the flow of an article.
+Distinct from [`popquote`](#popquote) / [`details`](#details), which render a collapsible disclosure widget. `quote` is an always-visible featured pull-quote intended to draw the eye within the flow of an article.
 
 ### Parameters
 
@@ -726,3 +730,9 @@ Wrapper shortcode that places inner content side by side on desktop. Collapses t
 ### Live Demo
 
 See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#side-by-side).
+
+---
+
+## Changelog
+
+- **1.1** (2026-05-10): Clarified that `popquote` renders identical HTML to `details` and is retained as an alias for backward compatibility; new content should use `details`. Restored the `center` shortcode name in the ToC and H2 heading (previously OED-normalized to `centre` by sanitize because the identifier was not in backticks); the section title is now backticked so future sanitize passes will leave it alone, with an explicit `{#centre}` anchor attribute to keep the URL fragment stable across sanitize runs.
