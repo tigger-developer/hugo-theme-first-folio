@@ -3683,3 +3683,52 @@ figure.inline-image:has(.inline-image-caption-blur) {
   text-decoration: underline;
   text-decoration-skip-ink: auto;
 }
+
+/* Issue #54: stat / stats shortcodes.
+   stat = single number+label block (number, optional prefix/suffix, label).
+   stats = wrapper that lays children out in a responsive auto-fit grid (or
+   N fixed columns via inline style override from the shortcode template).
+   No !important per WEB.md; specificity alone is sufficient here. */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.stat {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.stat-figure {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.1rem;
+  line-height: 1;
+}
+
+.stat-value {
+  font-family: var(--font-accent);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-prefix,
+.stat-suffix {
+  font-family: var(--font-accent);
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-weight: 500;
+  color: var(--color-primary);
+  opacity: 0.75;
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+  color: var(--text-secondary);
+}

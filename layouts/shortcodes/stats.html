@@ -1,0 +1,23 @@
+<!--
+ Copyright (c) 2023 Taḋg Paul
+ SPDX-License-Identifier: Apache-2.0
+ See LICENSE file in the repository root.
+-->
+
+{{- /* ABOUTME: stats shortcode — wrapper that lays out child {{< stat >}} elements in a responsive grid. */ -}}
+{{- /* ABOUTME: Defaults to auto-fit columns (responsive). Optional `columns=N` for a fixed-column layout. */ -}}
+
+{{- $columns := .Get "columns" -}}
+{{- $style := "" -}}
+{{- if $columns -}}
+  {{- /* Hugo's html/template auto-escapes inline style values (renders as
+       "ZgotmplZ" placeholder). The value here is built from a known-safe
+       template plus the integer columns parameter; mark as safe CSS so
+       Hugo emits it verbatim. */ -}}
+  {{- /* %v handles whatever type Hugo casts the shortcode param to (int or string). */ -}}
+  {{- $style = printf "grid-template-columns: repeat(%v, 1fr)" $columns | safeCSS -}}
+{{- end -}}
+
+<div class="stats-grid"{{ with $style }} style="{{ . }}"{{ end }}>
+{{ .Inner }}
+</div>

@@ -190,6 +190,43 @@ Places two items side by side on desktop, stacked on mobile:
 {{< img src="sample-b.jpg" alt="Blue gradient" >}}
 {{< /side-by-side >}}
 
+## Stats
+
+A pair of shortcodes for portfolio / consultancy "stats rows" — a number paired with a short label. Use `stat` standalone, or wrap several in `stats` for a responsive grid.
+
+### Standalone
+
+A single stat block, used inline:
+
+{{< stat number="80" label="Countries" >}}
+
+### Prefix and suffix
+
+Optional `prefix` and `suffix` add small adornments around the number:
+
+{{< stat number="20" label="Years" prefix="~" suffix="+" >}}
+
+### Wrapped — auto-fit responsive grid
+
+The default `{{</* stats */>}}` wrapper lays children out with `auto-fit` columns. The layout reflows to fewer columns as the viewport narrows:
+
+{{< stats >}}
+{{< stat number="40" label="Years experience" >}}
+{{< stat number="80" label="Countries advised" >}}
+{{< stat number="200" suffix="+" label="Parties advised" >}}
+{{< /stats >}}
+
+### Wrapped — fixed columns
+
+Pass `columns=N` to fix the column count regardless of viewport. Useful when the row would otherwise reflow to a layout that looks unbalanced:
+
+{{< stats columns=4 >}}
+{{< stat prefix="£" number="500" suffix="k" label="Saved" >}}
+{{< stat number="12" label="Awards" >}}
+{{< stat number="4.7" suffix="/5" label="Score" >}}
+{{< stat number="99.9" suffix="%" label="Uptime" >}}
+{{< /stats >}}
+
 ## Video
 
 Embeds a local video file with HTML5 player controls:

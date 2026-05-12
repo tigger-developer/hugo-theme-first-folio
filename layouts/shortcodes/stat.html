@@ -1,0 +1,26 @@
+<!--
+ Copyright (c) 2023 Taḋg Paul
+ SPDX-License-Identifier: Apache-2.0
+ See LICENSE file in the repository root.
+-->
+
+{{- /* ABOUTME: stat shortcode — a single number+label "stat block" for portfolio/consultancy stats rows. */ -}}
+{{- /* ABOUTME: Pairs with the `stats` wrapper shortcode for grid layouts. Standalone use is fine too. */ -}}
+{{- /* Required: number, label. Optional: prefix (e.g. "£", "~"), suffix (e.g. "+", "%", "k"). */ -}}
+
+{{- $number := .Get "number" -}}
+{{- $label := .Get "label" -}}
+{{- $prefix := .Get "prefix" -}}
+{{- $suffix := .Get "suffix" -}}
+
+{{- if not $number -}}{{- errorf "stat shortcode: missing required 'number' parameter on %s" .Page.Path -}}{{- end -}}
+{{- if not $label -}}{{- errorf "stat shortcode: missing required 'label' parameter on %s" .Page.Path -}}{{- end -}}
+
+<div class="stat">
+  <div class="stat-figure">
+    {{- with $prefix }}<span class="stat-prefix">{{ . }}</span>{{ end -}}
+    <span class="stat-value">{{ $number }}</span>
+    {{- with $suffix }}<span class="stat-suffix">{{ . }}</span>{{ end -}}
+  </div>
+  <div class="stat-label">{{ $label }}</div>
+</div>
