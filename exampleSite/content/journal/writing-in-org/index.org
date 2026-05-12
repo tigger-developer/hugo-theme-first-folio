@@ -1,0 +1,77 @@
+---
+title: "Writing posts in Org-mode"
+linkTitle: "Org-mode"
+date: 2025-11-15
+description: "How to author First Folio pages in Org-mode, and why several theme shortcodes are unnecessary when you do."
+tags:
+  - org-mode
+  - markup
+  - reference
+author: "Theme Demo"
+toc: true
+---
+
+This whole page is an =.org= file. Hugo renders Org-mode natively — no plugin, no preprocessor. For text that isn't simple Markdown, Org gives you semantic blocks that Markdown lacks: verse, quote, centred content, source code with arbitrary language, examples, and raw HTML, all without shortcodes.
+
+A common misconception is that Hugo's Org support is "limited". That refers to the Emacs Org-mode ecosystem — agenda, literate programming, mobile sync, the whole catalogue. As a /markup format/ for static web content, Hugo's Org implementation is more featureful than its Markdown implementation. Most theme shortcodes exist to paper over Markdown's gaps.
+
+* Verse — replaces ~{{</* poem */>}}~
+
+Markdown collapses single newlines. To preserve line breaks for poetry the First Folio theme ships a =poem= shortcode. In Org you just use =#+BEGIN_VERSE=:
+
+#+BEGIN_VERSE
+She drew the roads from memory,
+the river where it used to run,
+the bridge they took down in the nineties.
+
+She marked the shop that sold paraffin,
+the tree where the owl sat every January,
+the gap in the wall you could squeeze through
+if you were ten and determined.
+#+END_VERSE
+
+Line breaks preserved. No shortcode wrapper, no escaping, no thinking about it.
+
+* Quote — replaces simple ~{{</* quote */>}}~
+
+For an unattributed pull-quote, Org's =#+BEGIN_QUOTE= is enough:
+
+#+BEGIN_QUOTE
+The best time to plant a tree was twenty years ago. The second best time is now.
+#+END_QUOTE
+
+(The structured =quote= shortcode with =name=, =role=, =organization=, =photo= still has a place — those richer testimonial layouts go beyond what a plain quote block expresses.)
+
+* Source code — richer than fenced Markdown
+
+A fenced Markdown block is just =```language= and a string. Org source blocks accept more attributes — including caption, label, language flavour, and switches that control numbering. Hugo highlights via Chroma exactly as for Markdown.
+
+#+CAPTION: Render a Hugo theme from the project root.
+#+BEGIN_SRC bash
+hugo --source exampleSite --destination _site --minify
+#+END_SRC
+
+* Footnotes — first-class
+
+Org footnotes[fn:1] are part of the language. Markdown has them too, but Org's syntax is cleaner and they integrate with Hugo's renderer without extension flags.
+
+[fn:1] You define them inline like this, or below the body with a stable label.
+
+* Centred content — replaces ~{{</* center */>}}~
+
+#+BEGIN_CENTER
+A centred line, no shortcode required.
+#+END_CENTER
+
+* When you still reach for a shortcode
+
+Org gives you the building blocks; shortcodes give you the theme-specific compositions on top. You still need shortcodes for:
+
+- =callout=, =stat=, =stats=, =img= (responsive thumbnails), =gallery=, =video=, =contactform=, =side-by-side= — they wrap multiple Org/HTML primitives into a theme-styled unit.
+- The /structured/ form of =quote= (named speaker + role + organisation + photo + featured modifier) — Org's quote block doesn't carry that data shape.
+
+The rule of thumb: if it's a markup primitive, prefer Org's native form. If it's a theme-specific composition, prefer the shortcode.
+
+* Mixing Org and Markdown freely
+
+Hugo doesn't mind. A single site can have =.md= and =.org= files side by side; their rendered output is indistinguishable from each other in the final HTML. Pick the format that fits the content — Org for verse and source-heavy posts, Markdown for short prose.
