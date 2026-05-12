@@ -65,10 +65,10 @@ With float positioning:
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. The callout sits alongside this paragraph text, demonstrating the float position parameter.
 
-## Centre
+## `center`
 
 {{< center >}}
-This text is centred using the centre shortcode.
+This text is centred using the `center` shortcode.
 {{< /center >}}
 
 ## Colorbold
