@@ -119,13 +119,13 @@
              loading="lazy"
              class="gallery-image">
       </picture>
-      {{- if $title -}}
-      <span class="gallery-item-title">{{ $title }}</span>
-      {{- end -}}
-      {{- if $caption -}}
-      <span class="gallery-item-caption">{{ $caption }}</span>
-      {{- end -}}
     </a>
+    {{- if $title }}
+    <span class="gallery-item-title">{{ $title }}</span>
+    {{- end }}
+    {{- if $caption }}
+    <span class="gallery-item-caption">{{ $caption }}</span>
+    {{- end }}
   </div>
   {{- end -}}
 </div>
