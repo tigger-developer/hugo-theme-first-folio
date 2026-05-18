@@ -17,7 +17,14 @@ document.documentElement.classList.add('prerelease-gating');
   var storageKey = 'prerelease-auth';
 
   function showPage() {
-    document.documentElement.classList.remove('prerelease-gating');
+    function reveal() {
+      document.documentElement.classList.remove('prerelease-gating');
+    }
+    if (document.readyState === 'complete') {
+      reveal();
+    } else {
+      window.addEventListener('load', reveal);
+    }
   }
 
   function hashInput(input) {
