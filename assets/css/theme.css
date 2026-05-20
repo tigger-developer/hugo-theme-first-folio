@@ -367,6 +367,26 @@ section.body > .footnotes {
   margin-top: 0;
 }
 
+/* Org-mode footnote layout (go-org emits sibling <sup> + <div class="footnote-body">) */
+.footnote-definition {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0.5em 0;
+}
+.footnote-definition > sup {
+  flex: 0 0 auto;
+}
+.footnote-body {
+  flex: 1 1 auto;
+}
+.footnote-body > p:first-child {
+  margin-top: 0;
+}
+.footnote-body > p:last-child {
+  margin-bottom: 0;
+}
+
 /* Signpost inside body: spacing above, collapse gap below */
 section.body > .signpost {
   margin-top: 1.5rem;
