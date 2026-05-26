@@ -1,0 +1,350 @@
+/*
+ * Copyright (c) 2023 Taḋg Paul
+ * SPDX-License-Identifier: Apache-2.0
+ * See LICENSE file in the repository root.
+ *
+ * ABOUTME: Print stylesheet. Loaded via <link media="print">, so downloaded only when printing.
+ * ABOUTME: See issue #61 for design rationale. Mobile arrangement is the reference, not the source.
+ */
+
+@media print {
+
+  /* ============================================
+     COLOUR & AMBIENCE — force light regardless of screen theme
+     ============================================ */
+  :root {
+    --bg-primary: #fff;
+    --bg-secondary: #fff;
+    --bg-color: #fff;
+    --text-color: #000;
+    --text-primary: #000;
+    --text-secondary: #222;
+  }
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  /* Defeat the background-layout's forced-dark class. */
+  .dark-bg,
+  .post-container.dark-bg,
+  .post-banner.dark-banner {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* ============================================
+     TYPOGRAPHY — Asap 12pt body, 800 bold; other fonts retained
+     ============================================ */
+  body {
+    font-family: 'Asap', system-ui, sans-serif !important;
+    font-size: 12pt;
+    font-weight: 400;
+    line-height: 1.45;
+  }
+  b, strong, .bold {
+    font-weight: 800;
+  }
+  /* stat / stats: cap the clamp-driven screen size for paper. */
+  .stat, .stats, .stat-number, .stats .stat-value {
+    font-size: 24pt !important;
+  }
+
+  /* ============================================
+     HIDE — site chrome and interactive widgets
+     ============================================ */
+  .site-nav,
+  .site-header,
+  header.site-header,
+  .burger-menu,
+  .burger,
+  .ambience-toggle,
+  .theme-toggle,
+  .lightbox,
+  .lightbox-overlay,
+  .pagination,
+  .section-sidebar,
+  .sidebar-collapse,
+  .carousel-prev,
+  .carousel-next,
+  .carousel-arrow,
+  .turnstile,
+  .cf-turnstile,
+  form.contact-form,
+  form.formspree,
+  .form-response,
+  footer.site-footer,
+  footer .social-icons,
+  footer .footer-links {
+    display: none !important;
+  }
+  /* Video and iframe embeds — replaced with text affordance below. */
+  video,
+  iframe {
+    display: none !important;
+  }
+  /* Text affordance where a video or iframe used to be. */
+  .video-wrapper::after,
+  .cf-stream::after,
+  figure.video::after,
+  .video::after {
+    content: "[video — see online version]";
+    display: block;
+    font-style: italic;
+    color: #555;
+    padding: 0.5rem 0;
+  }
+  iframe + ::after {
+    content: "[embedded content — see online version]";
+  }
+
+  /* ============================================
+     DECORATIVE STYLING — backgrounds, washes, shadows, gradients
+     ============================================ */
+  .post-banner,
+  .post-hero,
+  .post-container,
+  .masonry-bg,
+  .list-view-bg,
+  .carousel-bg,
+  .banner-wash,
+  .card-title-wash,
+  .card-desc-wash,
+  .carousel-scrim {
+    background-image: none !important;
+    background-color: transparent !important;
+  }
+  * {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    text-shadow: none !important;
+  }
+  /* Wash overlay layers — flatten to nothing. */
+  .banner-wash,
+  .card-title-wash,
+  .card-desc-wash,
+  .carousel-scrim,
+  .card-meta-pill {
+    background: none !important;
+  }
+
+  /* ============================================
+     EDITORIAL CONTENT — retain, neutralize screen-only styling
+     ============================================ */
+  /* Signposts: keep the text, drop the button chrome. URL expansion handled below. */
+  .signpost,
+  .signpost-footer {
+    background: none !important;
+    border: none !important;
+    padding: 0.25rem 0 !important;
+    margin: 0.5rem 0 !important;
+    text-align: left !important;
+    color: #000 !important;
+  }
+  .signpost a {
+    color: #000 !important;
+    text-decoration: underline;
+    font-weight: 800;
+  }
+  /* Post tags: pill -> inline text */
+  .post-tags ul.tags,
+  .post-tags .tags {
+    display: inline;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .post-tags li {
+    display: inline;
+    background: none !important;
+    border: none !important;
+    padding: 0;
+    margin: 0;
+  }
+  .post-tags li::after {
+    content: ", ";
+  }
+  .post-tags li:last-child::after {
+    content: "";
+  }
+  .post-tags a {
+    color: #000 !important;
+    text-decoration: none;
+  }
+  /* Breadcrumb: text retained, decoration stripped */
+  .breadcrumb,
+  .breadcrumb-list,
+  .breadcrumb-item {
+    color: #000 !important;
+  }
+  .breadcrumb-item a {
+    color: #000 !important;
+    text-decoration: none;
+  }
+  /* TOC: full retained at top */
+  .toc,
+  .toc-mobile,
+  .toc-mobile-details {
+    display: block !important;
+    border: 1px solid #ccc;
+    padding: 0.75rem 1rem;
+    margin: 0.5rem 0 1.5rem;
+    page-break-inside: avoid;
+    background: none !important;
+  }
+  .toc a, .toc-mobile a {
+    color: #000 !important;
+    text-decoration: none;
+  }
+  /* Related-articles: see-also list */
+  .related-articles {
+    border-top: 1px solid #ccc;
+    margin-top: 1.5rem;
+    padding-top: 0.75rem;
+  }
+  .related-articles a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  /* section-list shortcode: link list, chevron icons removed */
+  .sidebar-nav .sidebar-chevron,
+  .sidebar-nav .sidebar-chevron-wrapper {
+    display: none !important;
+  }
+  .sidebar-nav a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+
+  /* ============================================
+     CALLOUTS — retain content, soften fill, avoid splits
+     ============================================ */
+  .callout {
+    background: #fff !important;
+    border: 1px solid #ccc !important;
+    color: #000 !important;
+    page-break-inside: avoid;
+    margin: 0.75rem 0;
+  }
+  .callout-inner {
+    color: #000 !important;
+  }
+  .callout-title,
+  .callout a {
+    color: #000 !important;
+  }
+
+  /* ============================================
+     PULL-QUOTES — retain in IM Fell Extended, just soften
+     ============================================ */
+  .pull-quote,
+  figure.pull-quote {
+    page-break-inside: avoid;
+    border-left: 3px solid #444;
+    background: none !important;
+    color: #000 !important;
+  }
+
+  /* ============================================
+     QUOTE shortcode portrait — small inline circle
+     ============================================ */
+  .quote-photo,
+  .quote-portrait {
+    width: 80px !important;
+    height: 80px !important;
+    max-width: 80px !important;
+    max-height: 80px !important;
+  }
+
+  /* ============================================
+     TWO-COLUMN COLLAPSE — single-column flow in source order
+     ============================================ */
+  .columns-layout,
+  .post-featured-columns,
+  .post-featured-columns-left,
+  .post-featured-columns-right {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .columns-layout > *,
+  .post-featured-columns > * {
+    width: 100% !important;
+    float: none !important;
+    max-width: 100% !important;
+  }
+
+  /* ============================================
+     DETAILS — force-open regardless of [open] state
+     ============================================ */
+  details {
+    display: block !important;
+  }
+  details > * {
+    display: block !important;
+  }
+  details > summary {
+    list-style: none;
+    cursor: default;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+  }
+  details > summary::marker,
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* ============================================
+     PAGINATION HINTS — keep headings with content, blocks intact
+     ============================================ */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+  figure, .callout, .pull-quote, pre, table, .stat, .stats {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  /* ============================================
+     EXTERNAL LINK URL EXPANSION — print URLs after http(s) links only
+     ============================================ */
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #444;
+    word-break: break-all;
+  }
+
+  /* ============================================
+     IMAGES — common rules, then orientation-specific sizing
+     ============================================ */
+  img, picture, figure {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    page-break-inside: avoid;
+  }
+  /* Gallery: contact-sheet-style */
+  .gallery-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* ============================================
+   ORIENTATION-RESPONSIVE IMAGE SIZING
+   ============================================ */
+@media print and (orientation: portrait) {
+  img, picture, figure {
+    max-width: 70% !important;
+    max-height: 30vh !important;
+  }
+}
+
+@media print and (orientation: landscape) {
+  img, picture, figure {
+    max-width: 30% !important;
+    max-height: 70vh !important;
+  }
+}
