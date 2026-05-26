@@ -237,7 +237,7 @@ ul li {
 }
 
 ul > li::before {
-  content: '* ';
+  content: var(--list-bullet, '• ');
   font-weight: bold;
   color: var(--color-primary);
 }

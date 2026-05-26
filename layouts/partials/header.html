@@ -138,6 +138,9 @@
 	<!-- Configurable heading prefix characters -->
 	{{- partial "heading-prefix-config.html" . -}}
 
+	<!-- Configurable unordered-list bullet glyph -->
+	{{- partial "bullet-config.html" . -}}
+
 	<!-- Custom CSS style get applied last -->
 	{{- if isset .Site.Params "customcss" }}
 		{{ range .Site.Params.customCSS }}

@@ -1,0 +1,18 @@
+<!--
+ Copyright (c) 2023 Taḋg Paul
+ SPDX-License-Identifier: Apache-2.0
+ See LICENSE file in the repository root.
+-->
+
+{{/* ABOUTME: Generates CSS custom property for the unordered-list bullet glyph. */}}
+{{/* Controlled via params.listBullet (string). Defaults to '•' (U+2022 BULLET). */}}
+{{/* Note: distinct from params.headingPrefix.list, which targets section-page */}}
+{{/* list-view item titles — not <ul><li> bullets in body content. */}}
+
+{{- $bullet := .Site.Params.listBullet | default "•" -}}
+
+<style>
+  :root {
+    --list-bullet: '{{ $bullet }} ';
+  }
+</style>

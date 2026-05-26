@@ -256,6 +256,23 @@ Supports any text, Unicode character, or emoji.
 
 ---
 
+## List bullet glyph
+
+Controls the glyph rendered before each `<li>` in unordered lists across the entire site.
+
+```yaml
+params:
+  listBullet: '•'   # default
+```
+
+Distinct from `headingPrefix.list`: that controls section-page list-view *item titles* (when a section uses `list_style: list`), whereas `listBullet` controls the bullet on every `<ul><li>` in body content.
+
+Typographic note: the keyboard `*` (U+002A ASTERISK) is designed to sit at cap-height for footnote use and looks superscripted in proportional fonts. If an asterisk-shaped bullet is desired, prefer `✱` (U+2731 HEAVY ASTERISK), which is vertically centred to x-height.
+
+Supports any text, Unicode character, or emoji.
+
+---
+
 ## Read more button
 
 Controls the "read more" indicator on masonry cards.
