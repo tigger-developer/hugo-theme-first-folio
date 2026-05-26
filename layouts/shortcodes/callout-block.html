@@ -4,9 +4,10 @@
  See LICENSE file in the repository root.
 -->
 
-{{/* ABOUTME: Callout box shortcode with type variants, optional link, alignment, width, and float position */}}
-{{/* Params: type, text, title, link, linktext, align (left|center|right), width, position (left|right) */}}
-{{/* For multi-paragraph / Markdown body content, use the callout-block shortcode instead. */}}
+{{/* ABOUTME: Block-form callout — paired shortcode whose body is rendered as Markdown/Org. */}}
+{{/* ABOUTME: Same wrapper markup and CSS classes as `callout`; differs only in body source. */}}
+{{/* Params: type, title, link, align (left|center|right), width, position (left|right) */}}
+{{/* Usage: {{< callout-block type="info" title="Heading" >}}**Markdown** body, multi-paragraph, lists, etc.{{< /callout-block >}} */}}
 {{ $type := .Get "type" }}
 {{ $align := .Get "align" }}
 {{ $width := .Get "width" }}
@@ -23,8 +24,7 @@
     {{- end -}}
     {{ if $title }}
     <strong class="callout-title">{{ if $link }}<a href="{{ $link }}">{{ $title }}</a>{{ else }}{{ $title }}{{ end }}</strong>
-    <br />
     {{ end }}
-    {{ if $link }}<a href="{{ $link }}" class="callout-link">{{ .Get "text" }}</a>{{ else }}{{ .Get "text" }}{{ end }}
+    {{ .Inner | .Page.RenderString }}
     </div>
 </div>
