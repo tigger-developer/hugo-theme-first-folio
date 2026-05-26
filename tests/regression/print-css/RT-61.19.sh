@@ -5,13 +5,12 @@
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {
-    local css; css="$(print_css_path)" || return 1
-    # video and iframe must each be hidden somewhere in the file
-    if ! grep -qE '(^|,|[[:space:]])video([[:space:]]|,|\{)[^{}]*\{[^}]*display:[[:space:]]*none' "$css"; then
+    local flat; flat="$(print_css_flat)" || return 1
+    if ! echo "$flat" | grep -qE '\bvideo\b[^{]*\{[^}]*display:[[:space:]]*none'; then
         printf '    no display:none rule for <video>\n' >&2
         return 1
     fi
-    if ! grep -qE '(^|,|[[:space:]])iframe([[:space:]]|,|\{)[^{}]*\{[^}]*display:[[:space:]]*none' "$css"; then
+    if ! echo "$flat" | grep -qE '\biframe\b[^{]*\{[^}]*display:[[:space:]]*none'; then
         printf '    no display:none rule for <iframe>\n' >&2
         return 1
     fi

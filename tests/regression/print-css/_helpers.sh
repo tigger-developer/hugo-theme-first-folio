@@ -14,6 +14,13 @@ print_css_path() {
     echo "$css"
 }
 
+# Returns the print.css contents with newlines collapsed to spaces, so
+# multi-line CSS rules can be matched with regular grep patterns.
+print_css_flat() {
+    local css; css="$(print_css_path)" || return 1
+    tr '\n' ' ' < "$css"
+}
+
 # Grep wrapper that fails loudly when the expected pattern is missing.
 expect_in_print_css() {
     local pattern="$1"

@@ -63,6 +63,11 @@
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ $lightboxStyle.Permalink }}" />
 	{{- end }}
 
+	{{- with resources.Get "css/print.css" }}
+	{{ $printStyle := . | fingerprint }}
+	<link rel="stylesheet" type="text/css" media="print" href="{{ $printStyle.Permalink }}" />
+	{{- end }}
+
 	{{- $ambienceDefault := .Site.Params.ambience.default | default "auto" -}}
 	{{- $ambienceToggle := .Site.Params.ambience.toggle | default true -}}
 	{{- $needsDarkCSS := or (ne $ambienceDefault "light") $ambienceToggle -}}

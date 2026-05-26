@@ -1,15 +1,12 @@
 # shellcheck shell=bash
 # ABOUTME: RT-61.3 — print.css hides every chrome class enumerated in the issue Solution > Hide table.
-# User action: prints any page; chrome elements (nav, footer, burger, ambience toggle, lightbox,
-# carousel arrows, pagination, contact form widgets) must not appear on paper.
 
 # shellcheck source=_helpers.sh
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {
-    local css; css="$(print_css_path)" || return 1
+    local flat; flat="$(print_css_flat)" || return 1
     local missing=()
-    # Each chrome selector must appear with display:none (allowing whitespace and !important).
     local selectors=(
         '\.site-nav'
         '\.burger-menu'
@@ -17,11 +14,14 @@ run_test() {
         '\.lightbox'
         '\.pagination'
         '\.section-sidebar'
-        'iframe'
-        'video'
+        '\biframe\b'
+        '\bvideo\b'
     )
+    # Strategy: each selector must appear inside a rule that ends in display: none.
+    # We split into rule blocks and check each contains both the selector and display:none.
     for s in "${selectors[@]}"; do
-        if ! grep -qE "${s}[^{]*\{[^}]*display:[[:space:]]*none" "$css"; then
+        # Pattern: selector ... { ... display: none ... }
+        if ! echo "$flat" | grep -qE "${s}[^{]*\{[^}]*display:[[:space:]]*none"; then
             missing+=("$s")
         fi
     done

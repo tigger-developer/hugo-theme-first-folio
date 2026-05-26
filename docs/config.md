@@ -273,6 +273,25 @@ Supports any text, Unicode character, or emoji.
 
 ---
 
+## Print stylesheet
+
+Print rendering is built in and requires no configuration. A dedicated stylesheet (`assets/css/print.css`) is loaded with `media="print"`, so it is only downloaded when the browser's print pipeline triggers.
+
+Print output:
+
+- Forces black text on white paper regardless of the active screen ambience (light/dark/auto).
+- Hides site chrome and interactive widgets (navigation, footer, lightbox overlay, burger menu, ambience toggle, sidebars, pagination, contact-form widgets, carousel arrows, embedded video/iframes).
+- Retains editorial content: article title, author, date, breadcrumb text, TOC, signposts (with their URL expanded inline), related-articles list, post tags, and the `section-list` shortcode output.
+- Resizes content images responsively to print orientation: in portrait, no wider than 70% of page width and no taller than 30% of page height; in landscape, the constraints invert.
+- Sets body text to Asap 12pt (weight 400; bold 800). Headings (Special Elite), pull-quotes (IM Fell Extended), and code (IosevkaCustom Extended) retain their screen typefaces.
+- Force-opens any `<details>` collapsibles so their content is visible on paper.
+- Expands external `http(s)` link URLs after the anchor text; internal anchors and relative links remain plain.
+- Applies sensible page breaks: headings stay with the following content; callouts, pull-quotes, code blocks, tables, and figures are not split across pages.
+
+No author action is required to opt in. Cmd+P (or "Save as PDF") on any page produces a reader-view-style output across every layout the theme supports.
+
+---
+
 ## Read more button
 
 Controls the "read more" indicator on masonry cards.

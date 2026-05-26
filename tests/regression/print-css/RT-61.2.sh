@@ -1,16 +1,22 @@
 # shellcheck shell=bash
 # ABOUTME: RT-61.2 — list page <head> includes a media="print" stylesheet link.
-# User action: opens a section list (e.g. /blog/) and inspects <head>.
+# User action: opens a section list (e.g. /journal/) and inspects <head>.
 
 run_test() {
     local build_dir; build_dir="$(build_examplesite)" || return 1
-    local list_index="$build_dir/blog/index.html"
-    [[ ! -f "$list_index" ]] && list_index="$(find "$build_dir" -name 'index.html' -path '*/blog/index.html' -type f 2>/dev/null | head -1)"
-    if [[ ! -f "$list_index" ]]; then
-        printf '    no rendered list page found\n' >&2
+    # Try common section names in the exampleSite. journal/ is the canonical list.
+    local list_index=""
+    for cand in journal stories poetry recipes blog photography; do
+        if [[ -f "$build_dir/$cand/index.html" ]]; then
+            list_index="$build_dir/$cand/index.html"
+            break
+        fi
+    done
+    if [[ -z "$list_index" ]]; then
+        printf '    no rendered section-list page found in %s\n' "$build_dir" >&2
         return 1
     fi
-    if ! grep -qE '<link[^>]*media="print"[^>]*href="[^"]*/css/print\.|<link[^>]*href="[^"]*/css/print\.[^"]*"[^>]*media="print"|rel=stylesheet[^>]*media=print[^>]*print\.|media=print[^>]*print\.' "$list_index"; then
+    if ! grep -qE '<link[^>]*media="print"[^>]*href="[^"]*/css/print\.|<link[^>]*href="[^"]*/css/print\.[^"]*"[^>]*media="print"' "$list_index"; then
         printf '    media="print" stylesheet link not found in %s\n' "$list_index" >&2
         return 1
     fi

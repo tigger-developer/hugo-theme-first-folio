@@ -5,15 +5,9 @@
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {
-    local css; css="$(print_css_path)" || return 1
-    # Look for a details rule that forces visibility of children
-    if ! grep -qE 'details[^{]*\{' "$css"; then
-        printf '    no rule targeting <details>\n' >&2
-        return 1
-    fi
-    # Either details > * { display: block } or details:not([open]) > *:not(summary)
-    if ! grep -qE 'details[^{]*>[[:space:]]*\*[^{]*\{[^}]*display:[[:space:]]*(block|contents|inline|inherit|revert|initial)' "$css"; then
-        printf '    no details > * { display: ... } rule forcing visibility\n' >&2
+    local flat; flat="$(print_css_flat)" || return 1
+    if ! echo "$flat" | grep -qE 'details[[:space:]]*>[[:space:]]*\*[^{]*\{[^}]*display:[[:space:]]*block'; then
+        printf '    no "details > * { display: block }" rule\n' >&2
         return 1
     fi
     return 0

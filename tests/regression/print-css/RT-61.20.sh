@@ -5,11 +5,13 @@
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {
-    local css; css="$(print_css_path)" || return 1
-    # An ::after with content text on a video/iframe wrapper. Be lenient about wrapper class names.
-    if ! grep -qE '(video|iframe|\.video|\.cf-stream|\.video-wrapper)[^{]*::after[^{]*\{[^}]*content:' "$css"; then
-        printf '    no ::after content affordance for hidden video/iframe media\n' >&2
-        return 1
+    local flat; flat="$(print_css_flat)" || return 1
+    if ! echo "$flat" | grep -qE '(\.video|\.cf-stream|\.video-wrapper|figure\.video|video|iframe)[^{]*::after[^{]*\{[^}]*content:' "$flat"; then
+        # Try without file (only the flat string)
+        if ! echo "$flat" | grep -qE '(\.video|\.cf-stream|\.video-wrapper|figure\.video)[^{,]*::after[^{]*\{[^}]*content:'; then
+            printf '    no ::after content affordance for hidden video/iframe media\n' >&2
+            return 1
+        fi
     fi
     return 0
 }
