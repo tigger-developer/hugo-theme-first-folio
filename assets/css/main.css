@@ -1235,6 +1235,42 @@ nav {
   transform: scale(0.95);
 }
 
+/* Audiobook pages */
+.audiobook-page {
+  margin-block: 2rem;
+}
+
+.audiobook-content {
+  max-width: var(--content-max-width, 80rem);
+}
+
+.audiobook-feed {
+  margin-block: 1rem 2rem;
+}
+
+.audiobook-chapters {
+  display: grid;
+  gap: 1.5rem;
+  margin-block-start: 2rem;
+}
+
+.audiobook-chapter {
+  border-block-start: 1px solid var(--border-color, #ddd);
+  padding-block-start: 1.25rem;
+}
+
+.audiobook-chapter-title {
+  margin-block: 0 0.5rem;
+}
+
+.audiobook-chapter-summary {
+  margin-block: 0 0.75rem;
+}
+
+.audiobook-chapter audio {
+  inline-size: 100%;
+}
+
 /* Media queries for responsive design */
 @media (max-width: 37.4em) {
   .content {

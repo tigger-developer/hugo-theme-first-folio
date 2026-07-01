@@ -1,6 +1,6 @@
 # First Folio
 
-[Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md)
+[Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md) | [Audiobook pages](docs/audiobook.md)
 
 ## What this is
 

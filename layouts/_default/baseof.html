@@ -43,5 +43,8 @@
         })();
         </script>
         {{- end -}}
+        {{- if eq .Type "audiobook" }}
+        <script src="{{ "js/audiobook-player.js" | relURL }}"></script>
+        {{- end }}
     </body>
 </html>

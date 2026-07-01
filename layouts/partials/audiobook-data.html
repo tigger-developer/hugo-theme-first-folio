@@ -1,0 +1,73 @@
+{{/*
+ABOUTME: Validates audiobook frontmatter and returns normalized book/chapter data.
+ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
+*/}}
+{{- $page := . -}}
+{{- $book := .Params.audiobook -}}
+{{- if not $book -}}
+  {{- errorf "audiobook metadata requires params.audiobook on %s" .Path -}}
+{{- end -}}
+{{- if not $book.id -}}
+  {{- errorf "audiobook metadata requires id on %s" .Path -}}
+{{- end -}}
+{{- if or (not $book.title) (not $book.description) -}}
+  {{- errorf "audiobook metadata requires title and description on %s" .Path -}}
+{{- end -}}
+{{- $language := $book.language | default .Site.Language.Locale | default .Site.Language.Lang -}}
+{{- if not $language -}}
+  {{- errorf "audiobook metadata requires language on %s" .Path -}}
+{{- end -}}
+{{- if not (isset $book "chapters") -}}
+  {{- errorf "audiobook metadata requires chapters on %s" .Path -}}
+{{- end -}}
+{{- $chapters := $book.chapters -}}
+{{- if not $chapters -}}
+  {{- errorf "audiobook metadata requires at least one chapter on %s" .Path -}}
+{{- end -}}
+{{- $seen := dict -}}
+{{- $normalized := slice -}}
+{{- range $index, $chapter := $chapters -}}
+  {{- $chapterID := $chapter.id -}}
+  {{- if not $chapterID -}}
+    {{- errorf "audiobook chapter at index %d is missing id on %s" $index $page.Path -}}
+  {{- end -}}
+  {{- if index $seen $chapterID -}}
+    {{- errorf "audiobook chapter id %s is duplicated on %s" $chapterID $page.Path -}}
+  {{- end -}}
+  {{- $seen = merge $seen (dict $chapterID true) -}}
+  {{- if not $chapter.title -}}
+    {{- errorf "audiobook chapter %s is missing title on %s" $chapterID $page.Path -}}
+  {{- end -}}
+  {{- if not $chapter.src -}}
+    {{- errorf "audiobook chapter %s is missing src on %s" $chapterID $page.Path -}}
+  {{- end -}}
+  {{- $mimeType := or (index $chapter "mimeType") (index $chapter "mimetype") -}}
+  {{- if not $mimeType -}}
+    {{- errorf "audiobook chapter %s is missing mimeType on %s" $chapterID $page.Path -}}
+  {{- end -}}
+  {{- $byteLength := or (index $chapter "byteLength") (index $chapter "bytelength") -}}
+  {{- if not $byteLength -}}
+    {{- errorf "audiobook chapter %s is missing byteLength on %s" $chapterID $page.Path -}}
+  {{- end -}}
+  {{- $normalized = $normalized | append (dict
+      "id" $chapterID
+      "title" $chapter.title
+      "src" $chapter.src
+      "mimeType" $mimeType
+      "byteLength" $byteLength
+      "duration" $chapter.duration
+      "summary" $chapter.summary
+      "date" $chapter.date
+      "episode" $chapter.episode
+    ) -}}
+{{- end -}}
+{{- return (dict
+    "id" $book.id
+    "title" $book.title
+    "description" $book.description
+    "language" $language
+    "explicit" ($book.explicit | default false)
+    "author" ($book.author | default .Site.Title)
+    "image" $book.image
+    "chapters" $normalized
+  ) -}}

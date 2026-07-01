@@ -195,6 +195,18 @@ menu:
 taxonomies:
   tag: tags
 
+mediaTypes:
+  application/rss+xml:
+    suffixes:
+      - xml
+
+outputFormats:
+  podcast:
+    mediaType: application/rss+xml
+    baseName: feed
+    isPlainText: false
+    noUgly: true
+
 markup:
   goldmark:
     renderer:

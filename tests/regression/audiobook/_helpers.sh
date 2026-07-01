@@ -58,5 +58,5 @@ feed_item_count() {
 run_player_test() {
     local title="$1"
     local browser_path="$THEME_ROOT/.agent/tmp/ms-playwright"
-    PLAYWRIGHT_BROWSERS_PATH="$browser_path" npm exec -- playwright test tests/regression/audiobook/player.spec.mjs --grep "$title" --reporter=line --output "$THEME_ROOT/.agent/tmp/playwright-results"
+    env -u NO_COLOR PLAYWRIGHT_BROWSERS_PATH="$browser_path" npm exec -- playwright test tests/regression/audiobook/player.spec.mjs --grep "$title" --reporter=line --output "$THEME_ROOT/.agent/tmp/playwright-results"
 }

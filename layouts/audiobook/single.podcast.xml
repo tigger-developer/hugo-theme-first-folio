@@ -1,0 +1,37 @@
+{{- /*
+ABOUTME: RSS 2.0 podcast output for audiobook pages.
+ABOUTME: Shares validated chapter metadata with the audiobook HTML layout.
+*/ -}}
+{{- $book := partial "audiobook-data.html" . -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>{{ $book.title }}</title>
+    <description>{{ $book.description }}</description>
+    <link>{{ .Permalink }}</link>
+    <language>{{ $book.language }}</language>
+    <itunes:explicit>{{ $book.explicit }}</itunes:explicit>
+    {{- with $book.author }}
+    <itunes:author>{{ . }}</itunes:author>
+    {{- end }}
+    {{- with $book.image }}
+    <itunes:image href="{{ . | absURL }}" />
+    {{- end }}
+    {{- range $book.chapters }}
+    <item>
+      <title>{{ .title }}</title>
+      {{- with .summary }}
+      <description>{{ . }}</description>
+      {{- end }}
+      <guid isPermaLink="false">{{ $book.id }}:{{ .id }}</guid>
+      {{- with .date }}
+      <pubDate>{{ time.Format "Mon, 02 Jan 2006 15:04:05 -0700" . }}</pubDate>
+      {{- end }}
+      {{- with .duration }}
+      <itunes:duration>{{ . }}</itunes:duration>
+      {{- end }}
+      <enclosure url="{{ .src | absURL }}" type="{{ .mimeType }}" length="{{ .byteLength }}" />
+    </item>
+    {{- end }}
+  </channel>
+</rss>
