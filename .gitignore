@@ -76,6 +76,10 @@ tmp
 # npm
 node_modules
 
+# Playwright
+playwright-report
+test-results
+
 # backup files
 *.bak
 *~

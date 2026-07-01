@@ -3,8 +3,9 @@
 
 SHELL := /usr/bin/env bash
 SMOKE_DIR := /tmp/ff-smoke-build
+PLAYWRIGHT_BROWSERS_PATH ?= $(CURDIR)/.agent/tmp/ms-playwright
 
-.PHONY: test test-one-off smoke lint help
+.PHONY: test test-one-off smoke lint node-deps help
 
 help:
 	@printf 'Available targets:\n'
@@ -13,7 +14,7 @@ help:
 	@printf '  smoke         build exampleSite and link-check it with htmltest\n'
 	@printf '  lint          shellcheck on test scripts\n'
 
-test: lint
+test: lint node-deps
 	@bash tests/regression/run.sh
 
 test-one-off:
@@ -30,7 +31,16 @@ smoke:
 
 lint:
 	@if command -v shellcheck >/dev/null 2>&1; then \
-		find tests -name '*.sh' -print0 | xargs -0 shellcheck; \
+		find tests -name '*.sh' -execdir shellcheck -x {} +; \
 	else \
 		printf 'shellcheck not installed; skipping lint\n'; \
+	fi
+
+node-deps:
+	@if [ -f package-lock.json ] && [ ! -d node_modules/@playwright/test ]; then \
+		npm ci; \
+	fi
+	@if [ -d node_modules/@playwright/test ] && ! find "$(PLAYWRIGHT_BROWSERS_PATH)" -maxdepth 1 -name 'chromium*' -type d 2>/dev/null | grep -q .; then \
+		mkdir -p "$(PLAYWRIGHT_BROWSERS_PATH)"; \
+		PLAYWRIGHT_BROWSERS_PATH="$(PLAYWRIGHT_BROWSERS_PATH)" npm exec -- playwright install chromium; \
 	fi
