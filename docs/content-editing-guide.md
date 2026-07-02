@@ -180,11 +180,11 @@ Some commonly used ones:
 | `gallery` | Display all images in the page folder as a grid |
 | `details` | Collapsible section (click to expand) |
 
-For the full list with examples, see the [shortcode showcase](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/).
+For the full list with examples, see the [shortcode showcase](https://demo.theme.tadg.ie/journal/shortcode-showcase/).
 
 ## Getting help
 
-1. Check this guide and the examples on the [demo site](https://first-folio.demo.lobb.ie)
+1. Check this guide and the examples on the [demo site](https://demo.theme.tadg.ie)
 2. Look at existing pages in the repo for reference - copying a working page and editing it is often the easiest approach
 3. The [Hugo documentation](https://gohugo.io/documentation/) covers everything in detail
 4. The [Hugo Discourse forum](https://discourse.gohugo.io/) is active and helpful
