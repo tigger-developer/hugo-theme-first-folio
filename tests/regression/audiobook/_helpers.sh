@@ -54,3 +54,52 @@ feed_item_count() {
     local feed="$1"
     xmlstarlet sel -t -v 'count(/rss/channel/item)' "$feed"
 }
+
+start_examplesite_server() {
+    local port="${1:-46813}"
+    EXAMPLESITE_SERVER_URL="http://127.0.0.1:${port}"
+    EXAMPLESITE_SERVER_LOG="$(mktemp -t "ff-audiobook-server-XXXXXX")"
+    hugo server --quiet --source "$THEME_ROOT/exampleSite" --bind 127.0.0.1 --port "$port" --baseURL "$EXAMPLESITE_SERVER_URL/" --disableFastRender --renderToMemory --noHTTPCache >"$EXAMPLESITE_SERVER_LOG" 2>&1 &
+    EXAMPLESITE_SERVER_PID="$!"
+
+    for _ in {1..50}; do
+        if curl --silent --fail --output /dev/null "$EXAMPLESITE_SERVER_URL/"; then
+            return 0
+        fi
+        sleep 0.1
+    done
+
+    printf '    exampleSite server did not become ready:\n%s\n' "$(cat "$EXAMPLESITE_SERVER_LOG")" >&2
+    stop_examplesite_server
+    return 1
+}
+
+stop_examplesite_server() {
+    if [[ -n "${EXAMPLESITE_SERVER_PID:-}" ]]; then
+        if kill "$EXAMPLESITE_SERVER_PID" 2>/dev/null; then
+            if wait "$EXAMPLESITE_SERVER_PID" 2>/dev/null; then
+                :
+            fi
+        fi
+        EXAMPLESITE_SERVER_PID=""
+    fi
+    if [[ -n "${EXAMPLESITE_SERVER_LOG:-}" ]]; then
+        rm -f "$EXAMPLESITE_SERVER_LOG"
+        EXAMPLESITE_SERVER_LOG=""
+    fi
+}
+
+http_status() {
+    local url="$1"
+    curl --silent --output /dev/null --write-out '%{http_code}' "$url"
+}
+
+http_content_type() {
+    local url="$1"
+    curl --silent --output /dev/null --write-out '%{content_type}' "$url"
+}
+
+http_download_size() {
+    local url="$1"
+    curl --silent --fail --output /dev/null --write-out '%{size_download}' "$url"
+}

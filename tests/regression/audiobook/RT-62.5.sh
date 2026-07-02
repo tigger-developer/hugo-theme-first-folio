@@ -1,14 +1,27 @@
 # shellcheck shell=bash
-# ABOUTME: RT-62.5 - demo m4a files are copied into the repository.
+# ABOUTME: RT-62.5 - demo audio files are served as public HTTP artefacts.
+
+source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {
-    local audio_dir="$THEME_ROOT/exampleSite/static/audio/audiobook-demo"
-    [[ -f "$audio_dir/episode-1.m4a" ]] || return 1
-    [[ -f "$audio_dir/episode-2.m4a" ]] || return 1
-    [[ -f "$audio_dir/episode-3.m4a" ]] || return 1
+    start_examplesite_server 46813 || return 1
+    trap stop_examplesite_server RETURN
 
-    if grep -R -qF '/Users/tigger/scratch/yapcast' "$THEME_ROOT/exampleSite"; then
-        printf '    exampleSite must not reference the scratch audio source path\n' >&2
-        return 1
-    fi
+    local episode
+    for episode in 1 2 3; do
+        local url="$EXAMPLESITE_SERVER_URL/audio/audiobook-demo/episode-${episode}.m4a"
+        local status
+        status="$(http_status "$url")"
+        if [[ "$status" != "200" ]]; then
+            printf '    expected %s to return HTTP 200, got %s\n' "$url" "$status" >&2
+            return 1
+        fi
+
+        local size
+        size="$(http_download_size "$url")"
+        if (( size <= 0 )); then
+            printf '    expected %s to have nonzero response body\n' "$url" >&2
+            return 1
+        fi
+    done
 }
