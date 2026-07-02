@@ -57,7 +57,7 @@ jobs:
 
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Build with Hugo
         env:
@@ -70,7 +70,7 @@ jobs:
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./public
 
@@ -83,7 +83,7 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 ```
 
 ## Custom domain
@@ -91,8 +91,10 @@ jobs:
 If you're using a custom domain (e.g. `www.example.com`):
 
 1. Set `baseURL: https://www.example.com/` in your `hugo.yaml`
-2. Add a `static/CNAME` file containing just the domain name
+2. Configure the custom domain in **Settings > Pages** for your repository
 3. Configure the DNS record as described in [GitHub's custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
+
+GitHub ignores `CNAME` files when publishing Pages from a custom GitHub Actions workflow. `CNAME` files are only required for branch-based Pages publishing.
 
 ## Hugo modules
 

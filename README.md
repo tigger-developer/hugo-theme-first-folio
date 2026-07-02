@@ -1,6 +1,6 @@
 # First Folio
 
-[Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md) | [Audiobook pages](docs/audiobook.md)
+[Live demo](https://first-folio.demo.lobb.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md) | [Audiobook pages](docs/audiobook.md)
 
 ## What this is
 
@@ -16,7 +16,7 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 
 **The masonry grid.** A hybrid CSS Grid and JavaScript approach that adapts to viewport width using em-based breakpoints (WCAG 2.1 compliant - respects browser font size). Configurable columns, gaps, and breakpoints. A carousel card rotates featured content above the grid. Pin values control homepage ordering.
 
-**18 shortcodes.** Callout boxes, collapsible details, block quotes with decorative marks, expandable quotes, poetry formatting, play dialogue and stage directions, inline images with responsive thumbnails and WebP, image galleries, side-by-side layouts, video embeds, contact forms with CAPTCHA, and more. Each documented with live examples on the [demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/).
+**18 shortcodes.** Callout boxes, collapsible details, block quotes with decorative marks, expandable quotes, poetry formatting, play dialogue and stage directions, inline images with responsive thumbnails and WebP, image galleries, side-by-side layouts, video embeds, contact forms with CAPTCHA, and more. Each documented with live examples on the [demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/).
 
 **Navigation and CTAs.** Breadcrumb trails with section hierarchy, author, and date. Signpost bars for calls to action - configurable per page or cascaded across entire sections. Table of contents as a sticky sidebar on desktop, collapsible on mobile.
 

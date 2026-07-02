@@ -5,11 +5,10 @@ A demonstration site for the [First Folio Hugo theme](https://github.com/tadg-pa
 ## Quick Start
 
 ```bash
-cd themes/first-folio/exampleSite
-hugo server --themesDir ../..
+make serve
 ```
 
-Then open <http://localhost:1313>.
+Run this from the theme repository root, then open <http://127.0.0.1:1313>. Override `HUGO_BIND` or `HUGO_PORT` if needed.
 
 ## Content Sections
 
@@ -20,6 +19,7 @@ Then open <http://localhost:1313>.
 | **Photography** | Gallery subsections, `gallery: true`, lightbox, EXIF metadata, sidebar mode 4 (root-based) |
 | **Stories** | List view, dialogue/direction/poem shortcodes, sidebar mode 3 (explicit sections) |
 | **Poetry** | Masonry cards, recursive listing, nested collections (half-remembered/), sidebar mode 4 (root-based), `hideDate` cascade, `pin`, poem shortcode |
+| **Podcast** | Theme-owned audiobook page layout, chapter audio controls, local listening-position storage, podcast feed at `/audiobook-demo/feed.xml` |
 
 ## Feature Coverage
 
@@ -85,6 +85,7 @@ All shortcodes are demonstrated in the [Shortcode Showcase](/journal/shortcode-s
 - **Social icons:** Both Feather (github, rss) and Simple Icons (bluesky, mastodon)
 - **Background images with blur:** Journal articles with image frontmatter
 - **Pagination:** Per-section config
+- **Podcast demo:** Audiobook content page and RSS feed backed by repository-local `.m4a` files
 
 ## Adding Images
 
@@ -101,7 +102,7 @@ See `hugo.yaml` for all theme parameters. Key settings demonstrated:
 
 - `params.grid` - full responsive breakpoint configuration
 - `params.mainSections` - controls homepage masonry grid content
-- `menu.main` - navigation entries including Poetry and Tags
+- `menu.main` - navigation entries including Poetry, Podcast, and Tags
 - `params.bgImage` - background image opacity and blur defaults
 - `params.social` - both Feather and Simple Icons icon types
 

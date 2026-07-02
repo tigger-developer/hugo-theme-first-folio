@@ -217,7 +217,7 @@ The important thing is not to stop questioning.
 {{</* /quote */>}}
 ```
 
-For the full shortcode reference with live examples, see [the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/).
+For the full shortcode reference with live examples, see [the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/).
 
 ## Deploy
 

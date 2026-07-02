@@ -58,7 +58,7 @@ Styled alert/callout boxes with colour-coded types.
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#callout).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#callout).
 
 ---
 
@@ -114,7 +114,7 @@ This has {{< colorbold text="no underline" underlined=false >}} here.
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#colorbold).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#colorbold).
 
 ---
 
@@ -140,7 +140,7 @@ Can include **markdown**.
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#details).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#details).
 
 ---
 
@@ -168,7 +168,7 @@ Supports both positional and named parameters.
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#dialogue).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#dialogue).
 
 ---
 
@@ -191,7 +191,7 @@ Stage directions for plays. Renders in italics with secondary accent colour.
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#direction).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#direction).
 
 ---
 
@@ -219,7 +219,7 @@ Multiple paragraphs supported.
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#popquote).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#popquote).
 
 ---
 
@@ -318,7 +318,7 @@ Line breaks for you.
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#poem).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#poem).
 
 ---
 
@@ -386,7 +386,7 @@ Fixed-column grid (override the auto-fit default):
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#stats).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#stats).
 
 ---
 
@@ -618,7 +618,7 @@ video:
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#video).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#video).
 
 ---
 
@@ -652,7 +652,7 @@ params:
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#contact-form).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#contact-form).
 
 ---
 
@@ -674,7 +674,7 @@ Contact form using Formspree as the backend. Simpler alternative to `contactform
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#formspree).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#formspree).
 
 ---
 
@@ -700,7 +700,7 @@ Pass through raw HTML without markdown processing. Use for embedding widgets, if
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#raw-html).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#raw-html).
 
 ---
 
@@ -725,7 +725,7 @@ Renders a navigation list of site sections with chevron icons. Behaviour is cons
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#section-list).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#section-list).
 
 ---
 
@@ -759,7 +759,7 @@ Inline image for embedding within article text. Generates responsive thumbnails 
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#img).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#img).
 
 ---
 
@@ -804,7 +804,7 @@ Use `exclude` when you have images displayed inline (via `img` shortcode) that y
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#gallery).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#gallery).
 
 ---
 
@@ -829,7 +829,7 @@ Wrapper shortcode that places inner content side by side on desktop. Collapses t
 
 ### Live Demo
 
-See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#side-by-side).
+See [live example on the demo site](https://first-folio.demo.lobb.ie/journal/shortcode-showcase/#side-by-side).
 
 ---
 
