@@ -188,6 +188,9 @@ menu:
     - name: Profile
       url: /profile/
       weight: 48
+    - name: Podcast
+      url: /audiobook-demo/
+      weight: 49
     - name: Tags
       url: /tags/
       weight: 50
