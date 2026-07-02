@@ -54,9 +54,3 @@ feed_item_count() {
     local feed="$1"
     xmlstarlet sel -t -v 'count(/rss/channel/item)' "$feed"
 }
-
-run_player_test() {
-    local title="$1"
-    local browser_path="$THEME_ROOT/.agent/tmp/ms-playwright"
-    env -u NO_COLOR PLAYWRIGHT_BROWSERS_PATH="$browser_path" npm exec -- playwright test tests/regression/audiobook/player.spec.mjs --grep "$title" --reporter=line --output "$THEME_ROOT/.agent/tmp/playwright-results"
-}

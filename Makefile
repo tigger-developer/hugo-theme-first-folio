@@ -3,11 +3,10 @@
 
 SHELL := /usr/bin/env bash
 SMOKE_DIR := /tmp/ff-smoke-build
-PLAYWRIGHT_BROWSERS_PATH ?= $(CURDIR)/.agent/tmp/ms-playwright
 HUGO_BIND ?= 127.0.0.1
 HUGO_PORT ?= 1313
 
-.PHONY: test test-one-off smoke serve lint node-deps help
+.PHONY: test test-one-off smoke serve lint help
 
 help:
 	@printf 'Available targets:\n'
@@ -17,7 +16,7 @@ help:
 	@printf '  serve         run hugo server for exampleSite; override HUGO_BIND/HUGO_PORT as needed\n'
 	@printf '  lint          shellcheck on test scripts\n'
 
-test: lint node-deps
+test: lint
 	@bash tests/regression/run.sh
 
 test-one-off:
@@ -40,13 +39,4 @@ lint:
 		find tests -name '*.sh' -execdir shellcheck -x {} +; \
 	else \
 		printf 'shellcheck not installed; skipping lint\n'; \
-	fi
-
-node-deps:
-	@if [ -f package-lock.json ] && [ ! -d node_modules/@playwright/test ]; then \
-		npm ci; \
-	fi
-	@if [ -d node_modules/@playwright/test ] && ! find "$(PLAYWRIGHT_BROWSERS_PATH)" -maxdepth 1 -name 'chromium*' -type d 2>/dev/null | grep -q .; then \
-		mkdir -p "$(PLAYWRIGHT_BROWSERS_PATH)"; \
-		PLAYWRIGHT_BROWSERS_PATH="$(PLAYWRIGHT_BROWSERS_PATH)" npm exec -- playwright install chromium; \
 	fi
