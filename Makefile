@@ -4,14 +4,17 @@
 SHELL := /usr/bin/env bash
 SMOKE_DIR := /tmp/ff-smoke-build
 PLAYWRIGHT_BROWSERS_PATH ?= $(CURDIR)/.agent/tmp/ms-playwright
+HUGO_BIND ?= 127.0.0.1
+HUGO_PORT ?= 1313
 
-.PHONY: test test-one-off smoke lint node-deps help
+.PHONY: test test-one-off smoke serve lint node-deps help
 
 help:
 	@printf 'Available targets:\n'
 	@printf '  test          run regression tests (tests/regression/)\n'
 	@printf '  test-one-off  run one-off tests (tests/one_off/); use ISSUE=N to filter\n'
 	@printf '  smoke         build exampleSite and link-check it with htmltest\n'
+	@printf '  serve         run hugo server for exampleSite; override HUGO_BIND/HUGO_PORT as needed\n'
 	@printf '  lint          shellcheck on test scripts\n'
 
 test: lint node-deps
@@ -28,6 +31,9 @@ smoke:
 	@if [ -d "$(SMOKE_DIR)" ]; then trash "$(SMOKE_DIR)"; fi
 	@hugo --quiet --source exampleSite --destination "$(SMOKE_DIR)"
 	@htmltest
+
+serve:
+	@hugo server --source exampleSite --bind "$(HUGO_BIND)" --port "$(HUGO_PORT)" --baseURL "http://$(HUGO_BIND):$(HUGO_PORT)/" --disableFastRender
 
 lint:
 	@if command -v shellcheck >/dev/null 2>&1; then \
