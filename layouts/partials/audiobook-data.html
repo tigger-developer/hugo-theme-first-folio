@@ -17,6 +17,10 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
 {{- if not $language -}}
   {{- errorf "audiobook metadata requires language on %s" .Path -}}
 {{- end -}}
+{{- $type := $book.type | default "serial" -}}
+{{- if not (in (slice "serial" "episodic") $type) -}}
+  {{- errorf "audiobook metadata type must be serial or episodic on %s" .Path -}}
+{{- end -}}
 {{- if not (isset $book "chapters") -}}
   {{- errorf "audiobook metadata requires chapters on %s" .Path -}}
 {{- end -}}
@@ -67,6 +71,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
     "description" $book.description
     "language" $language
     "explicit" ($book.explicit | default false)
+    "type" $type
     "author" ($book.author | default .Site.Title)
     "image" $book.image
     "chapters" $normalized

@@ -11,6 +11,7 @@ ABOUTME: Shares validated chapter metadata with the audiobook HTML layout.
     <link>{{ .Permalink }}</link>
     <language>{{ $book.language }}</language>
     <itunes:explicit>{{ $book.explicit }}</itunes:explicit>
+    <itunes:type>{{ $book.type }}</itunes:type>
     {{- with $book.author }}
     <itunes:author>{{ . }}</itunes:author>
     {{- end }}
@@ -29,6 +30,9 @@ ABOUTME: Shares validated chapter metadata with the audiobook HTML layout.
       {{- end }}
       {{- with .duration }}
       <itunes:duration>{{ . }}</itunes:duration>
+      {{- end }}
+      {{- with .episode }}
+      <itunes:episode>{{ . }}</itunes:episode>
       {{- end }}
       <enclosure url="{{ .src | absURL }}" type="{{ .mimeType }}" length="{{ .byteLength }}" />
     </item>

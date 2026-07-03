@@ -21,12 +21,14 @@ params:
     description: A short synthetic podcast used by the First Folio example site.
     language: en-GB
     explicit: false
+    type: serial
     chapters:
       - id: episode-1
         title: Demo Episode 1
         src: /audio/audiobook-demo/episode-1.m4a
         mimeType: audio/mp4
         byteLength: 64280
+        episode: 1
 ---
 ```
 
@@ -43,6 +45,7 @@ Book metadata:
 - `description`: podcast channel description.
 - `language`: feed language, such as `en-GB`.
 - `explicit`: boolean podcast explicit-status metadata.
+- `type`: optional podcast ordering type, either `serial` or `episodic`. Defaults to `serial` for audiobook-style sequential playback.
 - `chapters`: one or more chapter objects.
 
 Chapter metadata:
@@ -58,6 +61,8 @@ Chapter metadata:
 Optional metadata can enrich the feed without changing the required interface.
 
 Book metadata may include `author` and `image`. Chapter metadata may include `summary`, `date`, `duration`, and `episode`.
+
+Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Use `type: episodic` only for podcast-style feeds where clients should treat newer episodes as primary.
 
 ## Output Configuration
 
