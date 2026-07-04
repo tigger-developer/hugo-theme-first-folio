@@ -7,11 +7,14 @@ author: "Taḋg Paul"
 sectionLabel: Audiobook
 description: A theme-owned audiobook page for sequential chapter playback, generated media metadata, and a serial RSS feed.
 pin: 46
+carousel: 5
 image:
   src: beacon3.jpg
   alt: "Beacon light against a dark sky"
   card_src: beacon3.jpg
   card_position: center center
+  carousel_src: beacon3.jpg
+  carousel_position: center center
 outputs:
   - html
   - podcast
@@ -69,9 +72,9 @@ This page demonstrates First Folio's theme-owned audio layout for audiobook-styl
 Expected audiobook behaviour:
 
 - Feed type is `serial`, so clients should preserve the configured chapter order.
-- The page chooses the existing `hero` visual layout, so the cover image is rendered by the standard page template before the audio controls.
+- The page chooses the existing `background` visual layout, so the cover image is rendered by the standard page template before the audio controls.
 - Items are labelled as front matter and chapters in the page content and omit podcast episode numbers.
-- The page is promoted as a masonry card with `pin`, not as a carousel item.
+- The page is promoted to the homepage carousel with `carousel`, using the same front matter contract as other featured content.
 - Listening position is stored per book id and chapter id in the browser.
 - Generated media metadata supplies duration and byte length, while front matter remains the source of titles, summaries, and source URLs.
 
