@@ -1,0 +1,5 @@
+fixture-audiobook:
+  episode-1:
+    src: /audio/audiobook-demo/stale-episode-1.m4a
+    byteLength: 222
+    duration: "00:02:22"
