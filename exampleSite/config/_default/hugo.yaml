@@ -3,7 +3,7 @@
 
 baseURL: https://example.com/
 locale: en-GB-oed
-title: red.dots.innit
+title: example.site
 
 module:
   imports:
