@@ -66,7 +66,7 @@ Feed items are emitted in the same order as the configured `chapters` list. The 
 
 ## Generated Media Metadata
 
-Front matter remains the canonical source for editorial metadata and chapter `src` values. Sites may provide generated media facts in `data/first_folio_media.yaml`, keyed by audiobook id and chapter id:
+Front matter remains the canonical source for editorial metadata and chapter `src` values. Sites may provide generated media facts in `data/first_folio_media.yaml`, keyed by audiobook/podcast id and item id:
 
 ```yaml
 first-folio-demo-podcast:
@@ -76,14 +76,18 @@ first-folio-demo-podcast:
     duration: "00:00:03"
 ```
 
-Generated data is optional and works for both local and remote media. The theme applies media facts in this order:
+Generated data is optional and works for both local and remote media. It is the preferred contract for binary-derived facts when a site has a build step that can inspect or fetch media metadata. Manual front matter remains supported for existing sites, simple sites, and remote media hosts where Hugo cannot see the files.
+
+The theme applies media facts in this order:
 
 - `src`: front matter is canonical. A generated `src`, when present, must match front matter or the build fails as stale metadata.
 - `duration`: generated data, then front matter, then omitted.
 - `byteLength`: generated data, then local file size via `os.Stat` for site-root-relative static files, then front matter, then a build error for podcast RSS.
 - `mimeType`: front matter, then generated data, then a build error.
 
-The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`. This repository demonstrates that pattern with `make generate-audiobook-metadata`; `make build` runs that target before building the exampleSite for deployment.
+The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
+
+This repository demonstrates the generated-metadata pattern with `make generate-audiobook-metadata`. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` because each consuming site owns its environment names and configuration.
 
 ## Output Configuration
 

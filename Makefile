@@ -5,7 +5,6 @@ SHELL := /usr/bin/env bash
 SMOKE_DIR := /tmp/ff-smoke-build
 HUGO_BIND ?= 127.0.0.1
 HUGO_PORT ?= 1313
-HUGO_ENVIRONMENT ?= theme-demo-live
 FIRST_FOLIO_MEDIA_CONTENT ?= exampleSite/content/audiobook-demo/index.md
 FIRST_FOLIO_MEDIA_STATIC_DIR ?= exampleSite/static
 FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
@@ -23,7 +22,11 @@ help:
 	@printf '  lint          shellcheck on test scripts\n'
 
 build: generate-audiobook-metadata
-	@hugo --source exampleSite --destination exampleSite/public --environment "$(HUGO_ENVIRONMENT)" --minify
+	@if [ -z "$${HUGO_ENVIRONMENT:-}" ]; then \
+		printf 'HUGO_ENVIRONMENT is required for make build\n' >&2; \
+		exit 2; \
+	fi
+	@hugo --source exampleSite --destination public --environment "$(HUGO_ENVIRONMENT)" --minify
 
 generate-audiobook-metadata:
 	@bash scripts/generate-audiobook-metadata.sh

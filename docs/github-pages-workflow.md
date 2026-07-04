@@ -5,11 +5,11 @@ A ready-to-use GitHub Actions workflow for deploying a Hugo site with the First 
 ## Prerequisites
 
 1. In your GitHub repo, go to **Settings > Pages** and set the Source to **GitHub Actions**.
-2. Set `baseURL` in your `hugo.yaml`, or leave it unset - the workflow infers it from the Pages configuration automatically.
+2. Set `baseURL` in your Hugo config, either in the default config or in the environment config used by the workflow.
 
 ## Setup
 
-Copy the workflow below into `.github/workflows/hugo-pages.yml` in your repo. No other configuration is needed.
+Copy the workflow below into `.github/workflows/hugo-pages.yml` in your repo. Set `HUGO_ENVIRONMENT` to the Hugo environment name your site uses for production Pages builds.
 
 The workflow:
 
@@ -65,7 +65,7 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           hugo \
-            --environment production \
+            --environment "$HUGO_ENVIRONMENT" \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
 
@@ -95,6 +95,18 @@ If you're using a custom domain (e.g. `www.example.com`):
 3. Configure the DNS record as described in [GitHub's custom domain docs](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site)
 
 GitHub ignores `CNAME` files when publishing Pages from a custom GitHub Actions workflow. `CNAME` files are only required for branch-based Pages publishing.
+
+## ExampleSite Builds
+
+This theme repository deploys its demo from `exampleSite`, not from the repository root. Its workflow sets `HUGO_ENVIRONMENT=theme-demo-live` and calls `make build`.
+
+The `make build` target intentionally requires `HUGO_ENVIRONMENT` from the caller. The Makefile must not guess the environment name because consuming sites own their Hugo environment names and config directories. For this repository's demo, run:
+
+```sh
+HUGO_ENVIRONMENT=theme-demo-live make build
+```
+
+That target generates the example audiobook media metadata first, then builds Hugo with `--source exampleSite --destination public`, which writes the deployable artifact to `exampleSite/public`.
 
 ## Hugo modules
 
