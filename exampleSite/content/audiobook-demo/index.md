@@ -3,6 +3,7 @@ title: First Folio Demo Audiobook
 linkTitle: Audiobook Demo
 type: audiobook
 layout: background
+author: "Taḋg Paul"
 sectionLabel: Audiobook
 description: A theme-owned audiobook page for sequential chapter playback, generated media metadata, and a serial RSS feed.
 pin: 46
