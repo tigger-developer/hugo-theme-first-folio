@@ -9,11 +9,12 @@ FIRST_FOLIO_MEDIA_CONTENT ?= exampleSite/content/audiobook-demo/index.md example
 FIRST_FOLIO_MEDIA_STATIC_DIR ?= exampleSite/static
 FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
 
-.PHONY: build generate-audiobook-metadata test test-one-off smoke serve lint help
+.PHONY: build ensure-audiobook-metadata generate-audiobook-metadata test test-one-off smoke serve lint help
 
 help:
 	@printf 'Available targets:\n'
-	@printf '  build         build exampleSite for deployment using committed media metadata\n'
+	@printf '  build         build exampleSite for deployment; generate media metadata only when missing\n'
+	@printf '  ensure-audiobook-metadata  generate exampleSite media metadata when the committed file is missing\n'
 	@printf '  generate-audiobook-metadata  explicitly refresh generated media facts for the exampleSite audio demos\n'
 	@printf '  test          run regression tests (tests/regression/)\n'
 	@printf '  test-one-off  run one-off tests (tests/one_off/); use ISSUE=N to filter\n'
@@ -21,12 +22,18 @@ help:
 	@printf '  serve         run hugo server for exampleSite; override HUGO_BIND/HUGO_PORT as needed\n'
 	@printf '  lint          shellcheck on test scripts\n'
 
-build:
+build: ensure-audiobook-metadata
 	@if [ -z "$${HUGO_ENVIRONMENT:-}" ]; then \
 		printf 'HUGO_ENVIRONMENT is required for make build\n' >&2; \
 		exit 2; \
 	fi
 	@hugo --source exampleSite --destination public --environment "$(HUGO_ENVIRONMENT)" --minify
+
+ensure-audiobook-metadata:
+	@if [ ! -s "$(FIRST_FOLIO_MEDIA_OUTPUT)" ]; then \
+		printf '%s is missing; generating media metadata with ffprobe\n' "$(FIRST_FOLIO_MEDIA_OUTPUT)" >&2; \
+		$(MAKE) generate-audiobook-metadata; \
+	fi
 
 generate-audiobook-metadata:
 	@bash scripts/generate-audiobook-metadata.sh
@@ -41,7 +48,7 @@ else
 	@find tests/one_off -name "OT-*.sh" -print -exec bash {} \;
 endif
 
-smoke:
+smoke: ensure-audiobook-metadata
 	@if [ -d "$(SMOKE_DIR)" ]; then trash "$(SMOKE_DIR)"; fi
 	@hugo --quiet --source exampleSite --destination "$(SMOKE_DIR)"
 	@htmltest

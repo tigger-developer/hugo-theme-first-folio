@@ -47,27 +47,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git init .
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git -c http.extraheader="AUTHORIZATION: bearer ${GH_TOKEN}" fetch --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: 'latest'
-          extended: true
+      - name: Install Hugo and ffprobe
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y hugo ffmpeg
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v6
-
-      - name: Build with Hugo
+      - name: Build with Make
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
-        run: |
-          hugo \
-            --environment "$HUGO_ENVIRONMENT" \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+        run: make build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
@@ -98,7 +95,7 @@ GitHub ignores `CNAME` files when publishing Pages from a custom GitHub Actions 
 
 ## ExampleSite Builds
 
-This theme repository deploys its demo from `exampleSite`, not from the repository root. Its workflow sets `HUGO_ENVIRONMENT=theme-demo-live` and calls `make build`.
+This theme repository deploys its demo from `exampleSite`, not from the repository root. Its workflow checks out the repository with Git, installs `hugo` and `ffmpeg` from apt, sets `HUGO_ENVIRONMENT=theme-demo-live`, and calls `make build`.
 
 The `make build` target intentionally requires `HUGO_ENVIRONMENT` from the caller. The Makefile must not guess the environment name because consuming sites own their Hugo environment names and config directories. For this repository's demo, run:
 
@@ -106,7 +103,7 @@ The `make build` target intentionally requires `HUGO_ENVIRONMENT` from the calle
 HUGO_ENVIRONMENT=theme-demo-live make build
 ```
 
-That target builds Hugo with `--source exampleSite --destination public`, which writes the deployable artifact to `exampleSite/public`. It uses the committed `exampleSite/data/first_folio_media.yaml`; it does not run media probes during deployment. Refresh that file explicitly with `make generate-audiobook-metadata` when demo audio files or chapter source paths change, then commit the updated YAML.
+That target builds Hugo with `--source exampleSite --destination public`, which writes the deployable artifact to `exampleSite/public`. It uses the committed `exampleSite/data/first_folio_media.yaml` in normal builds. If that file is missing, `make build` generates it with `ffprobe` before running Hugo; refresh it explicitly with `make generate-audiobook-metadata` when demo audio files or chapter source paths change, then commit the updated YAML.
 
 ## Hugo modules
 
