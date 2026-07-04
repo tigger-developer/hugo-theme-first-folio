@@ -63,7 +63,7 @@ Chapter metadata:
 
 Optional metadata can enrich the feed without changing the required interface.
 
-Book metadata may include `author` and `image`. Chapter metadata may include `summary`, `date`, `duration`, and `episode`.
+Book metadata may include `author` and `image`. Chapter metadata may include `summary`, `date`, `duration`, and `episode`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date.
 
 Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Use `type: episodic` only for podcast-style feeds where clients should treat newer episodes as primary.
 
@@ -90,7 +90,7 @@ The theme applies media facts in this order:
 
 The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
 
-This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. The podcast demo uses the existing `background` visual layout, and the audiobook demo uses the existing `hero` visual layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` because each consuming site owns its environment names and configuration.
+This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. Both demos use the existing `background` visual layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`; run it explicitly when demo audio files or chapter source paths change, then commit the updated YAML. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` and uses committed metadata rather than probing media during every build.
 
 ## Output Configuration
 

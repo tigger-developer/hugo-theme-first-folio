@@ -70,6 +70,7 @@ coverage.*
 profile.cov
 
 # misc
+.agent/
 dist
 tmp
 

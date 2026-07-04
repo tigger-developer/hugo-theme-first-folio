@@ -106,7 +106,7 @@ The `make build` target intentionally requires `HUGO_ENVIRONMENT` from the calle
 HUGO_ENVIRONMENT=theme-demo-live make build
 ```
 
-That target generates the example audiobook media metadata first, then builds Hugo with `--source exampleSite --destination public`, which writes the deployable artifact to `exampleSite/public`.
+That target builds Hugo with `--source exampleSite --destination public`, which writes the deployable artifact to `exampleSite/public`. It uses the committed `exampleSite/data/first_folio_media.yaml`; it does not run media probes during deployment. Refresh that file explicitly with `make generate-audiobook-metadata` when demo audio files or chapter source paths change, then commit the updated YAML.
 
 ## Hugo modules
 

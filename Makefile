@@ -13,15 +13,15 @@ FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
 
 help:
 	@printf 'Available targets:\n'
-	@printf '  build         generate exampleSite media metadata and build exampleSite for deployment\n'
-	@printf '  generate-audiobook-metadata  write generated media facts for the exampleSite audio demos\n'
+	@printf '  build         build exampleSite for deployment using committed media metadata\n'
+	@printf '  generate-audiobook-metadata  explicitly refresh generated media facts for the exampleSite audio demos\n'
 	@printf '  test          run regression tests (tests/regression/)\n'
 	@printf '  test-one-off  run one-off tests (tests/one_off/); use ISSUE=N to filter\n'
 	@printf '  smoke         build exampleSite and link-check it with htmltest\n'
 	@printf '  serve         run hugo server for exampleSite; override HUGO_BIND/HUGO_PORT as needed\n'
 	@printf '  lint          shellcheck on test scripts\n'
 
-build: generate-audiobook-metadata
+build:
 	@if [ -z "$${HUGO_ENVIRONMENT:-}" ]; then \
 		printf 'HUGO_ENVIRONMENT is required for make build\n' >&2; \
 		exit 2; \
@@ -41,7 +41,7 @@ else
 	@find tests/one_off -name "OT-*.sh" -print -exec bash {} \;
 endif
 
-smoke: generate-audiobook-metadata
+smoke:
 	@if [ -d "$(SMOKE_DIR)" ]; then trash "$(SMOKE_DIR)"; fi
 	@hugo --quiet --source exampleSite --destination "$(SMOKE_DIR)"
 	@htmltest

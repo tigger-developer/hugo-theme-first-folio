@@ -1,6 +1,7 @@
 ---
 title: Fixture Audiobook
 type: audiobook
+date: 2024-07-04T09:30:00+01:00
 outputs:
   - html
   - podcast

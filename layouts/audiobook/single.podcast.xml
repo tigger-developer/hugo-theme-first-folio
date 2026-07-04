@@ -26,7 +26,7 @@ ABOUTME: Shares validated chapter metadata with the audiobook HTML layout.
       {{- end }}
       <guid isPermaLink="false">{{ $book.id }}:{{ .id }}</guid>
       {{- with .date }}
-      <pubDate>{{ time.Format "Mon, 02 Jan 2006 15:04:05 -0700" . }}</pubDate>
+      <pubDate>{{ (time.AsTime .).Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
       {{- end }}
       {{- with .duration }}
       <itunes:duration>{{ . }}</itunes:duration>

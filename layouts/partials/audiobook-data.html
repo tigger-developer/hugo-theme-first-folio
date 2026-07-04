@@ -72,6 +72,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
   {{- if not $byteLength -}}
     {{- errorf "audiobook chapter %s is missing byteLength; audiobook media metadata could not resolve byteLength on %s" $chapterID $page.Path -}}
   {{- end -}}
+  {{- $date := or $chapter.date $generated.date $page.Date -}}
   {{- $normalized = $normalized | append (dict
       "id" $chapterID
       "title" $chapter.title
@@ -80,7 +81,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
       "byteLength" $byteLength
       "duration" (or $generated.duration $chapter.duration)
       "summary" $chapter.summary
-      "date" $chapter.date
+      "date" $date
       "episode" $chapter.episode
     ) -}}
 {{- end -}}
