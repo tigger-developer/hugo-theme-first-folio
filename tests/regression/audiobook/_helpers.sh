@@ -14,6 +14,18 @@ audiobook_demo_feed() {
     echo "$build_dir/audiobook-demo/feed.xml"
 }
 
+podcast_demo_page() {
+    local build_dir
+    build_dir="$(build_examplesite)" || return 1
+    echo "$build_dir/podcast-demo/index.html"
+}
+
+podcast_demo_feed() {
+    local build_dir
+    build_dir="$(build_examplesite)" || return 1
+    echo "$build_dir/podcast-demo/feed.xml"
+}
+
 audiobook_fixture_page() {
     local fixture="$1"
     local build_dir

@@ -19,7 +19,8 @@ Run this from the theme repository root, then open <http://127.0.0.1:1313>. Over
 | **Photography** | Gallery subsections, `gallery: true`, lightbox, EXIF metadata, sidebar mode 4 (root-based) |
 | **Stories** | List view, dialogue/direction/poem shortcodes, sidebar mode 3 (explicit sections) |
 | **Poetry** | Masonry cards, recursive listing, nested collections (half-remembered/), sidebar mode 4 (root-based), `hideDate` cascade, `pin`, poem shortcode |
-| **Podcast** | Theme-owned audiobook page layout, chapter audio controls, local listening-position storage, podcast feed at `/audiobook-demo/feed.xml` |
+| **Podcast** | Theme-owned audio page layout, episode audio controls, episodic feed metadata, generated media facts, podcast feed at `/podcast-demo/feed.xml` |
+| **Audiobook** | Theme-owned audio page layout, chapter audio controls, serial feed metadata, local listening-position storage, audiobook feed at `/audiobook-demo/feed.xml` |
 
 ## Feature Coverage
 

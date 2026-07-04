@@ -5,7 +5,7 @@ SHELL := /usr/bin/env bash
 SMOKE_DIR := /tmp/ff-smoke-build
 HUGO_BIND ?= 127.0.0.1
 HUGO_PORT ?= 1313
-FIRST_FOLIO_MEDIA_CONTENT ?= exampleSite/content/audiobook-demo/index.md
+FIRST_FOLIO_MEDIA_CONTENT ?= exampleSite/content/audiobook-demo/index.md exampleSite/content/podcast-demo/index.md
 FIRST_FOLIO_MEDIA_STATIC_DIR ?= exampleSite/static
 FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
 
@@ -14,7 +14,7 @@ FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
 help:
 	@printf 'Available targets:\n'
 	@printf '  build         generate exampleSite media metadata and build exampleSite for deployment\n'
-	@printf '  generate-audiobook-metadata  write generated media facts for the exampleSite audiobook demo\n'
+	@printf '  generate-audiobook-metadata  write generated media facts for the exampleSite audio demos\n'
 	@printf '  test          run regression tests (tests/regression/)\n'
 	@printf '  test-one-off  run one-off tests (tests/one_off/); use ISSUE=N to filter\n'
 	@printf '  smoke         build exampleSite and link-check it with htmltest\n'

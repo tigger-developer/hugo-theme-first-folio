@@ -87,11 +87,11 @@ The theme applies media facts in this order:
 
 The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
 
-This repository demonstrates the generated-metadata pattern with `make generate-audiobook-metadata`. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` because each consuming site owns its environment names and configuration.
+This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` because each consuming site owns its environment names and configuration.
 
 ## Output Configuration
 
-The example site declares a `podcast` output format with `baseName: feed`, so an audiobook page at `/audiobook-demo/` publishes `/audiobook-demo/feed.xml`.
+The example site declares a `podcast` output format with `baseName: feed`, so the podcast demo at `/podcast-demo/` publishes `/podcast-demo/feed.xml` and the audiobook demo at `/audiobook-demo/` publishes `/audiobook-demo/feed.xml`.
 
 ```yaml
 mediaTypes:
@@ -108,7 +108,7 @@ outputFormats:
 
 ## Demo Audio Assets
 
-The example site uses small `.m4a` demo files copied into the repository under `exampleSite/static/audio/audiobook-demo/`. Consuming projects should copy or publish their own audio files into their site and point chapter `src` values at those published URLs.
+The example site uses small `.m4a` demo files copied into the repository under `exampleSite/static/audio/podcast-demo/` and `exampleSite/static/audio/audiobook-demo/`. Consuming projects should copy or publish their own audio files into their site and point item `src` values at those published URLs.
 
 ## Local Player Behaviour
 

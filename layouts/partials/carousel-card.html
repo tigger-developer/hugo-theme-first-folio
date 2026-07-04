@@ -26,8 +26,9 @@
 {{- if gt (len $carouselPages) 0 -}}
 <div class="carousel-container" data-interval="{{ $interval }}"
      style="--carousel-bg-blur: {{ $carouselBlur }}; --masonry-bg-blur: {{ $masonryBlur }};">
-  {{- range $i, $page := $carouselPages -}}
+    {{- range $i, $page := $carouselPages -}}
     {{- $section := .Section | default .Type -}}
+    {{- $sectionLabel := .Params.sectionLabel | default "" -}}
 
     {{- /* Determine background image (same logic as masonry-grid) */ -}}
     {{- $bgImageUrl := "" -}}
@@ -78,7 +79,7 @@
           {{- if or $showSection $showDate $showAuthor -}}
           <p class="masonry-meta">
             {{- if $showSection -}}
-            <span class="masonry-section">{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}</span>
+            <span class="masonry-section">{{ if $sectionLabel }}{{ $sectionLabel }}{{ else }}{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}{{ end }}</span>
             {{- end -}}
             {{- if $showAuthor -}}
             <span class="masonry-author">{{ .Params.author }}</span>

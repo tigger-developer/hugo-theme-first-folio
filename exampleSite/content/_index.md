@@ -9,7 +9,7 @@ sidebar:
 
     {{< section-list >}}
 
-    Listen to the [podcast and audiobook demo](/audiobook-demo/).
+    Compare the [podcast demo](/podcast-demo/) and [audiobook demo](/audiobook-demo/).
 
     Built with [Hugo](https://gohugo.io) and the [First Folio theme](https://github.com/tadg-paul/hugo-theme-first-folio).
 ---

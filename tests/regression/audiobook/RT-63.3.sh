@@ -1,13 +1,17 @@
 # shellcheck shell=bash
-# ABOUTME: RT-63.3 - podcast feed preserves configured chapter order.
+# ABOUTME: RT-63.3 - audio feeds preserve configured item order.
 
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {
-    local feed
-    feed="$(audiobook_demo_feed)" || return 1
+    local audiobook_feed podcast_feed
+    audiobook_feed="$(audiobook_demo_feed)" || return 1
+    podcast_feed="$(podcast_demo_feed)" || return 1
 
-    local titles
-    titles="$(xmlstarlet sel -t -m '/rss/channel/item' -v 'title' -n "$feed")"
-    [[ "$titles" == $'Demo Episode 1\nDemo Episode 2\nDemo Episode 3' ]]
+    local audiobook_titles podcast_titles
+    audiobook_titles="$(xmlstarlet sel -t -m '/rss/channel/item' -v 'title' -n "$audiobook_feed")"
+    podcast_titles="$(xmlstarlet sel -t -m '/rss/channel/item' -v 'title' -n "$podcast_feed")"
+
+    [[ "$audiobook_titles" == $'Demo Chapter 1\nDemo Chapter 2\nDemo Chapter 3' ]] || return 1
+    [[ "$podcast_titles" == $'Demo Episode 1\nDemo Episode 2\nDemo Episode 3' ]]
 }

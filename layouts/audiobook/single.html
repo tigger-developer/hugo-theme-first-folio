@@ -12,6 +12,17 @@ ABOUTME: Consuming sites opt in with type=audiobook and params.audiobook metadat
         {{- if ne .Params.breadcrumb false }}<div class="meta">{{ partial "breadcrumb.html" . }}</div>{{- end }}
       </div>
 
+      {{- with .Params.image }}
+      {{- with .src }}
+      <div class="post-featured audiobook-featured">
+        <img src="{{ $.RelPermalink }}{{ . }}" alt="{{ if $.Params.image.alt }}{{ $.Params.image.alt }}{{ else if $.Params.image.caption }}{{ $.Params.image.caption }}{{ else }}{{ $.Title }}{{ end }}"{{ if or $.Params.image.blur $.Params.image.opacity }} style="{{ with $.Params.image.blur }}filter: blur({{ . }});{{ end }}{{ with $.Params.image.opacity }} opacity: {{ . }};{{ end }}"{{ end }}>
+        {{- with $.Params.image.caption }}
+        <div class="image-caption">{{ . }}</div>
+        {{- end }}
+      </div>
+      {{- end }}
+      {{- end }}
+
       <section class="body audiobook-intro">
         {{ .Content }}
       </section>

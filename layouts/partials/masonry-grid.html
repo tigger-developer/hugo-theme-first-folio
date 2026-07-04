@@ -21,6 +21,7 @@
   {{- range $pages -}}
     {{- /* Determine content type for styling */ -}}
     {{- $section := .Section | default .Type -}}
+    {{- $sectionLabel := .Params.sectionLabel | default "" -}}
     {{- /* Issue #1: Gallery detection via frontmatter, not section name */ -}}
     {{- $isGallery := .Params.gallery | default false -}}
 
@@ -85,7 +86,7 @@
           {{- if $showSection -}}
           <div class="masonry-footer">
             <p class="masonry-meta">
-              <span class="masonry-section">{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}</span>
+              <span class="masonry-section">{{ if $sectionLabel }}{{ $sectionLabel }}{{ else }}{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}{{ end }}</span>
             </p>
             <div class="read-more-container">
               <a href="{{ .RelPermalink }}" class="read-more-btn">
@@ -112,7 +113,7 @@
             {{- if or $showSection $showDate $showAuthor -}}
             <p class="masonry-meta">
               {{- if $showSection -}}
-              <span class="masonry-section">{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}</span>
+              <span class="masonry-section">{{ if $sectionLabel }}{{ $sectionLabel }}{{ else }}{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}{{ end }}</span>
               {{- end -}}
               {{- if $showAuthor -}}
               <span class="masonry-author">{{ .Params.author }}</span>
