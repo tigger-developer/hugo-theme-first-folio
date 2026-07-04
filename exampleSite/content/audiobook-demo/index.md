@@ -2,7 +2,7 @@
 title: First Folio Demo Audiobook
 linkTitle: Audiobook Demo
 type: audiobook
-layout: hero
+layout: background
 sectionLabel: Audiobook
 description: A theme-owned audiobook page for sequential chapter playback, generated media metadata, and a serial RSS feed.
 pin: 46
