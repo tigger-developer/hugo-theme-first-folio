@@ -11,8 +11,8 @@ run_test() {
     fi
 
     local length duration
-    length="$(yq '.first-folio-demo-podcast.episode-1.byteLength' "$out")"
-    duration="$(yq '.first-folio-demo-podcast.episode-1.duration' "$out")"
+    length="$(yq '."first-folio-demo-podcast"."episode-1".byteLength' "$out")"
+    duration="$(yq '."first-folio-demo-podcast"."episode-1".duration' "$out")"
     rm -f "$out"
 
     [[ "$length" == "64280" ]] || return 1

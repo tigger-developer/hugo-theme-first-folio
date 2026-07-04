@@ -9,5 +9,5 @@ run_test() {
 
     local length
     length="$(xmlstarlet sel -t -v '/rss/channel/item[1]/enclosure/@length' "$feed")"
-    [[ "$length" == "25" ]]
+    [[ "$length" == "26" ]]
 }

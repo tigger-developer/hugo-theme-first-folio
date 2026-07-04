@@ -5,16 +5,28 @@ SHELL := /usr/bin/env bash
 SMOKE_DIR := /tmp/ff-smoke-build
 HUGO_BIND ?= 127.0.0.1
 HUGO_PORT ?= 1313
+HUGO_ENVIRONMENT ?= theme-demo-live
+FIRST_FOLIO_MEDIA_CONTENT ?= exampleSite/content/audiobook-demo/index.md
+FIRST_FOLIO_MEDIA_STATIC_DIR ?= exampleSite/static
+FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
 
-.PHONY: test test-one-off smoke serve lint help
+.PHONY: build generate-audiobook-metadata test test-one-off smoke serve lint help
 
 help:
 	@printf 'Available targets:\n'
+	@printf '  build         generate exampleSite media metadata and build exampleSite for deployment\n'
+	@printf '  generate-audiobook-metadata  write generated media facts for the exampleSite audiobook demo\n'
 	@printf '  test          run regression tests (tests/regression/)\n'
 	@printf '  test-one-off  run one-off tests (tests/one_off/); use ISSUE=N to filter\n'
 	@printf '  smoke         build exampleSite and link-check it with htmltest\n'
 	@printf '  serve         run hugo server for exampleSite; override HUGO_BIND/HUGO_PORT as needed\n'
 	@printf '  lint          shellcheck on test scripts\n'
+
+build: generate-audiobook-metadata
+	@hugo --source exampleSite --destination exampleSite/public --environment "$(HUGO_ENVIRONMENT)" --minify
+
+generate-audiobook-metadata:
+	@bash scripts/generate-audiobook-metadata.sh
 
 test: lint
 	@bash tests/regression/run.sh
@@ -26,7 +38,7 @@ else
 	@find tests/one_off -name "OT-*.sh" -print -exec bash {} \;
 endif
 
-smoke:
+smoke: generate-audiobook-metadata
 	@if [ -d "$(SMOKE_DIR)" ]; then trash "$(SMOKE_DIR)"; fi
 	@hugo --quiet --source exampleSite --destination "$(SMOKE_DIR)"
 	@htmltest

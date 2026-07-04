@@ -64,6 +64,27 @@ Book metadata may include `author` and `image`. Chapter metadata may include `su
 
 Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Use `type: episodic` only for podcast-style feeds where clients should treat newer episodes as primary.
 
+## Generated Media Metadata
+
+Front matter remains the canonical source for editorial metadata and chapter `src` values. Sites may provide generated media facts in `data/first_folio_media.yaml`, keyed by audiobook id and chapter id:
+
+```yaml
+first-folio-demo-podcast:
+  episode-1:
+    src: /audio/audiobook-demo/episode-1.m4a
+    byteLength: 64280
+    duration: "00:00:03"
+```
+
+Generated data is optional and works for both local and remote media. The theme applies media facts in this order:
+
+- `src`: front matter is canonical. A generated `src`, when present, must match front matter or the build fails as stale metadata.
+- `duration`: generated data, then front matter, then omitted.
+- `byteLength`: generated data, then local file size via `os.Stat` for site-root-relative static files, then front matter, then a build error for podcast RSS.
+- `mimeType`: front matter, then generated data, then a build error.
+
+The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`. This repository demonstrates that pattern with `make generate-audiobook-metadata`; `make build` runs that target before building the exampleSite for deployment.
+
 ## Output Configuration
 
 The example site declares a `podcast` output format with `baseName: feed`, so an audiobook page at `/audiobook-demo/` publishes `/audiobook-demo/feed.xml`.

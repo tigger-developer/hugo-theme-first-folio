@@ -28,6 +28,8 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
 {{- if not $chapters -}}
   {{- errorf "audiobook metadata requires at least one chapter on %s" .Path -}}
 {{- end -}}
+{{- $generatedRoot := index hugo.Data "first_folio_media" | default dict -}}
+{{- $generatedBook := index $generatedRoot $book.id | default dict -}}
 {{- $seen := dict -}}
 {{- $normalized := slice -}}
 {{- range $index, $chapter := $chapters -}}
@@ -45,13 +47,30 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
   {{- if not $chapter.src -}}
     {{- errorf "audiobook chapter %s is missing src on %s" $chapterID $page.Path -}}
   {{- end -}}
-  {{- $mimeType := or (index $chapter "mimeType") (index $chapter "mimetype") -}}
+  {{- $generated := index $generatedBook $chapterID | default dict -}}
+  {{- with $generated.src -}}
+    {{- if ne . $chapter.src -}}
+      {{- errorf "audiobook media metadata src mismatch for chapter %s on %s: generated %q does not match front matter %q" $chapterID $page.Path . $chapter.src -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $mimeType := or (index $chapter "mimeType") (index $chapter "mimetype") (index $generated "mimeType") (index $generated "mimetype") -}}
   {{- if not $mimeType -}}
     {{- errorf "audiobook chapter %s is missing mimeType on %s" $chapterID $page.Path -}}
   {{- end -}}
-  {{- $byteLength := or (index $chapter "byteLength") (index $chapter "bytelength") -}}
+  {{- $byteLength := or (index $generated "byteLength") (index $generated "bytelength") -}}
   {{- if not $byteLength -}}
-    {{- errorf "audiobook chapter %s is missing byteLength on %s" $chapterID $page.Path -}}
+    {{- if and (not (urls.Parse $chapter.src).Scheme) (hasPrefix $chapter.src "/") -}}
+      {{- $staticPath := printf "static/%s" (strings.TrimPrefix "/" $chapter.src) -}}
+      {{- if os.FileExists $staticPath -}}
+        {{- with os.Stat $staticPath -}}
+          {{- $byteLength = .Size -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $byteLength = or $byteLength (index $chapter "byteLength") (index $chapter "bytelength") -}}
+  {{- if not $byteLength -}}
+    {{- errorf "audiobook chapter %s is missing byteLength; audiobook media metadata could not resolve byteLength on %s" $chapterID $page.Path -}}
   {{- end -}}
   {{- $normalized = $normalized | append (dict
       "id" $chapterID
@@ -59,7 +78,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
       "src" $chapter.src
       "mimeType" $mimeType
       "byteLength" $byteLength
-      "duration" $chapter.duration
+      "duration" (or $generated.duration $chapter.duration)
       "summary" $chapter.summary
       "date" $chapter.date
       "episode" $chapter.episode
