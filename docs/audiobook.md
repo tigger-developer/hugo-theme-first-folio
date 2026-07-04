@@ -26,7 +26,7 @@ params:
     chapters:
       - id: episode-1
         title: Demo Episode 1
-        src: /audio/audiobook-demo/episode-1.m4a
+        src: /audio/podcast-demo/episode-1.m4a
         mimeType: audio/mp4
         byteLength: 64280
         episode: 1
@@ -74,7 +74,7 @@ Front matter remains the canonical source for editorial metadata and chapter `sr
 ```yaml
 first-folio-demo-podcast:
   episode-1:
-    src: /audio/audiobook-demo/episode-1.m4a
+    src: /audio/podcast-demo/episode-1.m4a
     byteLength: 64280
     duration: "00:00:03"
 ```
@@ -115,7 +115,7 @@ The example site uses small `.m4a` demo files copied into the repository under `
 
 ## Local Player Behaviour
 
-The audiobook player script stores listening position in `localStorage` using stable `book id + chapter id` keys. When a visitor returns in the same browser, matching audio controls restore their previous position. Invalid or missing stored values are ignored so audio controls continue to load normally.
+The audiobook player script stores listening position in `localStorage` using stable `book id + chapter id` keys. When a visitor returns in the same browser, matching audio controls restore their previous position. When a chapter ends, the script attempts to start the next audio control in page order; browsers that block automatic playback leave the native controls usable. Starting one chapter pauses any other active chapter on the same page. Invalid or missing stored values are ignored so audio controls continue to load normally.
 
 ## Robots Metadata
 

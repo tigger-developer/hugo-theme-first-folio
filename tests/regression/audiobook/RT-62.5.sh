@@ -7,9 +7,9 @@ run_test() {
     start_examplesite_server 46813 || return 1
     trap stop_examplesite_server RETURN
 
-    local episode
-    for episode in 1 2 3; do
-        local url="$EXAMPLESITE_SERVER_URL/audio/audiobook-demo/episode-${episode}.m4a"
+    local chapter
+    for chapter in 00 01 02 03 04 05 06; do
+        local url="$EXAMPLESITE_SERVER_URL/audio/audiobook-demo/chapter${chapter}.m4a"
         local status
         status="$(http_status "$url")"
         if [[ "$status" != "200" ]]; then

@@ -8,6 +8,6 @@ run_test() {
     feed="$(audiobook_demo_feed)" || return 1
 
     local valid_count
-    valid_count="$(xmlstarlet sel -t -v 'count(/rss/channel/item/enclosure[starts-with(@url, "https://example.com/audio/audiobook-demo/") and @type = "audio/mp4" and number(@length) > 0])' "$feed")"
-    [[ "$valid_count" == "3" ]]
+    valid_count="$(xmlstarlet sel -t -v 'count(/rss/channel/item/enclosure[(starts-with(@url, "https://") or starts-with(@url, "http://")) and contains(@url, "/audio/audiobook-demo/") and @type = "audio/mp4" and number(@length) > 0])' "$feed")"
+    [[ "$valid_count" == "7" ]]
 }

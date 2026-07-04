@@ -9,7 +9,7 @@ run_test() {
 
     local sources
     sources="$(htmlq -f "$page" -a src 'audio source')"
-    grep -qF '/audio/audiobook-demo/episode-1.m4a' <<< "$sources" || return 1
-    grep -qF '/audio/audiobook-demo/episode-2.m4a' <<< "$sources" || return 1
-    grep -qF '/audio/audiobook-demo/episode-3.m4a' <<< "$sources" || return 1
+    grep -qF '/audio/audiobook-demo/chapter00.m4a' <<< "$sources" || return 1
+    grep -qF '/audio/audiobook-demo/chapter01.m4a' <<< "$sources" || return 1
+    grep -qF '/audio/audiobook-demo/chapter06.m4a' <<< "$sources" || return 1
 }

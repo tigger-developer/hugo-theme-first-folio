@@ -1,17 +1,33 @@
 ---
 first-folio-demo-audiobook:
+  front-matter:
+    src: "/audio/audiobook-demo/chapter00.m4a"
+    byteLength: 34677
+    duration: '00:00:04'
   chapter-1:
-    src: "/audio/audiobook-demo/episode-1.m4a"
-    byteLength: 64280
-    duration: '00:00:03'
+    src: "/audio/audiobook-demo/chapter01.m4a"
+    byteLength: 318736
+    duration: '00:00:36'
   chapter-2:
-    src: "/audio/audiobook-demo/episode-2.m4a"
-    byteLength: 288535
-    duration: '00:00:14'
+    src: "/audio/audiobook-demo/chapter02.m4a"
+    byteLength: 489928
+    duration: '00:00:56'
   chapter-3:
-    src: "/audio/audiobook-demo/episode-3.m4a"
-    byteLength: 778800
+    src: "/audio/audiobook-demo/chapter03.m4a"
+    byteLength: 359449
+    duration: '00:00:41'
+  chapter-4:
+    src: "/audio/audiobook-demo/chapter04.m4a"
+    byteLength: 305393
     duration: '00:00:35'
+  chapter-5:
+    src: "/audio/audiobook-demo/chapter05.m4a"
+    byteLength: 230843
+    duration: '00:00:26'
+  chapter-6:
+    src: "/audio/audiobook-demo/chapter06.m4a"
+    byteLength: 550341
+    duration: '00:01:04'
 first-folio-demo-podcast:
   episode-1:
     src: "/audio/podcast-demo/episode-1.m4a"

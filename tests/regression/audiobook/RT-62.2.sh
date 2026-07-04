@@ -9,10 +9,10 @@ run_test() {
 
     local count
     count="$(htmlq -f "$page" 'audio[data-chapter-id]' | grep -c '<audio')"
-    if [[ "$count" == "3" ]]; then
+    if [[ "$count" == "7" ]]; then
         return 0
     fi
 
-    printf '    expected 3 audiobook audio controls, found %s\n' "$count" >&2
+    printf '    expected 7 audiobook audio controls, found %s\n' "$count" >&2
     return 1
 }

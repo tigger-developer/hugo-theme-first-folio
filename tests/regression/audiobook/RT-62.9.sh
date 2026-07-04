@@ -9,5 +9,5 @@ run_test() {
 
     local count
     count="$(feed_item_count "$feed")"
-    [[ "$count" == "3" ]]
+    [[ "$count" == "7" ]]
 }

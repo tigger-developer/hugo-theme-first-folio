@@ -9,15 +9,15 @@ run_test() {
 
     local enclosure_urls
     enclosure_urls="$(xmlstarlet sel -t -m '/rss/channel/item/enclosure' -v '@url' -n "$feed")"
-    grep -qF 'https://example.com/audio/audiobook-demo/episode-1.m4a' <<< "$enclosure_urls" || return 1
-    grep -qF 'https://example.com/audio/audiobook-demo/episode-2.m4a' <<< "$enclosure_urls" || return 1
-    grep -qF 'https://example.com/audio/audiobook-demo/episode-3.m4a' <<< "$enclosure_urls" || return 1
+    grep -qF 'https://example.com/audio/audiobook-demo/chapter00.m4a' <<< "$enclosure_urls" || return 1
+    grep -qF 'https://example.com/audio/audiobook-demo/chapter01.m4a' <<< "$enclosure_urls" || return 1
+    grep -qF 'https://example.com/audio/audiobook-demo/chapter06.m4a' <<< "$enclosure_urls" || return 1
 
     start_examplesite_server 46814 || return 1
     trap stop_examplesite_server RETURN
 
     local path
-    for path in /audio/audiobook-demo/episode-1.m4a /audio/audiobook-demo/episode-2.m4a /audio/audiobook-demo/episode-3.m4a; do
+    for path in /audio/audiobook-demo/chapter00.m4a /audio/audiobook-demo/chapter01.m4a /audio/audiobook-demo/chapter02.m4a /audio/audiobook-demo/chapter03.m4a /audio/audiobook-demo/chapter04.m4a /audio/audiobook-demo/chapter05.m4a /audio/audiobook-demo/chapter06.m4a; do
         local status
         status="$(http_status "$EXAMPLESITE_SERVER_URL$path")"
         if [[ "$status" != "200" ]]; then
