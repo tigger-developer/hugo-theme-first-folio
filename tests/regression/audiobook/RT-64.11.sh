@@ -56,20 +56,33 @@ globalThis.document = {
 };
 
 globalThis.localStorage = {
-  values: {},
+  values: { "first-folio:audiobook:fixture-book:chapter-2": "1" },
   getItem: function (key) {
     return Object.prototype.hasOwnProperty.call(this.values, key) ? this.values[key] : null;
   },
   setItem: function (key, value) {
     this.values[key] = String(value);
+  },
+  removeItem: function (key) {
+    delete this.values[key];
   }
 };
 
 eval(readText("${THEME_ROOT}/static/js/audiobook-player.js"));
 
+if (audios[1].currentTime !== 1) {
+  throw new Error("test setup did not restore stored chapter position");
+}
+
 audios[0].dispatch("ended");
 if (audios[1].playCount !== 1) {
   throw new Error("first chapter did not advance to second chapter");
+}
+if (audios[1].currentTime !== 0) {
+  throw new Error("advanced chapter did not start from the beginning");
+}
+if (globalThis.localStorage.values["first-folio:audiobook:fixture-book:chapter-2"]) {
+  throw new Error("advanced chapter kept stale stored position");
 }
 
 audios[2].paused = false;

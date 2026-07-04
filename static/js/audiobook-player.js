@@ -51,6 +51,18 @@
     }
   }
 
+  function clearPosition(audio) {
+    const key = storageKey(audio);
+    if (!key) {
+      return;
+    }
+    try {
+      localStorage.removeItem(key);
+    } catch (_error) {
+      // Storage can be unavailable in private modes; audio controls should still work.
+    }
+  }
+
   function pauseOtherAudio(currentAudio) {
     audios.forEach(function (audio) {
       if (audio !== currentAudio && !audio.paused) {
@@ -66,6 +78,8 @@
     }
 
     const nextAudio = audios[index + 1];
+    clearPosition(nextAudio);
+    nextAudio.currentTime = 0;
     const playAttempt = nextAudio.play();
     if (playAttempt && typeof playAttempt.catch === "function") {
       playAttempt.catch(function () {
