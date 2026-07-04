@@ -2,6 +2,7 @@
 title: First Folio Demo Podcast
 linkTitle: Podcast Demo
 type: audiobook
+layout: background
 sectionLabel: Podcast
 description: A theme-owned podcast page with episodic feed metadata, generated media facts, and demo audio files.
 carousel: 4
@@ -58,6 +59,7 @@ This page demonstrates First Folio's theme-owned audio layout for podcast-style 
 Expected podcast behaviour:
 
 - Feed type is `episodic`, so podcast clients may emphasize newer or featured episodes.
+- The page chooses the existing `background` visual layout, so the cover image becomes the page canvas and the background-layout dark ambience rules apply.
 - Items include `episode` numbers in front matter and RSS output.
 - The page is promoted to the homepage carousel with `carousel`.
 - Each episode has its own audio enclosure, duration, byte length, and summary.

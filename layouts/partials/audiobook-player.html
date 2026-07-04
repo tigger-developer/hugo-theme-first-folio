@@ -1,0 +1,19 @@
+{{/*
+ABOUTME: Renders audio feed and chapter controls inside the active single-page layout.
+ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visual layout.
+*/}}
+{{- $book := partial "audiobook-data.html" . -}}
+{{- with .OutputFormats.Get "podcast" }}
+<p class="audiobook-feed"><a href="{{ .RelPermalink }}">Podcast feed</a></p>
+{{- end }}
+<div class="audiobook-chapters" data-audiobook-theme-feature="first-folio" data-audiobook-id="{{ $book.id }}">
+  {{- range $book.chapters }}
+  <section class="audiobook-chapter" data-chapter-id="{{ .id }}">
+    <h2 class="audiobook-chapter-title">{{ .title }}</h2>
+    {{- with .summary }}<p class="audiobook-chapter-summary">{{ . }}</p>{{- end }}
+    <audio controls preload="metadata" data-audiobook-id="{{ $book.id }}" data-chapter-id="{{ .id }}">
+      <source src="{{ .src | relURL }}" type="{{ .mimeType }}">
+    </audio>
+  </section>
+  {{- end }}
+</div>

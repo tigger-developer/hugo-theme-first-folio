@@ -1,6 +1,6 @@
 # Audiobook Pages and Podcast Feeds
 
-First Folio provides a theme-owned audiobook layout for sites that publish static audio chapters. Consuming sites provide content, metadata, and audio assets; the theme renders the page, podcast feed, and local listening-position behaviour.
+First Folio provides theme-owned audio controls and podcast feeds for sites that publish static audio chapters. Consuming sites provide content, metadata, audio assets, and the normal First Folio visual layout choice; the theme renders the page, podcast feed, and local listening-position behaviour.
 
 ## Minimal Frontmatter
 
@@ -10,6 +10,7 @@ Use `type: audiobook` and request both HTML and podcast output when a feed is ne
 ---
 title: First Folio Demo Podcast
 type: audiobook
+layout: hero
 outputs:
   - html
   - podcast
@@ -32,7 +33,9 @@ params:
 ---
 ```
 
-The theme owns `layouts/audiobook/single.html` and `layouts/audiobook/single.podcast.xml`. Consuming sites should not copy those templates for normal use.
+The `type: audiobook` value selects the audio data contract and podcast feed template. HTML pages still use the normal First Folio single-page layout system, so consuming sites may choose `layout: banner`, `hero`, `columns`, `featured-columns-left`, `featured-columns-right`, `featured`, `background`, or omit `layout` for the default convention.
+
+The theme owns the audio controls and `layouts/audiobook/single.podcast.xml`. Consuming sites should not copy those templates or partials for normal use.
 
 ## Required Metadata
 
@@ -87,7 +90,7 @@ The theme applies media facts in this order:
 
 The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
 
-This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` because each consuming site owns its environment names and configuration.
+This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. The podcast demo uses the existing `background` visual layout, and the audiobook demo uses the existing `hero` visual layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` because each consuming site owns its environment names and configuration.
 
 ## Output Configuration
 

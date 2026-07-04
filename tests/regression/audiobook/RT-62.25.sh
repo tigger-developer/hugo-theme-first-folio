@@ -9,8 +9,8 @@ run_test() {
     local page="$build/journal/typography-guide/index.html"
 
     [[ -f "$page" ]] || return 1
-    if htmlq -f "$page" '.audiobook-page' | grep -q '<'; then
-        printf '    non-audiobook page unexpectedly rendered audiobook layout\n' >&2
+    if htmlq -f "$page" '.audiobook-chapters' | grep -q '<'; then
+        printf '    non-audiobook page unexpectedly rendered audiobook controls\n' >&2
         return 1
     fi
 }

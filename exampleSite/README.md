@@ -19,8 +19,8 @@ Run this from the theme repository root, then open <http://127.0.0.1:1313>. Over
 | **Photography** | Gallery subsections, `gallery: true`, lightbox, EXIF metadata, sidebar mode 4 (root-based) |
 | **Stories** | List view, dialogue/direction/poem shortcodes, sidebar mode 3 (explicit sections) |
 | **Poetry** | Masonry cards, recursive listing, nested collections (half-remembered/), sidebar mode 4 (root-based), `hideDate` cascade, `pin`, poem shortcode |
-| **Podcast** | Theme-owned audio page layout, episode audio controls, episodic feed metadata, generated media facts, podcast feed at `/podcast-demo/feed.xml` |
-| **Audiobook** | Theme-owned audio page layout, chapter audio controls, serial feed metadata, local listening-position storage, audiobook feed at `/audiobook-demo/feed.xml` |
+| **Podcast** | Theme-owned audio controls on the background layout, episode audio controls, episodic feed metadata, generated media facts, podcast feed at `/podcast-demo/feed.xml` |
+| **Audiobook** | Theme-owned audio controls on the hero layout, chapter audio controls, serial feed metadata, local listening-position storage, audiobook feed at `/audiobook-demo/feed.xml` |
 
 ## Feature Coverage
 
@@ -37,11 +37,11 @@ Run this from the theme repository root, then open <http://127.0.0.1:1313>. Over
 
 ### Single-Page Layouts
 - **banner:** journal/typography-guide/
-- **hero:** journal/masonry-explained/, journal/navigation-features/
+- **hero:** journal/masonry-explained/, journal/navigation-features/, audiobook-demo/
 - **columns:** journal/on-walking/
 - **featured-columns-right:** journal/dark-mode-setup/
 - **featured:** journal/featured-image/
-- **background:** journal/background-images/
+- **background:** journal/background-images/, podcast-demo/
 - **default (text-only):** journal/shortcode-showcase/
 
 ### Shortcodes (all 18)
@@ -86,7 +86,8 @@ All shortcodes are demonstrated in the [Shortcode Showcase](/journal/shortcode-s
 - **Social icons:** Both Feather (github, rss) and Simple Icons (bluesky, mastodon)
 - **Background images with blur:** Journal articles with image frontmatter
 - **Pagination:** Per-section config
-- **Podcast demo:** Audiobook content page and RSS feed backed by repository-local `.m4a` files
+- **Podcast demo:** Audio content page and RSS feed backed by repository-local `.m4a` files
+- **Audiobook demo:** Audio content page and serial RSS feed backed by repository-local `.m4a` files
 
 ## Adding Images
 

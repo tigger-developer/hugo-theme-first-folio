@@ -2,6 +2,7 @@
 title: First Folio Demo Audiobook
 linkTitle: Audiobook Demo
 type: audiobook
+layout: hero
 sectionLabel: Audiobook
 description: A theme-owned audiobook page for sequential chapter playback, generated media metadata, and a serial RSS feed.
 pin: 46
@@ -53,6 +54,7 @@ This page demonstrates First Folio's theme-owned audio layout for audiobook-styl
 Expected audiobook behaviour:
 
 - Feed type is `serial`, so clients should preserve the configured chapter order.
+- The page chooses the existing `hero` visual layout, so the cover image is rendered by the standard page template before the audio controls.
 - Items are labelled as chapters in the page content and omit podcast episode numbers.
 - The page is promoted as a masonry card with `pin`, not as a carousel item.
 - Listening position is stored per book id and chapter id in the browser.
