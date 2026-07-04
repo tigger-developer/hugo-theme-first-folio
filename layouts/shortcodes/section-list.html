@@ -28,6 +28,18 @@
           </span>
           <a href="{{ $section.RelPermalink }}" class="sidebar-link">{{ $section.Title }}</a>
         </li>
+      {{- else -}}
+        {{- $typePages := where $.Site.RegularPages "Type" $sectionName -}}
+        {{- if gt (len $typePages) 0 -}}
+          {{- $page := index $typePages 0 -}}
+          <li>
+            <span class="sidebar-chevron-wrapper">
+              <img src="{{ relURL "icons/chevron-right-thick.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-light" aria-hidden="true">
+              <img src="{{ relURL "icons/chevron-right-thick-white.svg" }}" alt="" class="sidebar-chevron sidebar-chevron-dark" aria-hidden="true">
+            </span>
+            <a href="{{ $page.RelPermalink }}" class="sidebar-link">{{ $page.LinkTitle | default $page.Title }}</a>
+          </li>
+        {{- end -}}
       {{- end -}}
     {{- end -}}
   </ul>

@@ -2,6 +2,15 @@
 title: First Folio Demo Podcast
 linkTitle: Audiobook Demo
 type: audiobook
+description: A theme-owned audiobook page with a podcast RSS feed, generated media metadata, and demo audio files.
+carousel: 4
+image:
+  src: audiobook.jpg
+  alt: "Open book with headphones and an audio player on a wooden desk"
+  card_src: audiobook.jpg
+  card_position: center center
+  carousel_src: podcast.jpg
+  carousel_position: center center
 outputs:
   - html
   - podcast

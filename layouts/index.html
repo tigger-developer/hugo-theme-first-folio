@@ -64,6 +64,14 @@
 						{{- /* Regular content pages */ -}}
 						{{- $sectionPages = where $.Site.RegularPages "Section" $section -}}
 					{{- end -}}
+				{{- else -}}
+					{{- /* Regular pages can belong to a configured main section even when
+					     that section has no _index.md page of its own. Top-level typed
+					     pages can also opt into the homepage by matching .Type. */ -}}
+					{{- $sectionPages = where $.Site.RegularPages "Section" $section -}}
+					{{- if eq (len $sectionPages) 0 -}}
+						{{- $sectionPages = where $.Site.RegularPages "Type" $section -}}
+					{{- end -}}
 				{{- end -}}
 
 				{{- /* Separate carousel pages from this section */ -}}

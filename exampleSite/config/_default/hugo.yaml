@@ -129,6 +129,7 @@ params:
     - photography
     - stories
     - poetry
+    - audiobook
 
   useCDN: false
 
