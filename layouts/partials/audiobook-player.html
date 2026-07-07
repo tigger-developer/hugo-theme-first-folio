@@ -12,7 +12,7 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
     <h2 class="audiobook-chapter-title">{{ .title }}</h2>
     {{- with .summary }}<p class="audiobook-chapter-summary">{{ . }}</p>{{- end }}
     <audio controls preload="metadata" data-audiobook-id="{{ $book.id }}" data-chapter-id="{{ .id }}">
-      <source src="{{ .src | relURL }}" type="{{ .mimeType }}">
+      <source src="{{ .srcRelPermalink }}" type="{{ .mimeType }}">
     </audio>
   </section>
   {{- end }}

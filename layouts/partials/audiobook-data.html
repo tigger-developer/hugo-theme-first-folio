@@ -47,6 +47,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
   {{- if not $chapter.src -}}
     {{- errorf "audiobook chapter %s is missing src on %s" $chapterID $page.Path -}}
   {{- end -}}
+  {{- $mediaSrc := partial "audiobook-media-src.html" (dict "page" $page "src" $chapter.src "chapterID" $chapterID) -}}
   {{- $generated := index $generatedBook $chapterID | default dict -}}
   {{- with $generated.src -}}
     {{- if ne . $chapter.src -}}
@@ -58,6 +59,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
     {{- errorf "audiobook chapter %s is missing mimeType on %s" $chapterID $page.Path -}}
   {{- end -}}
   {{- $byteLength := or (index $generated "byteLength") (index $generated "bytelength") -}}
+  {{- $byteLength = or $byteLength (index $mediaSrc "byteLength") -}}
   {{- if not $byteLength -}}
     {{- if and (not (urls.Parse $chapter.src).Scheme) (hasPrefix $chapter.src "/") -}}
       {{- $staticPath := printf "static/%s" (strings.TrimPrefix "/" $chapter.src) -}}
@@ -77,6 +79,8 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
       "id" $chapterID
       "title" $chapter.title
       "src" $chapter.src
+      "srcRelPermalink" $mediaSrc.rel
+      "srcPermalink" $mediaSrc.abs
       "mimeType" $mimeType
       "byteLength" $byteLength
       "duration" (or $generated.duration $chapter.duration)

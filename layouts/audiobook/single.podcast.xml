@@ -34,7 +34,7 @@ ABOUTME: Shares validated chapter metadata with the audiobook HTML layout.
       {{- with .episode }}
       <itunes:episode>{{ . }}</itunes:episode>
       {{- end }}
-      <enclosure url="{{ .src | absURL }}" type="{{ .mimeType }}" length="{{ .byteLength }}" />
+      <enclosure url="{{ .srcPermalink }}" type="{{ .mimeType }}" length="{{ .byteLength }}" />
     </item>
     {{- end }}
   </channel>

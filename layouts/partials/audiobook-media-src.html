@@ -1,0 +1,41 @@
+{{/*
+ABOUTME: Resolves audiobook media src values for HTML and RSS rendering.
+ABOUTME: Preserves raw frontmatter src while supporting Hugo page-bundle resources.
+*/}}
+{{- $page := .page -}}
+{{- $rawSrc := .src -}}
+{{- $chapterID := .chapterID -}}
+{{- $parsed := urls.Parse $rawSrc -}}
+{{- $resolved := dict -}}
+{{- if $parsed.Scheme -}}
+  {{- $resolved = dict "raw" $rawSrc "rel" $rawSrc "abs" $rawSrc -}}
+{{- else if hasPrefix $rawSrc "/" -}}
+  {{- $resolved = dict "raw" $rawSrc "rel" ($rawSrc | relURL) "abs" ($rawSrc | absURL) -}}
+{{- else -}}
+  {{- $contentPath := path.Clean (path.Join $page.File.Dir $rawSrc) -}}
+  {{- $resource := $page.Resources.Get (strings.TrimPrefix "./" $rawSrc) -}}
+  {{- if not $resource -}}
+    {{- $resourceDir := path.Dir $contentPath -}}
+    {{- $resourceName := path.Base $contentPath -}}
+    {{- with site.GetPage $resourceDir -}}
+      {{- $resource = .Resources.Get $resourceName -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if not $resource -}}
+    {{- errorf "audiobook chapter %s src %q cannot be resolved as a page resource on %s" $chapterID $rawSrc $page.Path -}}
+  {{- end -}}
+  {{- $byteLength := 0 -}}
+  {{- $contentFile := printf "content/%s" $contentPath -}}
+  {{- if os.FileExists $contentFile -}}
+    {{- with os.Stat $contentFile -}}
+      {{- $byteLength = .Size -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $resolved = dict
+      "raw" $rawSrc
+      "rel" $resource.RelPermalink
+      "abs" $resource.Permalink
+      "byteLength" $byteLength
+    -}}
+{{- end -}}
+{{- return $resolved -}}
