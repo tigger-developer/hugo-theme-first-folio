@@ -75,7 +75,13 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
   {{- if not $byteLength -}}
     {{- errorf "audiobook chapter %s is missing byteLength; audiobook media metadata could not resolve byteLength on %s" $chapterID $page.Path -}}
   {{- end -}}
-  {{- $date := or $chapter.date $generated.date $page.Date -}}
+  {{- $date := or $chapter.date $generated.date -}}
+  {{- if not $date -}}
+    {{- $date = $page.Date -}}
+    {{- if eq $type "serial" -}}
+      {{- $date = (time.AsTime $page.Date).Add (time.ParseDuration (printf "%ds" $index)) -}}
+    {{- end -}}
+  {{- end -}}
   {{- $normalized = $normalized | append (dict
       "id" $chapterID
       "title" $chapter.title

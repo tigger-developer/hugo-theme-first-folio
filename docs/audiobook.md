@@ -66,7 +66,7 @@ Chapter metadata:
 
 Optional metadata can enrich the feed without changing the required interface.
 
-Book metadata may include `author` and `image`. Chapter metadata may include `summary`, `date`, `duration`, and `episode`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date.
+Book metadata may include `author` and `image`. Chapter metadata may include `summary`, `date`, `duration`, and `episode`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
 
 Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Use `type: episodic` only for podcast-style feeds where clients should treat newer episodes as primary.
 
