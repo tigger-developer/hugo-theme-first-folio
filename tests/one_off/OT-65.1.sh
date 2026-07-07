@@ -22,9 +22,21 @@ if [[ "$(grep -cxF "$theme_url" "$themes_file")" != "1" ]]; then
     exit 1
 fi
 
-if ! LC_ALL=C sort -c "$themes_file"; then
-    printf 'themes.txt is not lexicographically sorted\n' >&2
-    exit 1
-fi
+mapfile -t themes < "$themes_file"
+for index in "${!themes[@]}"; do
+    if [[ "${themes[$index]}" == "$theme_url" ]]; then
+        previous="${themes[$((index - 1))]:-}"
+        next="${themes[$((index + 1))]:-}"
+        if [[ -n "$previous" && ! "$previous" < "$theme_url" ]]; then
+            printf '%s is not after lexicographic predecessor %s\n' "$theme_url" "$previous" >&2
+            exit 1
+        fi
+        if [[ -n "$next" && ! "$theme_url" < "$next" ]]; then
+            printf '%s is not before lexicographic successor %s\n' "$theme_url" "$next" >&2
+            exit 1
+        fi
+        break
+    fi
+done
 
 git -C "$repo" diff -- themes.txt | grep -qF "+$theme_url"
