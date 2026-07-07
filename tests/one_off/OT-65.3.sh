@@ -5,7 +5,7 @@ set -euo pipefail
 
 tag="$(git describe --tags --abbrev=0)"
 
-for path in theme.toml hugo.yaml README.md images/screenshot.jpg images/tn.jpg; do
+for path in theme.toml hugo.yaml README.md images/screenshot.png images/tn.png; do
     if ! git cat-file -e "$tag:$path"; then
         printf '%s is missing from %s\n' "$path" "$tag" >&2
         exit 1

@@ -4,8 +4,8 @@
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {
-    local screenshot="$THEME_ROOT/images/screenshot.jpg"
-    local thumbnail="$THEME_ROOT/images/tn.jpg"
+    local screenshot="$THEME_ROOT/images/screenshot.png"
+    local thumbnail="$THEME_ROOT/images/tn.png"
 
     [[ -f "$screenshot" ]] || return 1
     [[ -f "$thumbnail" ]] || return 1
