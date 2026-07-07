@@ -4,6 +4,7 @@
   const storagePrefix = "first-folio:audiobook";
   const audioSelector = "audio[data-audiobook-id][data-chapter-id]";
   const audios = Array.from(document.querySelectorAll(audioSelector));
+  const copyButtons = Array.from(document.querySelectorAll("[data-feed-copy][data-feed-url]"));
 
   function storageKey(audio) {
     const bookId = audio.dataset.audiobookId;
@@ -110,5 +111,25 @@
     }
   }
 
+  function wireCopyButton(button) {
+    button.addEventListener("click", function () {
+      const feedUrl = button.dataset.feedUrl;
+      if (!feedUrl || !navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
+        return;
+      }
+
+      const originalText = button.textContent;
+      navigator.clipboard.writeText(feedUrl).then(function () {
+        button.textContent = "Copied";
+        window.setTimeout(function () {
+          button.textContent = originalText;
+        }, 1600);
+      }).catch(function () {
+        button.textContent = originalText;
+      });
+    });
+  }
+
   audios.forEach(wireAudio);
+  copyButtons.forEach(wireCopyButton);
 })();

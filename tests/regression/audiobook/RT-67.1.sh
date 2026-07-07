@@ -33,4 +33,11 @@ run_test() {
     grep -qxF 'Overcast' <<< "$app_text"
     grep -qxF 'Castro' <<< "$app_text"
     grep -qxF 'AntennaPod' <<< "$app_text"
+
+    local app_hrefs
+    app_hrefs="$(htmlq -f "$page" -a href '.audiobook-subscribe .audiobook-app-link')"
+    grep -qxF 'podcast:https://example.com/podcast-demo/feed.xml' <<< "$app_hrefs"
+    grep -qxF 'overcast://x-callback-url/add?url=https%3A%2F%2Fexample.com%2Fpodcast-demo%2Ffeed.xml' <<< "$app_hrefs"
+    grep -qxF 'castros://subscribe/https%3A%2F%2Fexample.com%2Fpodcast-demo%2Ffeed.xml' <<< "$app_hrefs"
+    grep -qxF 'antennapod-subscribe:https://example.com/podcast-demo/feed.xml' <<< "$app_hrefs"
 }

@@ -23,6 +23,9 @@ params:
     language: en-GB
     explicit: false
     type: serial
+    subscribe:
+      label: Open in your podcast app
+      prompt: Select your podcast app to listen in.
     chapters:
       - id: episode-1
         title: Demo Episode 1
@@ -107,6 +110,26 @@ outputFormats:
     baseName: feed
     isPlainText: false
     noUgly: true
+```
+
+## Feed Subscription Controls
+
+When a page requests the `podcast` output, the HTML page renders a small subscription area above the chapter list:
+
+- an `RSS feed` text link to the generated feed;
+- a `Copy` button that copies the absolute feed URL when the browser permits clipboard access;
+- an `Open in your podcast app` details chooser with text links for common podcast clients.
+
+The chooser is deliberately generic enough for podcasts and audiobooks. Static sites cannot reliably detect which podcast app is installed on a visitor's device, so First Folio exposes app-specific text links rather than attempting client detection or maintaining app icon assets.
+
+The default chooser copy can be overridden per page:
+
+```yaml
+params:
+  audiobook:
+    subscribe:
+      label: Listen in an app
+      prompt: Choose where to open this feed.
 ```
 
 ## Demo Audio Assets

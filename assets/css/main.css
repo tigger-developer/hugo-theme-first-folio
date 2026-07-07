@@ -1244,8 +1244,51 @@ nav {
   max-width: var(--content-max-width, 80rem);
 }
 
-.audiobook-feed {
+.audiobook-subscribe {
+  display: grid;
+  gap: 0.75rem;
   margin-block: 1rem 2rem;
+}
+
+.audiobook-feed {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.audiobook-feed-copy {
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 0.25rem;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.25rem 0.6rem;
+}
+
+.audiobook-apps {
+  border-block-start: 1px solid var(--border-color, #ddd);
+  padding-block-start: 0.75rem;
+}
+
+.audiobook-apps summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.audiobook-subscribe-prompt {
+  margin-block: 0.75rem 0.5rem;
+}
+
+.audiobook-app-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .audiobook-chapters {

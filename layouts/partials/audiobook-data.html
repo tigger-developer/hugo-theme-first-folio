@@ -30,6 +30,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
 {{- end -}}
 {{- $generatedRoot := index hugo.Data "first_folio_media" | default dict -}}
 {{- $generatedBook := index $generatedRoot $book.id | default dict -}}
+{{- $subscribe := $book.subscribe | default dict -}}
 {{- $seen := dict -}}
 {{- $normalized := slice -}}
 {{- range $index, $chapter := $chapters -}}
@@ -98,5 +99,9 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
     "type" $type
     "author" ($book.author | default .Site.Title)
     "image" $book.image
+    "subscribe" (dict
+      "label" ($subscribe.label | default "Open in your podcast app")
+      "prompt" ($subscribe.prompt | default "Select your podcast app to listen in.")
+    )
     "chapters" $normalized
   ) -}}

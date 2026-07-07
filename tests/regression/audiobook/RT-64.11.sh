@@ -48,10 +48,13 @@ const audios = [new FakeAudio("chapter-1"), new FakeAudio("chapter-2"), new Fake
 
 globalThis.document = {
   querySelectorAll: function (selector) {
-    if (selector !== "audio[data-audiobook-id][data-chapter-id]") {
-      throw new Error("unexpected selector: " + selector);
+    if (selector === "audio[data-audiobook-id][data-chapter-id]") {
+      return audios;
     }
-    return audios;
+    if (selector === "[data-feed-copy][data-feed-url]") {
+      return [];
+    }
+    throw new Error("unexpected selector: " + selector);
   }
 };
 

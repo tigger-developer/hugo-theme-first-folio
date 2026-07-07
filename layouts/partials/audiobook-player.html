@@ -4,7 +4,28 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
 */}}
 {{- $book := partial "audiobook-data.html" . -}}
 {{- with .OutputFormats.Get "podcast" }}
-<p class="audiobook-feed"><a href="{{ .RelPermalink }}">Podcast feed</a></p>
+{{- $feedURL := .Permalink -}}
+{{- $encodedFeedURL := $feedURL | urlquery -}}
+{{- $appleURL := printf "podcast:%s" $feedURL | safeURL -}}
+{{- $overcastURL := printf "overcast://x-callback-url/add?url=%s" $encodedFeedURL | safeURL -}}
+{{- $castroURL := printf "castros://subscribe/%s" $encodedFeedURL | safeURL -}}
+{{- $antennaPodURL := printf "antennapod-subscribe:%s" $feedURL | safeURL -}}
+<div class="audiobook-subscribe">
+  <div class="audiobook-feed">
+    <a class="audiobook-feed-link" href="{{ .RelPermalink }}">RSS feed</a>
+    <button type="button" class="audiobook-feed-copy" data-feed-copy data-feed-url="{{ $feedURL }}" aria-label="Copy RSS feed URL">Copy</button>
+  </div>
+  <details class="audiobook-apps">
+    <summary>{{ $book.subscribe.label }}</summary>
+    <p class="audiobook-subscribe-prompt">{{ $book.subscribe.prompt }}</p>
+    <ul class="audiobook-app-list">
+      <li><a class="audiobook-app-link" href="{{ $appleURL }}">Apple Podcasts</a></li>
+      <li><a class="audiobook-app-link" href="{{ $overcastURL }}">Overcast</a></li>
+      <li><a class="audiobook-app-link" href="{{ $castroURL }}">Castro</a></li>
+      <li><a class="audiobook-app-link" href="{{ $antennaPodURL }}">AntennaPod</a></li>
+    </ul>
+  </details>
+</div>
 {{- end }}
 <div class="audiobook-chapters" data-audiobook-theme-feature="first-folio" data-audiobook-id="{{ $book.id }}">
   {{- range $book.chapters }}
