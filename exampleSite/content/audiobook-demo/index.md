@@ -71,11 +71,11 @@ This page demonstrates First Folio's theme-owned audio layout for audiobook-styl
 
 Expected audiobook behaviour:
 
-- Feed type is `serial`, so clients should preserve the configured chapter order.
+- Feed type is `serial`, so the feed declares audiobook-style ordering and uses one-second fallback `pubDate` increments when item dates are not explicitly supplied.
 - The page chooses the existing `background` visual layout, so the cover image is rendered by the standard page template before the audio controls.
 - Items are labelled as front matter and chapters in the page content and omit podcast episode numbers.
 - The page is promoted to the homepage carousel with `carousel`, using the same front matter contract as other featured content.
 - Listening position is stored per book id and chapter id in the browser.
-- Generated media metadata supplies duration and byte length, while front matter remains the source of titles, summaries, and source URLs.
+- Generated media metadata supplies duration and byte length, while front matter remains the source of titles, summaries, and source URLs. If generated media dates are absent, serial fallback dates are derived from the page date in chapter order.
 
 Use this pattern for audiobooks, serialized essays, course modules, or any audio work where the listener is expected to start at the beginning and continue in order.

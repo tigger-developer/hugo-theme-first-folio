@@ -58,7 +58,7 @@ This page demonstrates First Folio's theme-owned audio layout for podcast-style 
 
 Expected podcast behaviour:
 
-- Feed type is `episodic`, so podcast clients may emphasize newer or featured episodes.
+- Feed type is `episodic`, so podcast clients may emphasize newer or featured episodes and fallback dates are not staggered by chapter order.
 - The page chooses the existing `background` visual layout, so the cover image becomes the page canvas and the background-layout dark ambience rules apply.
 - Items include `episode` numbers in front matter and RSS output.
 - The page is promoted to the homepage carousel with `carousel`.

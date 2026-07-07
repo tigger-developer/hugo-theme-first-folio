@@ -8,7 +8,7 @@ Use `type: audiobook` and request both HTML and podcast output when a feed is ne
 
 ```yaml
 ---
-title: First Folio Demo Podcast
+title: First Folio Demo Audiobook
 type: audiobook
 layout: hero
 outputs:
@@ -17,9 +17,9 @@ outputs:
 robots: noindex,nofollow,noarchive
 params:
   audiobook:
-    id: first-folio-demo-podcast
-    title: First Folio Demo Podcast
-    description: A short synthetic podcast used by the First Folio example site.
+    id: first-folio-demo-audiobook
+    title: First Folio Demo Audiobook
+    description: A short synthetic audiobook used by the First Folio example site.
     language: en-GB
     explicit: false
     type: serial
@@ -27,12 +27,11 @@ params:
       label: Open in your podcast app
       prompt: Select your podcast app to listen in.
     chapters:
-      - id: episode-1
-        title: Demo Episode 1
-        src: /audio/podcast-demo/episode-1.m4a
+      - id: chapter-1
+        title: Demo Chapter 1
+        src: /audio/audiobook-demo/chapter01.m4a
         mimeType: audio/mp4
         byteLength: 64280
-        episode: 1
 ---
 ```
 
@@ -58,9 +57,16 @@ Chapter metadata:
 
 - `id`: stable chapter identifier. Values must be unique within the book.
 - `title`: rendered chapter title and feed item title.
-- `src`: audio URL or site-root-relative path.
+- `src`: audio URL, site-root-relative path, or page-resource-relative path.
 - `mimeType`: enclosure MIME type, such as `audio/mp4`.
 - `byteLength`: enclosure byte length in bytes.
+
+The `src` value supports these forms:
+
+- Absolute URL, for media hosted outside the site: `https://media.example.com/book/chapter01.m4a`.
+- Site-root-relative static path: `/audio/book/chapter01.m4a`.
+- Page-resource-relative path inside the current page bundle: `chapter01.m4a` or `media/chapter01.m4a`.
+- Page-resource-relative path into another bundle, such as `../shared-audio/chapter01.m4a`, when that path resolves to a Hugo page resource.
 
 ## Optional Metadata
 
@@ -80,6 +86,7 @@ first-folio-demo-podcast:
     src: /audio/podcast-demo/episode-1.m4a
     byteLength: 64280
     duration: "00:00:03"
+    date: 2024-07-04T09:30:00+01:00
 ```
 
 Generated data is optional and works for both local and remote media. It is the preferred contract for binary-derived facts when a site has a build step that can inspect or fetch media metadata. Manual front matter remains supported for existing sites, simple sites, and remote media hosts where Hugo cannot see the files.
@@ -87,8 +94,9 @@ Generated data is optional and works for both local and remote media. It is the 
 The theme applies media facts in this order:
 
 - `src`: front matter is canonical. A generated `src`, when present, must match front matter or the build fails as stale metadata.
+- `date`: front matter, then generated data, then fallback. For `serial` feeds only, fallback dates are staggered by chapter index in one-second increments.
 - `duration`: generated data, then front matter, then omitted.
-- `byteLength`: generated data, then local file size via `os.Stat` for site-root-relative static files, then front matter, then a build error for podcast RSS.
+- `byteLength`: generated data, then local file size via `os.Stat` for resolvable page resources or site-root-relative static files, then front matter, then a build error for podcast RSS.
 - `mimeType`: front matter, then generated data, then a build error.
 
 The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
