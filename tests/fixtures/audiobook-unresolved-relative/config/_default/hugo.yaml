@@ -1,0 +1,17 @@
+baseURL: https://fixture.example/
+languageCode: en-GB
+title: Audiobook Unresolved Relative Fixture
+outputs:
+  page:
+    - html
+    - podcast
+mediaTypes:
+  application/rss+xml:
+    suffixes:
+      - xml
+outputFormats:
+  podcast:
+    mediaType: application/rss+xml
+    baseName: feed
+    isPlainText: false
+    noUgly: true
