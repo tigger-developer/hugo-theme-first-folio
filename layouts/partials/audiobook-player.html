@@ -13,7 +13,7 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
 <div class="audiobook-subscribe">
   <div class="audiobook-feed">
     <a class="audiobook-feed-link" href="{{ .RelPermalink }}">RSS feed</a>
-    <button type="button" class="audiobook-feed-copy" data-feed-copy data-feed-url="{{ $feedURL }}" aria-label="Copy RSS feed URL">Copy</button>
+    <button type="button" class="audiobook-feed-copy" data-feed-copy data-feed-url="{{ $feedURL }}" aria-label="Copy RSS feed URL" title="Copy RSS feed URL">⧉</button>
   </div>
   <details class="audiobook-apps">
     <summary>{{ $book.subscribe.label }}</summary>

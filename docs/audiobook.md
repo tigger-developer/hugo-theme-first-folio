@@ -117,7 +117,7 @@ outputFormats:
 When a page requests the `podcast` output, the HTML page renders a small subscription area above the chapter list:
 
 - an `RSS feed` text link to the generated feed;
-- a `Copy` button that copies the absolute feed URL when the browser permits clipboard access;
+- a copy-glyph button that copies the absolute feed URL when the browser permits clipboard access;
 - an `Open in your podcast app` details chooser with text links for common podcast clients.
 
 The chooser is deliberately generic enough for podcasts and audiobooks. Static sites cannot reliably detect which podcast app is installed on a visitor's device, so First Folio exposes app-specific text links rather than attempting client detection or maintaining app icon assets.

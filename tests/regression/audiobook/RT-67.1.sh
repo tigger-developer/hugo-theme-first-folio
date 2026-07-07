@@ -19,6 +19,10 @@ run_test() {
     copy_urls="$(htmlq -f "$page" -a data-feed-url '.audiobook-subscribe [data-feed-copy]')"
     grep -qxF 'https://example.com/podcast-demo/feed.xml' <<< "$copy_urls"
 
+    local copy_text
+    copy_text="$(htmlq -f "$page" -t '.audiobook-subscribe [data-feed-copy]' | tr -d '\n')"
+    [[ "$copy_text" == "⧉" ]]
+
     local summary_text
     summary_text="$(htmlq -f "$page" -t '.audiobook-subscribe details summary' | tr -d '\n')"
     [[ "$summary_text" == "Open in your podcast app" ]]

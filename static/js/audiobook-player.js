@@ -120,7 +120,7 @@
 
       const originalText = button.textContent;
       navigator.clipboard.writeText(feedUrl).then(function () {
-        button.textContent = "Copied";
+        button.textContent = "✓";
         window.setTimeout(function () {
           button.textContent = originalText;
         }, 1600);
