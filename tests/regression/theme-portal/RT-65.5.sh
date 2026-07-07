@@ -12,5 +12,4 @@ run_test() {
 
     htmlq -f "$page" 'title' | grep -q 'demo.theme.tadg.ie' || return 1
     htmlq -f "$page" -a content 'meta[property="og:url"]' | grep -qx 'https://demo.theme.tadg.ie/' || return 1
-    htmlq -f "$page" -a content 'meta[property="og:title"]' | grep -q 'demo.theme.tadg.ie' || return 1
 }

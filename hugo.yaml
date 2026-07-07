@@ -1,0 +1,7 @@
+# ABOUTME: Root Hugo module metadata for the First Folio theme.
+# ABOUTME: Declares the Hugo version contract consumed by Hugo modules and theme portals.
+
+module:
+  hugoVersion:
+    extended: true
+    min: 0.155.0

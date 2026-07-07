@@ -16,7 +16,7 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 
 **The masonry grid.** A hybrid CSS Grid and JavaScript approach that adapts to viewport width using em-based breakpoints (WCAG 2.1 compliant - respects browser font size). Configurable columns, gaps, and breakpoints. A carousel card rotates featured content above the grid. Pin values control homepage ordering.
 
-**18 shortcodes.** Callout boxes, collapsible details, block quotes with decorative marks, expandable quotes, poetry formatting, play dialogue and stage directions, inline images with responsive thumbnails and WebP, image galleries, side-by-side layouts, video embeds, contact forms with CAPTCHA, and more. Each documented with live examples on the [demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/).
+**19 shortcodes.** Callout boxes, collapsible details, block quotes with decorative marks, expandable quotes, poetry formatting, play dialogue and stage directions, inline images with responsive thumbnails and WebP, image galleries, side-by-side layouts, video embeds, contact forms with CAPTCHA, and more. Each documented with live examples on the [demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/).
 
 **Navigation and CTAs.** Breadcrumb trails with section hierarchy, author, and date. Signpost bars for calls to action - configurable per page or cascaded across entire sections. Table of contents as a sticky sidebar on desktop, collapsible on mobile.
 
@@ -51,6 +51,12 @@ For non-developers who need to edit content on an existing site, see the [Conten
    ```bash
    hugo server
    ```
+
+## Compatibility
+
+First Folio targets Hugo Extended 0.155.0 or newer. The theme is published as the Hugo module `github.com/tadg-paul/hugo-theme-first-folio`, with the live example site at https://demo.theme.tadg.ie.
+
+The repository includes portal metadata in `theme.toml` and preview assets under `images/` for submission to the public Hugo theme directory.
 
 ## Table of Contents
 

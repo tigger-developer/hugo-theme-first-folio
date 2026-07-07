@@ -16,11 +16,19 @@ run_test() {
         rm -f "$out"
         return 1
     fi
-    if ! htmlq -f "$out" 'h2,h3' | grep -q 'Compatibility'; then
+    local headings
+    headings="$(htmlq -f "$out" 'h2,h3')"
+    if ! grep -q 'Compatibility' <<< "$headings"; then
         rm -f "$out"
         return 1
     fi
-    if ! grep -q 'Hugo 0.155.0' "$out"; then
+    local compatibility
+    compatibility="$(htmlq -f "$out" '#compatibility' '+ p')"
+    if ! grep -q 'Hugo Extended' <<< "$compatibility"; then
+        rm -f "$out"
+        return 1
+    fi
+    if ! grep -q '0.155.0' <<< "$compatibility"; then
         rm -f "$out"
         return 1
     fi

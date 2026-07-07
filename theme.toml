@@ -5,13 +5,14 @@ license = "Apache-2.0"
 licenselink = "https://github.com/tadg-paul/hugo-theme-first-folio/blob/main/LICENSE"
 description = "A versatile Hugo theme for sites that do many things — galleries, blogs, poetry, plays, recipes, tech docs — without any section feeling like an afterthought."
 homepage = "https://github.com/tadg-paul/hugo-theme-first-folio"
-demosite = "https://first-folio.demo.lobb.ie/"
-tags = ["blog", "portfolio", "gallery", "poetry", "responsive", "masonry", "multi-section", "shortcodes", "dark", "video", "cloudflare-stream"]
+demosite = "https://demo.theme.tadg.ie/"
+tags = ["blog", "portfolio", "gallery", "poetry", "podcast", "audiobook", "responsive", "masonry", "multi-section", "shortcodes", "dark", "video", "cloudflare-stream"]
 features = [
   "Masonry grid with carousel card",
   "Image galleries with lightbox and EXIF metadata",
   "Six article layouts (banner, hero, columns, featured, background, text-only)",
   "19 custom shortcodes",
+  "Podcast and audiobook pages with RSS feeds",
   "Cloudflare Stream video support",
   "Breadcrumb navigation and signpost CTAs",
   "Table of contents sidebar",
