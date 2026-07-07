@@ -9,11 +9,12 @@ FIRST_FOLIO_MEDIA_CONTENT ?= exampleSite/content/audiobook-demo/index.md example
 FIRST_FOLIO_MEDIA_STATIC_DIR ?= exampleSite/static
 FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
 
-.PHONY: build ensure-audiobook-metadata generate-audiobook-metadata test test-one-off smoke serve lint help
+.PHONY: build verify-audiobook-metadata ensure-audiobook-metadata generate-audiobook-metadata test test-one-off smoke serve lint help
 
 help:
 	@printf 'Available targets:\n'
-	@printf '  build         build exampleSite for deployment; generate media metadata only when missing\n'
+	@printf '  build         build exampleSite for deployment; requires committed media metadata\n'
+	@printf '  verify-audiobook-metadata  fail if committed exampleSite media metadata is missing\n'
 	@printf '  ensure-audiobook-metadata  generate exampleSite media metadata when the committed file is missing\n'
 	@printf '  generate-audiobook-metadata  explicitly refresh generated media facts for the exampleSite audio demos\n'
 	@printf '  test          run regression tests (tests/regression/)\n'
@@ -22,12 +23,18 @@ help:
 	@printf '  serve         run hugo server for exampleSite; override HUGO_BIND/HUGO_PORT as needed\n'
 	@printf '  lint          shellcheck on test scripts\n'
 
-build: ensure-audiobook-metadata
+build: verify-audiobook-metadata
 	@if [ -z "$${HUGO_ENVIRONMENT:-}" ]; then \
 		printf 'HUGO_ENVIRONMENT is required for make build\n' >&2; \
 		exit 2; \
 	fi
 	@hugo --source exampleSite --destination public --environment "$(HUGO_ENVIRONMENT)" --minify
+
+verify-audiobook-metadata:
+	@if [ ! -s "$(FIRST_FOLIO_MEDIA_OUTPUT)" ]; then \
+		printf '%s is missing; run make generate-audiobook-metadata and commit it before building\n' "$(FIRST_FOLIO_MEDIA_OUTPUT)" >&2; \
+		exit 2; \
+	fi
 
 ensure-audiobook-metadata:
 	@if [ ! -s "$(FIRST_FOLIO_MEDIA_OUTPUT)" ]; then \
@@ -48,7 +55,7 @@ else
 	@find tests/one_off -name "OT-*.sh" -print -exec bash {} \;
 endif
 
-smoke: ensure-audiobook-metadata
+smoke: verify-audiobook-metadata
 	@if [ -d "$(SMOKE_DIR)" ]; then trash "$(SMOKE_DIR)"; fi
 	@hugo --quiet --source exampleSite --destination "$(SMOKE_DIR)"
 	@htmltest

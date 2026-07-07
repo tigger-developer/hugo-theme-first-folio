@@ -101,7 +101,7 @@ The theme applies media facts in this order:
 
 The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
 
-This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. Both demos use the existing `background` visual layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`; run it explicitly when demo audio files or chapter source paths change, then commit the updated YAML. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT`, uses committed metadata in normal builds, and only runs `ffprobe` when the metadata file is missing.
+This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. Both demos use the existing `background` visual layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`; run it explicitly when demo audio files or chapter source paths change, then commit the updated YAML. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` and fails if the committed metadata file is missing. GitHub Pages deploys do not run `ffprobe`.
 
 ## Output Configuration
 

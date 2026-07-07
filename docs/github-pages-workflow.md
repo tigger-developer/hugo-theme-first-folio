@@ -15,9 +15,11 @@ The workflow:
 
 - Triggers on every push to `main` (adjust the branch name if yours differs)
 - Can also be triggered manually from the Actions tab
-- Installs Hugo Extended (latest version)
+- Builds with a pinned Hugo container
 - Builds the site with `--minify` for production
 - Deploys the output to GitHub Pages
+
+If your site uses generated podcast or audiobook metadata, add a pre-build step that verifies the committed metadata is present. Do not run media probes during Pages deploys; generate metadata locally, commit it, and let CI fail early when the committed data is missing.
 
 ## Workflow
 
@@ -47,24 +49,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          git init .
-          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
-          git -c http.extraheader="AUTHORIZATION: bearer ${GH_TOKEN}" fetch --depth=1 origin "$GITHUB_SHA"
-          git checkout --detach FETCH_HEAD
+        uses: actions/checkout@v4
 
-      - name: Install Hugo and ffprobe
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y hugo ffmpeg
-
-      - name: Build with Make
+      - name: Build Hugo
         env:
-          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: production
-        run: make build
+          HUGO_IMAGE: hugomods/hugo:debian-0.161.1@sha256:b65563ec4d103289c6c1e0a26875036bad780702b2613825f8d4c02f63c7711a
+        run: |
+          docker run --rm \
+            -v "$PWD:/src" \
+            -w /src \
+            -e HUGO_CACHEDIR=/tmp/hugo_cache \
+            -e HUGO_ENVIRONMENT="$HUGO_ENVIRONMENT" \
+            "$HUGO_IMAGE" \
+            hugo --source . --destination public --environment "$HUGO_ENVIRONMENT" --gc --minify
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
@@ -83,6 +81,13 @@ jobs:
         uses: actions/deploy-pages@v5
 ```
 
+For this theme repository's demo workflow, the metadata guard is:
+
+```yaml
+      - name: Verify committed media metadata
+        run: make verify-audiobook-metadata
+```
+
 ## Custom domain
 
 If you're using a custom domain (e.g. `www.example.com`):
@@ -95,7 +100,7 @@ GitHub ignores `CNAME` files when publishing Pages from a custom GitHub Actions 
 
 ## ExampleSite Builds
 
-This theme repository deploys its demo from `exampleSite`, not from the repository root. Its workflow checks out the repository with Git, installs `hugo` and `ffmpeg` from apt, sets `HUGO_ENVIRONMENT=theme-demo-live`, and calls `make build`.
+This theme repository deploys its demo from `exampleSite`, not from the repository root. Its workflow uses GitHub's official checkout action, verifies committed media metadata with `make verify-audiobook-metadata`, sets `HUGO_ENVIRONMENT=theme-demo-live`, and runs Hugo inside a pinned Hugo container. GitHub's official actions may use Node internally as Actions runtime plumbing; Node is not a project dependency and is not used by the Hugo build.
 
 The `make build` target intentionally requires `HUGO_ENVIRONMENT` from the caller. The Makefile must not guess the environment name because consuming sites own their Hugo environment names and config directories. For this repository's demo, run:
 
@@ -103,7 +108,7 @@ The `make build` target intentionally requires `HUGO_ENVIRONMENT` from the calle
 HUGO_ENVIRONMENT=theme-demo-live make build
 ```
 
-That target builds Hugo with `--source exampleSite --destination public`, which writes the deployable artifact to `exampleSite/public`. It uses the committed `exampleSite/data/first_folio_media.yaml` in normal builds. If that file is missing, `make build` generates it with `ffprobe` before running Hugo; refresh it explicitly with `make generate-audiobook-metadata` when demo audio files or chapter source paths change, then commit the updated YAML.
+The demo workflow builds Hugo with `--source exampleSite --destination public`, which writes the deployable artifact to `exampleSite/public`. It requires the committed `exampleSite/data/first_folio_media.yaml`; CI fails if that file is missing. Refresh it explicitly with `make generate-audiobook-metadata` when demo audio files or chapter source paths change, then commit the updated YAML before pushing. GitHub Pages deploys do not run `ffprobe`.
 
 ## Hugo modules
 

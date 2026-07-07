@@ -25,24 +25,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          git init .
-          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
-          git -c http.extraheader="AUTHORIZATION: bearer ${GH_TOKEN}" fetch --depth=1 origin "$GITHUB_SHA"
-          git checkout --detach FETCH_HEAD
+        uses: actions/checkout@v4
 
-      - name: Install Hugo and ffprobe
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y hugo ffmpeg
+      - name: Verify committed media metadata
+        run: make verify-audiobook-metadata
 
       - name: Build exampleSite
         env:
-          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
           HUGO_ENVIRONMENT: theme-demo-live
-        run: make build
+          HUGO_IMAGE: hugomods/hugo:debian-0.161.1@sha256:b65563ec4d103289c6c1e0a26875036bad780702b2613825f8d4c02f63c7711a
+        run: |
+          docker run --rm \
+            -v "$PWD:/src" \
+            -w /src \
+            -e HUGO_CACHEDIR=/tmp/hugo_cache \
+            -e HUGO_ENVIRONMENT="$HUGO_ENVIRONMENT" \
+            "$HUGO_IMAGE" \
+            hugo --source exampleSite --destination public --environment "$HUGO_ENVIRONMENT" --gc --minify
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
