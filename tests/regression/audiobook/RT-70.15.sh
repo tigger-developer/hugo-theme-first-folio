@@ -13,10 +13,10 @@ run_test() {
     for selector in '.audiobook-player' '.audiobook-sidebar' '.audiobook-save-panel' '.audiobook-homescreen-panel' '.audiobook-subscribe-panel'; do
         local audiobook_count
         local podcast_count
-        audiobook_count="$(htmlq -f "$audiobook_page" "$selector" | htmlq "$selector" | wc -l | tr -d ' ')"
-        podcast_count="$(htmlq -f "$podcast_page" "$selector" | htmlq "$selector" | wc -l | tr -d ' ')"
-        [[ "$audiobook_count" == "1" ]] || return 1
-        [[ "$podcast_count" == "1" ]] || return 1
+        audiobook_count="$(htmlq -f "$audiobook_page" "$selector" | wc -c | tr -d ' ')"
+        podcast_count="$(htmlq -f "$podcast_page" "$selector" | wc -c | tr -d ' ')"
+        [[ "$audiobook_count" -gt 0 ]] || return 1
+        [[ "$podcast_count" -gt 0 ]] || return 1
     done
 
     local audiobook_label

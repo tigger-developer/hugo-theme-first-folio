@@ -8,6 +8,6 @@ run_test() {
     page="$(audiobook_fixture_page audiobook-no-local-template)" || return 1
 
     local marker
-    marker="$(htmlq -f "$page" -a data-audiobook-theme-feature '.audiobook-chapters')"
+    marker="$(htmlq -f "$page" -a data-audiobook-theme-feature '.audiobook-listening-layout')"
     [[ "$marker" == "first-folio" ]]
 }

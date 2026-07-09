@@ -3,7 +3,7 @@
 
 run_test() {
     local out
-    out="$(mktemp -t "ff-missing-media-XXXXXX.yaml")"
+    out="$(mktemp "$AGENT_TMP/ff-missing-media-XXXXXX.yaml")"
     rm -f "$out"
 
     if HUGO_ENVIRONMENT=theme-demo-live make -C "$THEME_ROOT" build FIRST_FOLIO_MEDIA_OUTPUT="$out" >/dev/null 2>&1; then

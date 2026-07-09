@@ -1,3 +1,5 @@
+<!-- Version: 1.1 | Last updated: 2026-07-09 -->
+
 # Audiobook Pages and Podcast Feeds
 
 First Folio provides theme-owned audio controls and podcast feeds for sites that publish static audio chapters. Consuming sites provide content, metadata, audio assets, and the normal First Folio visual layout choice; the theme renders the page, podcast feed, and local listening-position behaviour.
@@ -24,8 +26,10 @@ params:
     explicit: false
     type: serial
     subscribe:
-      label: Open in your podcast app
-      prompt: Select your podcast app to listen in.
+      label: Listen in your favourite podcast app
+      prompt: Copy this Podcast Feed Link.
+      hint: In your podcast app, look for Add Link or Add Feed, then paste it there.
+      copied: Copied Podcast Feed Link
     chapters:
       - id: chapter-1
         title: Demo Chapter 1
@@ -72,7 +76,7 @@ The `src` value supports these forms:
 
 Optional metadata can enrich the feed without changing the required interface.
 
-Book metadata may include `author` and `image`. Chapter metadata may include `summary`, `date`, `duration`, and `episode`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
+Book metadata may include `author`, `image`, `subscribe`, `save`, and `homescreen`. Chapter metadata may include `summary`, `date`, `duration`, `episode`, and `label`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
 
 Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Use `type: episodic` only for podcast-style feeds where clients should treat newer episodes as primary.
 
@@ -101,11 +105,11 @@ The theme applies media facts in this order:
 
 The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
 
-This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. Both demos use the existing `background` visual layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`; run it explicitly when demo audio files or chapter source paths change, then commit the updated YAML. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` and fails if the committed metadata file is missing. GitHub Pages deploys do not run `ffprobe`.
+This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. The podcast demo uses the existing `background` visual layout, while the audiobook demo uses the existing `hero` layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`; run it explicitly when demo audio files or chapter source paths change, then commit the updated YAML. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` and fails if the committed metadata file is missing. GitHub Pages deploys do not run `ffprobe`.
 
 ## Output Configuration
 
-The example site declares a `podcast` output format with `baseName: feed`, so the podcast demo at `/podcast-demo/` publishes `/podcast-demo/feed.xml` and the audiobook demo at `/audiobook-demo/` publishes `/audiobook-demo/feed.xml`.
+The example site declares a `podcast` output format with `baseName: feed`, so the podcast demo at `/podcast-demo/` publishes `/podcast-demo/feed.xml` and the audiobook demo at `/audiobook-demo/` publishes `/audiobook-demo/feed.xml`. It also declares a `webmanifest` output format with `baseName: manifest` so audio pages can publish `/manifest.webmanifest` for Home Screen metadata when that output is requested.
 
 ```yaml
 mediaTypes:
@@ -118,19 +122,35 @@ outputFormats:
     baseName: feed
     isPlainText: false
     noUgly: true
+  webmanifest:
+    mediaType: application/manifest+json
+    baseName: manifest
+    isPlainText: true
+    noUgly: true
 ```
 
-## Feed Subscription Controls
+## Web Player and Sidebar Controls
 
-When a page requests the `podcast` output, the HTML page renders a small subscription area above the chapter list:
+Audio pages render a single web player for both audiobook and podcast modes. The page still models audio as chapters or episodes, but the visible player exposes only one play/pause control, back 30 seconds, forward 15 seconds, previous and next item controls, current item metadata, and a visible ordered list of tappable chapter or episode names. This keeps item granularity available for listeners who open the same private link in another browser context and lose local saved position.
 
-- an `RSS feed` text link to the generated feed;
-- a copy-glyph button that copies the absolute feed URL when the browser permits clipboard access;
-- an `Open in your podcast app` details chooser with text links for common podcast clients.
+The same UX is used for `serial` audiobooks and `episodic` podcasts. Differences are limited to labels, feed ordering semantics, and the content supplied by the page. `serial` is the default and is intended for chapter-order listening. `episodic` is intended for podcast-style feeds where episodes can stand alone.
 
-The chooser is deliberately generic enough for podcasts and audiobooks. Static sites cannot reliably detect which podcast app is installed on a visitor's device, so First Folio exposes app-specific text links rather than attempting client detection or maintaining app icon assets.
+Secondary actions live in the audio sidebar:
 
-The default chooser copy can be overridden per page:
+- `Share or save this page`: copies the page Link and shows a Web Share button only when the browser exposes `navigator.share`.
+- `Save to your Home Screen`: shows iOS, Android, or generic instructions. iOS-family browsers receive Share icon / Add to Home Screen guidance; Android-family browsers receive browser menu / Add to Home screen or Install app guidance.
+- `Listen in your favourite podcast app`: contains the feed Link, copy glyph, short setup instructions, and copy feedback.
+
+Default podcast-app setup does not render named app links. Apple and Android do not provide a reliable one-tap Link for private feeds, and app-specific URL schemes overpromise behaviour that many players do not support. The default copy is deliberately manual and uses `Link` rather than `URL`:
+
+```text
+Copy this Podcast Feed Link.
+In your podcast app, look for Add Link or Add Feed, then paste it there.
+```
+
+Clicking the feed panel copy target copies the absolute feed Link when clipboard access is available and displays `Copied Podcast Feed Link`. The visible feed Link remains selectable when clipboard access is unavailable.
+
+The default visible text can be overridden per page without copying templates. Feed setup text lives under `params.audiobook.subscribe`; page-link copy text lives under `params.audiobook.save`; Home Screen guidance lives under `params.audiobook.homescreen`:
 
 ```yaml
 params:
@@ -138,6 +158,20 @@ params:
     subscribe:
       label: Listen in an app
       prompt: Choose where to open this feed.
+      hint: Paste this Link into the app's Add Feed screen.
+      footnote: Private feeds require manual setup on most phones.
+      copied: Copied Podcast Feed Link
+    save:
+      label: Share or save this page
+      prompt: Copy this page Link, or use your browser's bookmark/share button to come back later.
+      copied: Copied Page Link
+    homescreen:
+      enabled: true
+      label: Save to your Home Screen
+      prompt: Save this page to your phone so it opens like an app and is easy to find again.
+      ios: On iPhone or iPad, tap Share, then choose Add to Home Screen.
+      android: On Android, open your browser menu, then choose Add to Home screen or Install app.
+      fallback: Use your browser menu to bookmark this page or add it to your device home screen.
 ```
 
 ## Demo Audio Assets
@@ -146,7 +180,11 @@ The example site uses small `.m4a` demo files copied into the repository under `
 
 ## Local Player Behaviour
 
-The audiobook player script stores listening position in `localStorage` using stable `book id + chapter id` keys. When a visitor returns in the same browser, matching audio controls restore their previous position. When a chapter ends, the script attempts to start the next audio control in page order; browsers that block automatic playback leave the native controls usable. Starting one chapter pauses any other active chapter on the same page. Invalid or missing stored values are ignored so audio controls continue to load normally.
+The audiobook player script stores listening position in `localStorage` using stable `book id + chapter id` keys. When a visitor returns in the same browser, the matching chapter or episode restores its previous position. When an item ends, the script clears any stale saved position for the next item, starts it from zero, and attempts to continue playback in page order. Browsers that block automatic playback leave the player controls usable. The page exposes one active audio element at a time, so starting another chapter or episode changes the active item instead of creating multiple competing play buttons. Invalid or missing stored values are ignored so audio controls continue to load normally.
+
+## Changelog
+
+- 1.1 (2026-07-09): Document the unified player, sidebar help panels, Home Screen guidance, webmanifest output, and override contract.
 
 ## Robots Metadata
 

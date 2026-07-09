@@ -45,8 +45,8 @@ expect_fixture_build_failure() {
     local expected_message="$2"
     local out
     local err
-    out="$(mktemp -d -t "ff-audiobook-invalid-${fixture}-XXXXXX")"
-    err="$(mktemp -t "ff-audiobook-invalid-${fixture}-stderr-XXXXXX")"
+    out="$(mktemp -d "$AGENT_TMP/ff-audiobook-invalid-${fixture}-XXXXXX")"
+    err="$(mktemp "$AGENT_TMP/ff-audiobook-invalid-${fixture}-stderr-XXXXXX")"
     local result=1
 
     if hugo --source "$FIXTURES_ROOT/$fixture" --destination "$out" --themesDir "$THEME_ROOT/.." --theme "$(basename "$THEME_ROOT")" > /dev/null 2>"$err"; then
@@ -70,7 +70,7 @@ feed_item_count() {
 start_examplesite_server() {
     local port="${1:-46813}"
     EXAMPLESITE_SERVER_URL="http://127.0.0.1:${port}"
-    EXAMPLESITE_SERVER_LOG="$(mktemp -t "ff-audiobook-server-XXXXXX")"
+    EXAMPLESITE_SERVER_LOG="$(mktemp "$AGENT_TMP/ff-audiobook-server-XXXXXX")"
     hugo server --quiet --source "$THEME_ROOT/exampleSite" --bind 127.0.0.1 --port "$port" --baseURL "$EXAMPLESITE_SERVER_URL/" --disableFastRender --renderToMemory --noHTTPCache >"$EXAMPLESITE_SERVER_LOG" 2>&1 &
     EXAMPLESITE_SERVER_PID="$!"
 

@@ -14,7 +14,7 @@ root_hugo_value() {
 
 build_theme_demo_live() {
     local out
-    out="$(mktemp -d -t "ff-theme-portal-XXXXXX")"
+    out="$(mktemp -d "$AGENT_TMP/ff-theme-portal-XXXXXX")"
     if hugo --quiet --source "$THEME_ROOT/exampleSite" --destination "$out" --environment theme-demo-live --minify; then
         echo "$out"
         return 0

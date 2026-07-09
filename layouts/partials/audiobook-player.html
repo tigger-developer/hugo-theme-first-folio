@@ -1,40 +1,107 @@
 {{/*
-ABOUTME: Renders audio feed and chapter controls inside the active single-page layout.
+ABOUTME: Renders the unified audio player and secondary listening help panels.
 ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visual layout.
 */}}
 {{- $book := partial "audiobook-data.html" . -}}
-{{- with .OutputFormats.Get "podcast" }}
-{{- $feedURL := .Permalink -}}
-{{- $encodedFeedURL := $feedURL | urlquery -}}
-{{- $appleURL := printf "podcast:%s" $feedURL | safeURL -}}
-{{- $overcastURL := printf "overcast://x-callback-url/add?url=%s" $encodedFeedURL | safeURL -}}
-{{- $castroURL := printf "castros://subscribe/%s" $encodedFeedURL | safeURL -}}
-{{- $antennaPodURL := printf "antennapod-subscribe:%s" $feedURL | safeURL -}}
-<div class="audiobook-subscribe">
-  <div class="audiobook-feed">
-    <a class="audiobook-feed-link" href="{{ .RelPermalink }}">RSS feed</a>
-    <button type="button" class="audiobook-feed-copy" data-feed-copy data-feed-url="{{ $feedURL }}" aria-label="Copy RSS feed URL" title="Copy RSS feed URL">⧉</button>
-  </div>
-  <details class="audiobook-apps">
-    <summary>{{ $book.subscribe.label }}</summary>
-    <p class="audiobook-subscribe-prompt">{{ $book.subscribe.prompt }}</p>
-    <ul class="audiobook-app-list">
-      <li><a class="audiobook-app-link" href="{{ $appleURL }}">Apple Podcasts</a></li>
-      <li><a class="audiobook-app-link" href="{{ $overcastURL }}">Overcast</a></li>
-      <li><a class="audiobook-app-link" href="{{ $castroURL }}">Castro</a></li>
-      <li><a class="audiobook-app-link" href="{{ $antennaPodURL }}">AntennaPod</a></li>
-    </ul>
-  </details>
-</div>
-{{- end }}
-<div class="audiobook-chapters" data-audiobook-theme-feature="first-folio" data-audiobook-id="{{ $book.id }}">
-  {{- range $book.chapters }}
-  <section class="audiobook-chapter" data-chapter-id="{{ .id }}">
-    <h2 class="audiobook-chapter-title">{{ .title }}</h2>
-    {{- with .summary }}<p class="audiobook-chapter-summary">{{ . }}</p>{{- end }}
-    <audio controls preload="metadata" data-audiobook-id="{{ $book.id }}" data-chapter-id="{{ .id }}">
-      <source src="{{ .srcRelPermalink }}" type="{{ .mimeType }}">
+{{- $first := index $book.chapters 0 -}}
+{{- $pageURL := .Permalink -}}
+<div class="audiobook-listening-layout" data-audiobook-theme-feature="first-folio">
+  <section class="audiobook-player" data-audiobook-id="{{ $book.id }}" data-audiobook-type="{{ $book.type }}" aria-label="{{ $book.title }} audio player">
+    <header class="audiobook-player-header">
+      <p class="audiobook-work-title">{{ $book.title }}</p>
+      <p class="audiobook-active-label" data-audiobook-active-label>{{ $first.label }}</p>
+      <h2 class="audiobook-active-title" data-audiobook-active-title>{{ $first.title }}</h2>
+      <p class="audiobook-active-summary" data-audiobook-active-summary{{ if not $first.summary }} hidden{{ end }}>{{ $first.summary }}</p>
+    </header>
+
+    <audio preload="metadata" data-audiobook-id="{{ $book.id }}" data-chapter-id="{{ $first.id }}">
+      <source data-audiobook-source src="{{ $first.srcRelPermalink }}" type="{{ $first.mimeType }}">
     </audio>
+
+    <div class="audiobook-progress" aria-live="polite">
+      <span data-audiobook-active-progress>00:00</span>
+      <span aria-hidden="true">/</span>
+      <span data-audiobook-active-duration>{{ $first.duration | default "00:00" }}</span>
+    </div>
+
+    <div class="audiobook-controls" aria-label="Playback controls">
+      <button type="button" class="audiobook-control" data-audiobook-previous aria-label="Previous item">‹</button>
+      <button type="button" class="audiobook-control audiobook-control-primary" data-audiobook-seek="-30" aria-label="Back 30 seconds">‹‹ 30s</button>
+      <button type="button" class="audiobook-play-toggle" data-audiobook-play-toggle aria-label="Play or pause">Play</button>
+      <button type="button" class="audiobook-control audiobook-control-primary" data-audiobook-seek="15" aria-label="Forward 15 seconds">15s ››</button>
+      <button type="button" class="audiobook-control" data-audiobook-next aria-label="Next item">›</button>
+    </div>
+
+    <ol class="audiobook-track-list" aria-label="{{ if eq $book.type "episodic" }}Episodes{{ else }}Chapters{{ end }}">
+      {{- range $index, $chapter := $book.chapters }}
+      <li>
+        <button
+          type="button"
+          class="audiobook-track-button{{ if eq $index 0 }} is-active{{ end }}"
+          data-audiobook-track
+          data-audiobook-id="{{ $book.id }}"
+          data-chapter-id="{{ $chapter.id }}"
+          data-chapter-label="{{ $chapter.label }}"
+          data-chapter-title="{{ $chapter.title }}"
+          data-chapter-summary="{{ $chapter.summary }}"
+          data-chapter-src="{{ $chapter.srcRelPermalink }}"
+          data-chapter-mime-type="{{ $chapter.mimeType }}"
+          data-chapter-duration="{{ $chapter.duration }}"
+          {{ if eq $index 0 }}aria-current="true"{{ end }}>
+          <span class="audiobook-track-label">{{ $chapter.label }}</span>
+          <span class="audiobook-track-title">{{ $chapter.title }}</span>
+        </button>
+      </li>
+      {{- end }}
+    </ol>
+
+    <noscript>
+      <div class="audiobook-noscript">
+        {{- range $book.chapters }}
+        <section class="audiobook-noscript-item">
+          <h3>{{ .title }}</h3>
+          {{- with .summary }}<p>{{ . }}</p>{{- end }}
+          <audio controls preload="metadata">
+            <source src="{{ .srcRelPermalink }}" type="{{ .mimeType }}">
+          </audio>
+        </section>
+        {{- end }}
+      </div>
+    </noscript>
   </section>
-  {{- end }}
+
+  <aside class="audiobook-sidebar" aria-label="Listening options">
+    <details class="audiobook-assist-panel audiobook-save-panel">
+      <summary>{{ $book.save.label }}</summary>
+      <p>{{ $book.save.prompt }}</p>
+      <button type="button" class="audiobook-copy-button" data-audio-assist-copy data-copy-value="{{ $pageURL }}" data-audio-assist-copied="{{ $book.save.copied }}" aria-label="Copy page Link">⧉<span data-audio-assist-feedback></span></button>
+      <button type="button" class="audiobook-share-button" data-audio-web-share data-share-url="{{ $pageURL }}" data-share-title="{{ $book.title }}" hidden>Share</button>
+    </details>
+
+    {{- if $book.homescreen.enabled }}
+    <details class="audiobook-assist-panel audiobook-homescreen-panel">
+      <summary>{{ $book.homescreen.label }}</summary>
+      <p>{{ $book.homescreen.prompt }}</p>
+      <p data-homescreen-instruction="ios" hidden><span class="audiobook-share-icon" aria-hidden="true">□↑</span> {{ $book.homescreen.ios }}</p>
+      <p data-homescreen-instruction="android" hidden>{{ $book.homescreen.android }}</p>
+      <p data-homescreen-instruction="generic" hidden>{{ $book.homescreen.fallback }}</p>
+      <button type="button" class="audiobook-install-button" data-audio-install hidden>Install</button>
+    </details>
+    {{- end }}
+
+    {{- with .OutputFormats.Get "podcast" }}
+    {{- $feedURL := .Permalink -}}
+    <details class="audiobook-assist-panel audiobook-subscribe-panel">
+      <summary>{{ $book.subscribe.label }}</summary>
+      <div class="audiobook-feed-copy-zone" data-audio-assist-copy data-copy-value="{{ $feedURL }}" data-audio-assist-copied="{{ $book.subscribe.copied }}">
+        <p class="audiobook-subscribe-prompt">{{ $book.subscribe.prompt }}</p>
+        <p class="audiobook-subscribe-hint">{{ $book.subscribe.hint }}</p>
+        <p><a class="audiobook-feed-link" href="{{ .RelPermalink }}">Podcast Feed Link</a></p>
+        <button type="button" class="audiobook-copy-button" aria-label="Copy Podcast Feed Link">⧉</button>
+        <p class="audiobook-copy-feedback" data-audio-assist-feedback></p>
+      </div>
+      <p class="audiobook-assist-footnote">{{ $book.subscribe.footnote }}</p>
+    </details>
+    {{- end }}
+  </aside>
 </div>

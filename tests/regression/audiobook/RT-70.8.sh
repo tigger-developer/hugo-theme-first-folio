@@ -9,7 +9,7 @@ run_test() {
     page="$(podcast_demo_page)" || return 1
 
     local player_count
-    player_count="$(htmlq -f "$page" '.audiobook-player' | htmlq '.audiobook-player' | wc -l | tr -d ' ')"
+    player_count="$(htmlq -f "$page" -a data-audiobook-id '.audiobook-player' | wc -l | tr -d ' ')"
     [[ "$player_count" == "1" ]] || return 1
 
     local main_feed_controls

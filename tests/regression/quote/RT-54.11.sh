@@ -14,8 +14,8 @@
 
 run_test() {
     local tmp_out tmp_err
-    tmp_out="$(mktemp -d -t "ff-warnf-XXXXXX")"
-    tmp_err="$(mktemp -t "ff-warnf-stderr-XXXXXX")"
+    tmp_out="$(mktemp -d "$AGENT_TMP/ff-warnf-XXXXXX")"
+    tmp_err="$(mktemp "$AGENT_TMP/ff-warnf-stderr-XXXXXX")"
     trap 'rm -rf "$tmp_out" "$tmp_err"' RETURN
 
     hugo --source "$THEME_ROOT/exampleSite" --destination "$tmp_out" --logLevel warn >/dev/null 2>"$tmp_err"

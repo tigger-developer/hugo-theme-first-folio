@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-64.10 - audio demos can choose the existing background visual layout.
+# ABOUTME: RT-64.10 - audio demos can choose existing visual layouts.
 
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
@@ -19,9 +19,9 @@ run_test() {
         return 1
     fi
 
-    htmlq -f "$audiobook_page" '.post-container.dark-bg' | grep -q '<' || return 1
-    if htmlq -f "$audiobook_page" '#dark-mode-toggle' | grep -q '<'; then
-        printf '    background audiobook page unexpectedly showed ambience toggle\n' >&2
+    htmlq -f "$audiobook_page" '.post-hero img' | grep -q '<' || return 1
+    if ! htmlq -f "$audiobook_page" '#dark-mode-toggle' | grep -q '<'; then
+        printf '    hero audiobook page unexpectedly hid ambience toggle\n' >&2
         return 1
     fi
 }

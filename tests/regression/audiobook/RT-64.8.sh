@@ -3,7 +3,7 @@
 
 run_test() {
     local out
-    out="$(mktemp -t "ff-audiobook-media-XXXXXX.yaml")"
+    out="$(mktemp "$AGENT_TMP/ff-audiobook-media-XXXXXX.yaml")"
 
     if ! make -C "$THEME_ROOT" generate-audiobook-metadata FIRST_FOLIO_MEDIA_OUTPUT="$out" >/dev/null; then
         rm -f "$out"

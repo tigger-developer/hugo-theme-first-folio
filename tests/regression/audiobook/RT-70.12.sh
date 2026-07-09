@@ -9,7 +9,7 @@ run_test() {
     page="$(audiobook_demo_page)" || return 1
 
     local panel_count
-    panel_count="$(htmlq -f "$page" '.audiobook-save-panel' | htmlq '.audiobook-save-panel' | wc -l | tr -d ' ')"
+    panel_count="$(htmlq -f "$page" -t '.audiobook-save-panel summary' | wc -l | tr -d ' ')"
     [[ "$panel_count" == "1" ]] || return 1
 
     local summary_text

@@ -200,12 +200,20 @@ mediaTypes:
   application/rss+xml:
     suffixes:
       - xml
+  application/manifest+json:
+    suffixes:
+      - webmanifest
 
 outputFormats:
   podcast:
     mediaType: application/rss+xml
     baseName: feed
     isPlainText: false
+    noUgly: true
+  webmanifest:
+    mediaType: application/manifest+json
+    baseName: manifest
+    isPlainText: true
     noUgly: true
 
 markup:

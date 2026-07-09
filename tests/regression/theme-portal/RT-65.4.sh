@@ -3,7 +3,7 @@
 
 run_test() {
     local out
-    out="$(mktemp -t "ff-theme-readme-XXXXXX.html")"
+    out="$(mktemp "$AGENT_TMP/ff-theme-readme-XXXXXX.html")"
     pandoc "$THEME_ROOT/README.md" --from gfm --to html --output "$out"
 
     local links

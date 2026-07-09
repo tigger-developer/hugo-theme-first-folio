@@ -7,8 +7,13 @@ IFS=$'\n\t'
 THEME_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 TESTS_ROOT="$THEME_ROOT/tests/regression"
 FIXTURES_ROOT="$THEME_ROOT/tests/fixtures"
+AGENT_TMP="$THEME_ROOT/.agent/tmp"
+REGRESSION_TMP="$AGENT_TMP/regression-run"
+mkdir -p "$AGENT_TMP"
+rm -rf "$REGRESSION_TMP"
+mkdir -p "$REGRESSION_TMP"
 
-export THEME_ROOT TESTS_ROOT FIXTURES_ROOT
+export THEME_ROOT TESTS_ROOT FIXTURES_ROOT AGENT_TMP REGRESSION_TMP
 
 PASSED=0
 FAILED=0
@@ -31,7 +36,11 @@ build_fixture() {
         return 1
     fi
     local out
-    out="$(mktemp -d -t "ff-fixture-${name}-XXXXXX")"
+    out="$REGRESSION_TMP/fixture-${name}"
+    if [[ -d "$out" ]]; then
+        echo "$out"
+        return 0
+    fi
     if hugo --quiet --source "$src" --destination "$out" --themesDir "$THEME_ROOT/.." --theme "$(basename "$THEME_ROOT")" 2>/dev/null; then
         BUILT_FIXTURES[$name]="$out"
         echo "$out"
@@ -49,11 +58,12 @@ build_fixture() {
 EXAMPLESITE_BUILD=""
 # shellcheck disable=SC2329  # invoked from per-test scripts that source this driver indirectly
 build_examplesite() {
-    if [[ -n "$EXAMPLESITE_BUILD" && -d "$EXAMPLESITE_BUILD" ]]; then
-        echo "$EXAMPLESITE_BUILD"
+    local out="$REGRESSION_TMP/examplesite"
+    if [[ -f "$out/index.html" ]]; then
+        echo "$out"
         return 0
     fi
-    EXAMPLESITE_BUILD="$(mktemp -d -t "ff-examplesite-XXXXXX")"
+    EXAMPLESITE_BUILD="$out"
     if hugo --quiet --source "$THEME_ROOT/exampleSite" --destination "$EXAMPLESITE_BUILD" 2>/dev/null; then
         echo "$EXAMPLESITE_BUILD"
         return 0
@@ -68,14 +78,8 @@ build_examplesite() {
 cleanup_fixtures() {
     # mktemp-created temp dirs are the documented exception in CODING.md
     # where direct removal (not via `trash`) is acceptable.
-    local out
-    for out in "${BUILT_FIXTURES[@]:-}"; do
-        if [[ -d "$out" ]]; then
-            rm -rf "$out"
-        fi
-    done
-    if [[ -n "$EXAMPLESITE_BUILD" && -d "$EXAMPLESITE_BUILD" ]]; then
-        rm -rf "$EXAMPLESITE_BUILD"
+    if [[ -d "$REGRESSION_TMP" ]]; then
+        rm -rf "$REGRESSION_TMP"
     fi
 }
 trap cleanup_fixtures EXIT

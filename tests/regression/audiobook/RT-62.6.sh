@@ -8,7 +8,7 @@ run_test() {
     page="$(audiobook_demo_page)" || return 1
 
     local sources
-    sources="$(htmlq -f "$page" -a src 'audio source')"
+    sources="$(htmlq -f "$page" -a data-chapter-src '.audiobook-track-button[data-chapter-id]')"
     grep -qF '/audio/audiobook-demo/chapter00.m4a' <<< "$sources" || return 1
     grep -qF '/audio/audiobook-demo/chapter01.m4a' <<< "$sources" || return 1
     grep -qF '/audio/audiobook-demo/chapter06.m4a' <<< "$sources" || return 1

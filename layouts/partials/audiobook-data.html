@@ -31,6 +31,8 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
 {{- $generatedRoot := index hugo.Data "first_folio_media" | default dict -}}
 {{- $generatedBook := index $generatedRoot $book.id | default dict -}}
 {{- $subscribe := $book.subscribe | default dict -}}
+{{- $save := $book.save | default dict -}}
+{{- $homescreen := $book.homescreen | default dict -}}
 {{- $seen := dict -}}
 {{- $normalized := slice -}}
 {{- range $index, $chapter := $chapters -}}
@@ -82,9 +84,26 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
       {{- $date = (time.AsTime $page.Date).Add (time.ParseDuration (printf "%ds" $index)) -}}
     {{- end -}}
   {{- end -}}
+  {{- $label := $chapter.label -}}
+  {{- if not $label -}}
+    {{- if eq $type "episodic" -}}
+      {{- $label = printf "Episode %v" (or $chapter.episode (add $index 1)) -}}
+    {{- else if and (eq $index 0) (eq (urlize $chapterID) "front-matter") -}}
+      {{- $label = "Front Matter" -}}
+    {{- else if eq $type "serial" -}}
+      {{- $chapterNumber := add $index 1 -}}
+      {{- if eq (urlize (index $chapters 0).id) "front-matter" -}}
+        {{- $chapterNumber = $index -}}
+      {{- end -}}
+      {{- $label = printf "Chapter %d" $chapterNumber -}}
+    {{- else -}}
+      {{- $label = $chapter.title -}}
+    {{- end -}}
+  {{- end -}}
   {{- $normalized = $normalized | append (dict
       "id" $chapterID
       "title" $chapter.title
+      "label" $label
       "src" $chapter.src
       "srcRelPermalink" $mediaSrc.rel
       "srcPermalink" $mediaSrc.abs
@@ -106,8 +125,24 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
     "author" ($book.author | default .Site.Title)
     "image" $book.image
     "subscribe" (dict
-      "label" ($subscribe.label | default "Open in your podcast app")
-      "prompt" ($subscribe.prompt | default "Select your podcast app to listen in.")
+      "label" ($subscribe.label | default "Listen in your favourite podcast app")
+      "prompt" ($subscribe.prompt | default "Copy this Podcast Feed Link.")
+      "hint" ($subscribe.hint | default "In your podcast app, look for Add Link or Add Feed, then paste it there.")
+      "footnote" ($subscribe.footnote | default "Unfortunately Apple and Android do not provide a reliable one-tap Link for private feeds.")
+      "copied" ($subscribe.copied | default "Copied Podcast Feed Link")
+    )
+    "save" (dict
+      "label" ($save.label | default "Share or save this page")
+      "prompt" ($save.prompt | default "Copy this page Link, or use your browser's bookmark/share button to come back later.")
+      "copied" ($save.copied | default "Copied Page Link")
+    )
+    "homescreen" (dict
+      "enabled" ($homescreen.enabled | default true)
+      "label" ($homescreen.label | default "Save to your Home Screen")
+      "prompt" ($homescreen.prompt | default "Save this page to your phone so it opens like an app and is easy to find again.")
+      "ios" ($homescreen.ios | default "On iPhone or iPad, tap Share, then choose Add to Home Screen.")
+      "android" ($homescreen.android | default "On Android, open your browser menu, then choose Add to Home screen or Install app.")
+      "fallback" ($homescreen.fallback | default "Use your browser menu to bookmark this page or add it to your device home screen.")
     )
     "chapters" $normalized
   ) -}}

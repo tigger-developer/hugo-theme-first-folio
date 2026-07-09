@@ -10,8 +10,8 @@
 
 run_test() {
     local tmp_out tmp_err
-    tmp_out="$(mktemp -d -t "ff-exif-XXXXXX")"
-    tmp_err="$(mktemp -t "ff-exif-stderr-XXXXXX")"
+    tmp_out="$(mktemp -d "$AGENT_TMP/ff-exif-XXXXXX")"
+    tmp_err="$(mktemp "$AGENT_TMP/ff-exif-stderr-XXXXXX")"
     trap 'rm -rf "$tmp_out" "$tmp_err"' RETURN
 
     hugo --source "$THEME_ROOT/exampleSite" --destination "$tmp_out" --logLevel warn >/dev/null 2>"$tmp_err"

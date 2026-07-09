@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-62.3 - chapter entries expose title, media URL, and stable chapter ID.
+# ABOUTME: RT-62.3 - chapter selectors expose title, media URL, and stable chapter ID.
 
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
@@ -8,9 +8,9 @@ run_test() {
     page="$(audiobook_demo_page)" || return 1
 
     local titles sources chapter_ids
-    titles="$(htmlq -f "$page" -t '.audiobook-chapter-title')"
-    sources="$(htmlq -f "$page" -a src 'audio[data-chapter-id] source')"
-    chapter_ids="$(htmlq -f "$page" -a data-chapter-id 'audio[data-chapter-id]')"
+    titles="$(htmlq -f "$page" -t '.audiobook-track-button')"
+    sources="$(htmlq -f "$page" -a data-chapter-src '.audiobook-track-button[data-chapter-id]')"
+    chapter_ids="$(htmlq -f "$page" -a data-chapter-id '.audiobook-track-button[data-chapter-id]')"
 
     grep -qF 'Front Matter' <<< "$titles" || return 1
     grep -qF 'Demo Chapter 6' <<< "$titles" || return 1

@@ -16,6 +16,7 @@ image:
 outputs:
   - html
   - podcast
+  - webmanifest
 robots: noindex,nofollow,noarchive
 params:
   audiobook:

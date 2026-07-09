@@ -1236,84 +1236,187 @@ nav {
 }
 
 /* Audiobook pages */
-.audiobook-page {
+.audiobook-listening-layout {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
   margin-block: 2rem;
 }
 
-.audiobook-content {
-  max-width: var(--content-max-width, 80rem);
-}
-
-.audiobook-subscribe {
+.audiobook-player {
+  border-block-start: 3px solid var(--color-primary);
   display: grid;
-  gap: 0.75rem;
-  margin-block: 1rem 2rem;
+  gap: 1rem;
+  padding-block-start: 1rem;
 }
 
-.audiobook-feed {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.audiobook-player-header {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.audiobook-work-title,
+.audiobook-active-label,
+.audiobook-active-summary,
+.audiobook-progress,
+.audiobook-subscribe-hint,
+.audiobook-assist-footnote {
+  color: var(--color-text-muted, #6b6b7a);
+  font-family: var(--font-caption);
+}
+
+.audiobook-work-title,
+.audiobook-active-label,
+.audiobook-active-title,
+.audiobook-active-summary {
   margin: 0;
 }
 
-.audiobook-feed-copy {
+.audiobook-active-label {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.audiobook-active-title {
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+.audiobook-progress {
+  align-items: center;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.audiobook-controls {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.audiobook-control,
+.audiobook-play-toggle,
+.audiobook-copy-button,
+.audiobook-share-button,
+.audiobook-install-button {
   background: transparent;
   border: 1px solid currentColor;
   border-radius: 0.25rem;
   color: inherit;
   cursor: pointer;
   font: inherit;
-  line-height: 1;
-  min-inline-size: 2rem;
-  padding: 0.25rem 0.6rem;
+  min-block-size: 2.4rem;
+  padding: 0.35rem 0.55rem;
 }
 
-.audiobook-apps {
-  border-block-start: 1px solid var(--border-color, #ddd);
-  padding-block-start: 0.75rem;
+.audiobook-control-primary,
+.audiobook-play-toggle {
+  font-weight: 700;
 }
 
-.audiobook-apps summary {
-  cursor: pointer;
-  font-weight: 600;
+.audiobook-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
 }
 
-.audiobook-subscribe-prompt {
-  margin-block: 0.75rem 0.5rem;
-}
-
-.audiobook-app-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 1rem;
+.audiobook-track-list {
+  display: grid;
+  gap: 0.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.audiobook-chapters {
+.audiobook-track-list > li {
+  text-indent: 0;
+}
+
+.audiobook-track-list > li::before {
+  content: none;
+}
+
+.audiobook-track-button {
+  background: color-mix(in srgb, var(--color-background, #ffffff) 86%, var(--color-primary));
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  border-radius: 0.25rem;
+  color: inherit;
+  cursor: pointer;
   display: grid;
-  gap: 1.5rem;
-  margin-block-start: 2rem;
-}
-
-.audiobook-chapter {
-  border-block-start: 1px solid var(--border-color, #ddd);
-  padding-block-start: 1.25rem;
-}
-
-.audiobook-chapter-title {
-  margin-block: 0 0.5rem;
-}
-
-.audiobook-chapter-summary {
-  margin-block: 0 0.75rem;
-}
-
-.audiobook-chapter audio {
+  font: inherit;
+  gap: 0.15rem;
   inline-size: 100%;
+  padding: 0.65rem 0.75rem;
+  text-align: start;
+}
+
+.audiobook-track-button.is-active {
+  border-color: var(--color-primary);
+  box-shadow: inset 0.25rem 0 0 var(--color-primary);
+}
+
+.audiobook-track-label {
+  color: var(--color-text-muted, #6b6b7a);
+  font-family: var(--font-caption);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.audiobook-track-title {
+  font-weight: 700;
+}
+
+.audiobook-sidebar {
+  align-self: start;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.audiobook-assist-panel {
+  border-block-start: 1px solid var(--color-border, #8a7070);
+  padding-block-start: 0.75rem;
+}
+
+.audiobook-assist-panel summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.audiobook-assist-panel p {
+  margin-block: 0.6rem;
+}
+
+.audiobook-feed-copy-zone {
+  cursor: copy;
+}
+
+.audiobook-copy-button,
+.audiobook-share-button,
+.audiobook-install-button {
+  margin-block-start: 0.35rem;
+}
+
+.audiobook-copy-feedback {
+  font-weight: 700;
+}
+
+.audiobook-assist-footnote {
+  font-size: 0.9rem;
+}
+
+.audiobook-noscript {
+  display: grid;
+  gap: 1rem;
+  margin-block-start: 1rem;
+}
+
+.audiobook-noscript audio {
+  inline-size: 100%;
+}
+
+@media (min-width: 56rem) {
+  .audiobook-listening-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(14rem, 18rem);
+  }
 }
 
 /* Media queries for responsive design */

@@ -39,6 +39,20 @@
 	{{ with .OutputFormats.Get "podcast" -}}
 	{{ printf `<link rel="alternate" type="%s" href="%s" title="%s podcast feed" />` .MediaType.Type .Permalink $.Title | safeHTML }}
 	{{ end -}}
+	{{ with .OutputFormats.Get "webmanifest" -}}
+	{{ printf `<link rel="manifest" href="%s" />` .RelPermalink | safeHTML }}
+	{{- end }}
+	{{- if eq .Type "audiobook" -}}
+	  {{- $book := partial "audiobook-data.html" . -}}
+	  {{- $icon := or $book.image .Params.image.src -}}
+	  {{- with $icon }}
+	    {{- $iconURL := . -}}
+	    {{- if not (or (urls.Parse $iconURL).Scheme (hasPrefix $iconURL "/")) -}}
+	      {{- $iconURL = printf "%s%s" $.RelPermalink $iconURL -}}
+	    {{- end -}}
+	<link rel="apple-touch-icon" href="{{ $iconURL }}" />
+	  {{- end -}}
+	{{- end -}}
 
 	{{- template "_internal/opengraph.html" . -}}
 	{{- template "_internal/twitter_cards.html" . -}}
