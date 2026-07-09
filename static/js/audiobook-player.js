@@ -469,6 +469,32 @@
     });
   }
 
+  function wireResponsiveAssistPanels() {
+    if (!globalThis.window || !globalThis.window.matchMedia) {
+      return;
+    }
+    const panels = queryAll(document, ".audiobook-sidebar details.audiobook-assist-panel");
+    if (panels.length === 0) {
+      return;
+    }
+    const media = window.matchMedia("(max-width: 55.99rem)");
+    const syncPanels = function () {
+      panels.forEach(function (panel) {
+        if (media.matches) {
+          panel.removeAttribute("open");
+          return;
+        }
+        panel.setAttribute("open", "");
+      });
+    };
+    syncPanels();
+    if (typeof media.addEventListener === "function") {
+      media.addEventListener("change", syncPanels);
+    } else if (typeof media.addListener === "function") {
+      media.addListener(syncPanels);
+    }
+  }
+
   const players = queryAll(document, ".audiobook-player");
   if (players.length > 0) {
     players.forEach(wireUnifiedPlayer);
@@ -478,4 +504,5 @@
   wireCopyActions();
   wireHomescreenInstructions();
   wireWebShare();
+  wireResponsiveAssistPanels();
 })();

@@ -1253,6 +1253,10 @@ nav {
   margin-block: 2rem;
 }
 
+.audiobook-sidebar {
+  order: -1;
+}
+
 .audio-layout {
   min-block-size: 68vh;
 }
@@ -1605,6 +1609,10 @@ nav {
   font-weight: 700;
 }
 
+.audiobook-assist-panel[open] > :not(summary) {
+  animation: audiobook-assist-reveal 180ms ease-out;
+}
+
 .audiobook-assist-panel p {
   margin-block: 0.6rem;
 }
@@ -1638,9 +1646,25 @@ nav {
     grid-template-columns: minmax(0, 1fr) minmax(14rem, 18rem);
   }
 
+  .audiobook-sidebar {
+    order: 0;
+  }
+
   .audio-hero .audiobook-listening-layout {
     align-items: start;
     grid-template-columns: minmax(24rem, 1fr) minmax(13rem, 17rem);
+  }
+}
+
+@keyframes audiobook-assist-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
