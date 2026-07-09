@@ -44,12 +44,58 @@ layout: banner
 |-------|-------------|
 | `banner` | Full-width image banner with title overlaid. |
 | `hero` | Large image above the article content. |
+| `audio` | Theme-owned audio player layout for `type: audiobook` pages. |
 | `featured` | Image floated beside content. |
 | `background` | Image behind the entire article. Forces dark mode for the page. |
 | `columns` | Two-column layout with image. |
 | `featured-columns-left` | Image on left, content on right. |
 | `featured-columns-right` | Content on left, image on right. |
 | *(not set)* | If `image.src` is set but no layout is specified, defaults to `background`. Otherwise, a plain text article. |
+
+---
+
+## Audio
+
+Audio pages use Hugo `type: audiobook` plus `layout: audio` when the page should render the theme-owned web player as the primary page experience. The detailed contract is documented in [Audiobook Pages and Podcast Feeds](audiobook.md).
+
+```yaml
+type: audiobook
+layout: audio
+outputs:
+  - html
+  - podcast
+params:
+  audiobook:
+    id: about-time-part-2
+    title: About Time, Part Two
+    description: Audio chapters from About Time.
+    language: en-GB
+    explicit: false
+    type: serial
+    itemTerm: Chapter
+    itemTermPlural: Chapters
+    startNumber: 13
+    chapters:
+      - id: chapter-13
+        title: Telling the Truth
+        displayNumber: 13
+        src: ch13.m4a
+        mimeType: audio/mp4
+        byteLength: 10512465
+```
+
+| Field | Description |
+|-------|-------------|
+| `params.audiobook.type` | Feed ordering type: `episodic` by default, or `serial` for audiobook-style sequential works. |
+| `params.audiobook.itemTerm` | Singular fallback label term, such as `Episode`, `Chapter`, `Track`, or `Stanza`. |
+| `params.audiobook.itemTermPlural` | Plural label for grouped list labelling. Defaults to a simple `s` suffix. |
+| `params.audiobook.startNumber` | First generated serial item number. Useful when a split work starts at `Chapter 13` rather than `Chapter 1`. |
+| `params.audiobook.chapters[].displayNumber` | Item-level generated label number or string, such as `13`, `A`, or `Bonus`. |
+| `params.audiobook.chapters[].episode` | Podcast episode number used for episodic generated labels when `displayNumber` is absent. |
+| `params.audiobook.chapters[].label` | Full visible item label. Takes precedence over generated labels and numeric helpers. |
+| `params.audiobook.chapters[].role` | `section` or `part` marks non-numbered serial items that do not consume generated chapter numbers. |
+
+Generated fallback labels use the precedence documented in [Audiobook Pages and Podcast Feeds](audiobook.md#optional-metadata): full `label`, generated media `label`, `displayNumber`, `episode`, then the serial running number from `startNumber`.
 
 ---
 
@@ -380,5 +426,6 @@ toc: true
 
 ## Changelog
 
+- **1.2** (2026-07-09): #75 documentation. Added `layout: audio` to the layout table and documented audio item numbering fields including `startNumber`, `displayNumber`, `episode`, and `label` precedence.
 - **1.1** (2026-05-12): #54 documentation. Added `linkTitle` to the Display Options section (#54 item 4 — short label for sidebar / breadcrumb / related-articles nav contexts; Hugo built-in falls back to `title` when unset). Added `list_style: prose` to the Section Index Fields section with a dedicated subsection and full example (#54 item 2 — free-form landing-page layout). Noted that `signpost` and `signpost_footer` also render on `list_style: prose` section pages, bracketing `.Content` the same way as on article pages.
 - **1.0** (2026-05-05): Initial frontmatter reference covering basic fields, layouts, image/video, homepage controls, signpost, display title, breadcrumb, gallery, section-index, and build control.

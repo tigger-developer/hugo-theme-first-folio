@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 # ABOUTME: RT-75.4 - item-level displayNumber sets an episodic generated fallback label.
 
-# shellcheck source=tests/regression/audiobook/_helpers.sh
+# shellcheck source=_helpers.sh
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {

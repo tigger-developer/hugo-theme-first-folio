@@ -1,4 +1,4 @@
-<!-- Version: 1.6 | Last updated: 2026-07-09 -->
+<!-- Version: 1.7 | Last updated: 2026-07-09 -->
 
 # Audiobook Pages and Podcast Feeds
 
@@ -80,9 +80,18 @@ The `src` value supports these forms:
 
 Optional metadata can enrich the feed and player without changing the required interface.
 
-Book metadata may include `author`, `image`, `itemTerm`, `itemTermPlural`, `subscribe`, `save`, and `homescreen`. Chapter metadata may include `summary`, `date`, `duration`, `episode`, `label`, and `role`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
+Book metadata may include `author`, `image`, `itemTerm`, `itemTermPlural`, `startNumber`, `subscribe`, `save`, and `homescreen`. Chapter metadata may include `summary`, `date`, `duration`, `episode`, `displayNumber`, `label`, and `role`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
 
-`itemTerm` controls the fallback item label shown in the player, so sites can render `Chapter 1`, `Episode 1`, `Track 1`, `Verse 1`, `Stanza 1`, or another term without copying templates. The default is `Episode` for `episodic` works and `Chapter` for `serial` works. `itemTermPlural` is used for grouped list labelling and defaults to a simple `s` suffix. A chapter-level `label` always wins over generated fallback labels. Use `role: section` or `role: part` for non-numbered markers such as `Part One`; those markers do not shift subsequent fallback numbering.
+`itemTerm` controls the fallback item label shown in the player, so sites can render `Chapter 1`, `Episode 1`, `Track 1`, `Verse 1`, `Stanza 1`, or another term without copying templates. The default is `Episode` for `episodic` works and `Chapter` for `serial` works. `itemTermPlural` is used for grouped list labelling and defaults to a simple `s` suffix. `startNumber` controls the first generated serial item number, which is useful when a book is split across pages and a later page starts at `Chapter 13`. Use chapter-level `displayNumber` when one item needs a specific generated number such as `13`, `A`, or `Bonus` without writing the full label. Use chapter-level `label` when the whole visible label should be supplied manually. Use `role: section` or `role: part` for non-numbered markers such as `Part One`; those markers do not shift subsequent fallback numbering.
+
+Generated fallback labels use this precedence:
+
+1. Chapter front matter `label`.
+2. Generated media `label`.
+3. `itemTerm` plus chapter front matter `displayNumber`.
+4. For `episodic` works, `itemTerm` plus chapter front matter `episode`.
+5. For `serial` works, `itemTerm` plus the page-level running number beginning at `startNumber` or `1`.
+6. For non-numbered serial markers, the item title.
 
 Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Omit `type` or use `type: episodic` for podcast-style feeds where clients should treat newer episodes as primary.
 
@@ -203,6 +212,7 @@ If an audio item errors, the player shows an item-specific status message and ke
 
 ## Changelog
 
+- 1.7 (2026-07-09): Document `startNumber`, `displayNumber`, and fallback label precedence for split serial works.
 - 1.6 (2026-07-09): Document configurable item terminology, resume/restart/complete controls, queue behaviour, speed, sleep timers, keyboard shortcuts, Media Session support, and error-state behaviour.
 - 1.1 (2026-07-09): Document the unified player, sidebar help panels, Home Screen guidance, webmanifest output, and override contract.
 

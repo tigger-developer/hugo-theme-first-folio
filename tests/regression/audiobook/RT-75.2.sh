@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 # ABOUTME: RT-75.2 - front matter and part markers do not consume startNumber sequence values.
 
-# shellcheck source=tests/regression/audiobook/_helpers.sh
+# shellcheck source=_helpers.sh
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
 run_test() {

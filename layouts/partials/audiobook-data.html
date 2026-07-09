@@ -35,9 +35,10 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
 {{- $defaultItemTerm := cond (eq $type "episodic") "Episode" "Chapter" -}}
 {{- $itemTerm := $book.itemTerm | default $defaultItemTerm -}}
 {{- $itemTermPlural := $book.itemTermPlural | default (printf "%ss" $itemTerm) -}}
+{{- $startNumber := int ($book.startNumber | default 1) -}}
 {{- $seen := dict -}}
 {{- $normalized := slice -}}
-{{- $numberedIndex := 0 -}}
+{{- $numberedIndex := sub $startNumber 1 -}}
 {{- range $index, $chapter := $chapters -}}
   {{- $chapterID := $chapter.id -}}
   {{- if not $chapterID -}}
@@ -94,9 +95,12 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
   {{- $isSectionMarker := in (slice "section" "part") $role -}}
   {{- $label := or $chapter.label $generatedLabel -}}
   {{- $title := or $chapter.title $generatedTitle -}}
+  {{- $displayNumber := index $chapter "displayNumber" -}}
+  {{- $hasDisplayNumber := isset $chapter "displayNumber" -}}
   {{- if not $label -}}
     {{- if eq $type "episodic" -}}
-      {{- $label = printf "%s %v" $itemTerm (or $chapter.episode (add $index 1)) -}}
+      {{- $itemNumber := cond $hasDisplayNumber $displayNumber (or $chapter.episode (add $index 1)) -}}
+      {{- $label = printf "%s %v" $itemTerm $itemNumber -}}
     {{- else if $isFrontMatter -}}
       {{- $label = "Front Matter" -}}
     {{- else if eq $type "serial" -}}
@@ -104,7 +108,8 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
         {{- $label = $title -}}
       {{- else -}}
         {{- $numberedIndex = add $numberedIndex 1 -}}
-        {{- $label = printf "%s %d" $itemTerm $numberedIndex -}}
+        {{- $itemNumber := cond $hasDisplayNumber $displayNumber $numberedIndex -}}
+        {{- $label = printf "%s %v" $itemTerm $itemNumber -}}
       {{- end -}}
     {{- else -}}
       {{- $label = $title -}}
@@ -127,6 +132,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
       "summary" $chapter.summary
       "date" $date
       "episode" $chapter.episode
+      "displayNumber" $displayNumber
     ) -}}
 {{- end -}}
 {{- return (dict
