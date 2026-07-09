@@ -1236,6 +1236,16 @@ nav {
 }
 
 /* Audiobook pages */
+.visually-hidden {
+  block-size: 1px;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  inline-size: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
 .audiobook-listening-layout {
   display: grid;
   gap: 1.5rem;
@@ -1244,10 +1254,15 @@ nav {
 }
 
 .audiobook-player {
-  border-block-start: 3px solid var(--color-primary);
+  background: rgb(20 20 24 / 0.88);
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-block-start: 4px solid var(--color-primary);
+  border-radius: 0.5rem;
+  box-shadow: 0 1rem 2.5rem rgb(0 0 0 / 0.25);
+  color: #ffffff;
   display: grid;
   gap: 1rem;
-  padding-block-start: 1rem;
+  padding: 1.1rem;
 }
 
 .audiobook-player-header {
@@ -1261,7 +1276,7 @@ nav {
 .audiobook-progress,
 .audiobook-subscribe-hint,
 .audiobook-assist-footnote {
-  color: var(--color-text-muted, #6b6b7a);
+  color: rgb(255 255 255 / 0.72);
   font-family: var(--font-caption);
 }
 
@@ -1278,20 +1293,37 @@ nav {
 }
 
 .audiobook-active-title {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   line-height: 1.2;
+}
+
+.audiobook-timeline {
+  display: grid;
+  gap: 0.45rem;
 }
 
 .audiobook-progress {
   align-items: center;
   display: flex;
   gap: 0.4rem;
+  justify-content: space-between;
+}
+
+.audiobook-scrubber-label {
+  display: block;
+}
+
+.audiobook-scrubber {
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  inline-size: 100%;
 }
 
 .audiobook-controls {
-  display: grid;
+  align-items: center;
+  display: flex;
   gap: 0.5rem;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  justify-content: center;
 }
 
 .audiobook-control,
@@ -1299,19 +1331,36 @@ nav {
 .audiobook-copy-button,
 .audiobook-share-button,
 .audiobook-install-button {
-  background: transparent;
-  border: 1px solid currentColor;
-  border-radius: 0.25rem;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.35);
+  border-radius: 999rem;
   color: inherit;
   cursor: pointer;
   font: inherit;
-  min-block-size: 2.4rem;
-  padding: 0.35rem 0.55rem;
+  min-block-size: 2.6rem;
+  min-inline-size: 2.6rem;
+  padding: 0.35rem 0.75rem;
 }
 
-.audiobook-control-primary,
-.audiobook-play-toggle {
+.audiobook-control-primary {
+  font-family: var(--font-caption);
   font-weight: 700;
+}
+
+.audiobook-play-toggle {
+  align-items: center;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  display: inline-flex;
+  font-size: 1.45rem;
+  font-weight: 700;
+  justify-content: center;
+  min-block-size: 4rem;
+  min-inline-size: 4rem;
+}
+
+.audiobook-control-secondary {
+  color: rgb(255 255 255 / 0.78);
 }
 
 .audiobook-control:disabled {
@@ -1321,7 +1370,7 @@ nav {
 
 .audiobook-track-list {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.4rem;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -1336,10 +1385,10 @@ nav {
 }
 
 .audiobook-track-button {
-  background: color-mix(in srgb, var(--color-background, #ffffff) 86%, var(--color-primary));
-  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
-  border-radius: 0.25rem;
-  color: inherit;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.16);
+  border-radius: 0.35rem;
+  color: #ffffff;
   cursor: pointer;
   display: grid;
   font: inherit;
@@ -1351,11 +1400,11 @@ nav {
 
 .audiobook-track-button.is-active {
   border-color: var(--color-primary);
-  box-shadow: inset 0.25rem 0 0 var(--color-primary);
+  box-shadow: inset 0.25rem 0 0 var(--color-primary), 0 0 0 1px rgb(255 255 255 / 0.2);
 }
 
 .audiobook-track-label {
-  color: var(--color-text-muted, #6b6b7a);
+  color: rgb(255 255 255 / 0.68);
   font-family: var(--font-caption);
   font-size: 0.9rem;
   font-weight: 700;

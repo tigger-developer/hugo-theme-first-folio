@@ -18,18 +18,24 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
       <source data-audiobook-source src="{{ $first.srcRelPermalink }}" type="{{ $first.mimeType }}">
     </audio>
 
-    <div class="audiobook-progress" aria-live="polite">
-      <span data-audiobook-active-progress>00:00</span>
-      <span aria-hidden="true">/</span>
-      <span data-audiobook-active-duration>{{ $first.duration | default "00:00" }}</span>
+    <div class="audiobook-timeline">
+      <div class="audiobook-progress" aria-live="polite">
+        <span data-audiobook-active-progress>00:00</span>
+        <span aria-hidden="true">/</span>
+        <span data-audiobook-active-duration>{{ $first.duration | default "00:00" }}</span>
+      </div>
+      <label class="audiobook-scrubber-label">
+        <span class="visually-hidden">Playback position</span>
+        <input type="range" class="audiobook-scrubber" data-audiobook-scrubber min="0" max="0" value="0" step="1">
+      </label>
     </div>
 
     <div class="audiobook-controls" aria-label="Playback controls">
-      <button type="button" class="audiobook-control" data-audiobook-previous aria-label="Previous item">‹</button>
-      <button type="button" class="audiobook-control audiobook-control-primary" data-audiobook-seek="-30" aria-label="Back 30 seconds">‹‹ 30s</button>
-      <button type="button" class="audiobook-play-toggle" data-audiobook-play-toggle aria-label="Play or pause">Play</button>
-      <button type="button" class="audiobook-control audiobook-control-primary" data-audiobook-seek="15" aria-label="Forward 15 seconds">15s ››</button>
-      <button type="button" class="audiobook-control" data-audiobook-next aria-label="Next item">›</button>
+      <button type="button" class="audiobook-control audiobook-control-secondary" data-audiobook-previous aria-label="Previous item"><span aria-hidden="true">|‹</span></button>
+      <button type="button" class="audiobook-control audiobook-control-primary" data-audiobook-seek="-30" aria-label="Back 30 seconds"><span aria-hidden="true">-30</span></button>
+      <button type="button" class="audiobook-play-toggle" data-audiobook-play-toggle aria-label="Play or pause"><span aria-hidden="true" data-audiobook-play-icon>▶</span><span class="visually-hidden" data-audiobook-play-label>Play</span></button>
+      <button type="button" class="audiobook-control audiobook-control-primary" data-audiobook-seek="15" aria-label="Forward 15 seconds"><span aria-hidden="true">+15</span></button>
+      <button type="button" class="audiobook-control audiobook-control-secondary" data-audiobook-next aria-label="Next item"><span aria-hidden="true">›|</span></button>
     </div>
 
     <ol class="audiobook-track-list" aria-label="{{ if eq $book.type "episodic" }}Episodes{{ else }}Chapters{{ end }}">

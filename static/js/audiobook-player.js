@@ -138,6 +138,9 @@
     const activeSummary = queryOne(player, "[data-audiobook-active-summary]");
     const activeProgress = queryOne(player, "[data-audiobook-active-progress]");
     const activeDuration = queryOne(player, "[data-audiobook-active-duration]");
+    const scrubber = queryOne(player, "[data-audiobook-scrubber]");
+    const playIcon = queryOne(player, "[data-audiobook-play-icon]");
+    const playLabel = queryOne(player, "[data-audiobook-play-label]");
 
     if (!audio || tracks.length === 0) {
       return;
@@ -168,7 +171,14 @@
         nextButton.disabled = activeIndex >= tracks.length - 1;
       }
       if (playToggle) {
-        playToggle.textContent = audio.paused ? "Play" : "Pause";
+        const label = audio.paused ? "Play" : "Pause";
+        if (playIcon) {
+          playIcon.textContent = audio.paused ? "▶" : "Ⅱ";
+        }
+        updateText(playLabel, label);
+        if (typeof playToggle.setAttribute === "function") {
+          playToggle.setAttribute("aria-label", label);
+        }
       }
     }
 
@@ -176,6 +186,12 @@
       updateText(activeProgress, formatClock(audio.currentTime));
       if (activeDuration) {
         activeDuration.textContent = currentTrack().dataset.chapterDuration || formatClock(audio.duration);
+      }
+      if (scrubber) {
+        if (Number.isFinite(audio.duration) && audio.duration > 0) {
+          scrubber.max = String(Math.floor(audio.duration));
+        }
+        scrubber.value = String(Math.floor(audio.currentTime || 0));
       }
     }
 
@@ -249,6 +265,18 @@
         updateProgress();
       });
     });
+
+    if (scrubber) {
+      scrubber.addEventListener("input", function () {
+        const nextTime = Number(scrubber.value);
+        if (!Number.isFinite(nextTime)) {
+          return;
+        }
+        setAudioTime(audio, nextTime);
+        storePosition(audio);
+        updateProgress();
+      });
+    }
 
     if (previousButton) {
       previousButton.addEventListener("click", function () {
