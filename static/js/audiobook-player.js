@@ -15,17 +15,53 @@
     return storageKeyForIds(audio.dataset.audiobookId, audio.dataset.chapterId);
   }
 
-  function storedPosition(key) {
+  function scopedStorageKey(bookId, name) {
+    if (!bookId || !name) {
+      return null;
+    }
+    return `${storagePrefix}:${bookId}:${name}`;
+  }
+
+  function safeGetStorage(key) {
+    if (!key) {
+      return null;
+    }
     try {
-      const raw = localStorage.getItem(key);
-      const value = Number(raw);
-      if (!Number.isFinite(value) || value <= 0) {
-        return null;
-      }
-      return value;
+      return localStorage.getItem(key);
     } catch (_error) {
       return null;
     }
+  }
+
+  function safeSetStorage(key, value) {
+    if (!key) {
+      return;
+    }
+    try {
+      localStorage.setItem(key, String(value));
+    } catch (_error) {
+      // Storage can be unavailable in private modes; audio controls should still work.
+    }
+  }
+
+  function safeRemoveStorage(key) {
+    if (!key) {
+      return;
+    }
+    try {
+      localStorage.removeItem(key);
+    } catch (_error) {
+      // Storage can be unavailable in private modes; audio controls should still work.
+    }
+  }
+
+  function storedPosition(key) {
+    const raw = safeGetStorage(key);
+    const value = Number(raw);
+    if (!Number.isFinite(value) || value <= 0) {
+      return null;
+    }
+    return value;
   }
 
   function setAudioTime(audio, value) {
@@ -53,11 +89,7 @@
     if (!key || !Number.isFinite(audio.currentTime) || audio.currentTime <= 0) {
       return;
     }
-    try {
-      localStorage.setItem(key, String(Math.floor(audio.currentTime)));
-    } catch (_error) {
-      // Storage can be unavailable in private modes; audio controls should still work.
-    }
+    safeSetStorage(key, Math.floor(audio.currentTime));
   }
 
   function clearPositionForIds(bookId, chapterId) {
@@ -65,11 +97,7 @@
     if (!key) {
       return;
     }
-    try {
-      localStorage.removeItem(key);
-    } catch (_error) {
-      // Storage can be unavailable in private modes; audio controls should still work.
-    }
+    safeRemoveStorage(key);
   }
 
   function clearPosition(audio) {
@@ -109,6 +137,19 @@
     }
   }
 
+  function setHidden(element, hidden) {
+    if (!element) {
+      return;
+    }
+    if ("hidden" in element) {
+      element.hidden = hidden;
+    } else if (hidden && typeof element.setAttribute === "function") {
+      element.setAttribute("hidden", "");
+    } else if (!hidden && typeof element.removeAttribute === "function") {
+      element.removeAttribute("hidden");
+    }
+  }
+
   function queryAll(root, selector) {
     try {
       return Array.from(root.querySelectorAll(selector));
@@ -141,23 +182,221 @@
     const scrubber = queryOne(player, "[data-audiobook-scrubber]");
     const playIcon = queryOne(player, "[data-audiobook-play-icon]");
     const playLabel = queryOne(player, "[data-audiobook-play-label]");
+    const feedback = queryOne(player, "[data-audiobook-feedback]");
+    const errorMessage = queryOne(player, "[data-audiobook-error]");
+    const upNext = queryOne(player, "[data-audiobook-up-next]");
+    const resumeWork = queryOne(player, "[data-audiobook-resume-work]");
+    const speedButtons = queryAll(player, "[data-audiobook-speed]");
+    const sleepMinuteButtons = queryAll(player, "[data-audiobook-sleep-minutes]");
+    const sleepEndButton = queryOne(player, "[data-audiobook-sleep-end]");
+    const sleepCancelButton = queryOne(player, "[data-audiobook-sleep-cancel]");
+    const startButtons = queryAll(player, "[data-audiobook-track-start]");
+    const completeButtons = queryAll(player, "[data-audiobook-track-complete]");
+    const queueUpButtons = queryAll(player, "[data-audiobook-queue-up]");
+    const queueDownButtons = queryAll(player, "[data-audiobook-queue-down]");
+    const queueResetButton = queryOne(player, "[data-audiobook-queue-reset]");
 
     if (!audio || tracks.length === 0) {
       return;
     }
 
+    const bookId = audio.dataset.audiobookId || player.dataset.audiobookId;
+    const speedKey = scopedStorageKey(bookId, "speed");
+    const queueKey = scopedStorageKey(bookId, "queue");
+    const canonicalOrder = tracks.map(function (track) {
+      return track.dataset.chapterId;
+    });
+    let queueOrder = loadQueueOrder();
+    let sleepTimer = null;
+    let sleepMode = "";
     let activeIndex = Math.max(0, tracks.findIndex(function (track) {
       return track.dataset.chapterId === audio.dataset.chapterId;
     }));
 
+    function trackById(chapterId) {
+      return tracks.find(function (track) {
+        return track.dataset.chapterId === chapterId;
+      }) || null;
+    }
+
+    function trackIndexById(chapterId) {
+      return tracks.findIndex(function (track) {
+        return track.dataset.chapterId === chapterId;
+      });
+    }
+
+    function activeTrackId() {
+      const track = currentTrack();
+      return track ? track.dataset.chapterId : "";
+    }
+
+    function loadQueueOrder() {
+      const raw = safeGetStorage(queueKey);
+      if (!raw) {
+        return canonicalOrder.slice();
+      }
+      try {
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) {
+          return canonicalOrder.slice();
+        }
+        const known = parsed.filter(function (chapterId) {
+          return canonicalOrder.indexOf(chapterId) !== -1;
+        });
+        canonicalOrder.forEach(function (chapterId) {
+          if (known.indexOf(chapterId) === -1) {
+            known.push(chapterId);
+          }
+        });
+        return known;
+      } catch (_error) {
+        return canonicalOrder.slice();
+      }
+    }
+
+    function storeQueueOrder() {
+      safeSetStorage(queueKey, JSON.stringify(queueOrder));
+    }
+
     function currentTrack() {
       return tracks[activeIndex];
+    }
+
+    function showFeedback(message) {
+      updateText(feedback, message);
+      if (!message || !globalThis.window || typeof window.setTimeout !== "function") {
+        return;
+      }
+      window.setTimeout(function () {
+        if (feedback && feedback.textContent === message) {
+          updateText(feedback, "");
+        }
+      }, 1400);
+    }
+
+    function labelFor(track) {
+      if (!track) {
+        return "";
+      }
+      return `${track.dataset.chapterLabel || ""}: ${track.dataset.chapterTitle || ""}`.replace(/^: /, "").replace(/: $/, "");
+    }
+
+    function formatHumanTime(seconds) {
+      const clock = formatClock(seconds);
+      if (clock.indexOf(":") === -1) {
+        return clock;
+      }
+      return clock.replace(/^00:/, "");
+    }
+
+    function completionKey(track) {
+      if (!track) {
+        return null;
+      }
+      return scopedStorageKey(track.dataset.audiobookId, `complete:${track.dataset.chapterId}`);
+    }
+
+    function updateStoredPositionAffordances() {
+      let firstResumeTrack = null;
+      let firstResumePosition = null;
+      tracks.forEach(function (track) {
+        const position = storedPosition(storageKeyForIds(track.dataset.audiobookId, track.dataset.chapterId));
+        const row = track.closest ? track.closest("[data-audiobook-track-row]") : null;
+        const resumeLabel = row ? queryOne(row, "[data-audiobook-track-resume]") : null;
+        if (position !== null) {
+          if (!firstResumeTrack) {
+            firstResumeTrack = track;
+            firstResumePosition = position;
+          }
+          updateText(resumeLabel, `Resume from ${formatHumanTime(position)}`);
+          setHidden(resumeLabel, false);
+        } else {
+          updateText(resumeLabel, "");
+          setHidden(resumeLabel, true);
+        }
+      });
+      if (firstResumeTrack && resumeWork) {
+        resumeWork.dataset.chapterId = firstResumeTrack.dataset.chapterId;
+        updateText(resumeWork, `Resume ${labelFor(firstResumeTrack)} at ${formatHumanTime(firstResumePosition)}`);
+        setHidden(resumeWork, false);
+      } else if (resumeWork) {
+        updateText(resumeWork, "");
+        setHidden(resumeWork, true);
+      }
+    }
+
+    function nextTrackFromQueue() {
+      const queueIndex = queueOrder.indexOf(activeTrackId());
+      if (queueIndex === -1 || queueIndex >= queueOrder.length - 1) {
+        return null;
+      }
+      return trackById(queueOrder[queueIndex + 1]);
+    }
+
+    function updateUpNext() {
+      const nextTrack = nextTrackFromQueue();
+      updateText(upNext, nextTrack ? `Up next: ${labelFor(nextTrack)}` : "Up next: end of list");
+    }
+
+    function setError(message) {
+      updateText(errorMessage, message);
+      setHidden(errorMessage, !message);
+    }
+
+    function updateMediaSession() {
+      if (typeof navigator === "undefined" || !navigator.mediaSession) {
+        return;
+      }
+      const track = currentTrack();
+      const metadata = {
+        title: labelFor(track),
+        artist: player.dataset.audiobookAuthor || "",
+        album: player.dataset.audiobookTitle || ""
+      };
+      if (player.dataset.audiobookArtwork) {
+        metadata.artwork = [{ src: player.dataset.audiobookArtwork }];
+      }
+      if (typeof MediaMetadata === "function") {
+        navigator.mediaSession.metadata = new MediaMetadata(metadata);
+      } else {
+        navigator.mediaSession.metadata = metadata;
+      }
+    }
+
+    function registerMediaSessionActions() {
+      if (typeof navigator === "undefined" || !navigator.mediaSession || typeof navigator.mediaSession.setActionHandler !== "function") {
+        return;
+      }
+      const actions = {
+        play: function () { playAudio(audio); },
+        pause: function () { audio.pause(); },
+        seekbackward: function () { seekBy(-30); },
+        seekforward: function () { seekBy(15); },
+        previoustrack: function () { applyTrack(activeIndex - 1); },
+        nexttrack: function () {
+          const nextTrack = nextTrackFromQueue();
+          if (nextTrack) {
+            applyTrack(trackIndexById(nextTrack.dataset.chapterId));
+          }
+        }
+      };
+      Object.keys(actions).forEach(function (action) {
+        try {
+          navigator.mediaSession.setActionHandler(action, actions[action]);
+        } catch (_error) {
+          // Some browsers expose only part of the action set.
+        }
+      });
     }
 
     function setButtonState() {
       tracks.forEach(function (track, index) {
         const isActive = index === activeIndex;
         track.classList.toggle("is-active", isActive);
+        const row = track.closest ? track.closest("[data-audiobook-track-row]") : null;
+        if (row) {
+          row.classList.toggle("is-active", isActive);
+        }
         if (isActive && typeof track.setAttribute === "function") {
           track.setAttribute("aria-current", "true");
         } else if (!isActive && typeof track.removeAttribute === "function") {
@@ -181,6 +420,8 @@
           playToggle.setAttribute("aria-label", label);
         }
       }
+      updateUpNext();
+      updateMediaSession();
     }
 
     function updateProgress() {
@@ -222,6 +463,7 @@
       updateText(activeLabel, track.dataset.chapterLabel);
       updateText(activeTitle, track.dataset.chapterTitle);
       updateText(activeSummary, track.dataset.chapterSummary);
+      setError("");
 
       if (settings.reset) {
         clearPositionForIds(track.dataset.audiobookId, track.dataset.chapterId);
@@ -232,10 +474,113 @@
 
       updateProgress();
       setButtonState();
+      applySpeed(currentSpeed());
+      updateStoredPositionAffordances();
 
       if (!settings.initialize && (settings.play || wasPlaying)) {
         playAudio(audio);
       }
+    }
+
+    function currentSpeed() {
+      const stored = Number(safeGetStorage(speedKey));
+      if (Number.isFinite(stored) && stored > 0) {
+        return stored;
+      }
+      return 1;
+    }
+
+    function applySpeed(rate) {
+      if (!Number.isFinite(rate) || rate <= 0) {
+        return;
+      }
+      audio.playbackRate = rate;
+      speedButtons.forEach(function (button) {
+        const isActive = Number(button.dataset.audiobookSpeed) === rate;
+        if (typeof button.setAttribute === "function") {
+          button.setAttribute("aria-pressed", isActive ? "true" : "false");
+        }
+      });
+    }
+
+    function setSpeed(rate) {
+      applySpeed(rate);
+      safeSetStorage(speedKey, rate);
+      showFeedback(`Speed ${rate}x`);
+    }
+
+    function seekBy(delta) {
+      if (!Number.isFinite(delta)) {
+        return;
+      }
+      const nextTime = Math.max(0, audio.currentTime + delta);
+      setAudioTime(audio, nextTime);
+      storePosition(audio);
+      updateProgress();
+      updateStoredPositionAffordances();
+      showFeedback(delta < 0 ? `Back ${Math.abs(delta)} seconds` : `Forward ${delta} seconds`);
+    }
+
+    function clearSleepTimer() {
+      if (sleepTimer && globalThis.window && typeof window.clearTimeout === "function") {
+        window.clearTimeout(sleepTimer);
+      }
+      sleepTimer = null;
+      sleepMode = "";
+    }
+
+    function setMinuteSleepTimer(minutes) {
+      clearSleepTimer();
+      if (!globalThis.window || typeof window.setTimeout !== "function") {
+        return;
+      }
+      sleepMode = "minutes";
+      showFeedback(`Sleep timer ${minutes} min`);
+      sleepTimer = window.setTimeout(function () {
+        storePosition(audio);
+        audio.pause();
+        clearSleepTimer();
+        showFeedback("Sleep timer ended");
+      }, minutes * 60 * 1000);
+    }
+
+    function setEndOfItemSleepTimer() {
+      clearSleepTimer();
+      sleepMode = "end";
+      showFeedback("Sleep at end of item");
+    }
+
+    function moveQueue(chapterId, delta) {
+      const current = queueOrder.indexOf(chapterId);
+      const next = current + delta;
+      if (current === -1 || next < 0 || next >= queueOrder.length) {
+        return;
+      }
+      const moved = queueOrder.splice(current, 1)[0];
+      queueOrder.splice(next, 0, moved);
+      storeQueueOrder();
+      updateUpNext();
+      showFeedback("Queue updated");
+    }
+
+    function restartTrack(chapterId) {
+      const index = trackIndexById(chapterId);
+      if (index === -1) {
+        return;
+      }
+      applyTrack(index, { play: true, reset: true });
+      showFeedback("Started from beginning");
+    }
+
+    function markComplete(chapterId) {
+      const track = trackById(chapterId);
+      if (!track) {
+        return;
+      }
+      clearPositionForIds(track.dataset.audiobookId, track.dataset.chapterId);
+      safeSetStorage(completionKey(track), "1");
+      updateStoredPositionAffordances();
+      showFeedback("Marked complete");
     }
 
     tracks.forEach(function (track, index) {
@@ -256,16 +601,74 @@
 
     seekButtons.forEach(function (button) {
       button.addEventListener("click", function () {
-        const delta = Number(button.dataset.audiobookSeek);
-        if (!Number.isFinite(delta)) {
-          return;
-        }
-        const nextTime = Math.max(0, audio.currentTime + delta);
-        setAudioTime(audio, nextTime);
-        storePosition(audio);
-        updateProgress();
+        seekBy(Number(button.dataset.audiobookSeek));
       });
     });
+
+    speedButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        setSpeed(Number(button.dataset.audiobookSpeed));
+      });
+    });
+
+    sleepMinuteButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        setMinuteSleepTimer(Number(button.dataset.audiobookSleepMinutes));
+      });
+    });
+
+    if (sleepEndButton) {
+      sleepEndButton.addEventListener("click", setEndOfItemSleepTimer);
+    }
+
+    if (sleepCancelButton) {
+      sleepCancelButton.addEventListener("click", function () {
+        clearSleepTimer();
+        showFeedback("Sleep timer cancelled");
+      });
+    }
+
+    if (resumeWork) {
+      resumeWork.addEventListener("click", function () {
+        const index = trackIndexById(resumeWork.dataset.chapterId);
+        if (index !== -1) {
+          applyTrack(index, { play: true });
+        }
+      });
+    }
+
+    startButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        restartTrack(button.dataset.chapterId);
+      });
+    });
+
+    completeButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        markComplete(button.dataset.chapterId);
+      });
+    });
+
+    queueUpButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        moveQueue(button.dataset.chapterId, -1);
+      });
+    });
+
+    queueDownButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        moveQueue(button.dataset.chapterId, 1);
+      });
+    });
+
+    if (queueResetButton) {
+      queueResetButton.addEventListener("click", function () {
+        queueOrder = canonicalOrder.slice();
+        safeRemoveStorage(queueKey);
+        updateUpNext();
+        showFeedback("Queue reset");
+      });
+    }
 
     if (scrubber) {
       scrubber.addEventListener("input", function () {
@@ -306,12 +709,74 @@
     });
     audio.addEventListener("ended", function () {
       clearPosition(audio);
-      if (activeIndex < tracks.length - 1) {
-        applyTrack(activeIndex + 1, { play: true, reset: true });
+      if (sleepMode === "end") {
+        audio.pause();
+        clearSleepTimer();
+        showFeedback("Sleep timer ended");
+        return;
+      }
+      const nextTrack = nextTrackFromQueue();
+      if (nextTrack) {
+        applyTrack(trackIndexById(nextTrack.dataset.chapterId), { play: true, reset: true });
       }
     });
+    audio.addEventListener("error", function () {
+      setError(`Could not play ${labelFor(currentTrack())}. Try another item.`);
+    });
 
+    if (typeof document.addEventListener === "function") {
+      document.addEventListener("keydown", function (event) {
+        const target = event.target || {};
+        const tagName = String(target.tagName || "").toLowerCase();
+        if (tagName === "input" || tagName === "textarea" || tagName === "select" || target.isContentEditable) {
+          return;
+        }
+        const key = event.key;
+        if (key === " " || key === "p" || key === "P") {
+          event.preventDefault();
+          if (audio.paused) {
+            playAudio(audio);
+          } else {
+            audio.pause();
+          }
+          showFeedback(audio.paused ? "Paused" : "Playing");
+        } else if (key === "h" || key === "H" || key === "ArrowLeft") {
+          event.preventDefault();
+          seekBy(-30);
+        } else if (key === "l" || key === "L" || key === "ArrowRight") {
+          event.preventDefault();
+          seekBy(15);
+        } else if (key === "j" || key === "J" || key === "ArrowDown") {
+          event.preventDefault();
+          const nextTrack = nextTrackFromQueue();
+          if (nextTrack) {
+            applyTrack(trackIndexById(nextTrack.dataset.chapterId));
+          }
+          showFeedback("Next item");
+        } else if (key === "k" || key === "K" || key === "ArrowUp") {
+          event.preventDefault();
+          applyTrack(activeIndex - 1);
+          showFeedback("Previous item");
+        } else if (key === "-" || key === "_" || key === "=" || key === "+") {
+          event.preventDefault();
+          const speeds = speedButtons.map(function (button) {
+            return Number(button.dataset.audiobookSpeed);
+          }).filter(function (rate) {
+            return Number.isFinite(rate) && rate > 0;
+          });
+          const current = currentSpeed();
+          const currentIndex = Math.max(0, speeds.indexOf(current));
+          const delta = (key === "-" || key === "_") ? -1 : 1;
+          const nextIndex = Math.min(speeds.length - 1, Math.max(0, currentIndex + delta));
+          setSpeed(speeds[nextIndex] || current);
+        }
+      });
+    }
+
+    registerMediaSessionActions();
+    applySpeed(currentSpeed());
     applyTrack(activeIndex, { initialize: true });
+    updateStoredPositionAffordances();
   }
 
   function wireLegacyAudioList() {
@@ -363,7 +828,7 @@
   }
 
   function copyText(value) {
-    if (!value || !navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
+    if (!value || typeof navigator === "undefined" || !navigator.clipboard || typeof navigator.clipboard.writeText !== "function") {
       return null;
     }
     return navigator.clipboard.writeText(value);
@@ -411,6 +876,9 @@
   }
 
   function platformFamily() {
+    if (typeof navigator === "undefined") {
+      return "generic";
+    }
     const userAgent = `${navigator.userAgent || ""} ${navigator.platform || ""}`;
     if (/iPad|iPhone|iPod/.test(userAgent) || (/Macintosh/.test(userAgent) && navigator.maxTouchPoints > 1)) {
       return "ios";

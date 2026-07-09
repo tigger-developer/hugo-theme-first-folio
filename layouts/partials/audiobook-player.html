@@ -6,12 +6,14 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
 {{- $first := index $book.chapters 0 -}}
 {{- $pageURL := .Permalink -}}
 <div class="audiobook-listening-layout" data-audiobook-theme-feature="first-folio">
-  <section class="audiobook-player" data-audiobook-id="{{ $book.id }}" data-audiobook-type="{{ $book.type }}" aria-label="{{ $book.title }} audio player">
+  <section class="audiobook-player" data-audiobook-id="{{ $book.id }}" data-audiobook-type="{{ $book.type }}" data-audiobook-title="{{ $book.title }}" data-audiobook-author="{{ $book.author }}" data-audiobook-artwork="{{ $book.image }}" aria-label="{{ $book.title }} audio player">
     <header class="audiobook-player-header">
       <p class="audiobook-work-title">{{ $book.title }}</p>
       <p class="audiobook-active-label" data-audiobook-active-label>{{ $first.label }}</p>
       <h2 class="audiobook-active-title" data-audiobook-active-title>{{ $first.title }}</h2>
       <p class="audiobook-active-summary" data-audiobook-active-summary{{ if not $first.summary }} hidden{{ end }}>{{ $first.summary }}</p>
+      <p class="audiobook-up-next" data-audiobook-up-next aria-live="polite"></p>
+      <p class="audiobook-error" data-audiobook-error role="status" hidden></p>
     </header>
 
     <audio preload="metadata" data-audiobook-id="{{ $book.id }}" data-chapter-id="{{ $first.id }}">
@@ -38,25 +40,55 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
       <button type="button" class="audiobook-control audiobook-control-secondary" data-audiobook-next aria-label="Next item"><span class="audiobook-icon audiobook-icon-next" aria-hidden="true"></span></button>
     </div>
 
+    <div class="audiobook-enhanced-controls" aria-label="Listening controls">
+      <fieldset class="audiobook-control-group audiobook-speed-controls" data-audiobook-speed-controls>
+        <legend>Speed</legend>
+        {{- range slice "0.75" "1" "1.25" "1.5" "2" }}
+        <button type="button" class="audiobook-chip" data-audiobook-speed="{{ . }}" aria-pressed="{{ if eq . "1" }}true{{ else }}false{{ end }}">{{ . }}x</button>
+        {{- end }}
+      </fieldset>
+      <fieldset class="audiobook-control-group audiobook-sleep-controls" data-audiobook-sleep-controls>
+        <legend>Sleep</legend>
+        {{- range slice "15" "30" "45" "60" }}
+        <button type="button" class="audiobook-chip" data-audiobook-sleep-minutes="{{ . }}">{{ . }} min</button>
+        {{- end }}
+        <button type="button" class="audiobook-chip" data-audiobook-sleep-end>End of item</button>
+        <button type="button" class="audiobook-chip" data-audiobook-sleep-cancel>Cancel</button>
+      </fieldset>
+    </div>
+    <p class="audiobook-feedback" data-audiobook-feedback aria-live="polite"></p>
+    <button type="button" class="audiobook-resume-work" data-audiobook-resume-work hidden></button>
+    <button type="button" class="audiobook-queue-reset" data-audiobook-queue-reset>Reset order</button>
+
     <ol class="audiobook-track-list" aria-label="{{ if eq $book.type "episodic" }}Episodes{{ else }}Chapters{{ end }}">
       {{- range $index, $chapter := $book.chapters }}
       <li>
-        <button
-          type="button"
-          class="audiobook-track-button{{ if eq $index 0 }} is-active{{ end }}"
-          data-audiobook-track
-          data-audiobook-id="{{ $book.id }}"
-          data-chapter-id="{{ $chapter.id }}"
-          data-chapter-label="{{ $chapter.label }}"
-          data-chapter-title="{{ $chapter.title }}"
-          data-chapter-summary="{{ $chapter.summary }}"
-          data-chapter-src="{{ $chapter.srcRelPermalink }}"
-          data-chapter-mime-type="{{ $chapter.mimeType }}"
-          data-chapter-duration="{{ $chapter.duration }}"
-          {{ if eq $index 0 }}aria-current="true"{{ end }}>
-          <span class="audiobook-track-label">{{ $chapter.label }}</span>
-          <span class="audiobook-track-title">{{ $chapter.title }}</span>
-        </button>
+        <div class="audiobook-track-row{{ if eq $index 0 }} is-active{{ end }}" data-audiobook-track-row data-chapter-id="{{ $chapter.id }}">
+          <button
+            type="button"
+            class="audiobook-track-button{{ if eq $index 0 }} is-active{{ end }}"
+            data-audiobook-track
+            data-audiobook-id="{{ $book.id }}"
+            data-chapter-id="{{ $chapter.id }}"
+            data-chapter-label="{{ $chapter.label }}"
+            data-chapter-title="{{ $chapter.title }}"
+            data-chapter-summary="{{ $chapter.summary }}"
+            data-chapter-src="{{ $chapter.srcRelPermalink }}"
+            data-chapter-mime-type="{{ $chapter.mimeType }}"
+            data-chapter-duration="{{ $chapter.duration }}"
+            data-chapter-index="{{ $index }}"
+            {{ if eq $index 0 }}aria-current="true"{{ end }}>
+            <span class="audiobook-track-label">{{ $chapter.label }}</span>
+            <span class="audiobook-track-title">{{ $chapter.title }}</span>
+            <span class="audiobook-track-resume" data-audiobook-track-resume hidden></span>
+          </button>
+          <div class="audiobook-track-actions" aria-label="{{ $chapter.label }} actions">
+            <button type="button" class="audiobook-track-action" data-audiobook-track-start data-chapter-id="{{ $chapter.id }}" aria-label="Play {{ $chapter.label }} from start">Start</button>
+            <button type="button" class="audiobook-track-action" data-audiobook-track-complete data-chapter-id="{{ $chapter.id }}" aria-label="Mark {{ $chapter.label }} complete">Done</button>
+            <button type="button" class="audiobook-track-action" data-audiobook-queue-up data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} earlier">Up</button>
+            <button type="button" class="audiobook-track-action" data-audiobook-queue-down data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} later">Down</button>
+          </div>
+        </div>
       </li>
       {{- end }}
     </ol>

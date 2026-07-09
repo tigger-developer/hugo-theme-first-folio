@@ -1,4 +1,4 @@
-<!-- Version: 1.5 | Last updated: 2026-07-09 -->
+<!-- Version: 1.6 | Last updated: 2026-07-09 -->
 
 # Audiobook Pages and Podcast Feeds
 
@@ -78,9 +78,11 @@ The `src` value supports these forms:
 
 ## Optional Metadata
 
-Optional metadata can enrich the feed without changing the required interface.
+Optional metadata can enrich the feed and player without changing the required interface.
 
-Book metadata may include `author`, `image`, `subscribe`, `save`, and `homescreen`. Chapter metadata may include `summary`, `date`, `duration`, `episode`, and `label`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
+Book metadata may include `author`, `image`, `itemTerm`, `itemTermPlural`, `subscribe`, `save`, and `homescreen`. Chapter metadata may include `summary`, `date`, `duration`, `episode`, `label`, and `role`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
+
+`itemTerm` controls the fallback item label shown in the player, so sites can render `Chapter 1`, `Episode 1`, `Track 1`, `Verse 1`, `Stanza 1`, or another term without copying templates. The default is `Episode` for `episodic` works and `Chapter` for `serial` works. `itemTermPlural` is used for grouped list labelling and defaults to a simple `s` suffix. A chapter-level `label` always wins over generated fallback labels. Use `role: section` or `role: part` for non-numbered markers such as `Part One`; those markers do not shift subsequent fallback numbering.
 
 Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Omit `type` or use `type: episodic` for podcast-style feeds where clients should treat newer episodes as primary.
 
@@ -177,10 +179,31 @@ The example site uses small `.m4a` demo files copied into the repository under `
 
 ## Local Player Behaviour
 
-The audiobook player script stores listening position in `localStorage` using stable `book id + chapter id` keys. When a visitor returns in the same browser, the matching chapter or episode restores its previous position. When an item ends, the script clears any stale saved position for the next item, starts it from zero, and attempts to continue playback in page order. Browsers that block automatic playback leave the player controls usable. The page exposes one active audio element at a time, so starting another chapter or episode changes the active item instead of creating multiple competing play buttons. Invalid or missing stored values are ignored so audio controls continue to load normally.
+The audiobook player script stores listening position in `localStorage` using stable `book id + chapter id` keys. When a visitor returns in the same browser, the matching chapter or episode restores its previous position. The player shows a work-level resume button for the first stored item and per-item resume text in the item list. `Start` clears that item's stored position and plays from zero. `Done` clears the item's stored position and records a local completion marker.
+
+When an item ends, the script clears any stale saved position for the next item, starts it from zero, and attempts to continue playback in the listener's local queue order. Browsers that block automatic playback leave the player controls usable. The page exposes one active audio element at a time, so starting another chapter or episode changes the active item instead of creating multiple competing play buttons. Invalid or missing stored values are ignored so audio controls continue to load normally.
+
+The queue controls move items earlier or later for the current browser only. The canonical page order is still rendered in the list, and `Reset order` clears the local queue preference. This is intended for compilations where a listener may want a temporary sequence; authors should still put the canonical order in front matter.
+
+Playback speed controls persist the selected rate locally per work and reapply it after active item changes. The sleep timer supports common minute values plus `End of item`. Minute timers pause playback and store the current position. `End of item` pauses after the active item finishes instead of auto-advancing.
+
+Keyboard shortcuts are available when focus is not in a form field or editable element:
+
+- Space or `P`: play/pause.
+- `H` or Left Arrow: back 30 seconds.
+- `L` or Right Arrow: forward 15 seconds.
+- `J` or Down Arrow: next item in queue order.
+- `K` or Up Arrow: previous rendered item.
+- `-` / `_`: slower playback.
+- `=` / `+`: faster playback.
+
+When the Media Session API is available, the player publishes the active work title, active item label/title, author, artwork, and transport handlers for play, pause, seeking, and item navigation. Browsers without Media Session support use the same page controls without error. Media Session display, lock-screen behaviour, background playback, and sleep-timer reliability remain browser and operating-system decisions rather than guarantees the theme can force.
+
+If an audio item errors, the player shows an item-specific status message and keeps the list usable. Selecting another item clears the error state. With JavaScript disabled, the page renders native `<audio controls>` fallbacks for each configured item.
 
 ## Changelog
 
+- 1.6 (2026-07-09): Document configurable item terminology, resume/restart/complete controls, queue behaviour, speed, sleep timers, keyboard shortcuts, Media Session support, and error-state behaviour.
 - 1.1 (2026-07-09): Document the unified player, sidebar help panels, Home Screen guidance, webmanifest output, and override contract.
 
 ## Robots Metadata
