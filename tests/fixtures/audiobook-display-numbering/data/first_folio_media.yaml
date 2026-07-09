@@ -1,0 +1,6 @@
+display-numbering-fixture:
+  generated-label:
+    src: /audio/generated-label.m4a
+    label: Generated Track
+    byteLength: 12345
+    duration: "00:01:00"
