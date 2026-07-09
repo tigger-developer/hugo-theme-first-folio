@@ -62,30 +62,30 @@
 	      {{- if (.Site.Params.useCDN | default false) -}}
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v13/font/simple-icons.min.css" type="text/css">
 	      {{- else -}}
-		<link rel="stylesheet" href="{{ (resources.Get "css/simple-icons.css" | fingerprint).Permalink }}" type="text/css">
+		<link rel="stylesheet" href="{{ (resources.Get "css/simple-icons.css" | fingerprint).RelPermalink }}" type="text/css">
 	      {{- end -}}
 	    {{- end -}}
 	  {{- end -}}
 	{{- end -}}
 	{{ $fontstyle := resources.Get "css/fonts.css" | fingerprint }}
-	<link href="{{ $fontstyle.Permalink }}" rel="stylesheet">
+	<link href="{{ $fontstyle.RelPermalink }}" rel="stylesheet">
 
 	{{ $style := resources.Get "css/main.css" | fingerprint }}
-	<link rel="stylesheet" type="text/css" media="screen" href="{{ $style.Permalink }}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ $style.RelPermalink }}" />
 
 	{{- with resources.Get "css/theme.css" }}
 	{{ $themeStyle := . | fingerprint }}
-	<link rel="stylesheet" type="text/css" media="screen" href="{{ $themeStyle.Permalink }}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ $themeStyle.RelPermalink }}" />
 	{{- end }}
 
 	{{- with resources.Get "css/lightbox.css" }}
 	{{ $lightboxStyle := . | fingerprint }}
-	<link rel="stylesheet" type="text/css" media="screen" href="{{ $lightboxStyle.Permalink }}" />
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ $lightboxStyle.RelPermalink }}" />
 	{{- end }}
 
 	{{- with resources.Get "css/print.css" }}
 	{{ $printStyle := . | fingerprint }}
-	<link rel="stylesheet" type="text/css" media="print" href="{{ $printStyle.Permalink }}" />
+	<link rel="stylesheet" type="text/css" media="print" href="{{ $printStyle.RelPermalink }}" />
 	{{- end }}
 
 	{{- $ambienceDefault := .Site.Params.ambience.default | default "auto" -}}
@@ -93,7 +93,7 @@
 	{{- $needsDarkCSS := or (ne $ambienceDefault "light") $ambienceToggle -}}
 	{{- if $needsDarkCSS -}}
 		{{ $darkstyle := resources.Get "css/dark.css" | fingerprint }}
-		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="{{ $darkstyle.Permalink }}"
+		<link id="darkModeStyle" rel="stylesheet" type="text/css" href="{{ $darkstyle.RelPermalink }}"
 			{{- if eq $ambienceDefault "auto" }} media="(prefers-color-scheme: dark)"{{ end -}}
 			{{- if eq $ambienceDefault "light" }} disabled{{ end -}}
 		/>
@@ -170,12 +170,12 @@
 	{{- if isset .Site.Params "customcss" }}
 		{{ range .Site.Params.customCSS }}
 		{{ $customstyle := resources.Get . | fingerprint }}
-		<link rel="stylesheet" type="text/css" href="{{ $customstyle.Permalink }}">
+		<link rel="stylesheet" type="text/css" href="{{ $customstyle.RelPermalink }}">
 		{{ end }}
 	{{- end -}}
 	<!-- Core theme JS -->
-	<script src="{{ absURL "js/burger-menu.js" }}"></script>
-	<script src="{{ absURL "js/lightbox.js" }}"></script>
+	<script src="{{ "js/burger-menu.js" | relURL }}"></script>
+	<script src="{{ "js/lightbox.js" | relURL }}"></script>
 
 	{{- range .Site.Params.customJS }}
 	{{- if or (hasPrefix . "http://") (hasPrefix . "https://") }}
