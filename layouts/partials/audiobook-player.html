@@ -81,7 +81,7 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
     <details class="audiobook-assist-panel audiobook-homescreen-panel" open>
       <summary>{{ $book.homescreen.label }}</summary>
       <p>{{ $book.homescreen.prompt }}</p>
-      <button type="button" class="audiobook-share-button" data-audio-web-share data-share-url="{{ $pageURL }}" data-share-title="{{ $book.title }}" aria-label="Share this page" hidden>□↑</button>
+      <button type="button" class="audiobook-share-button" data-audio-web-share data-copy-value="{{ $pageURL }}" data-audio-assist-copied="{{ $book.homescreen.copied }}" data-share-url="{{ $pageURL }}" data-share-title="{{ $book.title }}" aria-label="Share this page">□↑<span data-audio-assist-feedback></span></button>
       <p data-homescreen-instruction="ios" hidden><span class="audiobook-share-icon" aria-hidden="true">□↑</span> {{ $book.homescreen.ios }}</p>
       <p data-homescreen-instruction="android" hidden>{{ $book.homescreen.android }}</p>
       <button type="button" class="audiobook-install-button" data-audio-install hidden>Install</button>

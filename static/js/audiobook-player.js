@@ -434,11 +434,29 @@
   function wireWebShare() {
     const shareButtons = queryAll(document, "[data-audio-web-share]");
     shareButtons.forEach(function (button) {
-      if (!navigator.share) {
-        return;
-      }
-      button.hidden = false;
       button.addEventListener("click", function () {
+        if (!navigator.share) {
+          const feedback = queryOne(button, "[data-audio-assist-feedback]");
+          const writeAttempt = copyText(button.dataset.copyValue || button.dataset.shareUrl || window.location.href);
+          if (!writeAttempt) {
+            return;
+          }
+          writeAttempt.then(function () {
+            if (feedback) {
+              feedback.textContent = button.dataset.audioAssistCopied || "Copied Link";
+            }
+            window.setTimeout(function () {
+              if (feedback) {
+                feedback.textContent = "";
+              }
+            }, 1600);
+          }).catch(function () {
+            if (feedback) {
+              feedback.textContent = "";
+            }
+          });
+          return;
+        }
         const shareAttempt = navigator.share({
           title: button.dataset.shareTitle || document.title,
           url: button.dataset.shareUrl || window.location.href

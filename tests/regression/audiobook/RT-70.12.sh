@@ -11,4 +11,5 @@ run_test() {
     [[ "$(htmlq -f "$page" '.audiobook-save-panel' | wc -c | tr -d ' ')" == "0" ]] || return 1
     [[ "$(htmlq -f "$page" '.audiobook-homescreen-panel[open]' | wc -c | tr -d ' ')" -gt 0 ]] || return 1
     [[ "$(htmlq -f "$page" '.audiobook-homescreen-panel [data-audio-web-share]' | wc -c | tr -d ' ')" -gt 0 ]] || return 1
+    [[ "$(htmlq -f "$page" -a hidden '.audiobook-homescreen-panel [data-audio-web-share]' | wc -c | tr -d ' ')" == "0" ]] || return 1
 }
