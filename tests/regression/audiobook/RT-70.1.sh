@@ -39,6 +39,12 @@ run_test() {
     play_count="$(htmlq -f "$page" -a aria-label '[data-audiobook-play-toggle]' | wc -l | tr -d ' ')"
     [[ "$play_count" == "1" ]] || return 1
 
+    [[ "$(htmlq -f "$page" '.audiobook-icon-play[data-audiobook-play-icon]' | wc -c | tr -d ' ')" -gt 0 ]] || return 1
+    [[ "$(htmlq -f "$page" '.audiobook-icon-previous' | wc -c | tr -d ' ')" -gt 0 ]] || return 1
+    [[ "$(htmlq -f "$page" '.audiobook-icon-next' | wc -c | tr -d ' ')" -gt 0 ]] || return 1
+    [[ "$(htmlq -f "$page" '.audiobook-icon-replay .audiobook-seek-amount' | wc -c | tr -d ' ')" -gt 0 ]] || return 1
+    [[ "$(htmlq -f "$page" '.audiobook-icon-forward .audiobook-seek-amount' | wc -c | tr -d ' ')" -gt 0 ]] || return 1
+
     local seek_values
     seek_values="$(htmlq -f "$page" -a data-audiobook-seek '[data-audiobook-seek]')"
     [[ "$seek_values" == *$'-30'* ]] || return 1

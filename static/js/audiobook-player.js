@@ -173,7 +173,8 @@
       if (playToggle) {
         const label = audio.paused ? "Play" : "Pause";
         if (playIcon) {
-          playIcon.textContent = audio.paused ? "▶" : "Ⅱ";
+          playIcon.classList.toggle("audiobook-icon-play", audio.paused);
+          playIcon.classList.toggle("audiobook-icon-pause", !audio.paused);
         }
         updateText(playLabel, label);
         if (typeof playToggle.setAttribute === "function") {

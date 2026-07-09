@@ -1390,6 +1390,140 @@ nav {
   min-inline-size: 4rem;
 }
 
+.audiobook-icon {
+  block-size: 1.15rem;
+  display: inline-block;
+  inline-size: 1.15rem;
+  position: relative;
+}
+
+.audiobook-icon-play {
+  block-size: 0;
+  border-block: 0.42rem solid transparent;
+  border-inline-start: 0.68rem solid currentColor;
+  inline-size: 0;
+  margin-inline-start: 0.14rem;
+}
+
+.audiobook-icon-pause::before,
+.audiobook-icon-pause::after {
+  background: currentColor;
+  block-size: 1rem;
+  border-radius: 999rem;
+  content: "";
+  inline-size: 0.22rem;
+  position: absolute;
+  inset-block-start: 0.08rem;
+}
+
+.audiobook-icon-pause::before {
+  inset-inline-start: 0.28rem;
+}
+
+.audiobook-icon-pause::after {
+  inset-inline-end: 0.28rem;
+}
+
+.audiobook-icon-previous::before,
+.audiobook-icon-next::before {
+  background: currentColor;
+  block-size: 1rem;
+  border-radius: 999rem;
+  content: "";
+  inline-size: 0.16rem;
+  position: absolute;
+  inset-block-start: 0.08rem;
+}
+
+.audiobook-icon-previous::after,
+.audiobook-icon-next::after {
+  block-size: 0;
+  border-block: 0.42rem solid transparent;
+  content: "";
+  inline-size: 0;
+  position: absolute;
+  inset-block-start: 0.16rem;
+}
+
+.audiobook-icon-previous::before {
+  inset-inline-start: 0.16rem;
+}
+
+.audiobook-icon-previous::after {
+  border-inline-end: 0.68rem solid currentColor;
+  inset-inline-start: 0.34rem;
+}
+
+.audiobook-icon-next::before {
+  inset-inline-end: 0.16rem;
+}
+
+.audiobook-icon-next::after {
+  border-inline-start: 0.68rem solid currentColor;
+  inset-inline-end: 0.34rem;
+}
+
+.audiobook-seek-control {
+  inline-size: 3rem;
+  padding: 0.35rem;
+}
+
+.audiobook-icon-replay,
+.audiobook-icon-forward {
+  border: 0.14rem solid currentColor;
+  border-radius: 999rem;
+  block-size: 1.45rem;
+  inline-size: 1.45rem;
+}
+
+.audiobook-icon-replay::before,
+.audiobook-icon-forward::before {
+  background: rgb(0 0 0 / 0.92);
+  block-size: 0.44rem;
+  content: "";
+  position: absolute;
+  inset-block-start: -0.18rem;
+  inline-size: 0.52rem;
+}
+
+.audiobook-icon-replay::before {
+  inset-inline-start: -0.12rem;
+}
+
+.audiobook-icon-forward::before {
+  inset-inline-end: -0.12rem;
+}
+
+.audiobook-icon-replay::after,
+.audiobook-icon-forward::after {
+  block-size: 0;
+  border-block: 0.24rem solid transparent;
+  content: "";
+  inline-size: 0;
+  position: absolute;
+  inset-block-start: -0.17rem;
+}
+
+.audiobook-icon-replay::after {
+  border-inline-end: 0.38rem solid currentColor;
+  inset-inline-start: -0.13rem;
+}
+
+.audiobook-icon-forward::after {
+  border-inline-start: 0.38rem solid currentColor;
+  inset-inline-end: -0.13rem;
+}
+
+.audiobook-seek-amount {
+  font-size: 0.64rem;
+  font-weight: 800;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  line-height: 1;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
 .audiobook-control-secondary {
   color: rgb(255 255 255 / 0.78);
 }
