@@ -9,5 +9,9 @@ run_test() {
     local page
     page="$(rt72_audiobook_page)" || return 1
     [[ "$(rt72_count "$page" '.audiobook-track-actions summary')" -gt 0 ]] || return 1
+    [[ "$(rt72_attr_count "$page" title '[data-audiobook-track-start]')" -gt 0 ]] || return 1
+    [[ "$(rt72_attr_count "$page" title '[data-audiobook-track-complete]')" -gt 0 ]] || return 1
+    [[ "$(rt72_attr_count "$page" title '[data-audiobook-queue-up]')" -gt 0 ]] || return 1
+    [[ "$(rt72_attr_count "$page" title '[data-audiobook-queue-down]')" -gt 0 ]] || return 1
     rt72_jxa resume
 }
