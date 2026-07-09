@@ -1382,6 +1382,10 @@ nav {
   gap: 0.55rem;
 }
 
+.audiobook-player [hidden] {
+  display: none;
+}
+
 .audiobook-disclosure-control {
   position: relative;
 }
