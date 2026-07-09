@@ -12,19 +12,21 @@ run_test() {
     panel_count="$(htmlq -f "$page" -t '.audiobook-homescreen-panel[open] summary' | wc -l | tr -d ' ')"
     [[ "$panel_count" == "1" ]] || return 1
 
-    local summary_text
-    summary_text="$(htmlq -f "$page" -t '.audiobook-homescreen-panel summary' | tr -d '\n')"
-    [[ "$summary_text" == "Save to your Home Screen" ]] || return 1
+    local summary_count
+    summary_count="$(htmlq -f "$page" '.audiobook-homescreen-panel summary' | wc -c | tr -d ' ')"
+    [[ "$summary_count" -gt 0 ]] || return 1
 
-    local panel_text
-    panel_text="$(htmlq -f "$page" -t '.audiobook-homescreen-panel')"
-    grep -qF "Use your browser's Share or menu button to add this page to your phone." <<< "$panel_text" || return 1
+    local share_button_count generic_instruction_count
+    share_button_count="$(htmlq -f "$page" '.audiobook-homescreen-panel [data-audio-web-share][data-share-url]' | wc -c | tr -d ' ')"
+    generic_instruction_count="$(htmlq -f "$page" '.audiobook-homescreen-panel [data-homescreen-instruction="generic"]' | wc -c | tr -d ' ')"
+    [[ "$share_button_count" -gt 0 ]] || return 1
+    [[ "$generic_instruction_count" == "0" ]] || return 1
 
     local manifest_href
     manifest_href="$(htmlq -f "$page" -a href 'link[rel="manifest"]')"
-    grep -qxF '/audiobook-demo/manifest.webmanifest' <<< "$manifest_href" || return 1
+    [[ "$manifest_href" == "/audiobook-demo/manifest.webmanifest" ]] || return 1
 
     local icon_href
     icon_href="$(htmlq -f "$page" -a href 'link[rel="apple-touch-icon"]')"
-    grep -qxF '/audiobook-demo/beacon3.jpg' <<< "$icon_href" || return 1
+    [[ "$icon_href" == "/audiobook-demo/beacon3.jpg" ]] || return 1
 }

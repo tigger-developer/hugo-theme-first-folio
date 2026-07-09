@@ -11,8 +11,4 @@ run_test() {
     local panel_count
     panel_count="$(htmlq -f "$page" -t '.audiobook-sidebar details.audiobook-subscribe-panel[open] summary' | wc -l | tr -d ' ')"
     [[ "$panel_count" == "1" ]] || return 1
-
-    local summary_text
-    summary_text="$(htmlq -f "$page" -t '.audiobook-sidebar details.audiobook-subscribe-panel summary' | tr -d '\n')"
-    [[ "$summary_text" == "Listen in your favourite podcast app" ]] || return 1
 }

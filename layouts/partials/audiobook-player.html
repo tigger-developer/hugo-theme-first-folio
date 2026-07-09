@@ -81,10 +81,9 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
     <details class="audiobook-assist-panel audiobook-homescreen-panel" open>
       <summary>{{ $book.homescreen.label }}</summary>
       <p>{{ $book.homescreen.prompt }}</p>
-      <button type="button" class="audiobook-share-button" data-audio-web-share data-share-url="{{ $pageURL }}" data-share-title="{{ $book.title }}" hidden>Share</button>
+      <button type="button" class="audiobook-share-button" data-audio-web-share data-share-url="{{ $pageURL }}" data-share-title="{{ $book.title }}" aria-label="Share this page" hidden>□↑</button>
       <p data-homescreen-instruction="ios" hidden><span class="audiobook-share-icon" aria-hidden="true">□↑</span> {{ $book.homescreen.ios }}</p>
       <p data-homescreen-instruction="android" hidden>{{ $book.homescreen.android }}</p>
-      <p data-homescreen-instruction="generic" hidden>{{ $book.homescreen.fallback }}</p>
       <button type="button" class="audiobook-install-button" data-audio-install hidden>Install</button>
     </details>
     {{- end }}
@@ -95,9 +94,9 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
       <summary>{{ $book.subscribe.label }}</summary>
       <div class="audiobook-feed-copy-zone" data-audio-assist-copy data-copy-value="{{ $feedURL }}" data-audio-assist-copied="{{ $book.subscribe.copied }}">
         <p class="audiobook-subscribe-prompt">{{ $book.subscribe.prompt }}</p>
-        <p class="audiobook-subscribe-hint">{{ $book.subscribe.hint }}</p>
         <p><a class="audiobook-feed-link" href="{{ .RelPermalink }}">Podcast Feed Link</a></p>
         <button type="button" class="audiobook-copy-button" aria-label="Copy Podcast Feed Link">⧉</button>
+        <p class="audiobook-subscribe-hint">{{ $book.subscribe.hint }}</p>
         <p class="audiobook-copy-feedback" data-audio-assist-feedback></p>
       </div>
       {{- with $book.subscribe.footnote }}<p class="audiobook-assist-footnote">{{ . }}</p>{{- end }}

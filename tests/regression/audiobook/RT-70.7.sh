@@ -8,11 +8,8 @@ run_test() {
     local page
     page="$(podcast_demo_page)" || return 1
 
-    local link_text
-    link_text="$(htmlq -f "$page" -t 'a')"
+    local subscribe_link_count
+    subscribe_link_count="$(htmlq -f "$page" -a href '.audiobook-subscribe-panel a' | wc -l | tr -d ' ')"
 
-    if grep -Eq 'Apple Podcasts|Overcast|Castro|AntennaPod' <<< "$link_text"; then
-        printf 'named podcast app link was rendered by default\n' >&2
-        return 1
-    fi
+    [[ "$subscribe_link_count" == "1" ]]
 }

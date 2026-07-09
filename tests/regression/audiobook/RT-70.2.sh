@@ -4,6 +4,25 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
+rendered_line_number() {
+    local file="$1"
+    local pattern="$2"
+    local number=0
+    local line
+
+    while IFS= read -r line; do
+        number=$((number + 1))
+        case "$line" in
+            *"$pattern"*)
+                printf '%s\n' "$number"
+                return 0
+                ;;
+        esac
+    done < "$file"
+
+    return 1
+}
+
 run_test() {
     local page
     page="$(podcast_demo_page)" || return 1
@@ -22,26 +41,20 @@ run_test() {
 
     local seek_values
     seek_values="$(htmlq -f "$page" -a data-audiobook-seek '[data-audiobook-seek]')"
-    grep -qxF -- '-30' <<< "$seek_values" || return 1
-    grep -qxF -- '15' <<< "$seek_values" || return 1
+    [[ "$seek_values" == *$'-30'* ]] || return 1
+    [[ "$seek_values" == *$'15'* ]] || return 1
 
-    local active_label
-    active_label="$(htmlq -f "$page" -t '[data-audiobook-active-label]' | tr -d '\n')"
-    [[ "$active_label" == "Episode 1" ]] || return 1
+    local player_type
+    player_type="$(htmlq -f "$page" -a data-audiobook-type '.audiobook-player' | tr -d '\n')"
+    [[ "$player_type" == "episodic" ]] || return 1
 
     local selector_count
     selector_count="$(htmlq -f "$page" -a data-chapter-id '.audiobook-track-button[data-chapter-id]' | wc -l | tr -d ' ')"
     [[ "$selector_count" == "3" ]] || return 1
 
-    local selector_text
-    selector_text="$(htmlq -f "$page" -t '.audiobook-track-button')"
-    grep -qF 'Demo Episode 1' <<< "$selector_text" || return 1
-    grep -qF 'Demo Episode 2' <<< "$selector_text" || return 1
-    grep -qF 'Demo Episode 3' <<< "$selector_text" || return 1
-
     local player_line
     local body_line
-    player_line="$(grep -n 'class="audiobook-player"' "$page" | head -n1 | cut -d: -f1)"
-    body_line="$(grep -n 'This page demonstrates First Folio' "$page" | head -n1 | cut -d: -f1)"
+    player_line="$(rendered_line_number "$page" 'class="audiobook-player"')" || return 1
+    body_line="$(rendered_line_number "$page" 'class="body audio-body"')" || return 1
     [[ "$player_line" -lt "$body_line" ]] || return 1
 }

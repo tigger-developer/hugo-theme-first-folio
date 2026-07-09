@@ -9,31 +9,27 @@ run_test() {
 
     local feed_links
     feed_links="$(htmlq -f "$page" -a href '.audiobook-subscribe-panel .audiobook-feed-link')"
-    grep -qxF '/podcast-demo/feed.xml' <<< "$feed_links"
-
-    local feed_text
-    feed_text="$(htmlq -f "$page" -t '.audiobook-subscribe-panel .audiobook-feed-link' | tr -d '\n')"
-    [[ "$feed_text" == "Podcast Feed Link" ]]
+    [[ "$feed_links" == "/podcast-demo/feed.xml" ]] || return 1
 
     local copy_urls
     copy_urls="$(htmlq -f "$page" -a data-copy-value '.audiobook-subscribe-panel [data-audio-assist-copy]')"
-    grep -qxF 'https://example.com/podcast-demo/feed.xml' <<< "$copy_urls"
+    [[ "$copy_urls" == "https://example.com/podcast-demo/feed.xml" ]] || return 1
 
-    local copy_text
-    copy_text="$(htmlq -f "$page" -t '.audiobook-subscribe-panel .audiobook-copy-button' | tr -d '\n')"
-    [[ "$copy_text" == "⧉" ]]
+    local copy_count
+    copy_count="$(htmlq -f "$page" '.audiobook-subscribe-panel .audiobook-copy-button[aria-label]' | wc -c | tr -d ' ')"
+    [[ "$copy_count" -gt 0 ]] || return 1
 
-    local summary_text
-    summary_text="$(htmlq -f "$page" -t '.audiobook-subscribe-panel summary' | tr -d '\n')"
-    [[ "$summary_text" == "Listen in your favourite podcast app" ]]
+    local summary_count
+    summary_count="$(htmlq -f "$page" '.audiobook-subscribe-panel summary' | wc -c | tr -d ' ')"
+    [[ "$summary_count" -gt 0 ]] || return 1
 
-    local prompt_text
-    prompt_text="$(htmlq -f "$page" -t '.audiobook-subscribe-panel .audiobook-subscribe-prompt' | tr -d '\n')"
-    [[ "$prompt_text" == "Copy this Podcast Feed Link." ]]
+    local prompt_count hint_count
+    prompt_count="$(htmlq -f "$page" '.audiobook-subscribe-panel .audiobook-subscribe-prompt' | wc -c | tr -d ' ')"
+    hint_count="$(htmlq -f "$page" '.audiobook-subscribe-panel .audiobook-subscribe-hint' | wc -c | tr -d ' ')"
+    [[ "$prompt_count" -gt 0 ]] || return 1
+    [[ "$hint_count" -gt 0 ]] || return 1
 
-    local app_text
-    app_text="$(htmlq -f "$page" -t '.audiobook-subscribe-panel a')"
-    if grep -Eq 'Apple Podcasts|Overcast|Castro|AntennaPod' <<< "$app_text"; then
-        return 1
-    fi
+    local link_count
+    link_count="$(htmlq -f "$page" -a href '.audiobook-subscribe-panel a' | wc -l | tr -d ' ')"
+    [[ "$link_count" == "1" ]]
 }

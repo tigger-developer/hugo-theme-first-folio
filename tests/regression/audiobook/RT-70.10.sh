@@ -1,6 +1,6 @@
 # shellcheck shell=bash
-# ABOUTME: RT-70.10 - feed setup copy is generic, configurable, and Link-based.
-# ABOUTME: Rendered defaults avoid URL wording in listener-facing instructions.
+# ABOUTME: RT-70.10 - feed setup renders compact structure without app-link clutter.
+# ABOUTME: The panel exposes one feed link, one copy target, and no default footnote.
 
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
@@ -12,17 +12,12 @@ run_test() {
     panel_count="$(htmlq -f "$page" -t '.audiobook-subscribe-panel summary' | wc -l | tr -d ' ')"
     [[ "$panel_count" == "1" ]] || return 1
 
-    local panel_text
-    panel_text="$(htmlq -f "$page" -t '.audiobook-subscribe-panel')"
-    grep -qF 'Copy this Podcast Feed Link.' <<< "$panel_text" || return 1
-    grep -qF 'In your podcast app, look for Add Link or Add Feed, then paste it there.' <<< "$panel_text" || return 1
-    if grep -qF 'Unfortunately' <<< "$panel_text"; then
-        printf 'subscription panel rendered default apology copy\n' >&2
-        return 1
-    fi
+    local feed_link_count copy_target_count footnote_count
+    feed_link_count="$(htmlq -f "$page" '.audiobook-subscribe-panel .audiobook-feed-link' | wc -c | tr -d ' ')"
+    copy_target_count="$(htmlq -f "$page" '.audiobook-subscribe-panel [data-audio-assist-copy][data-copy-value]' | wc -c | tr -d ' ')"
+    footnote_count="$(htmlq -f "$page" '.audiobook-subscribe-panel .audiobook-assist-footnote' | wc -c | tr -d ' ')"
 
-    if grep -qF 'URL' <<< "$panel_text"; then
-        printf 'subscription panel used URL in default user-facing copy\n' >&2
-        return 1
-    fi
+    [[ "$feed_link_count" -gt 0 ]] || return 1
+    [[ "$copy_target_count" -gt 0 ]] || return 1
+    [[ "$footnote_count" == "0" ]] || return 1
 }

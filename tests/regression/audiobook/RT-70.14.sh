@@ -22,7 +22,6 @@ FakeElement.prototype.addEventListener = function () {};
 
 const ios = new FakeElement("ios");
 const android = new FakeElement("android");
-const generic = new FakeElement("generic");
 
 globalThis.document = {
   querySelectorAll: function (selector) {
@@ -33,7 +32,7 @@ globalThis.document = {
       return [];
     }
     if (selector === "[data-homescreen-instruction]") {
-      return [ios, android, generic];
+      return [ios, android];
     }
     return [];
   }
@@ -45,7 +44,7 @@ globalThis.navigator = {
 globalThis.window = {};
 
 eval(readText("${THEME_ROOT}/static/js/audiobook-player.js"));
-if (ios.hidden !== false || android.hidden !== true || generic.hidden !== true) {
+if (ios.hidden !== false || android.hidden !== true) {
   throw new Error("iOS instruction was not selected");
 }
 
@@ -53,9 +52,8 @@ globalThis.navigator.userAgent = "Mozilla/5.0 (Linux; Android 15; Pixel)";
 globalThis.navigator.platform = "Linux armv8l";
 ios.hidden = true;
 android.hidden = true;
-generic.hidden = true;
 eval(readText("${THEME_ROOT}/static/js/audiobook-player.js"));
-if (android.hidden !== false || ios.hidden !== true || generic.hidden !== true) {
+if (android.hidden !== false || ios.hidden !== true) {
   throw new Error("Android instruction was not selected");
 }
 
@@ -63,10 +61,9 @@ globalThis.navigator.userAgent = "Mozilla/5.0 (X11; Linux x86_64)";
 globalThis.navigator.platform = "Linux x86_64";
 ios.hidden = true;
 android.hidden = true;
-generic.hidden = true;
 eval(readText("${THEME_ROOT}/static/js/audiobook-player.js"));
-if (generic.hidden !== false || ios.hidden !== true || android.hidden !== true) {
-  throw new Error("generic instruction was not selected");
+if (ios.hidden !== true || android.hidden !== true) {
+  throw new Error("unknown platform should not select mobile-specific instructions");
 }
 JXA
 }

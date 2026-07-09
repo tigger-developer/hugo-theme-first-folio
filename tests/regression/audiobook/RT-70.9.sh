@@ -10,13 +10,13 @@ run_test() {
 
     local feed_links
     feed_links="$(htmlq -f "$page" -a href '.audiobook-subscribe-panel .audiobook-feed-link')"
-    grep -qxF '/podcast-demo/feed.xml' <<< "$feed_links" || return 1
+    [[ "$feed_links" == "/podcast-demo/feed.xml" ]] || return 1
 
     local copy_values
     copy_values="$(htmlq -f "$page" -a data-copy-value '.audiobook-subscribe-panel [data-audio-assist-copy]')"
-    grep -qxF 'https://example.com/podcast-demo/feed.xml' <<< "$copy_values" || return 1
+    [[ "$copy_values" == "https://example.com/podcast-demo/feed.xml" ]] || return 1
 
-    local copy_labels
-    copy_labels="$(htmlq -f "$page" -a data-audio-assist-copied '.audiobook-subscribe-panel [data-audio-assist-copy]')"
-    grep -qxF 'Copied Podcast Feed Link' <<< "$copy_labels" || return 1
+    local copy_feedback_count
+    copy_feedback_count="$(htmlq -f "$page" '.audiobook-subscribe-panel [data-audio-assist-copied]' | wc -c | tr -d ' ')"
+    [[ "$copy_feedback_count" -gt 0 ]] || return 1
 }

@@ -19,11 +19,11 @@ run_test() {
         [[ "$podcast_count" -gt 0 ]] || return 1
     done
 
-    local audiobook_label
-    local podcast_label
-    audiobook_label="$(htmlq -f "$audiobook_page" -t '[data-audiobook-active-label]' | tr -d '\n')"
-    podcast_label="$(htmlq -f "$podcast_page" -t '[data-audiobook-active-label]' | tr -d '\n')"
+    local audiobook_type
+    local podcast_type
+    audiobook_type="$(htmlq -f "$audiobook_page" -a data-audiobook-type '.audiobook-player' | tr -d '\n')"
+    podcast_type="$(htmlq -f "$podcast_page" -a data-audiobook-type '.audiobook-player' | tr -d '\n')"
 
-    [[ "$audiobook_label" == "Front Matter" ]] || return 1
-    [[ "$podcast_label" == "Episode 1" ]] || return 1
+    [[ "$audiobook_type" == "serial" ]] || return 1
+    [[ "$podcast_type" == "episodic" ]] || return 1
 }

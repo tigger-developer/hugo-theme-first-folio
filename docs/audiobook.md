@@ -1,4 +1,4 @@
-<!-- Version: 1.4 | Last updated: 2026-07-09 -->
+<!-- Version: 1.5 | Last updated: 2026-07-09 -->
 
 # Audiobook Pages and Podcast Feeds
 
@@ -26,9 +26,9 @@ params:
     explicit: false
     type: serial
     subscribe:
-      label: Listen in your favourite podcast app
-      prompt: Copy this Podcast Feed Link.
-      hint: In your podcast app, look for Add Link or Add Feed, then paste it there.
+      label: Listen using your Podcast App
+      prompt: Use this link to listen in your podcast app:
+      hint: Look for Add Link or Add Feed in your podcast app.
       copied: Copied Podcast Feed Link
     chapters:
       - id: chapter-1
@@ -141,14 +141,14 @@ The same UX is used for `serial` audiobooks and `episodic` podcasts. Differences
 
 Secondary actions live in the audio sidebar and are expanded by default:
 
-- `Save to your Home Screen`: shows a Web Share button only when the browser exposes `navigator.share`, followed by iOS, Android, or generic instructions. iOS-family browsers receive Share icon / Add to Home Screen guidance; Android-family browsers receive browser menu / Add to Home screen or Install app guidance.
-- `Listen in your favourite podcast app`: contains the feed Link, copy glyph, short setup instructions, and copy feedback.
+- `Save to your Home Screen`: says to use the share link below to add the page to the Home Screen, then shows a Web Share glyph button only when the browser exposes `navigator.share`. iOS-family browsers receive Share icon / Add to Home Screen guidance; Android-family browsers receive browser menu / Add to Home screen or Install app guidance.
+- `Listen using your Podcast App`: contains the feed Link, copy glyph, short setup instructions, and copy feedback.
 
-Default podcast-app setup does not render named app links because app-specific URL schemes overpromise behaviour that many players do not support. The default copy is deliberately manual and uses `Link` rather than `URL`:
+Default podcast-app setup does not render named app links because app-specific URL schemes overpromise behaviour that many players do not support. The default copy is deliberately manual and uses `link` rather than `URL`:
 
 ```text
-Copy this Podcast Feed Link.
-In your podcast app, look for Add Link or Add Feed, then paste it there.
+Use this link to listen in your podcast app:
+Look for Add Link or Add Feed in your podcast app.
 ```
 
 Clicking the feed panel copy target copies the absolute feed Link when clipboard access is available and displays `Copied Podcast Feed Link`. The visible feed Link remains selectable when clipboard access is unavailable.
@@ -159,17 +159,16 @@ The default visible text can be overridden per page without copying templates. F
 params:
   audiobook:
     subscribe:
-      label: Listen in an app
-      prompt: Choose where to open this feed.
-      hint: Paste this Link into the app's Add Feed screen.
+      label: Listen using your Podcast App
+      prompt: Use this link to listen in your podcast app:
+      hint: Look for Add Link or Add Feed in your podcast app.
       copied: Copied Podcast Feed Link
     homescreen:
       enabled: true
       label: Save to your Home Screen
-      prompt: Use your browser's Share or menu button to add this page to your phone.
+      prompt: Use the share link below to add this page to your Home Screen.
       ios: On iPhone or iPad, tap the browser Share button, then choose Add to Home Screen.
       android: On Android, open the browser menu, then choose Add to Home screen or Install app.
-      fallback: Use your browser menu to bookmark this page or add it to your device home screen.
 ```
 
 ## Demo Audio Assets
