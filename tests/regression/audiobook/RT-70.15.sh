@@ -10,7 +10,7 @@ run_test() {
     audiobook_page="$(audiobook_demo_page)" || return 1
     podcast_page="$(podcast_demo_page)" || return 1
 
-    for selector in '.audiobook-player' '.audiobook-sidebar' '.audiobook-save-panel' '.audiobook-homescreen-panel' '.audiobook-subscribe-panel'; do
+    for selector in '.audiobook-player' '.audiobook-sidebar' '.audiobook-homescreen-panel[open]' '.audiobook-subscribe-panel[open]'; do
         local audiobook_count
         local podcast_count
         audiobook_count="$(htmlq -f "$audiobook_page" "$selector" | wc -c | tr -d ' ')"

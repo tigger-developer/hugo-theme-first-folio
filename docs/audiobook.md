@@ -1,4 +1,4 @@
-<!-- Version: 1.3 | Last updated: 2026-07-09 -->
+<!-- Version: 1.4 | Last updated: 2026-07-09 -->
 
 # Audiobook Pages and Podcast Feeds
 
@@ -139,10 +139,9 @@ Audio pages render a single web player for both audiobook and podcast modes. The
 
 The same UX is used for `serial` audiobooks and `episodic` podcasts. Differences are limited to labels, feed ordering semantics, and the content supplied by the page. `episodic` is the default and is intended for podcast-style feeds where episodes can stand alone. Set `type: serial` for chapter-order listening.
 
-Secondary actions live in the audio sidebar:
+Secondary actions live in the audio sidebar and are expanded by default:
 
-- `Share or save this page`: copies the page Link and shows a Web Share button only when the browser exposes `navigator.share`.
-- `Save to your Home Screen`: shows iOS, Android, or generic instructions. iOS-family browsers receive Share icon / Add to Home Screen guidance; Android-family browsers receive browser menu / Add to Home screen or Install app guidance.
+- `Save to your Home Screen`: shows a Web Share button only when the browser exposes `navigator.share`, followed by iOS, Android, or generic instructions. iOS-family browsers receive Share icon / Add to Home Screen guidance; Android-family browsers receive browser menu / Add to Home screen or Install app guidance.
 - `Listen in your favourite podcast app`: contains the feed Link, copy glyph, short setup instructions, and copy feedback.
 
 Default podcast-app setup does not render named app links because app-specific URL schemes overpromise behaviour that many players do not support. The default copy is deliberately manual and uses `Link` rather than `URL`:
@@ -154,7 +153,7 @@ In your podcast app, look for Add Link or Add Feed, then paste it there.
 
 Clicking the feed panel copy target copies the absolute feed Link when clipboard access is available and displays `Copied Podcast Feed Link`. The visible feed Link remains selectable when clipboard access is unavailable.
 
-The default visible text can be overridden per page without copying templates. Feed setup text lives under `params.audiobook.subscribe`; page-link copy text lives under `params.audiobook.save`; Home Screen guidance lives under `params.audiobook.homescreen`:
+The default visible text can be overridden per page without copying templates. Feed setup text lives under `params.audiobook.subscribe`; Home Screen guidance lives under `params.audiobook.homescreen`:
 
 ```yaml
 params:
@@ -164,10 +163,6 @@ params:
       prompt: Choose where to open this feed.
       hint: Paste this Link into the app's Add Feed screen.
       copied: Copied Podcast Feed Link
-    save:
-      label: Share or save this page
-      prompt: Copy this page Link, or use your browser's bookmark/share button to come back later.
-      copied: Copied Page Link
     homescreen:
       enabled: true
       label: Save to your Home Screen

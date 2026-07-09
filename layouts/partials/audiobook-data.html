@@ -31,7 +31,6 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
 {{- $generatedRoot := index hugo.Data "first_folio_media" | default dict -}}
 {{- $generatedBook := index $generatedRoot $book.id | default dict -}}
 {{- $subscribe := $book.subscribe | default dict -}}
-{{- $save := $book.save | default dict -}}
 {{- $homescreen := $book.homescreen | default dict -}}
 {{- $seen := dict -}}
 {{- $normalized := slice -}}
@@ -130,11 +129,6 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
       "hint" ($subscribe.hint | default "In your podcast app, look for Add Link or Add Feed, then paste it there.")
       "footnote" $subscribe.footnote
       "copied" ($subscribe.copied | default "Copied Podcast Feed Link")
-    )
-    "save" (dict
-      "label" ($save.label | default "Share or save this page")
-      "prompt" ($save.prompt | default "Copy this page Link, or use your browser's bookmark/share button to come back later.")
-      "copied" ($save.copied | default "Copied Page Link")
     )
     "homescreen" (dict
       "enabled" ($homescreen.enabled | default true)
