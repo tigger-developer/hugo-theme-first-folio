@@ -12,7 +12,6 @@ params:
     language: en-GB
     explicit: false
     type: serial
-    startNumber: 13
     chapters:
       - id: front-matter
         title: Front Matter
@@ -26,31 +25,31 @@ params:
         mimeType: audio/mp4
         byteLength: 12345
       - id: chapter-13
+        label: Chapter 13
         title: Telling the Truth
         src: /audio/chapter-13.m4a
         mimeType: audio/mp4
         byteLength: 12345
       - id: chapter-14
+        label: Chapter 14
         title: Buttons
         src: /audio/chapter-14.m4a
         mimeType: audio/mp4
         byteLength: 12345
       - id: appendix-a
+        label: Chapter A
         title: Appendix Note
-        displayNumber: A
         src: /audio/appendix-a.m4a
         mimeType: audio/mp4
         byteLength: 12345
       - id: manual-label
         label: Interlude
         title: Label Wins
-        displayNumber: 99
         src: /audio/manual-label.m4a
         mimeType: audio/mp4
         byteLength: 12345
       - id: generated-label
         title: Generated Label Wins
-        displayNumber: 100
         src: /audio/generated-label.m4a
         mimeType: audio/mp4
         byteLength: 12345

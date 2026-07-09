@@ -15,13 +15,11 @@ params:
     chapters:
       - id: episode-special
         title: Listener Questions
-        displayNumber: 101
         src: /audio/episode-special.m4a
         mimeType: audio/mp4
         byteLength: 12345
       - id: episode-with-episode-number
         title: Ordinary Episode
-        episode: 7
         src: /audio/episode-7.m4a
         mimeType: audio/mp4
         byteLength: 12345

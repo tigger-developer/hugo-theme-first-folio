@@ -1,9 +1,9 @@
 # shellcheck shell=bash
-# ABOUTME: RT-75.7 - audio docs publish the startNumber/displayNumber contract.
+# ABOUTME: RT-75.7 - audio docs publish the label-only display contract.
 
 run_test() {
     local docs="$THEME_ROOT/docs/audiobook.md"
 
-    grep -qF 'startNumber' "$docs" || return 1
-    grep -qF 'displayNumber' "$docs"
+    grep -qF 'label' "$docs" || return 1
+    grep -qF 'The theme does not invent numeric labels' "$docs"
 }

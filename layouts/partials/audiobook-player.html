@@ -9,7 +9,7 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
   <section class="audiobook-player" data-audiobook-id="{{ $book.id }}" data-audiobook-type="{{ $book.type }}" data-audiobook-title="{{ $book.title }}" data-audiobook-author="{{ $book.author }}" data-audiobook-artwork="{{ $book.image }}" aria-label="{{ $book.title }} audio player">
     <header class="audiobook-player-header">
       <p class="audiobook-work-title">{{ $book.title }}</p>
-      <p class="audiobook-active-label" data-audiobook-active-label>{{ $first.label }}</p>
+      <p class="audiobook-active-label" data-audiobook-active-label{{ if not $first.label }} hidden{{ end }}>{{ $first.label }}</p>
       <h2 class="audiobook-active-title" data-audiobook-active-title>{{ $first.title }}</h2>
       <p class="audiobook-active-summary" data-audiobook-active-summary{{ if not $first.summary }} hidden{{ end }}>{{ $first.summary }}</p>
       <p class="audiobook-up-next" data-audiobook-up-next aria-live="polite"></p>
@@ -33,14 +33,6 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
     </div>
 
     <div class="audiobook-controls" aria-label="Playback controls">
-      <button type="button" class="audiobook-control audiobook-control-secondary" data-audiobook-previous aria-label="Previous item"><span class="audiobook-icon audiobook-icon-previous" aria-hidden="true"></span></button>
-      <button type="button" class="audiobook-control audiobook-control-primary audiobook-seek-control" data-audiobook-seek="-30" aria-label="Back 30 seconds"><span class="audiobook-icon audiobook-icon-replay" aria-hidden="true"><span class="audiobook-seek-amount">30</span></span></button>
-      <button type="button" class="audiobook-play-toggle" data-audiobook-play-toggle aria-label="Play or pause"><span class="audiobook-icon audiobook-icon-play" aria-hidden="true" data-audiobook-play-icon></span><span class="visually-hidden" data-audiobook-play-label>Play</span></button>
-      <button type="button" class="audiobook-control audiobook-control-primary audiobook-seek-control" data-audiobook-seek="15" aria-label="Forward 15 seconds"><span class="audiobook-icon audiobook-icon-forward" aria-hidden="true"><span class="audiobook-seek-amount">15</span></span></button>
-      <button type="button" class="audiobook-control audiobook-control-secondary" data-audiobook-next aria-label="Next item"><span class="audiobook-icon audiobook-icon-next" aria-hidden="true"></span></button>
-    </div>
-
-    <div class="audiobook-enhanced-controls" aria-label="Listening controls">
       <div class="audiobook-disclosure-control audiobook-speed-controls" data-audiobook-speed-controls>
         <button type="button" class="audiobook-disclosure-toggle" data-audiobook-speed-toggle aria-expanded="false">
           <span>Speed</span>
@@ -51,6 +43,13 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
         <button type="button" class="audiobook-chip" data-audiobook-speed="{{ . }}" aria-pressed="{{ if eq . "1" }}true{{ else }}false{{ end }}">{{ . }}x</button>
         {{- end }}
         </div>
+      </div>
+      <div class="audiobook-transport-controls">
+        <button type="button" class="audiobook-control audiobook-control-secondary" data-audiobook-previous aria-label="Previous item"><span class="audiobook-icon audiobook-icon-previous" aria-hidden="true"></span></button>
+        <button type="button" class="audiobook-control audiobook-control-primary audiobook-seek-control" data-audiobook-seek="-30" aria-label="Back 30 seconds"><span class="audiobook-icon audiobook-icon-replay" aria-hidden="true"><span class="audiobook-seek-amount">30</span></span></button>
+        <button type="button" class="audiobook-play-toggle" data-audiobook-play-toggle aria-label="Play or pause"><span class="audiobook-icon audiobook-icon-play" aria-hidden="true" data-audiobook-play-icon></span><span class="visually-hidden" data-audiobook-play-label>Play</span></button>
+        <button type="button" class="audiobook-control audiobook-control-primary audiobook-seek-control" data-audiobook-seek="15" aria-label="Forward 15 seconds"><span class="audiobook-icon audiobook-icon-forward" aria-hidden="true"><span class="audiobook-seek-amount">15</span></span></button>
+        <button type="button" class="audiobook-control audiobook-control-secondary" data-audiobook-next aria-label="Next item"><span class="audiobook-icon audiobook-icon-next" aria-hidden="true"></span></button>
       </div>
       <div class="audiobook-disclosure-control audiobook-sleep-controls" data-audiobook-sleep-controls>
         <button type="button" class="audiobook-disclosure-toggle" data-audiobook-sleep-toggle aria-expanded="false">
@@ -72,6 +71,7 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
 
     <ol class="audiobook-track-list" aria-label="{{ if eq $book.type "episodic" }}Episodes{{ else }}Chapters{{ end }}">
       {{- range $index, $chapter := $book.chapters }}
+      {{- $displayName := or $chapter.label $chapter.title }}
       <li>
         <div class="audiobook-track-row{{ if eq $index 0 }} is-active{{ end }}" data-audiobook-track-row data-chapter-id="{{ $chapter.id }}">
           <button
@@ -88,19 +88,18 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
             data-chapter-duration="{{ $chapter.duration }}"
             data-chapter-index="{{ $index }}"
             {{ if eq $index 0 }}aria-current="true"{{ end }}>
-            <span class="audiobook-track-label">{{ $chapter.label }}</span>
+            {{- with $chapter.label }}
+            <span class="audiobook-track-label">{{ . }}</span>
+            {{- end }}
             <span class="audiobook-track-title">{{ $chapter.title }}</span>
             <span class="audiobook-track-resume" data-audiobook-track-resume hidden></span>
           </button>
-          <details class="audiobook-track-actions" aria-label="{{ $chapter.label }} actions">
-            <summary aria-label="More actions for {{ $chapter.label }}">More</summary>
-            <div class="audiobook-track-action-menu">
-              <button type="button" class="audiobook-track-action" data-audiobook-track-start data-chapter-id="{{ $chapter.id }}" aria-label="Play {{ $chapter.label }} from start" title="Start from beginning"><span aria-hidden="true">0:00</span><span class="visually-hidden">Start from beginning</span></button>
-              <button type="button" class="audiobook-track-action" data-audiobook-track-complete data-chapter-id="{{ $chapter.id }}" aria-label="Mark {{ $chapter.label }} complete" title="Mark complete"><span aria-hidden="true">✓</span><span class="visually-hidden">Mark complete</span></button>
-              <button type="button" class="audiobook-track-action" data-audiobook-queue-up data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} earlier" title="Move earlier"><span aria-hidden="true">↑</span><span class="visually-hidden">Move earlier</span></button>
-              <button type="button" class="audiobook-track-action" data-audiobook-queue-down data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} later" title="Move later"><span aria-hidden="true">↓</span><span class="visually-hidden">Move later</span></button>
-            </div>
-          </details>
+          <div class="audiobook-track-actions" aria-label="{{ $displayName }} actions">
+            <button type="button" class="audiobook-track-action" data-audiobook-track-start data-chapter-id="{{ $chapter.id }}" aria-label="Play {{ $displayName }} from start" title="Start from beginning"><span aria-hidden="true">0:00</span><span class="visually-hidden">Start from beginning</span></button>
+            <button type="button" class="audiobook-track-action" data-audiobook-track-complete data-chapter-id="{{ $chapter.id }}" aria-label="Mark {{ $displayName }} complete" title="Mark complete"><span aria-hidden="true">✓</span><span class="visually-hidden">Mark complete</span></button>
+            <button type="button" class="audiobook-track-action" data-audiobook-queue-up data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $displayName }} earlier" title="Move earlier"><span aria-hidden="true">↑</span><span class="visually-hidden">Move earlier</span></button>
+            <button type="button" class="audiobook-track-action" data-audiobook-queue-down data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $displayName }} later" title="Move later"><span aria-hidden="true">↓</span><span class="visually-hidden">Move later</span></button>
+          </div>
         </div>
       </li>
       {{- end }}

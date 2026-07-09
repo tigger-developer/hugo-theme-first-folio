@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-75.1 - serial startNumber sets the first generated item label.
+# ABOUTME: RT-75.1 - explicit serial labels are displayed in frontmatter order.
 
 # shellcheck source=_helpers.sh
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
@@ -11,6 +11,5 @@ run_test() {
     local labels
     labels="$(htmlq -f "$page" -t '.audiobook-track-label')"
 
-    grep -qxF 'Chapter 13' <<< "$labels" || return 1
-    grep -qxF 'Chapter 14' <<< "$labels"
+    [[ "$labels" == $'Front Matter\nPart Two\nChapter 13\nChapter 14\nChapter A\nInterlude\nGenerated Track' ]]
 }

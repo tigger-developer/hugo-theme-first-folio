@@ -30,28 +30,28 @@ params:
     image: /podcast-demo/podcast.jpg
     chapters:
       - id: episode-1
+        label: Episode 1
         title: Demo Episode 1
         src: /audio/podcast-demo/episode-1.m4a
         mimeType: audio/mp4
         byteLength: 64280
         duration: "00:00:09"
-        episode: 1
         summary: A tiny demo episode served from the example site's static audio directory.
       - id: episode-2
+        label: Episode 2
         title: Demo Episode 2
         src: /audio/podcast-demo/episode-2.m4a
         mimeType: audio/mp4
         byteLength: 288535
         duration: "00:00:41"
-        episode: 2
         summary: A second demo episode using the same theme-owned layout and feed template.
       - id: episode-3
+        label: Episode 3
         title: Demo Episode 3
         src: /audio/podcast-demo/episode-3.m4a
         mimeType: audio/mp4
         byteLength: 778800
         duration: "00:01:50"
-        episode: 3
         summary: A third demo episode for end-to-end page and podcast feed coverage.
 ---
 
@@ -64,6 +64,6 @@ Expected podcast behaviour:
 - Items include `episode` numbers in front matter and RSS output.
 - The page is promoted to the homepage carousel with `carousel`.
 - Each episode has its own audio enclosure, duration, byte length, and summary.
-- Generated media metadata supplies duration and byte length, while front matter remains the source of titles, summaries, episode numbers, and source URLs.
+- Generated media metadata supplies duration and byte length, while front matter remains the source of titles, labels, summaries, and source URLs.
 
 Use this pattern for radio-style shows, interviews, release notes, lectures, or any audio series where episodes can stand on their own.

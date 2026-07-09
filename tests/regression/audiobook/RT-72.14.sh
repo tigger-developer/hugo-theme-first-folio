@@ -8,7 +8,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/_rt72_jxa.sh"
 run_test() {
     local page
     page="$(rt72_audiobook_page)" || return 1
-    [[ "$(rt72_count "$page" '.audiobook-track-actions summary')" -gt 0 ]] || return 1
+    [[ "$(rt72_count "$page" '.audiobook-track-actions button')" -ge 4 ]] || return 1
+    [[ "$(rt72_count "$page" '.audiobook-track-actions summary')" == "0" ]] || return 1
     [[ "$(rt72_attr_count "$page" title '[data-audiobook-track-start]')" -gt 0 ]] || return 1
     [[ "$(rt72_attr_count "$page" title '[data-audiobook-track-complete]')" -gt 0 ]] || return 1
     [[ "$(rt72_attr_count "$page" title '[data-audiobook-queue-up]')" -gt 0 ]] || return 1

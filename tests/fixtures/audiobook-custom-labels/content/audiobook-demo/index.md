@@ -23,8 +23,14 @@ params:
         mimeType: audio/mp4
         byteLength: 12345
       - id: stanza-1
+        label: Stanza 1
         title: First Movement
         src: /audio/stanza-1.m4a
+        mimeType: audio/mp4
+        byteLength: 12345
+      - id: unlabelled-track
+        title: Title Only Track
+        src: /audio/title-only.m4a
         mimeType: audio/mp4
         byteLength: 12345
       - id: labelled-track

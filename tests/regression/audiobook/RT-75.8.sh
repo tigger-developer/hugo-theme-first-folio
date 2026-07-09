@@ -1,9 +1,9 @@
 # shellcheck shell=bash
-# ABOUTME: RT-75.8 - audio docs publish label and numeric precedence.
+# ABOUTME: RT-75.8 - audio docs keep generated metadata scoped to media facts.
 
 run_test() {
     local docs="$THEME_ROOT/docs/audiobook.md"
 
-    grep -qF 'label' "$docs" || return 1
-    grep -qF 'Generated fallback labels use this precedence' "$docs"
+    grep -qF 'Generated media metadata should contain media facts' "$docs" || return 1
+    grep -qF 'Generated media metadata should not contain editorial labels' "$docs"
 }

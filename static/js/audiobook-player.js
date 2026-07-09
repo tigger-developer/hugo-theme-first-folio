@@ -485,6 +485,7 @@
       }
 
       updateText(activeLabel, track.dataset.chapterLabel);
+      setHidden(activeLabel, !track.dataset.chapterLabel);
       updateText(activeTitle, track.dataset.chapterTitle);
       updateText(activeSummary, track.dataset.chapterSummary);
       setError("");

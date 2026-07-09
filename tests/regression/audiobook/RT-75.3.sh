@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-75.3 - item-level displayNumber sets a serial generated fallback label.
+# ABOUTME: RT-75.3 - appendix-style labels are author-supplied display strings.
 
 # shellcheck source=_helpers.sh
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"

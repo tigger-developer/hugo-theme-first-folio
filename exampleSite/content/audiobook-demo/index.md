@@ -32,36 +32,43 @@ params:
     image: /audiobook-demo/beacon3.jpg
     chapters:
       - id: front-matter
+        label: Front Matter
         title: Front Matter
         src: /audio/audiobook-demo/chapter00.m4a
         mimeType: audio/mp4
         summary: Opening material served from the example site's static audiobook directory.
       - id: chapter-1
+        label: Chapter 1
         title: Demo Chapter 1
         src: /audio/audiobook-demo/chapter01.m4a
         mimeType: audio/mp4
         summary: The first audiobook chapter uses media that is distinct from the podcast demo.
       - id: chapter-2
+        label: Chapter 2
         title: Demo Chapter 2
         src: /audio/audiobook-demo/chapter02.m4a
         mimeType: audio/mp4
         summary: A second demo chapter using the shared audio controls and feed template.
       - id: chapter-3
+        label: Chapter 3
         title: Demo Chapter 3
         src: /audio/audiobook-demo/chapter03.m4a
         mimeType: audio/mp4
         summary: A third demo chapter for end-to-end page and podcast feed coverage.
       - id: chapter-4
+        label: Chapter 4
         title: Demo Chapter 4
         src: /audio/audiobook-demo/chapter04.m4a
         mimeType: audio/mp4
         summary: A fourth demo chapter keeps the audiobook feed clearly separate from the podcast feed.
       - id: chapter-5
+        label: Chapter 5
         title: Demo Chapter 5
         src: /audio/audiobook-demo/chapter05.m4a
         mimeType: audio/mp4
         summary: A fifth demo chapter exercises the serial feed order with additional entries.
       - id: chapter-6
+        label: Chapter 6
         title: Demo Chapter 6
         src: /audio/audiobook-demo/chapter06.m4a
         mimeType: audio/mp4
@@ -74,7 +81,7 @@ Expected audiobook behaviour:
 
 - Feed type is `serial`, so the feed declares audiobook-style ordering and uses one-second fallback `pubDate` increments when item dates are not explicitly supplied.
 - The page chooses `layout: audio`, so the player is the primary hero-area experience. Because the page also has a background image, the theme follows the background-image convention and renders the page in a forced dark context.
-- Items are labelled as front matter and chapters in the page content and omit podcast episode numbers.
+- Items are labelled explicitly as front matter and chapters in page front matter.
 - The page is promoted to the homepage carousel with `carousel`, using the same front matter contract as other featured content.
 - Listening position is stored per book id and chapter id in the browser.
 - Generated media metadata supplies duration and byte length, while front matter remains the source of titles, summaries, and source URLs. If generated media dates are absent, serial fallback dates are derived from the page date in chapter order.
