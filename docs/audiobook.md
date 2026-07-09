@@ -137,7 +137,7 @@ outputFormats:
 
 ## Web Player and Sidebar Controls
 
-Audio pages render a single web player for both audiobook and podcast modes. The page still models audio as chapters or episodes, but the visible player exposes only one play/pause control, back 30 seconds, forward 15 seconds, previous and next item controls, current item metadata, and a visible ordered list of tappable chapter or episode names. This keeps item granularity available for listeners who open the same private link in another browser context and lose local saved position.
+Audio pages render a single web player for both audiobook and podcast modes. The page still models audio as chapters or episodes, but the visible player exposes only one play/pause control, back 30 seconds, forward 15 seconds, previous and next item controls, current item metadata, compact Speed and Sleep controls with visible current state, and a visible ordered list of tappable chapter or episode names. This keeps item granularity available for listeners who open the same private link in another browser context and lose local saved position.
 
 The same UX is used for `serial` audiobooks and `episodic` podcasts. Differences are limited to labels, feed ordering semantics, and the content supplied by the page. `episodic` is the default and is intended for podcast-style feeds where episodes can stand alone. Set `type: serial` for chapter-order listening.
 
@@ -183,9 +183,9 @@ The audiobook player script stores listening position in `localStorage` using st
 
 When an item ends, the script clears any stale saved position for the next item, starts it from zero, and attempts to continue playback in the listener's local queue order. Browsers that block automatic playback leave the player controls usable. The page exposes one active audio element at a time, so starting another chapter or episode changes the active item instead of creating multiple competing play buttons. Invalid or missing stored values are ignored so audio controls continue to load normally.
 
-The queue controls move items earlier or later for the current browser only. The canonical page order is still rendered in the list, and `Reset order` clears the local queue preference. This is intended for compilations where a listener may want a temporary sequence; authors should still put the canonical order in front matter.
+The item row itself is the primary target for selecting or resuming that chapter or episode. Secondary per-item actions live behind each row's `More` control: start from the beginning, mark complete, move earlier, and move later. The queue controls move items earlier or later for the current browser only. The canonical page order is still rendered in the list, and `Reset order` clears the local queue preference. This is intended for compilations where a listener may want a temporary sequence; authors should still put the canonical order in front matter.
 
-Playback speed controls persist the selected rate locally per work and reapply it after active item changes. The sleep timer supports common minute values plus `End of item`. Minute timers pause playback and store the current position. `End of item` pauses after the active item finishes instead of auto-advancing.
+Playback speed controls persist the selected rate locally per work and reapply it after active item changes. The compact Speed control displays the active rate and expands only when the listener wants to change it. The compact Sleep control displays `Off`, a minute value, or `End`. The sleep timer supports common minute values plus `End of item`. Minute timers pause playback and store the current position. `End of item` pauses after the active item finishes instead of auto-advancing.
 
 Keyboard shortcuts are available when focus is not in a form field or editable element:
 

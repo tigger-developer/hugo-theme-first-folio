@@ -8,5 +8,7 @@ run_test() {
     local page
     page="$(rt72_audiobook_page)" || return 1
     [[ "$(rt72_count "$page" '[data-audiobook-speed-controls]')" -gt 0 ]] || return 1
+    [[ "$(rt72_count "$page" '[data-audiobook-speed-toggle][aria-expanded="false"]')" -gt 0 ]] || return 1
+    [[ "$(rt72_count "$page" '[data-audiobook-speed-status]')" -gt 0 ]] || return 1
     [[ "$(rt72_attr_count "$page" data-audiobook-speed '[data-audiobook-speed]')" == "5" ]] || return 1
 }

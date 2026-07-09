@@ -186,7 +186,13 @@
     const errorMessage = queryOne(player, "[data-audiobook-error]");
     const upNext = queryOne(player, "[data-audiobook-up-next]");
     const resumeWork = queryOne(player, "[data-audiobook-resume-work]");
+    const speedToggle = queryOne(player, "[data-audiobook-speed-toggle]");
+    const speedMenu = queryOne(player, "[data-audiobook-speed-menu]");
+    const speedStatus = queryOne(player, "[data-audiobook-speed-status]");
     const speedButtons = queryAll(player, "[data-audiobook-speed]");
+    const sleepToggle = queryOne(player, "[data-audiobook-sleep-toggle]");
+    const sleepMenu = queryOne(player, "[data-audiobook-sleep-menu]");
+    const sleepStatus = queryOne(player, "[data-audiobook-sleep-status]");
     const sleepMinuteButtons = queryAll(player, "[data-audiobook-sleep-minutes]");
     const sleepEndButton = queryOne(player, "[data-audiobook-sleep-end]");
     const sleepCancelButton = queryOne(player, "[data-audiobook-sleep-cancel]");
@@ -272,6 +278,24 @@
           updateText(feedback, "");
         }
       }, 1400);
+    }
+
+    function setDisclosure(toggle, menu, open) {
+      setHidden(menu, !open);
+      if (toggle && typeof toggle.setAttribute === "function") {
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      }
+    }
+
+    function closeDisclosures() {
+      setDisclosure(speedToggle, speedMenu, false);
+      setDisclosure(sleepToggle, sleepMenu, false);
+    }
+
+    function toggleDisclosure(toggle, menu, otherToggle, otherMenu) {
+      const isOpen = menu ? !menu.hidden : false;
+      setDisclosure(otherToggle, otherMenu, false);
+      setDisclosure(toggle, menu, !isOpen);
     }
 
     function labelFor(track) {
@@ -495,6 +519,7 @@
         return;
       }
       audio.playbackRate = rate;
+      updateText(speedStatus, `${rate}x`);
       speedButtons.forEach(function (button) {
         const isActive = Number(button.dataset.audiobookSpeed) === rate;
         if (typeof button.setAttribute === "function") {
@@ -506,6 +531,7 @@
     function setSpeed(rate) {
       applySpeed(rate);
       safeSetStorage(speedKey, rate);
+      closeDisclosures();
       showFeedback(`Speed ${rate}x`);
     }
 
@@ -535,11 +561,14 @@
         return;
       }
       sleepMode = "minutes";
+      updateText(sleepStatus, `${minutes} min`);
+      closeDisclosures();
       showFeedback(`Sleep timer ${minutes} min`);
       sleepTimer = window.setTimeout(function () {
         storePosition(audio);
         audio.pause();
         clearSleepTimer();
+        updateText(sleepStatus, "Off");
         showFeedback("Sleep timer ended");
       }, minutes * 60 * 1000);
     }
@@ -547,6 +576,8 @@
     function setEndOfItemSleepTimer() {
       clearSleepTimer();
       sleepMode = "end";
+      updateText(sleepStatus, "End");
+      closeDisclosures();
       showFeedback("Sleep at end of item");
     }
 
@@ -617,6 +648,18 @@
       });
     });
 
+    if (speedToggle) {
+      speedToggle.addEventListener("click", function () {
+        toggleDisclosure(speedToggle, speedMenu, sleepToggle, sleepMenu);
+      });
+    }
+
+    if (sleepToggle) {
+      sleepToggle.addEventListener("click", function () {
+        toggleDisclosure(sleepToggle, sleepMenu, speedToggle, speedMenu);
+      });
+    }
+
     if (sleepEndButton) {
       sleepEndButton.addEventListener("click", setEndOfItemSleepTimer);
     }
@@ -624,6 +667,8 @@
     if (sleepCancelButton) {
       sleepCancelButton.addEventListener("click", function () {
         clearSleepTimer();
+        updateText(sleepStatus, "Off");
+        closeDisclosures();
         showFeedback("Sleep timer cancelled");
       });
     }
@@ -712,6 +757,7 @@
       if (sleepMode === "end") {
         audio.pause();
         clearSleepTimer();
+        updateText(sleepStatus, "Off");
         showFeedback("Sleep timer ended");
         return;
       }

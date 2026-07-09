@@ -1376,25 +1376,61 @@ nav {
 }
 
 .audiobook-enhanced-controls {
-  display: grid;
-  gap: 0.65rem;
+  align-items: start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
 }
 
-.audiobook-control-group {
+.audiobook-disclosure-control {
+  position: relative;
+}
+
+.audiobook-disclosure-toggle {
   align-items: center;
-  border: 0;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.24);
+  border-radius: 999rem;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  gap: 0.5rem;
+  min-block-size: 2.2rem;
+  padding: 0.3rem 0.75rem;
+}
+
+.audiobook-disclosure-toggle strong {
+  color: #ffffff;
+  font-family: var(--font-caption);
+}
+
+.audiobook-disclosure-toggle::after {
+  border-block-start: 0.32rem solid currentColor;
+  border-inline: 0.25rem solid transparent;
+  content: "";
+  opacity: 0.72;
+}
+
+.audiobook-disclosure-toggle[aria-expanded="true"] {
+  background: rgb(255 255 255 / 0.16);
+}
+
+.audiobook-disclosure-menu {
+  background: rgb(18 19 22 / 0.92);
+  border: 1px solid rgb(255 255 255 / 0.24);
+  border-radius: 0.45rem;
+  box-shadow: 0 0.8rem 2rem rgb(0 0 0 / 0.24);
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin: 0;
-  padding: 0;
-}
-
-.audiobook-control-group legend {
-  color: rgb(255 255 255 / 0.72);
-  font-family: var(--font-caption);
-  font-weight: 700;
-  margin-inline-end: 0.2rem;
+  inline-size: max-content;
+  max-inline-size: min(18rem, calc(100vw - 2rem));
+  padding: 0.55rem;
+  position: absolute;
+  z-index: 4;
+  inset-block-start: calc(100% + 0.35rem);
+  inset-inline-start: 0;
 }
 
 .audiobook-chip,
@@ -1610,12 +1646,14 @@ nav {
 }
 
 .audiobook-track-row {
+  align-items: center;
   background: rgb(255 255 255 / 0.1);
   border: 1px solid rgb(255 255 255 / 0.18);
   border-radius: 0.35rem;
   display: grid;
-  gap: 0.4rem;
-  padding: 0.65rem 0.75rem;
+  gap: 0.6rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 0.62rem 0.7rem;
 }
 
 .audiobook-track-row.is-active {
@@ -1652,15 +1690,54 @@ nav {
 }
 
 .audiobook-track-actions {
+  justify-self: end;
+  position: relative;
+}
+
+.audiobook-track-actions > summary {
+  align-items: center;
+  background: rgb(255 255 255 / 0.08);
+  border: 1px solid rgb(255 255 255 / 0.18);
+  border-radius: 999rem;
+  color: rgb(255 255 255 / 0.74);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-caption);
+  font-size: 0.78rem;
+  font-weight: 700;
+  list-style: none;
+  min-block-size: 2rem;
+  padding: 0.25rem 0.55rem;
+}
+
+.audiobook-track-actions > summary::-webkit-details-marker {
+  display: none;
+}
+
+.audiobook-track-action-menu {
+  background: rgb(18 19 22 / 0.94);
+  border: 1px solid rgb(255 255 255 / 0.24);
+  border-radius: 0.45rem;
+  box-shadow: 0 0.8rem 2rem rgb(0 0 0 / 0.24);
   display: flex;
-  flex-wrap: wrap;
   gap: 0.35rem;
+  padding: 0.42rem;
+  position: absolute;
+  z-index: 3;
+  inset-block-start: calc(100% + 0.35rem);
+  inset-inline-end: 0;
 }
 
 .audiobook-track-action {
   color: rgb(255 255 255 / 0.76);
   font-size: 0.82rem;
-  padding: 0.18rem 0.5rem;
+  min-block-size: 2rem;
+  min-inline-size: 2rem;
+  padding: 0.18rem 0.42rem;
+}
+
+.audiobook-track-row:not(:hover):not(:focus-within):not(.is-active) .audiobook-track-actions > summary {
+  opacity: 0.45;
 }
 
 .audiobook-sidebar {

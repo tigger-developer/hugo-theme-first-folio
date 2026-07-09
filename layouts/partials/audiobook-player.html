@@ -41,20 +41,30 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
     </div>
 
     <div class="audiobook-enhanced-controls" aria-label="Listening controls">
-      <fieldset class="audiobook-control-group audiobook-speed-controls" data-audiobook-speed-controls>
-        <legend>Speed</legend>
+      <div class="audiobook-disclosure-control audiobook-speed-controls" data-audiobook-speed-controls>
+        <button type="button" class="audiobook-disclosure-toggle" data-audiobook-speed-toggle aria-expanded="false">
+          <span>Speed</span>
+          <strong data-audiobook-speed-status>1x</strong>
+        </button>
+        <div class="audiobook-disclosure-menu" data-audiobook-speed-menu hidden>
         {{- range slice "0.75" "1" "1.25" "1.5" "2" }}
         <button type="button" class="audiobook-chip" data-audiobook-speed="{{ . }}" aria-pressed="{{ if eq . "1" }}true{{ else }}false{{ end }}">{{ . }}x</button>
         {{- end }}
-      </fieldset>
-      <fieldset class="audiobook-control-group audiobook-sleep-controls" data-audiobook-sleep-controls>
-        <legend>Sleep</legend>
+        </div>
+      </div>
+      <div class="audiobook-disclosure-control audiobook-sleep-controls" data-audiobook-sleep-controls>
+        <button type="button" class="audiobook-disclosure-toggle" data-audiobook-sleep-toggle aria-expanded="false">
+          <span>Sleep</span>
+          <strong data-audiobook-sleep-status>Off</strong>
+        </button>
+        <div class="audiobook-disclosure-menu" data-audiobook-sleep-menu hidden>
         {{- range slice "15" "30" "45" "60" }}
         <button type="button" class="audiobook-chip" data-audiobook-sleep-minutes="{{ . }}">{{ . }} min</button>
         {{- end }}
         <button type="button" class="audiobook-chip" data-audiobook-sleep-end>End of item</button>
-        <button type="button" class="audiobook-chip" data-audiobook-sleep-cancel>Cancel</button>
-      </fieldset>
+        <button type="button" class="audiobook-chip" data-audiobook-sleep-cancel>Off</button>
+        </div>
+      </div>
     </div>
     <p class="audiobook-feedback" data-audiobook-feedback aria-live="polite"></p>
     <button type="button" class="audiobook-resume-work" data-audiobook-resume-work hidden></button>
@@ -82,12 +92,15 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
             <span class="audiobook-track-title">{{ $chapter.title }}</span>
             <span class="audiobook-track-resume" data-audiobook-track-resume hidden></span>
           </button>
-          <div class="audiobook-track-actions" aria-label="{{ $chapter.label }} actions">
-            <button type="button" class="audiobook-track-action" data-audiobook-track-start data-chapter-id="{{ $chapter.id }}" aria-label="Play {{ $chapter.label }} from start">Start</button>
-            <button type="button" class="audiobook-track-action" data-audiobook-track-complete data-chapter-id="{{ $chapter.id }}" aria-label="Mark {{ $chapter.label }} complete">Done</button>
-            <button type="button" class="audiobook-track-action" data-audiobook-queue-up data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} earlier">Up</button>
-            <button type="button" class="audiobook-track-action" data-audiobook-queue-down data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} later">Down</button>
-          </div>
+          <details class="audiobook-track-actions" aria-label="{{ $chapter.label }} actions">
+            <summary aria-label="More actions for {{ $chapter.label }}">More</summary>
+            <div class="audiobook-track-action-menu">
+              <button type="button" class="audiobook-track-action" data-audiobook-track-start data-chapter-id="{{ $chapter.id }}" aria-label="Play {{ $chapter.label }} from start"><span aria-hidden="true">0:00</span><span class="visually-hidden">Start from beginning</span></button>
+              <button type="button" class="audiobook-track-action" data-audiobook-track-complete data-chapter-id="{{ $chapter.id }}" aria-label="Mark {{ $chapter.label }} complete"><span aria-hidden="true">✓</span><span class="visually-hidden">Mark complete</span></button>
+              <button type="button" class="audiobook-track-action" data-audiobook-queue-up data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} earlier"><span aria-hidden="true">↑</span><span class="visually-hidden">Move earlier</span></button>
+              <button type="button" class="audiobook-track-action" data-audiobook-queue-down data-chapter-id="{{ $chapter.id }}" aria-label="Move {{ $chapter.label }} later"><span aria-hidden="true">↓</span><span class="visually-hidden">Move later</span></button>
+            </div>
+          </details>
         </div>
       </li>
       {{- end }}

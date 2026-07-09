@@ -155,10 +155,18 @@ function makeHarness(storageValues) {
     "[data-audiobook-error]": new FakeElement("error"),
     "[data-audiobook-up-next]": new FakeElement("up-next"),
     "[data-audiobook-resume-work]": new FakeElement("resume-work"),
+    "[data-audiobook-speed-toggle]": makeButton("speed-toggle"),
+    "[data-audiobook-speed-menu]": new FakeElement("speed-menu"),
+    "[data-audiobook-speed-status]": new FakeElement("speed-status"),
+    "[data-audiobook-sleep-toggle]": makeButton("sleep-toggle"),
+    "[data-audiobook-sleep-menu]": new FakeElement("sleep-menu"),
+    "[data-audiobook-sleep-status]": new FakeElement("sleep-status"),
     "[data-audiobook-sleep-end]": makeButton("sleep-end"),
     "[data-audiobook-sleep-cancel]": makeButton("sleep-cancel"),
     "[data-audiobook-queue-reset]": makeButton("queue-reset")
   };
+  elements["[data-audiobook-speed-menu]"].hidden = true;
+  elements["[data-audiobook-sleep-menu]"].hidden = true;
   const player = new FakeElement("player");
   player.dataset = {
     audiobookId: "fixture-book",
@@ -249,6 +257,8 @@ function makeHarness(storageValues) {
     tracks: tracks,
     speedButtons: speedButtons,
     sleepMinuteButtons: sleepMinuteButtons,
+    speedStatus: elements["[data-audiobook-speed-status]"],
+    sleepStatus: elements["[data-audiobook-sleep-status]"],
     sleepEndButton: elements["[data-audiobook-sleep-end]"],
     sleepCancelButton: elements["[data-audiobook-sleep-cancel]"],
     startButtons: startButtons,
@@ -288,6 +298,7 @@ function scenarioSpeed() {
   const h = makeHarness({});
   h.speedButtons[3].dispatch("click");
   assert(h.audio.playbackRate === 1.5, "speed button did not set playbackRate");
+  assert(h.speedStatus.textContent === "1.5x", "speed status label did not update");
   assert(globalThis.localStorage.values["first-folio:audiobook:fixture-book:speed"] === "1.5", "speed was not persisted");
   h.tracks[1].dispatch("click");
   assert(h.audio.playbackRate === 1.5, "speed was not reapplied after item change");
@@ -299,18 +310,22 @@ function scenarioSleepMinute() {
   h.audio.currentTime = 123;
   h.audio.play();
   h.sleepMinuteButtons[0].dispatch("click");
+  assert(h.sleepStatus.textContent === "15 min", "minute sleep status did not update");
   h.runTimeouts();
   assert(h.audio.paused, "minute sleep timer did not pause audio");
   assert(globalThis.localStorage.values["first-folio:audiobook:fixture-book:chapter-1"] === "123", "minute sleep timer did not store position");
+  assert(h.sleepStatus.textContent === "Off", "minute sleep status did not reset");
 }
 
 function scenarioSleepEnd() {
   const h = makeHarness({});
   h.audio.play();
   h.sleepEndButton.dispatch("click");
+  assert(h.sleepStatus.textContent === "End", "end-of-item sleep status did not update");
   h.audio.dispatch("ended");
   assert(h.audio.dataset.chapterId === "chapter-1", "end-of-item sleep advanced to next item");
   assert(h.audio.paused, "end-of-item sleep did not pause");
+  assert(h.sleepStatus.textContent === "Off", "end-of-item sleep status did not reset");
   h.sleepCancelButton.dispatch("click");
   assert(h.feedback.textContent === "Sleep timer cancelled", "sleep cancellation feedback missing");
 }
