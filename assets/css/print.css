@@ -113,6 +113,10 @@
     background-image: none !important;
     background-color: transparent !important;
   }
+  .post-container::before,
+  .post-container.dark-bg::before {
+    background-image: none !important;
+  }
   * {
     box-shadow: none !important;
     backdrop-filter: none !important;

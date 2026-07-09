@@ -449,6 +449,14 @@ body,
   display: block;
 }
 
+.post-container.dark-bg::before {
+  position: fixed;
+  inset: 0;
+  background-size: var(--background-size, cover);
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
 /* Content positioning */
 .post-container .post-content {
   position: relative;
