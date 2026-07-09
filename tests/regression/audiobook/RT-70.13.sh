@@ -18,7 +18,7 @@ run_test() {
 
     local panel_text
     panel_text="$(htmlq -f "$page" -t '.audiobook-homescreen-panel')"
-    grep -qF 'Save this page to your phone so it opens like an app and is easy to find again.' <<< "$panel_text" || return 1
+    grep -qF "Use your browser's Share or menu button to add this page to your phone." <<< "$panel_text" || return 1
 
     local manifest_href
     manifest_href="$(htmlq -f "$page" -a href 'link[rel="manifest"]')"

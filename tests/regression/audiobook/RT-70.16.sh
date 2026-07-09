@@ -11,7 +11,7 @@ run_test() {
     grep -qF 'Save to your Home Screen' "$doc" || return 1
     grep -qF 'Copy this page Link' "$doc" || return 1
     grep -qF 'params.audiobook.subscribe' "$doc" || return 1
-    grep -qF 'Apple and Android do not provide a reliable one-tap Link for private feeds' "$doc" || return 1
+    grep -qF 'tap the browser Share button' "$doc" || return 1
     grep -qF 'serial' "$doc" || return 1
     grep -qF 'episodic' "$doc" || return 1
 }

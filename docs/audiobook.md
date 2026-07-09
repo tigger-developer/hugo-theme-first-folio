@@ -1,4 +1,4 @@
-<!-- Version: 1.2 | Last updated: 2026-07-09 -->
+<!-- Version: 1.3 | Last updated: 2026-07-09 -->
 
 # Audiobook Pages and Podcast Feeds
 
@@ -145,7 +145,7 @@ Secondary actions live in the audio sidebar:
 - `Save to your Home Screen`: shows iOS, Android, or generic instructions. iOS-family browsers receive Share icon / Add to Home Screen guidance; Android-family browsers receive browser menu / Add to Home screen or Install app guidance.
 - `Listen in your favourite podcast app`: contains the feed Link, copy glyph, short setup instructions, and copy feedback.
 
-Default podcast-app setup does not render named app links. Apple and Android do not provide a reliable one-tap Link for private feeds, and app-specific URL schemes overpromise behaviour that many players do not support. The default copy is deliberately manual and uses `Link` rather than `URL`:
+Default podcast-app setup does not render named app links because app-specific URL schemes overpromise behaviour that many players do not support. The default copy is deliberately manual and uses `Link` rather than `URL`:
 
 ```text
 Copy this Podcast Feed Link.
@@ -163,7 +163,6 @@ params:
       label: Listen in an app
       prompt: Choose where to open this feed.
       hint: Paste this Link into the app's Add Feed screen.
-      footnote: Private feeds require manual setup on most phones.
       copied: Copied Podcast Feed Link
     save:
       label: Share or save this page
@@ -172,9 +171,9 @@ params:
     homescreen:
       enabled: true
       label: Save to your Home Screen
-      prompt: Save this page to your phone so it opens like an app and is easy to find again.
-      ios: On iPhone or iPad, tap Share, then choose Add to Home Screen.
-      android: On Android, open your browser menu, then choose Add to Home screen or Install app.
+      prompt: Use your browser's Share or menu button to add this page to your phone.
+      ios: On iPhone or iPad, tap the browser Share button, then choose Add to Home Screen.
+      android: On Android, open the browser menu, then choose Add to Home screen or Install app.
       fallback: Use your browser menu to bookmark this page or add it to your device home screen.
 ```
 

@@ -128,7 +128,7 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
       "label" ($subscribe.label | default "Listen in your favourite podcast app")
       "prompt" ($subscribe.prompt | default "Copy this Podcast Feed Link.")
       "hint" ($subscribe.hint | default "In your podcast app, look for Add Link or Add Feed, then paste it there.")
-      "footnote" ($subscribe.footnote | default "Unfortunately Apple and Android do not provide a reliable one-tap Link for private feeds.")
+      "footnote" $subscribe.footnote
       "copied" ($subscribe.copied | default "Copied Podcast Feed Link")
     )
     "save" (dict
@@ -139,9 +139,9 @@ ABOUTME: Shared by the audiobook HTML page and podcast feed templates.
     "homescreen" (dict
       "enabled" ($homescreen.enabled | default true)
       "label" ($homescreen.label | default "Save to your Home Screen")
-      "prompt" ($homescreen.prompt | default "Save this page to your phone so it opens like an app and is easy to find again.")
-      "ios" ($homescreen.ios | default "On iPhone or iPad, tap Share, then choose Add to Home Screen.")
-      "android" ($homescreen.android | default "On Android, open your browser menu, then choose Add to Home screen or Install app.")
+      "prompt" ($homescreen.prompt | default "Use your browser's Share or menu button to add this page to your phone.")
+      "ios" ($homescreen.ios | default "On iPhone or iPad, tap the browser Share button, then choose Add to Home Screen.")
+      "android" ($homescreen.android | default "On Android, open the browser menu, then choose Add to Home screen or Install app.")
       "fallback" ($homescreen.fallback | default "Use your browser menu to bookmark this page or add it to your device home screen.")
     )
     "chapters" $normalized

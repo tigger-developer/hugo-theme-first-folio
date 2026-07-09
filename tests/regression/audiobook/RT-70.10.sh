@@ -16,7 +16,10 @@ run_test() {
     panel_text="$(htmlq -f "$page" -t '.audiobook-subscribe-panel')"
     grep -qF 'Copy this Podcast Feed Link.' <<< "$panel_text" || return 1
     grep -qF 'In your podcast app, look for Add Link or Add Feed, then paste it there.' <<< "$panel_text" || return 1
-    grep -qF 'Unfortunately Apple and Android do not provide a reliable one-tap Link for private feeds.' <<< "$panel_text" || return 1
+    if grep -qF 'Unfortunately' <<< "$panel_text"; then
+        printf 'subscription panel rendered default apology copy\n' >&2
+        return 1
+    fi
 
     if grep -qF 'URL' <<< "$panel_text"; then
         printf 'subscription panel used URL in default user-facing copy\n' >&2

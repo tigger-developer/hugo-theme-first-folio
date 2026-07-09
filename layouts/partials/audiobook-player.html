@@ -106,7 +106,7 @@ ABOUTME: Keeps audiobook HTML behaviour reusable without owning the page's visua
         <button type="button" class="audiobook-copy-button" aria-label="Copy Podcast Feed Link">⧉</button>
         <p class="audiobook-copy-feedback" data-audio-assist-feedback></p>
       </div>
-      <p class="audiobook-assist-footnote">{{ $book.subscribe.footnote }}</p>
+      {{- with $book.subscribe.footnote }}<p class="audiobook-assist-footnote">{{ . }}</p>{{- end }}
     </details>
     {{- end }}
   </aside>
