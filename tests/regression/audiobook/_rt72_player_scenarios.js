@@ -270,10 +270,15 @@ function makeHarness(storageValues) {
     error: elements["[data-audiobook-error]"],
     upNext: elements["[data-audiobook-up-next]"],
     resumeWork: elements["[data-audiobook-resume-work]"],
-    keydown: function (key, target) {
+    keydown: function (key, target, options) {
+      options = options || {};
       const event = {
         key: key,
         target: target || {},
+        altKey: Boolean(options.altKey),
+        ctrlKey: Boolean(options.ctrlKey),
+        metaKey: Boolean(options.metaKey),
+        shiftKey: Boolean(options.shiftKey),
         prevented: false,
         preventDefault: function () { this.prevented = true; }
       };
@@ -373,6 +378,16 @@ function scenarioKeyboard() {
   assert(h.audio.playbackRate === 1.25, "equals did not increase speed");
   const event = h.keydown(" ", { tagName: "input" });
   assert(!event.prevented, "keyboard handler intercepted form field typing");
+  h.audio.currentTime = 100;
+  const cmdL = h.keydown("l", {}, { metaKey: true });
+  assert(!cmdL.prevented, "keyboard handler intercepted Cmd+L");
+  assert(h.audio.currentTime === 100, "Cmd+L changed audio position");
+  const cmdBack = h.keydown("ArrowLeft", {}, { metaKey: true });
+  assert(!cmdBack.prevented, "keyboard handler intercepted Cmd+Left");
+  assert(h.audio.currentTime === 100, "Cmd+Left changed audio position");
+  const altRight = h.keydown("ArrowRight", {}, { altKey: true });
+  assert(!altRight.prevented, "keyboard handler intercepted Alt+Right");
+  assert(h.audio.currentTime === 100, "Alt+Right changed audio position");
 }
 
 function scenarioMedia() {
