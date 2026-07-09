@@ -1,0 +1,3 @@
+{{/* ABOUTME: Publishes Home Screen metadata for pages using layout: audio. */}}
+{{/* ABOUTME: Delegates manifest contents to the shared audiobook webmanifest partial. */}}
+{{- partial "audiobook-webmanifest.json" . -}}

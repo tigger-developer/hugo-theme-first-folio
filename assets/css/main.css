@@ -1253,6 +1253,37 @@ nav {
   margin-block: 2rem;
 }
 
+.audio-layout {
+  min-block-size: 68vh;
+}
+
+.audio-layout .post-content {
+  max-inline-size: 68rem;
+}
+
+.audio-hero {
+  display: grid;
+  gap: 1.25rem;
+  min-block-size: min(56rem, calc(100vh - 9rem));
+  padding-block: clamp(1rem, 4vw, 3rem);
+}
+
+.audio-title {
+  margin-block-end: 0;
+}
+
+.audio-title h1 {
+  margin-block-end: 0.35rem;
+}
+
+.audio-body {
+  margin-block-start: 2rem;
+}
+
+.audio-hero .audiobook-listening-layout {
+  margin-block: 0;
+}
+
 .audiobook-player {
   background: rgb(20 20 24 / 0.88);
   border: 1px solid rgb(255 255 255 / 0.22);
@@ -1465,6 +1496,11 @@ nav {
 @media (min-width: 56rem) {
   .audiobook-listening-layout {
     grid-template-columns: minmax(0, 1fr) minmax(14rem, 18rem);
+  }
+
+  .audio-hero .audiobook-listening-layout {
+    align-items: start;
+    grid-template-columns: minmax(24rem, 1fr) minmax(13rem, 17rem);
   }
 }
 

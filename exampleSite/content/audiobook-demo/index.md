@@ -2,7 +2,7 @@
 title: First Folio Demo Audiobook
 linkTitle: Audiobook Demo
 type: audiobook
-layout: hero
+layout: audio
 author: "Taḋg Paul"
 sectionLabel: Audiobook
 description: A theme-owned audiobook page for sequential chapter playback, generated media metadata, and a serial RSS feed.
@@ -73,7 +73,7 @@ This page demonstrates First Folio's theme-owned audio layout for audiobook-styl
 Expected audiobook behaviour:
 
 - Feed type is `serial`, so the feed declares audiobook-style ordering and uses one-second fallback `pubDate` increments when item dates are not explicitly supplied.
-- The page chooses the existing `background` visual layout, so the cover image is rendered by the standard page template before the audio controls.
+- The page chooses `layout: audio`, so the player is the primary hero-area experience. Because the page also has a background image, the theme follows the background-image convention and renders the page in a forced dark context.
 - Items are labelled as front matter and chapters in the page content and omit podcast episode numbers.
 - The page is promoted to the homepage carousel with `carousel`, using the same front matter contract as other featured content.
 - Listening position is stored per book id and chapter id in the browser.

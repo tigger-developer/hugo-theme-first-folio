@@ -36,7 +36,8 @@
 		  {{- $effectiveLayout = "background" -}}
 		{{- end -}}
 		{{- $ambienceToggle := .Site.Params.ambience.toggle | default true -}}
-		{{- if and $ambienceToggle (ne $effectiveLayout "background") -}}
+		{{- $forceDarkForImage := or (eq $effectiveLayout "background") (and (eq $effectiveLayout "audio") .Params.image.src) -}}
+		{{- if and $ambienceToggle (not $forceDarkForImage) -}}
 		<button id="dark-mode-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; padding: 0.5rem;">
 			<svg class="feather" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
 				<circle cx="12" cy="12" r="5"></circle>

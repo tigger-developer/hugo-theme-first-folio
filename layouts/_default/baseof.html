@@ -32,7 +32,8 @@
         {{- if and .Params.image.src (not .Params.layout) -}}
           {{- $effectiveLayout = "background" -}}
         {{- end -}}
-        {{- if eq $effectiveLayout "background" -}}
+        {{- $forceDarkForImage := or (eq $effectiveLayout "background") (and (eq $effectiveLayout "audio") .Params.image.src) -}}
+        {{- if $forceDarkForImage -}}
         {{- $forceTheme := "dark" -}}
         <script>
         (function() {
@@ -43,7 +44,7 @@
         })();
         </script>
         {{- end -}}
-        {{- if eq .Type "audiobook" }}
+        {{- if or (eq .Type "audiobook") (and (eq .Params.layout "audio") .Params.audiobook) }}
         <script src="{{ "js/audiobook-player.js" | relURL }}"></script>
         {{- end }}
     </body>

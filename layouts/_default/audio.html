@@ -1,0 +1,81 @@
+{{/* Copyright (c) 2023 Taḋg Paul - SPDX-License-Identifier: Apache-2.0 */}}
+{{/* ABOUTME: Dedicated audio page layout with the web player in the hero position. */}}
+{{/* ABOUTME: Supports optional background-image pages using the theme's dark canvas convention. */}}
+{{ define "main" }}
+{{- if not .Params.audiobook -}}
+  {{- errorf "layout: audio requires params.audiobook on %s" .Path -}}
+{{- end -}}
+{{- $hasBackground := and .Params.image .Params.image.src -}}
+{{- $bgOpacity := .Site.Params.bgImage.opacity | default 0.7 -}}
+{{- with .Params.image.opacity -}}{{- $bgOpacity = . -}}{{- end -}}
+<main class="audio-page">
+  <article{{ if .Params.contentLang }} lang="{{ .Params.contentLang }}"{{ end }}{{ if .Params.toc }} class="has-toc"{{ end }}>
+    {{ partial "signpost.html" . }}
+    <div class="post-container audio-layout{{ if $hasBackground }} dark-bg{{ end }} soft-edge"{{ if $hasBackground }} style="--background-image: url('{{ .RelPermalink }}{{ .Params.image.src }}'); --image-opacity: {{ $bgOpacity }}; --image-blur: {{ if .Params.image.blur }}{{ .Params.image.blur }}{{ else }}{{ .Site.Params.bgImage.blur | default "2px" }}{{ end }}{{ with .Params.image.size }}; --background-size: {{ . }}{{ end }};"{{ end }}>
+      <div class="post-content audio-content">
+        <section class="audio-hero" aria-labelledby="audio-page-title">
+          <div class="title audio-title">
+            <h1 id="audio-page-title" class="title">{{ partial "display-title.html" . }}</h1>
+            {{- if ne .Params.breadcrumb false }}<div class="meta">{{ partial "breadcrumb.html" . }}</div>{{- end }}
+          </div>
+          {{ partial "audiobook-player.html" . }}
+        </section>
+
+        {{ if isset .Params "tldr" }}
+        <div class="tldr">
+          <strong>tl;dr:</strong>
+          {{ .Params.tldr }}
+        </div>{{ end }}
+        <section class="body audio-body">
+          {{ .Content }}
+          {{ partial "signpost-footer.html" . }}
+        </section>
+        <div class="post-tags">
+          {{ if ne .Type "page" }}
+          {{ if gt .Params.tags 0 }}
+          <nav class="nav tags">
+            <ul class="tags">
+              {{ range .Params.tags }}
+              <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
+              {{ end }}
+            </ul>
+          </nav>
+          {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    {{ if .Params.toc }}
+    {{- $tocTitle := site.Params.tocTitle | default "Table of contents:" -}}
+    {{- if ne .Params.toc true -}}{{- $tocTitle = .Params.toc -}}{{- end -}}
+    <div class="toc-mobile">
+      <details class="toc-mobile-details">
+        <summary class="toc-mobile-summary">{{ $tocTitle }}</summary>
+        {{ .TableOfContents }}
+      </details>
+    </div>
+    <div class="article-sidebar">
+      <div class="toc">
+        <strong>{{ $tocTitle }}</strong>
+        {{ .TableOfContents }}
+      </div>
+      {{ partial "related.html" . }}
+    </div>
+    <div class="related-mobile">
+      {{ partial "related.html" . }}
+    </div>
+    {{ else }}
+    {{ partial "related.html" . }}
+    {{ end }}
+
+    {{- $.Scratch.Set "isDisqus" true -}}
+    {{ if not .Site.Config.Services.Disqus.Shortname }}
+    {{- $.Scratch.Set "isDisqus" false -}}
+    {{ end }}
+    {{- if eq ($.Scratch.Get "isDisqus") true -}}
+    {{- partial "disqus.html" . -}}
+    {{- end -}}
+  </article>
+</main>
+{{ end }}

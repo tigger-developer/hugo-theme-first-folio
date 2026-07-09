@@ -38,4 +38,10 @@ run_test() {
     grep -qF 'Demo Episode 1' <<< "$selector_text" || return 1
     grep -qF 'Demo Episode 2' <<< "$selector_text" || return 1
     grep -qF 'Demo Episode 3' <<< "$selector_text" || return 1
+
+    local player_line
+    local body_line
+    player_line="$(grep -n 'class="audiobook-player"' "$page" | head -n1 | cut -d: -f1)"
+    body_line="$(grep -n 'This page demonstrates First Folio' "$page" | head -n1 | cut -d: -f1)"
+    [[ "$player_line" -lt "$body_line" ]] || return 1
 }

@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-64.10 - audio demos can choose existing visual layouts.
+# ABOUTME: RT-64.10 - audio layout with background image follows dark-canvas convention.
 
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 
@@ -13,15 +13,15 @@ run_test() {
     [[ -f "$podcast_page" ]] || return 1
     [[ -f "$audiobook_page" ]] || return 1
 
-    htmlq -f "$podcast_page" '.post-container.dark-bg' | grep -q '<' || return 1
+    htmlq -f "$podcast_page" '.post-container.audio-layout.dark-bg' | grep -q '<' || return 1
     if htmlq -f "$podcast_page" '#dark-mode-toggle' | grep -q '<'; then
-        printf '    background podcast page unexpectedly showed ambience toggle\n' >&2
+        printf '    audio podcast page with background unexpectedly showed ambience toggle\n' >&2
         return 1
     fi
 
-    htmlq -f "$audiobook_page" '.post-hero img' | grep -q '<' || return 1
-    if ! htmlq -f "$audiobook_page" '#dark-mode-toggle' | grep -q '<'; then
-        printf '    hero audiobook page unexpectedly hid ambience toggle\n' >&2
+    htmlq -f "$audiobook_page" '.post-container.audio-layout.dark-bg' | grep -q '<' || return 1
+    if htmlq -f "$audiobook_page" '#dark-mode-toggle' | grep -q '<'; then
+        printf '    audio audiobook page with background unexpectedly showed ambience toggle\n' >&2
         return 1
     fi
 }

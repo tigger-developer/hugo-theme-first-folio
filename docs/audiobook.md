@@ -1,4 +1,4 @@
-<!-- Version: 1.1 | Last updated: 2026-07-09 -->
+<!-- Version: 1.2 | Last updated: 2026-07-09 -->
 
 # Audiobook Pages and Podcast Feeds
 
@@ -12,7 +12,7 @@ Use `type: audiobook` and request both HTML and podcast output when a feed is ne
 ---
 title: First Folio Demo Audiobook
 type: audiobook
-layout: hero
+layout: audio
 outputs:
   - html
   - podcast
@@ -39,7 +39,11 @@ params:
 ---
 ```
 
-The `type: audiobook` value selects the audio data contract and podcast feed template. HTML pages still use the normal First Folio single-page layout system, so consuming sites may choose `layout: banner`, `hero`, `columns`, `featured-columns-left`, `featured-columns-right`, `featured`, `background`, or omit `layout` for the default convention.
+Use `layout: audio` for the theme-owned audio page experience. It places the web player in the hero position so audio is the primary interaction on the page. `layout: audio` requires `params.audiobook`.
+
+The `type: audiobook` value selects the audio data contract and podcast feed template. The `params.audiobook.type` value selects feed ordering semantics and is separate from Hugo's page `type`. Audio pages may still choose another First Folio layout when a site needs an ordinary article presentation, but the recommended layout for podcast and audiobook pages is `layout: audio`.
+
+When `layout: audio` is used with `image.src`, the image becomes the page canvas and the page follows the same dark-background convention as `layout: background`: the ambience toggle is hidden and the page is forced into the dark theme for predictable image opacity, wash, and text legibility.
 
 The theme owns the audio controls and `layouts/audiobook/single.podcast.xml`. Consuming sites should not copy those templates or partials for normal use.
 
@@ -54,7 +58,7 @@ Book metadata:
 - `description`: podcast channel description.
 - `language`: feed language, such as `en-GB`.
 - `explicit`: boolean podcast explicit-status metadata.
-- `type`: optional podcast ordering type, either `serial` or `episodic`. Defaults to `serial` for audiobook-style sequential playback.
+- `type`: optional podcast ordering type, either `serial` or `episodic`. Defaults to `episodic` for podcast-style feeds. Set `type: serial` for audiobook-style sequential playback.
 - `chapters`: one or more chapter objects.
 
 Chapter metadata:
@@ -78,7 +82,7 @@ Optional metadata can enrich the feed without changing the required interface.
 
 Book metadata may include `author`, `image`, `subscribe`, `save`, and `homescreen`. Chapter metadata may include `summary`, `date`, `duration`, `episode`, and `label`. Feed item dates use the chapter front matter `date` when present, then generated media `date` when present, and otherwise fall back to the page date. For `serial` feeds only, page-date fallback is staggered by chapter index in one-second increments so clients that sort by date still receive a stable ordering hint. Explicit chapter dates and generated media dates are never adjusted by this rule. `episodic` feeds keep the unmodified page-date fallback because podcast episode dates normally represent publication chronology.
 
-Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Use `type: episodic` only for podcast-style feeds where clients should treat newer episodes as primary.
+Feed items are emitted in the same order as the configured `chapters` list. The theme does not sort chapters by date or episode number. Use `type: serial` for audiobook-style feeds that should be presented from first episode to last. Omit `type` or use `type: episodic` for podcast-style feeds where clients should treat newer episodes as primary.
 
 ## Generated Media Metadata
 
@@ -105,7 +109,7 @@ The theme applies media facts in this order:
 
 The theme does not run media probes. Consuming sites that want reproducible durations should generate data before Hugo runs, for example with `ffprobe`, a CMS export, or a host-specific metadata script. Build scripts should fail early when generated data is stale or required enclosure metadata cannot be resolved; the RSS template also fails the Hugo build for unresolved enclosure length or MIME type.
 
-This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. The podcast demo uses the existing `background` visual layout, while the audiobook demo uses the existing `hero` layout. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`; run it explicitly when demo audio files or chapter source paths change, then commit the updated YAML. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` and fails if the committed metadata file is missing. GitHub Pages deploys do not run `ffprobe`.
+This repository demonstrates the generated-metadata pattern with separate podcast and audiobook example pages. Both demos use `layout: audio` with background images so the player is the primary page experience and the image canvas follows the dark-background convention. `make generate-audiobook-metadata` reads both demo content files and writes one combined `data/first_folio_media.yaml`; run it explicitly when demo audio files or chapter source paths change, then commit the updated YAML. The production exampleSite build is `HUGO_ENVIRONMENT=theme-demo-live make build`; `make build` deliberately requires the caller to provide `HUGO_ENVIRONMENT` and fails if the committed metadata file is missing. GitHub Pages deploys do not run `ffprobe`.
 
 ## Output Configuration
 
@@ -133,7 +137,7 @@ outputFormats:
 
 Audio pages render a single web player for both audiobook and podcast modes. The page still models audio as chapters or episodes, but the visible player exposes only one play/pause control, back 30 seconds, forward 15 seconds, previous and next item controls, current item metadata, and a visible ordered list of tappable chapter or episode names. This keeps item granularity available for listeners who open the same private link in another browser context and lose local saved position.
 
-The same UX is used for `serial` audiobooks and `episodic` podcasts. Differences are limited to labels, feed ordering semantics, and the content supplied by the page. `serial` is the default and is intended for chapter-order listening. `episodic` is intended for podcast-style feeds where episodes can stand alone.
+The same UX is used for `serial` audiobooks and `episodic` podcasts. Differences are limited to labels, feed ordering semantics, and the content supplied by the page. `episodic` is the default and is intended for podcast-style feeds where episodes can stand alone. Set `type: serial` for chapter-order listening.
 
 Secondary actions live in the audio sidebar:
 
