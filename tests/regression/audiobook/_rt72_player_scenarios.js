@@ -363,19 +363,25 @@ function scenarioQueue() {
 
 function scenarioKeyboard() {
   const h = makeHarness({});
-  h.keydown(" ");
-  assert(!h.audio.paused, "space did not toggle play");
+  const bareSpace = h.keydown(" ");
+  assert(!bareSpace.prevented, "bare space was intercepted");
+  assert(h.audio.paused, "bare space toggled play");
+  h.keydown(" ", {}, { ctrlKey: true });
+  assert(!h.audio.paused, "Ctrl+Space did not toggle play");
   h.audio.currentTime = 100;
-  h.keydown("h");
-  assert(h.audio.currentTime === 70, "h did not seek backward");
-  h.keydown("l");
-  assert(h.audio.currentTime === 85, "l did not seek forward");
-  h.keydown("j");
-  assert(h.audio.dataset.chapterId === "chapter-2", "j did not select next item");
-  h.keydown("k");
-  assert(h.audio.dataset.chapterId === "chapter-1", "k did not select previous item");
-  h.keydown("=");
-  assert(h.audio.playbackRate === 1.25, "equals did not increase speed");
+  const bareH = h.keydown("h");
+  assert(!bareH.prevented, "bare h was intercepted");
+  assert(h.audio.currentTime === 100, "bare h changed audio position");
+  h.keydown("h", {}, { ctrlKey: true });
+  assert(h.audio.currentTime === 70, "Ctrl+H did not seek backward");
+  h.keydown("l", {}, { ctrlKey: true });
+  assert(h.audio.currentTime === 85, "Ctrl+L did not seek forward");
+  h.keydown("j", {}, { ctrlKey: true });
+  assert(h.audio.dataset.chapterId === "chapter-2", "Ctrl+J did not select next item");
+  h.keydown("k", {}, { ctrlKey: true });
+  assert(h.audio.dataset.chapterId === "chapter-1", "Ctrl+K did not select previous item");
+  h.keydown("=", {}, { ctrlKey: true });
+  assert(h.audio.playbackRate === 1.25, "Ctrl+= did not increase speed");
   const event = h.keydown(" ", { tagName: "input" });
   assert(!event.prevented, "keyboard handler intercepted form field typing");
   h.audio.currentTime = 100;

@@ -778,7 +778,7 @@
         if (tagName === "input" || tagName === "textarea" || tagName === "select" || target.isContentEditable) {
           return;
         }
-        if (event.metaKey || event.ctrlKey || event.altKey) {
+        if (event.metaKey || event.altKey || !event.ctrlKey) {
           return;
         }
         const key = event.key;

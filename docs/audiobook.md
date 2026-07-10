@@ -197,15 +197,15 @@ The item row itself is the primary target for selecting or resuming that chapter
 
 Playback speed controls persist the selected rate locally per work and reapply it after active item changes. The compact Speed control displays the active rate and expands only when the listener wants to change it. The compact Sleep control displays `Off`, a minute value, or `End`. The sleep timer supports common minute values plus `End of item`. Minute timers pause playback and store the current position. `End of item` pauses after the active item finishes instead of auto-advancing.
 
-Keyboard shortcuts are available when focus is not in a form field or editable element:
+Keyboard shortcuts are available with Control when focus is not in a form field or editable element. Command, Option/Alt, and bare letter keys are left to the browser and operating system:
 
-- Space or `P`: play/pause.
-- `H` or Left Arrow: back 30 seconds.
-- `L` or Right Arrow: forward 15 seconds.
-- `J` or Down Arrow: next item in queue order.
-- `K` or Up Arrow: previous rendered item.
-- `-` / `_`: slower playback.
-- `=` / `+`: faster playback.
+- Control+Space or Control+P: play/pause.
+- Control+H or Control+Left Arrow: back 30 seconds.
+- Control+L or Control+Right Arrow: forward 15 seconds.
+- Control+J or Control+Down Arrow: next item in queue order.
+- Control+K or Control+Up Arrow: previous rendered item.
+- Control+- / Control+_: slower playback.
+- Control+= / Control++: faster playback.
 
 When the Media Session API is available, the player publishes the active work title, active item label/title, author, artwork, and transport handlers for play, pause, seeking, and item navigation. Browsers without Media Session support use the same page controls without error. Media Session display, lock-screen behaviour, background playback, and sleep-timer reliability remain browser and operating-system decisions rather than guarantees the theme can force.
 
