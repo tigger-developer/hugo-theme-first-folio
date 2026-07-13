@@ -90,6 +90,21 @@ This content is hidden by default. It can contain **bold text**, *italic text*, 
 - As do other block elements
 {{< /details >}}
 
+## Spoiler
+
+Spoilers conceal plot details until the reader deliberately reveals them. Inline spoilers remain within the surrounding sentence: the apparently harmless village doctor is {{< spoiler "the saboteur" >}}, but the review can discuss motive without exposing that fact.
+
+Named text and a custom label are also supported: {{< spoiler text="the missing diary was forged" label="Character reveal" >}}. Adjacent spoilers keep independent reveal state: {{< spoiler "the red key" >}} and {{< spoiler "the blue door" >}}.
+
+Use the paired form for a larger spoiler block:
+
+{{< spoiler label="Ending details" >}}
+The final scene reveals **why the letters stopped** and resolves the [opening mystery](https://example.com/review-notes).
+
+- The first clue is reinterpreted.
+- The last conversation gains a different meaning.
+{{< /spoiler >}}
+
 ## Dialogue
 
 For plays and screenplays — character name in small caps with optional parenthetical:
