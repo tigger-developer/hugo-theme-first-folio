@@ -39,6 +39,14 @@ Individual pages override these defaults via the `image` frontmatter block.
 
 ## Dark Mode
 
-Background images work in both light and dark modes. The theme adjusts the overlay colour automatically — light backgrounds use a white overlay, dark backgrounds use a dark overlay. The image shows through either way.
+Background-image pages use the theme's dark canvas regardless of the visitor's light or dark preference. A consistent canvas makes the configured image opacity, wash, and text contrast predictable.
 
 {{< callout type="tip" text="For background images, choose photographs with even tonal distribution. High-contrast images with bright spots can make overlaid text hard to read." >}}
+
+## Spoilers Over Images
+
+Inline spoilers retain their concealed treatment over an image-backed canvas: the photograph was taken {{< spoiler "after the storm had already passed" />}}.
+
+{{< spoiler label="Background-layout detail" >}}
+Block spoilers use the same dark-canvas contrast and reveal behaviour as the compact inline form.
+{{< /spoiler >}}
