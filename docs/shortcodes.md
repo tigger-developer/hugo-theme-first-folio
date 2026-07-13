@@ -1,8 +1,8 @@
-<!-- Version: 1.2 | Last updated: 2026-05-12 -->
+<!-- Version: 1.3 | Last updated: 2026-07-14 -->
 
 # Shortcodes Reference
 
-The First Folio theme provides 19 custom shortcodes for varied content types.
+The First Folio theme provides 20 custom shortcodes for varied content types.
 
 ## Table of Contents
 
@@ -10,20 +10,21 @@ The First Folio theme provides 19 custom shortcodes for varied content types.
 2. [`center`](#centre) - Centre-aligned content block
 3. [colorbold](#colorbold) - Inline accent-coloured bold text
 4. [details](#details) - Collapsible content
-5. [dialogue](#dialogue) - Character speech for plays
-6. [direction](#direction) - Stage directions
-7. [popquote](#popquote) - Alias for `details`; retained for existing content
-8. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
-9. [poem](#poem) - Poetry with preserved line breaks
-10. [stat / stats](#stat--stats) - Number+label "stats rows" with optional responsive grid
-11. [video](#video) - HTML5 video player
-12. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
-13. [formspree](#formspree) - Formspree-backed contact form
-14. [rawhtml](#rawhtml) - Raw HTML pass-through
-15. [section-list](#section-list) - Section navigation list
-16. [img](#img) - Inline image with responsive thumbnails
-17. [gallery](#gallery) - Image gallery with lightbox
-18. [side-by-side](#side-by-side) - Side-by-side content wrapper
+5. [spoiler](#spoiler) - Deliberately concealed inline or block content
+6. [dialogue](#dialogue) - Character speech for plays
+7. [direction](#direction) - Stage directions
+8. [popquote](#popquote) - Alias for `details`; retained for existing content
+9. [quote](#quote) - Pull-quote with decorative quotation marks and attribution
+10. [poem](#poem) - Poetry with preserved line breaks
+11. [stat / stats](#stat--stats) - Number+label "stats rows" with optional responsive grid
+12. [video](#video) - HTML5 video player
+13. [contactform](#contactform) - Self-hosted contact form with CAPTCHA
+14. [formspree](#formspree) - Formspree-backed contact form
+15. [rawhtml](#rawhtml) - Raw HTML pass-through
+16. [section-list](#section-list) - Section navigation list
+17. [img](#img) - Inline image with responsive thumbnails
+18. [gallery](#gallery) - Image gallery with lightbox
+19. [side-by-side](#side-by-side) - Side-by-side content wrapper
 
 ---
 
@@ -141,6 +142,48 @@ Can include **markdown**.
 ### Live Demo
 
 See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#details).
+
+---
+
+## spoiler
+
+Conceals review spoilers and other sensitive editorial details until the reader deliberately reveals them. The shortcode has separate inline and block authoring forms while sharing one visual and accessibility contract.
+
+### Parameters
+
+| Parameter | Required | Description |
+|-----------|----------|-------------|
+| First positional or `text` | Inline form | Protected inline text; may contain inline Markdown |
+| Inner content | Block form | Protected block content; supports paragraphs, emphasis, links, and lists |
+| `label` | No | Accessible inline label and visible block summary; defaults to `Spoiler` |
+
+### Inline usage
+
+```markdown
+The culprit is {{< spoiler "the village doctor" />}}.
+The motive is {{< spoiler text="hidden in the first letter" label="Motive" />}}.
+```
+
+Inline spoilers stay inside the surrounding paragraph. Their masked width follows the protected text, and each spoiler has independent reveal state. The closing slash is required because the same Hugo shortcode also supports paired block content.
+
+### Block usage
+
+```markdown
+{{< spoiler label="Ending" >}}
+The final scene reveals **why the letters stopped**.
+
+- The first clue is reinterpreted.
+- The last conversation gains a different meaning.
+{{< /spoiler >}}
+```
+
+Supplying both `text` and inner content is an error, as is supplying neither. Hugo stops the build and identifies the source page rather than rendering ambiguous or empty markup.
+
+Both forms are concealed by default and operate with pointer, touch, or keyboard without JavaScript. Closed spoilers remain concealed in print; a spoiler deliberately revealed before printing is included.
+
+### Live Demo
+
+See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode-showcase/#spoiler).
 
 ---
 
@@ -835,5 +878,6 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## Changelog
 
+- **1.3** (2026-07-14): Added the `spoiler` shortcode contract for inline and block conceal/reveal content, including validation, accessibility, and print behaviour.
 - **1.2** (2026-05-12): #54 documentation. Rewrote the `quote` section to cover the structured-attribution path (`name`, `role`, `organization`, `photo`, `featured`) added in #54 item 1, including the photo resolution chain (page resource > site-root > absolute URL) and the intentional-warning demo. Added a new `stat / stats` section for the shortcodes added in #54 item 3. Corrected the `--pull-quote-mark` alpha values quoted in the styling notes (light 0.3, dark 0.6).
 - **1.1** (2026-05-10): Clarified that `popquote` renders identical HTML to `details` and is retained as an alias for backward compatibility; new content should use `details`. Restored the `center` shortcode name in the ToC and H2 heading (previously OED-normalized to `centre` by sanitize because the identifier was not in backticks); the section title is now backticked so future sanitize passes will leave it alone, with an explicit `{#centre}` anchor attribute to keep the URL fragment stable across sanitize runs.

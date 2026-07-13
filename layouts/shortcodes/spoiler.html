@@ -1,0 +1,38 @@
+<!--
+ Copyright (c) 2023 Taḋg Paul
+ SPDX-License-Identifier: Apache-2.0
+ See LICENSE file in the repository root.
+-->
+
+{{/* ABOUTME: Renders concealed spoiler text as an inline toggle or block disclosure. */}}
+{{/* ABOUTME: Positional/named text selects inline mode; paired inner content selects block mode. */}}
+{{- $text := "" -}}
+{{- $label := "Spoiler" -}}
+{{- if .IsNamedParams -}}
+  {{- $text = strings.TrimSpace (.Get "text" | default "") -}}
+  {{- $label = strings.TrimSpace (.Get "label" | default "Spoiler") -}}
+{{- else -}}
+  {{- $text = strings.TrimSpace (.Get 0 | default "") -}}
+{{- end -}}
+{{- $inner := strings.TrimSpace .Inner -}}
+
+{{- if and $text $inner -}}
+  {{- errorf "spoiler shortcode cannot combine text and inner content on %s" .Page.Path -}}
+{{- else if not (or $text $inner) -}}
+  {{- errorf "spoiler shortcode requires text or inner content on %s" .Page.Path -}}
+{{- else if $text -}}
+  {{- $controlID := printf "spoiler-%s-%d" (md5 .Page.RelPermalink) .Ordinal -}}
+  <span class="spoiler spoiler--inline">
+    <input class="spoiler__toggle" type="checkbox" id="{{ $controlID }}" aria-label="{{ $label }}">
+    <label class="spoiler__label" for="{{ $controlID }}" title="{{ $label }}">
+      <span class="spoiler__content">{{ $text | markdownify }}</span>
+    </label>
+  </span>
+{{- else -}}
+  <details class="spoiler spoiler--block">
+    <summary>{{ $label | markdownify }}</summary>
+    <div class="spoiler__content">
+      {{ $inner | .Page.RenderString }}
+    </div>
+  </details>
+{{- end -}}

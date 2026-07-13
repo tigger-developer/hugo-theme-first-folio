@@ -297,6 +297,23 @@
     display: none;
   }
 
+  /* Spoilers preserve the reader's deliberate reveal state in print. */
+  .spoiler__toggle {
+    display: none !important;
+  }
+  .spoiler__toggle:not(:checked) + .spoiler__label .spoiler__content {
+    visibility: hidden !important;
+  }
+  .spoiler__toggle:checked + .spoiler__label .spoiler__content {
+    visibility: visible !important;
+  }
+  details.spoiler--block:not([open]) > .spoiler__content {
+    display: none !important;
+  }
+  details.spoiler--block[open] > .spoiler__content {
+    display: block !important;
+  }
+
   /* ============================================
      PAGINATION HINTS — keep headings with content, blocks intact
      ============================================ */
