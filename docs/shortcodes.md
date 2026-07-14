@@ -1,4 +1,4 @@
-<!-- Version: 1.5 | Last updated: 2026-07-14 -->
+<!-- Version: 1.6 | Last updated: 2026-07-14 -->
 
 # Shortcodes Reference
 
@@ -177,7 +177,7 @@ The final scene reveals **why the letters stopped**.
 {{< /spoiler >}}
 ```
 
-The block's symbol pattern takes its dimensions from the protected Markdown, so the reader sees the rhythm of the concealed lines rather than a generic Details accordion or a solid rectangle. A compact, content-width control using the spoiler's `label` remains visible at the upper-left before and after reveal. In the revealed state, clicking non-interactive text conceals the block again; links and form controls remain operable. The visible label also remains the native reveal and conceal control.
+The block's symbol pattern takes its dimensions from the protected Markdown, so the reader sees the rhythm of the concealed lines rather than a generic Details accordion or a solid rectangle. A full-width control using the spoiler's `label`, with centred label text, remains visible above the protected lines before and after reveal. In the revealed state, clicking non-interactive text conceals the block again; links and form controls remain operable. The visible label also remains the native reveal and conceal control.
 
 Supplying both `text` and inner content is an error, as is supplying neither. Hugo stops the build and identifies the source page rather than rendering ambiguous or empty markup.
 
@@ -880,6 +880,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## Changelog
 
+- **1.6** (2026-07-14): #76 documentation. Changed the block spoiler label to a full-width control with centred text.
 - **1.5** (2026-07-14): #76 documentation. Documented inherited mask colour, configurable opacity, the upper-left block label, and revealed-text re-conceal behaviour.
 - **1.4** (2026-07-14): Replaced filled spoiler masks with low-opacity symbol patterns, kept block labels visible before reveal, and clarified the concealed accessibility state.
 - **1.3** (2026-07-14): Added the `spoiler` shortcode contract for inline and block conceal/reveal content, including validation, accessibility, and print behaviour.
