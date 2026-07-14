@@ -37,9 +37,7 @@
     <label class="spoiler__label" for="{{ $controlID }}" title="{{ $label }}">
       <span class="spoiler__control-label">{{ $label | markdownify }}</span>
     </label>
-    <div class="spoiler__mask" inert aria-hidden="true">
-      {{ partial "spoiler-mask.html" $plainContent }}
-    </div>
+    <div class="spoiler__mask" inert aria-hidden="true">{{ partial "spoiler-mask.html" $plainContent }}</div>
     <div class="spoiler__content">
       {{ $inner | .Page.RenderString }}
     </div>

@@ -15,10 +15,10 @@
         descent="-200" />
       <missing-glyph horiz-adv-x="600" />
       <glyph glyph-name="space" unicode=" " horiz-adv-x="600" />
-      <glyph glyph-name="middot" unicode="&#x00B7;" d="M250 310h100v100H250z" />
-      <glyph glyph-name="multiply" unicode="&#x00D7;" d="M145 230l55-55 100 100 100-100 55 55-100 100 100 100-55 55-100-100-100 100-55-55 100-100z" />
-      <glyph glyph-name="endash" unicode="&#x2013;" d="M90 295h180v70H90zm240 0h180v70H330z" />
-      <glyph glyph-name="emdash" unicode="&#x2014;" d="M90 295h420v70H90z" />
+      <glyph glyph-name="middot" unicode="&#x00B7;" d="M250 310v100h100v-100H250z" />
+      <glyph glyph-name="multiply" unicode="&#x00D7;" d="M145 230l100 100-100 100 55 55 100-100 100 100 55-55-100-100 100-100-55-55-100 100-100-100z" />
+      <glyph glyph-name="endash" unicode="&#x2013;" d="M90 295v70h180v-70H90zm240 0v70h180v-70H330z" />
+      <glyph glyph-name="emdash" unicode="&#x2014;" d="M90 295v70h420v-70H90z" />
     </font>
   </defs>
 </svg>
