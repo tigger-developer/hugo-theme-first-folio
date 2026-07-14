@@ -11,6 +11,15 @@
    ACTIVE FONTS - Used in production
    ============================================ */
 
+/* ——— First Folio Spoiler Mask - Concealed editorial content ——— */
+
+@font-face {
+  font-family: 'First Folio Spoiler Mask';
+  font-weight: 400;
+  font-style: normal;
+  src: url('../fonts/FirstFolioSpoilerMask.woff2') format('woff2');
+}
+
 /* ——— Special Elite - UI, nav, headings, buttons ——— */
 
 /* Regular 400, normal */

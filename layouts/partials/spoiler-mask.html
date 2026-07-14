@@ -1,0 +1,10 @@
+{{/* ABOUTME: Replaces spoiler characters with a deterministic sequence of abstract symbols. */}}
+{{/* ABOUTME: Whitespace is retained so the concealed copy keeps text-like rhythm and wrapping. */}}
+{{- $symbols := slice "—" "·" "×" "–" -}}
+{{- range $index, $character := split . "" -}}
+  {{- if strings.Contains " \n\r\t" $character -}}
+    {{- $character -}}
+  {{- else -}}
+    {{- index $symbols (mod $index (len $symbols)) -}}
+  {{- end -}}
+{{- end -}}

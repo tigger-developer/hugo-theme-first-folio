@@ -8,7 +8,8 @@ run_test() {
     local css_file
     css_file="$(spoiler_built_css "print")" || return 1
 
-    grep -qF '.spoiler__toggle:not(:checked)' "$css_file" || return 1
+    grep -qF '.spoiler--inline > .spoiler__toggle:not(:checked)' "$css_file" || return 1
     grep -qF '.spoiler--block > .spoiler__toggle:not(:checked)' "$css_file" || return 1
-    grep -qF 'visibility: hidden' "$css_file"
+    grep -qF '.spoiler--block > .spoiler__toggle:checked ~ .spoiler__mask' "$css_file" || return 1
+    grep -qF 'display: none' "$css_file"
 }

@@ -1175,73 +1175,51 @@ details.styled-details > summary:hover > span {
 
 .spoiler--inline > .spoiler__label {
   display: inline;
-  padding-inline: 0.18em;
-  border: 1px solid color-mix(in srgb, var(--color-secondary) 65%, transparent);
-  border-radius: 0.15rem;
-  background-color: color-mix(in srgb, var(--color-secondary) 72%, var(--color-text));
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
   cursor: pointer;
 }
 
-.spoiler__toggle:not(:checked) + .spoiler__label .spoiler__content {
-  visibility: hidden;
+.spoiler__mask {
+  color: color-mix(in srgb, var(--color-text) 38%, transparent);
+  font-family: 'First Folio Spoiler Mask', monospace;
+  font-weight: 400;
+  letter-spacing: 0.04em;
 }
 
-.spoiler__toggle:checked + .spoiler__label {
-  background-color: color-mix(in srgb, var(--color-secondary) 12%, transparent);
+.spoiler--inline > .spoiler__toggle:not(:checked) + .spoiler__label .spoiler__content,
+.spoiler--inline > .spoiler__toggle:checked + .spoiler__label .spoiler__mask {
+  display: none;
 }
 
-.spoiler__toggle:checked + .spoiler__label .spoiler__content {
-  visibility: visible;
+.spoiler--inline > .spoiler__label:hover .spoiler__mask {
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
 }
 
-.spoiler__toggle:focus-visible + .spoiler__label {
+.spoiler--inline > .spoiler__toggle:focus-visible + .spoiler__label {
   outline: 0.15rem solid var(--color-secondary);
   outline-offset: 0.15rem;
-}
-
-.spoiler--inline > .spoiler__label:hover {
-  border-color: var(--color-secondary);
 }
 
 .spoiler--block {
   position: relative;
   margin-block: 1.5rem;
-  border-radius: var(--border-radius, 5px);
 }
 
 .spoiler--block > .spoiler__label {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  z-index: 1;
   cursor: pointer;
 }
 
 .spoiler--block > .spoiler__toggle:not(:checked) + .spoiler__label {
-  position: absolute;
   inset: 0;
-  z-index: 1;
-  border: 1px solid color-mix(in srgb, var(--color-secondary) 65%, transparent);
-  border-radius: inherit;
-  background-color: color-mix(in srgb, var(--color-secondary) 72%, var(--color-text));
 }
 
-.spoiler--block > .spoiler__toggle:not(:checked) + .spoiler__label .spoiler__control-label {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.spoiler--block > .spoiler__toggle:not(:checked) ~ .spoiler__content {
-  visibility: hidden;
-}
-
-.spoiler--block > .spoiler__toggle:checked + .spoiler__label {
+.spoiler--block > .spoiler__label .spoiler__control-label {
   position: absolute;
   inset-block-start: 0.35rem;
   inset-inline-end: 0.35rem;
-  z-index: 1;
   padding: 0.1rem 0.4rem;
   border: 1px solid color-mix(in srgb, var(--color-secondary) 55%, transparent);
   border-radius: 0.15rem;
@@ -1252,16 +1230,28 @@ details.styled-details > summary:hover > span {
   line-height: 1.4;
 }
 
-.spoiler--block > .spoiler__toggle:checked + .spoiler__label:hover {
+.spoiler--block > .spoiler__label:hover .spoiler__control-label {
   border-color: var(--color-secondary);
 }
 
-.spoiler--block > .spoiler__toggle:checked ~ .spoiler__content {
-  visibility: visible;
-  padding: 2rem 1rem 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--color-secondary) 45%, transparent);
-  border-radius: inherit;
-  background-color: color-mix(in srgb, var(--color-secondary) 8%, transparent);
+.spoiler--block > .spoiler__toggle:focus-visible + .spoiler__label .spoiler__control-label {
+  outline: 0.15rem solid var(--color-secondary);
+  outline-offset: 0.15rem;
+}
+
+.spoiler--block > .spoiler__mask,
+.spoiler--block > .spoiler__content {
+  min-block-size: 2.4rem;
+  padding-block-start: 2rem;
+}
+
+.spoiler--block > .spoiler__mask {
+  white-space: pre-wrap;
+}
+
+.spoiler--block > .spoiler__toggle:not(:checked) ~ .spoiler__content,
+.spoiler--block > .spoiler__toggle:checked ~ .spoiler__mask {
+  display: none;
 }
 
 /* Tables */

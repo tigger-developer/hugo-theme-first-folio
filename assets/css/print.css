@@ -301,19 +301,21 @@
   .spoiler__toggle {
     display: none !important;
   }
-  .spoiler__toggle:not(:checked) + .spoiler__label .spoiler__content {
-    visibility: hidden !important;
+  .spoiler--inline > .spoiler__toggle:not(:checked) + .spoiler__label .spoiler__content,
+  .spoiler--inline > .spoiler__toggle:checked + .spoiler__label .spoiler__mask {
+    display: none !important;
   }
-  .spoiler__toggle:checked + .spoiler__label .spoiler__content {
-    visibility: visible !important;
+  .spoiler--inline > .spoiler__toggle:checked + .spoiler__label .spoiler__content {
+    display: inline !important;
   }
   .spoiler--block > .spoiler__toggle:not(:checked) + .spoiler__label {
     position: absolute;
     inset: 0;
     display: block !important;
   }
-  .spoiler--block > .spoiler__toggle:not(:checked) ~ .spoiler__content {
-    visibility: hidden !important;
+  .spoiler--block > .spoiler__toggle:not(:checked) ~ .spoiler__content,
+  .spoiler--block > .spoiler__toggle:checked ~ .spoiler__mask {
+    display: none !important;
   }
   .spoiler--block > .spoiler__toggle:checked + .spoiler__label {
     display: none !important;
