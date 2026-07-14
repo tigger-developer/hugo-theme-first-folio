@@ -1,4 +1,4 @@
-<!-- Version: 1.3 | Last updated: 2026-07-14 -->
+<!-- Version: 1.4 | Last updated: 2026-07-14 -->
 
 # Shortcodes Reference
 
@@ -147,7 +147,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## spoiler
 
-Conceals review spoilers and other sensitive editorial details until the reader deliberately reveals them. Both forms present the protected content itself as a Reddit-style masked surface rather than an expandable heading followed by hidden content.
+Conceals review spoilers and other sensitive editorial details until the reader deliberately reveals them. Both forms replace the protected characters with a deterministic, low-opacity symbol pattern that follows the text's whitespace and wrapping. The concealed state has no filled background, border, or card.
 
 ### Parameters
 
@@ -155,7 +155,7 @@ Conceals review spoilers and other sensitive editorial details until the reader 
 |-----------|----------|-------------|
 | First positional or `text` | Inline form | Protected inline text; may contain inline Markdown |
 | Inner content | Block form | Protected block content; supports paragraphs, emphasis, links, and lists |
-| `label` | No | Accessible inline label and visible block summary; defaults to `Spoiler` |
+| `label` | No | Accessible inline label and visible block control; defaults to `Spoiler` |
 
 ### Inline usage
 
@@ -164,7 +164,7 @@ The culprit is {{< spoiler "the village doctor" />}}.
 The motive is {{< spoiler text="hidden in the first letter" label="Motive" />}}.
 ```
 
-Inline spoilers stay inside the surrounding paragraph. Their masked width follows the protected text, and each spoiler has independent reveal state. The closing slash is required because the same Hugo shortcode also supports paired block content.
+Inline spoilers stay inside the surrounding paragraph. Their symbol pattern follows the protected text's width and spaces, and each spoiler has independent reveal state. The inline label is available as hover text, keyboard focus, and the control's accessible name without inserting a visible word into the sentence. The closing slash is required because the same Hugo shortcode also supports paired block content.
 
 ### Block usage
 
@@ -177,11 +177,11 @@ The final scene reveals **why the letters stopped**.
 {{< /spoiler >}}
 ```
 
-The block's concealed surface takes its dimensions from the protected Markdown, so the reader sees a masked content area rather than a generic Details accordion. Once revealed, a compact control using the spoiler's `label` remains available to conceal it again without covering links or other content.
+The block's symbol pattern takes its dimensions from the protected Markdown, so the reader sees the rhythm of the concealed lines rather than a generic Details accordion or a solid rectangle. A compact control using the spoiler's `label` remains visible in the upper-right before and after reveal. In the revealed state, the control can conceal the content again without covering links or other content.
 
 Supplying both `text` and inner content is an error, as is supplying neither. Hugo stops the build and identifies the source page rather than rendering ambiguous or empty markup.
 
-Both forms are concealed by default and operate with pointer, touch, or keyboard without JavaScript. Closed spoilers remain concealed in print; a spoiler deliberately revealed before printing is included.
+Both forms are concealed by default and operate with pointer, touch, or keyboard without JavaScript. The symbol copy is inert and hidden from assistive technology; protected content becomes available only after reveal. Closed spoilers remain concealed in print; a spoiler deliberately revealed before printing is included.
 
 ### Live Demo
 
@@ -880,6 +880,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## Changelog
 
+- **1.4** (2026-07-14): Replaced filled spoiler masks with low-opacity symbol patterns, kept block labels visible before reveal, and clarified the concealed accessibility state.
 - **1.3** (2026-07-14): Added the `spoiler` shortcode contract for inline and block conceal/reveal content, including validation, accessibility, and print behaviour.
 - **1.2** (2026-05-12): #54 documentation. Rewrote the `quote` section to cover the structured-attribution path (`name`, `role`, `organization`, `photo`, `featured`) added in #54 item 1, including the photo resolution chain (page resource > site-root > absolute URL) and the intentional-warning demo. Added a new `stat / stats` section for the shortcodes added in #54 item 3. Corrected the `--pull-quote-mark` alpha values quoted in the styling notes (light 0.3, dark 0.6).
 - **1.1** (2026-05-10): Clarified that `popquote` renders identical HTML to `details` and is retained as an alias for backward compatibility; new content should use `details`. Restored the `center` shortcode name in the ToC and H2 heading (previously OED-normalized to `centre` by sanitize because the identifier was not in backticks); the section title is now backticked so future sanitize passes will leave it alone, with an explicit `{#centre}` anchor attribute to keep the URL fragment stable across sanitize runs.
