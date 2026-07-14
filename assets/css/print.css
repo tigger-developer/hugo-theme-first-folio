@@ -307,11 +307,20 @@
   .spoiler__toggle:checked + .spoiler__label .spoiler__content {
     visibility: visible !important;
   }
-  details.spoiler--block:not([open]) > .spoiler__content {
+  .spoiler--block > .spoiler__toggle:not(:checked) + .spoiler__label {
+    position: absolute;
+    inset: 0;
+    display: block !important;
+  }
+  .spoiler--block > .spoiler__toggle:not(:checked) ~ .spoiler__content {
+    visibility: hidden !important;
+  }
+  .spoiler--block > .spoiler__toggle:checked + .spoiler__label {
     display: none !important;
   }
-  details.spoiler--block[open] > .spoiler__content {
+  .spoiler--block > .spoiler__toggle:checked ~ .spoiler__content {
     display: block !important;
+    visibility: visible !important;
   }
 
   /* ============================================

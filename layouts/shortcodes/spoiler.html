@@ -29,10 +29,14 @@
     </label>
   </span>
 {{- else -}}
-  <details class="spoiler spoiler--block">
-    <summary>{{ $label | markdownify }}</summary>
+  {{- $controlID := printf "spoiler-%s-%d" (md5 .Page.RelPermalink) .Ordinal -}}
+  <div class="spoiler spoiler--block">
+    <input class="spoiler__toggle" type="checkbox" id="{{ $controlID }}" aria-label="{{ $label }}">
+    <label class="spoiler__label" for="{{ $controlID }}" title="{{ $label }}">
+      <span class="spoiler__control-label">{{ $label | markdownify }}</span>
+    </label>
     <div class="spoiler__content">
       {{ $inner | .Page.RenderString }}
     </div>
-  </details>
+  </div>
 {{- end -}}

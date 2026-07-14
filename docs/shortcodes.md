@@ -147,7 +147,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## spoiler
 
-Conceals review spoilers and other sensitive editorial details until the reader deliberately reveals them. The shortcode has separate inline and block authoring forms while sharing one visual and accessibility contract.
+Conceals review spoilers and other sensitive editorial details until the reader deliberately reveals them. Both forms present the protected content itself as a Reddit-style masked surface rather than an expandable heading followed by hidden content.
 
 ### Parameters
 
@@ -176,6 +176,8 @@ The final scene reveals **why the letters stopped**.
 - The last conversation gains a different meaning.
 {{< /spoiler >}}
 ```
+
+The block's concealed surface takes its dimensions from the protected Markdown, so the reader sees a masked content area rather than a generic Details accordion. Once revealed, a compact control using the spoiler's `label` remains available to conceal it again without covering links or other content.
 
 Supplying both `text` and inner content is an error, as is supplying neither. Hugo stops the build and identifies the source page rather than rendering ambiguous or empty markup.
 

@@ -1205,35 +1205,63 @@ details.styled-details > summary:hover > span {
   border-color: var(--color-secondary);
 }
 
-details.spoiler--block {
+.spoiler--block {
+  position: relative;
   margin-block: 1.5rem;
-  border: 1px solid color-mix(in srgb, var(--color-secondary) 65%, transparent);
   border-radius: var(--border-radius, 5px);
-  background-color: color-mix(in srgb, var(--color-secondary) 10%, transparent);
 }
 
-details.spoiler--block > summary {
-  padding: 0.65rem 0.85rem;
+.spoiler--block > .spoiler__label {
   cursor: pointer;
-  font-family: var(--font-accent);
-  font-weight: 650;
 }
 
-details.spoiler--block > summary:hover {
+.spoiler--block > .spoiler__toggle:not(:checked) + .spoiler__label {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 65%, transparent);
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--color-secondary) 72%, var(--color-text));
+}
+
+.spoiler--block > .spoiler__toggle:not(:checked) + .spoiler__label .spoiler__control-label {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.spoiler--block > .spoiler__toggle:not(:checked) ~ .spoiler__content {
+  visibility: hidden;
+}
+
+.spoiler--block > .spoiler__toggle:checked + .spoiler__label {
+  position: absolute;
+  inset-block-start: 0.35rem;
+  inset-inline-end: 0.35rem;
+  z-index: 1;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 55%, transparent);
+  border-radius: 0.15rem;
+  background-color: color-mix(in srgb, var(--color-secondary) 12%, transparent);
   color: var(--color-secondary);
+  font-family: var(--font-accent);
+  font-size: 0.75rem;
+  line-height: 1.4;
 }
 
-details.spoiler--block > summary:focus-visible {
-  outline: 0.15rem solid var(--color-secondary);
-  outline-offset: 0.15rem;
+.spoiler--block > .spoiler__toggle:checked + .spoiler__label:hover {
+  border-color: var(--color-secondary);
 }
 
-details.spoiler--block[open] > summary {
-  border-block-end: 1px solid color-mix(in srgb, var(--color-secondary) 45%, transparent);
-}
-
-details.spoiler--block > .spoiler__content {
-  padding: 0.25rem 1rem 0.75rem;
+.spoiler--block > .spoiler__toggle:checked ~ .spoiler__content {
+  visibility: visible;
+  padding: 2rem 1rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 45%, transparent);
+  border-radius: inherit;
+  background-color: color-mix(in srgb, var(--color-secondary) 8%, transparent);
 }
 
 /* Tables */
