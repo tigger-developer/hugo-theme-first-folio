@@ -1,4 +1,4 @@
-<!-- Version: 1.4 | Last updated: 2026-07-14 -->
+<!-- Version: 1.5 | Last updated: 2026-07-14 -->
 
 # Shortcodes Reference
 
@@ -147,7 +147,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## spoiler
 
-Conceals review spoilers and other sensitive editorial details until the reader deliberately reveals them. Both forms replace the protected characters with a deterministic, low-opacity symbol pattern that follows the text's whitespace and wrapping. The concealed state has no filled background, border, or card.
+Conceals review spoilers and other sensitive editorial details until the reader deliberately reveals them. Both forms replace the protected characters with a deterministic, low-opacity symbol pattern that follows the text's whitespace and wrapping. The symbols inherit the surrounding text colour; `params.spoiler.opacity` controls their opacity and defaults to `0.38`. The concealed state has no filled background, border, or card.
 
 ### Parameters
 
@@ -177,11 +177,11 @@ The final scene reveals **why the letters stopped**.
 {{< /spoiler >}}
 ```
 
-The block's symbol pattern takes its dimensions from the protected Markdown, so the reader sees the rhythm of the concealed lines rather than a generic Details accordion or a solid rectangle. A compact control using the spoiler's `label` remains visible in the upper-right before and after reveal. In the revealed state, the control can conceal the content again without covering links or other content.
+The block's symbol pattern takes its dimensions from the protected Markdown, so the reader sees the rhythm of the concealed lines rather than a generic Details accordion or a solid rectangle. A compact, content-width control using the spoiler's `label` remains visible at the upper-left before and after reveal. In the revealed state, clicking non-interactive text conceals the block again; links and form controls remain operable. The visible label also remains the native reveal and conceal control.
 
 Supplying both `text` and inner content is an error, as is supplying neither. Hugo stops the build and identifies the source page rather than rendering ambiguous or empty markup.
 
-Both forms are concealed by default and operate with pointer, touch, or keyboard without JavaScript. The symbol copy is inert and hidden from assistive technology; protected content becomes available only after reveal. Closed spoilers remain concealed in print; a spoiler deliberately revealed before printing is included.
+Both forms are concealed by default, and their native controls operate with pointer, touch, or keyboard without JavaScript. The revealed-text click behaviour is a JavaScript enhancement for block spoilers. The symbol copy is inert and hidden from assistive technology; protected content becomes available only after reveal. Closed spoilers remain concealed in print; a spoiler deliberately revealed before printing is included.
 
 ### Live Demo
 
@@ -880,6 +880,7 @@ See [live example on the demo site](https://demo.theme.tadg.ie/journal/shortcode
 
 ## Changelog
 
+- **1.5** (2026-07-14): #76 documentation. Documented inherited mask colour, configurable opacity, the upper-left block label, and revealed-text re-conceal behaviour.
 - **1.4** (2026-07-14): Replaced filled spoiler masks with low-opacity symbol patterns, kept block labels visible before reveal, and clarified the concealed accessibility state.
 - **1.3** (2026-07-14): Added the `spoiler` shortcode contract for inline and block conceal/reveal content, including validation, accessibility, and print behaviour.
 - **1.2** (2026-05-12): #54 documentation. Rewrote the `quote` section to cover the structured-attribution path (`name`, `role`, `organization`, `photo`, `featured`) added in #54 item 1, including the photo resolution chain (page resource > site-root > absolute URL) and the intentional-warning demo. Added a new `stat / stats` section for the shortcodes added in #54 item 3. Corrected the `--pull-quote-mark` alpha values quoted in the styling notes (light 0.3, dark 0.6).

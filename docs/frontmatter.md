@@ -1,4 +1,4 @@
-<!-- Version: 1.1 | Last updated: 2026-05-12 -->
+<!-- Version: 1.3 | Last updated: 2026-07-14 -->
 
 # Frontmatter Reference
 
@@ -101,14 +101,14 @@ Generated fallback labels use the precedence documented in [Audiobook Pages and 
 
 ## Image
 
-Controls the article's featured image. Used by all layout types and by masonry cards on the homepage.
+Controls the article's featured image. Article image presentation fields apply to article layouts; card-specific fields control masonry presentations on the homepage and list pages.
 
 ```yaml
 image:
   src: hero.jpg
   alt: "Descriptive text for accessibility"
   caption: "Photo credit or description"
-  opacity: 0.7
+  opacity: 0.7              # article layouts only
   blur: 3px
   position: "center top"
   size: cover
@@ -119,7 +119,7 @@ image:
 | `src` | - | Image filename. Must be in the same page bundle directory. |
 | `alt` | title | Alt text for accessibility. Falls back to caption, then title. |
 | `caption` | - | Caption displayed below the image (banner and hero layouts). |
-| `opacity` | site default | Image opacity override for this page. `1.0` = full image, lower = darker. |
+| `opacity` | site default | Article-layout image opacity for this page. `1.0` = full image, lower = darker. Does not change masonry cards. |
 | `blur` | site default | Blur override for this page. |
 | `position` | `center center` | CSS `object-position` / `background-position` for image cropping. |
 | `size` | `cover` | CSS `background-size` for background layout. |
@@ -133,6 +133,7 @@ image:
   src: hero.jpg              # used on the article page
   card_src: card-crop.jpg    # used on masonry cards instead
   card_position: center top  # crop position on cards
+  card_opacity: 0.8          # opacity in masonry presentations
   carousel_src: wide.jpg     # used on carousel cards instead
   carousel_position: center  # crop position on carousel
 ```
@@ -141,6 +142,7 @@ image:
 |-------|-------------|
 | `card_src` | Alternative image for masonry cards. Falls back to `src`. |
 | `card_position` | CSS position for the card image. Falls back to `position`. |
+| `card_opacity` | Image opacity for masonry cards. Falls back to `params.cardImage.opacity`, then `params.bgImage.opacity`. For carousel entries, this applies only when the entry uses the narrow masonry presentation. |
 | `carousel_src` | Alternative image for carousel cards. Falls back to `card_src`, then `src`. |
 | `carousel_position` | CSS position for the carousel image. Falls back to `card_position`, then `position`. |
 
@@ -426,6 +428,7 @@ toc: true
 
 ## Changelog
 
+- **1.3** (2026-07-14): #77 documentation. Added `image.card_opacity` and clarified that `image.opacity` applies to article layouts rather than masonry cards.
 - **1.2** (2026-07-09): #75 documentation. Added `layout: audio` to the layout table and documented audio item numbering fields including `startNumber`, `displayNumber`, `episode`, and `label` precedence.
 - **1.1** (2026-05-12): #54 documentation. Added `linkTitle` to the Display Options section (#54 item 4 — short label for sidebar / breadcrumb / related-articles nav contexts; Hugo built-in falls back to `title` when unset). Added `list_style: prose` to the Section Index Fields section with a dedicated subsection and full example (#54 item 2 — free-form landing-page layout). Noted that `signpost` and `signpost_footer` also render on `list_style: prose` section pages, bracketing `.Content` the same way as on article pages.
 - **1.0** (2026-05-05): Initial frontmatter reference covering basic fields, layouts, image/video, homepage controls, signpost, display title, breadcrumb, gallery, section-index, and build control.

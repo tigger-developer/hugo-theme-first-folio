@@ -1,4 +1,4 @@
-<!-- Version: 1.1 | Last updated: 2026-05-10 -->
+<!-- Version: 1.2 | Last updated: 2026-07-14 -->
 
 # Configuration Reference
 
@@ -38,6 +38,24 @@ params:
 | `toggle` | `true` | Whether to display a toggle button in the header. When `false`, the user cannot switch modes. |
 
 **Note:** The previous `mode` parameter (`light`/`dark`/`auto`/`toggle`) is deprecated and ignored from v1.0.1. Use `ambience` instead.
+
+---
+
+## Spoiler masks
+
+Controls the visibility of the symbol pattern used in place of concealed spoiler text.
+
+```yaml
+params:
+  spoiler:
+    opacity: 0.38
+```
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `opacity` | `0.38` | Opacity of concealed inline and block spoiler symbols. The symbols inherit the surrounding text colour, including downstream theme overrides and dark layouts. |
+
+The setting changes opacity only. It does not assign a spoiler text colour.
 
 ---
 
@@ -544,5 +562,6 @@ See `exampleSite/config/_default/hugo.yaml` for a complete working configuration
 
 ## Changelog
 
+- **1.2** (2026-07-14): #76 documentation. Added `params.spoiler.opacity` and documented inherited spoiler mask colour.
 - **1.1** (2026-05-10): Added `prereleaseKey`, `mainImage` / `mainImageDark`, `og_image`, `footerLinks`, `excludedTypes`, `tocTitle`, site-level `description`, `carousel.showAuthor`. Corrected stale defaults across `cardImage`, `cardGalleryImage`, and `carousel` wash sections. Added missing wash sub-keys: `coverage` and `blur` on description washes, `gradientV` / `gradientH` on gallery card title wash.
 - **1.0** (2026-05-05): Initial reference covering ambience, image/wash settings, heading prefixes, grid, and basic site settings.
