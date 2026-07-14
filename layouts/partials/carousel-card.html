@@ -20,7 +20,6 @@
 {{- $interval := $site.Params.carousel.interval | default 6 -}}
 {{- $carouselOpacity := $site.Params.carousel.bgImage.opacity | default ($site.Params.bgImage.opacity | default 0.9) -}}
 {{- $carouselBlur := $site.Params.carousel.bgImage.blur | default ($site.Params.bgImage.blur | default "0px") -}}
-{{- $masonryOpacity := $site.Params.cardImage.opacity | default ($site.Params.bgImage.opacity | default 0.9) -}}
 {{- $masonryBlur := $site.Params.cardImage.blur | default ($site.Params.bgImage.blur | default "3px") -}}
 
 {{- if gt (len $carouselPages) 0 -}}
@@ -54,7 +53,12 @@
     {{- /* Resolve background-position: carousel_position > card_position > position > default */ -}}
     {{- $bgPosition := .Params.image.carousel_position | default (.Params.image.card_position | default (.Params.image.position | default "center center")) -}}
 
-    {{- /* Per-page opacity override */ -}}
+    {{- /* Narrow view uses the masonry opacity contract, including the per-page override. */ -}}
+    {{- $masonryOpacity := $site.Params.cardImage.opacity | default ($site.Params.bgImage.opacity | default 0.9) -}}
+    {{- $image := .Params.image | default dict -}}
+    {{- if isset $image "card_opacity" -}}
+      {{- $masonryOpacity = index $image "card_opacity" -}}
+    {{- end -}}
 
     {{- $imageClass := "" -}}
     {{- if $bgImageUrl -}}
