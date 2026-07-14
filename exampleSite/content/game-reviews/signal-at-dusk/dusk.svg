@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ABOUTME: Synthetic background for the example game review. -->
+<!-- ABOUTME: Keeps article imagery distinct from optional reviewed-item artwork. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000">
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#34285f"/><stop offset="1" stop-color="#d37868"/></linearGradient></defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <path d="M0 760 280 610 510 730 810 540 1130 720 1390 600 1600 700v300H0z" fill="#172434"/>
+  <path d="M805 210v520m-95-340h190M750 540l55-330 55 330" fill="none" stroke="#f1c56b" stroke-width="18"/>
+  <circle cx="805" cy="205" r="28" fill="#f1c56b"/>
+</svg>

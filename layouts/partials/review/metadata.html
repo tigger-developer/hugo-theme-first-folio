@@ -1,0 +1,98 @@
+{{/* ABOUTME: Validates and normalizes review frontmatter before selecting an item-type partial. */}}
+{{/* ABOUTME: Resolves optional artwork and continuous rating data once for every article layout. */}}
+{{- $page := . -}}
+{{- $review := $page.Params.review -}}
+{{- if not (reflect.IsMap $review) -}}
+  {{- errorf "page %q: review must be a map" $page.Path -}}
+{{- end -}}
+
+{{- $title := $review.title | default "" -}}
+{{- if not $title -}}
+  {{- errorf "page %q: review.title is required" $page.Path -}}
+{{- end -}}
+
+{{- $itemType := $review.itemType | default "" -}}
+{{- if and $itemType (not (findRE `^[a-z0-9]+(?:-[a-z0-9]+)*$` $itemType)) -}}
+  {{- errorf "page %q: review.itemType %q must contain lowercase letters, digits, and internal hyphens only" $page.Path $itemType -}}
+{{- end -}}
+
+{{- $artwork := dict -}}
+{{- if isset $review "artwork" -}}
+  {{- $artworkParams := index $review "artwork" -}}
+  {{- if not (reflect.IsMap $artworkParams) -}}
+    {{- errorf "page %q: review.artwork must be a map" $page.Path -}}
+  {{- end -}}
+  {{- $src := $artworkParams.src | default "" -}}
+  {{- if not $src -}}
+    {{- errorf "page %q: review.artwork.src is required when review.artwork is present" $page.Path -}}
+  {{- end -}}
+  {{- $resource := $page.Resources.Get $src -}}
+  {{- if not $resource -}}
+    {{- errorf "page %q: review.artwork.src %q is not a page resource" $page.Path $src -}}
+  {{- end -}}
+  {{- $artwork = dict "src" $resource.RelPermalink "alt" ($artworkParams.alt | default $title) -}}
+{{- end -}}
+
+{{- $rating := dict -}}
+{{- if isset $review "rating" -}}
+  {{- $ratingParams := index $review "rating" -}}
+  {{- if not (reflect.IsMap $ratingParams) -}}
+    {{- errorf "page %q: review.rating must be a map" $page.Path -}}
+  {{- end -}}
+  {{- if not (isset $ratingParams "value") -}}
+    {{- errorf "page %q: review.rating.value is required when review.rating is present" $page.Path -}}
+  {{- end -}}
+  {{- $value := $ratingParams.value -}}
+  {{- $valueType := printf "%T" $value -}}
+  {{- if not (in (slice "int" "int8" "int16" "int32" "int64" "uint" "uint8" "uint16" "uint32" "uint64" "float32" "float64") $valueType) -}}
+    {{- errorf "page %q: review.rating.value must be numeric" $page.Path -}}
+  {{- end -}}
+  {{- $siteScale := 5 -}}
+  {{- with site.Params.review -}}
+    {{- with .rating -}}
+      {{- if isset . "scale" -}}{{- $siteScale = .scale -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $scale := $siteScale -}}
+  {{- if isset $ratingParams "scale" -}}{{- $scale = $ratingParams.scale -}}{{- end -}}
+  {{- $scaleType := printf "%T" $scale -}}
+  {{- if not (in (slice "int" "int8" "int16" "int32" "int64" "uint" "uint8" "uint16" "uint32" "uint64" "float32" "float64") $scaleType) -}}
+    {{- errorf "page %q: review.rating.scale must be numeric" $page.Path -}}
+  {{- end -}}
+  {{- if le (float $scale) 0.0 -}}
+    {{- errorf "page %q: review.rating.scale must be greater than zero" $page.Path -}}
+  {{- end -}}
+  {{- if lt (float $value) 0.0 -}}
+    {{- errorf "page %q: review.rating.value must not be negative" $page.Path -}}
+  {{- end -}}
+  {{- if gt (float $value) (float $scale) -}}
+    {{- errorf "page %q: review.rating.value must not exceed review.rating.scale" $page.Path -}}
+  {{- end -}}
+  {{- $fraction := div (float $value) (float $scale) -}}
+  {{- $percent := mul $fraction 100.0 -}}
+  {{- $ratingImage := "/images/review-rating-stars.svg" -}}
+  {{- with site.Params.review -}}{{- with .rating -}}{{- with .image -}}{{- $ratingImage = . -}}{{- end -}}{{- end -}}{{- end -}}
+  {{- $rating = dict
+      "value" $value
+      "scale" $scale
+      "fraction" $fraction
+      "percent" (printf "%.6g" $percent)
+      "image" ($ratingImage | relURL)
+      "clipID" (printf "review-rating-%s" (md5 $page.RelPermalink)) -}}
+{{- end -}}
+
+{{- $data := dict
+    "Page" $page
+    "ItemType" $itemType
+    "Title" $title
+    "Creator" ($review.creator | default "")
+    "Artwork" $artwork
+    "Rating" $rating -}}
+{{- $partialPath := "review/item-types/default.html" -}}
+{{- if $itemType -}}
+  {{- $candidate := printf "review/item-types/%s.html" $itemType -}}
+  {{- if templates.Exists (printf "_partials/%s" $candidate) -}}
+    {{- $partialPath = $candidate -}}
+  {{- end -}}
+{{- end -}}
+{{- partial $partialPath $data -}}

@@ -52,6 +52,29 @@ layout: banner
 | `featured-columns-right` | Content on left, image on right. |
 | *(not set)* | If `image.src` is set but no layout is specified, defaults to `background`. Otherwise, a plain text article. |
 
+## Review metadata
+
+The presence of `review` adds reviewed-item metadata below the title and breadcrumb without changing `layout`:
+
+```yaml
+review:
+  itemType: book
+  title: "The Left Hand of Darkness"
+  creator: "Ursula K. Le Guin"
+  artwork:
+    src: cover.jpg
+    alt: "Book cover"
+  rating:
+    value: 4.9
+    scale: 5
+```
+
+`review.title` is required. All other review fields are optional. `review.artwork.src` resolves within the page bundle; its `alt` falls back to the reviewed title. Rating scale precedence is page `review.rating.scale`, then `params.review.rating.scale`, then `5`. Values may be decimal but must remain between zero and the resolved scale.
+
+Article `author` identifies the writer of the page; `review.creator` identifies the creator of the reviewed work. Article `image` controls the selected page layout; `review.artwork` is the optional reviewed-item graphic. `review.itemType` selects an optional presentation partial and is distinct from Hugo's top-level `type`.
+
+See [Review metadata](reviews.md) for listing controls, extension partials, validation, and demonstrations.
+
 ---
 
 ## Audio
@@ -428,6 +451,7 @@ toc: true
 
 ## Changelog
 
+- **1.4** (2026-07-14): #78 documentation. Added layout-independent reviewed-item metadata, artwork, continuous ratings, item types, and list/card presentation behaviour.
 - **1.3** (2026-07-14): #77 documentation. Added `image.card_opacity` and clarified that `image.opacity` applies to article layouts rather than masonry cards.
 - **1.2** (2026-07-09): #75 documentation. Added `layout: audio` to the layout table and documented audio item numbering fields including `startNumber`, `displayNumber`, `episode`, and `label` precedence.
 - **1.1** (2026-05-12): #54 documentation. Added `linkTitle` to the Display Options section (#54 item 4 — short label for sidebar / breadcrumb / related-articles nav contexts; Hugo built-in falls back to `title` when unset). Added `list_style: prose` to the Section Index Fields section with a dedicated subsection and full example (#54 item 2 — free-form landing-page layout). Noted that `signpost` and `signpost_footer` also render on `list_style: prose` section pages, bracketing `.Content` the same way as on article pages.

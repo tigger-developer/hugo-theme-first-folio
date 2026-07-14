@@ -1,6 +1,6 @@
 # First Folio
 
-[Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md) | [Audiobook pages](docs/audiobook.md)
+[Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md) | [Review metadata](docs/reviews.md) | [Audiobook pages](docs/audiobook.md)
 
 ## What this is
 
@@ -13,6 +13,8 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 **Content variety without compromise.** Poetry pages preserve every line break. Gallery pages read EXIF metadata from your images. Blog posts get hero banners or background images. Play scripts render character names in small caps with stage directions in accent colour. Each content type has its own card style on the masonry grid, but shares the same responsive framework.
 
 **Article layouts.** Six layout options controlled by a single frontmatter field: full-width banner with title overlay, hero image below title, side-by-side columns (image left or right), inline featured image, and background image with configurable blur and opacity. Plus a clean text-only default.
+
+**Review metadata.** A layout-independent review block identifies books, games, music, film, or other reviewed items below the article breadcrumb. Optional artwork and continuously filled ratings support author-selected scales without conflating the reviewed creator with the article author.
 
 **The masonry grid.** A hybrid CSS Grid and JavaScript approach that adapts to viewport width using em-based breakpoints (WCAG 2.1 compliant - respects browser font size). Configurable columns, gaps, and breakpoints. A carousel card rotates featured content above the grid. Pin values control homepage ordering.
 

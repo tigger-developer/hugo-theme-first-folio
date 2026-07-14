@@ -14,6 +14,7 @@
 
 <ul class="list-view">
   {{- range $pages -}}
+  {{- $page := . -}}
 
   {{- /* Issue #21: Resolve background image — same pattern as masonry-grid.html */ -}}
   {{- $bgImageUrl := "" -}}
@@ -57,6 +58,7 @@
         <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
         {{- end -}}
       </div>
+      {{- with .Params.review }}{{ partial "review/listing.html" (dict "Page" $page "Prefix" "list-view") }}{{ end }}
       {{- $excerpt := .Description | default .Summary -}}
       {{- if $excerpt -}}
       <p class="list-view-summary">{{ $excerpt | plainify | truncate 150 }}</p>

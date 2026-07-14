@@ -38,6 +38,7 @@ params:
   carousel:
     interval: 6
     showAuthor: true
+    showReview: true
     bgImage:
       opacity: 0.9
       blur: 0px
@@ -58,6 +59,7 @@ params:
   cardImage:
     opacity: 0.9
     showAuthor: false
+    showReview: true
     blur: 2px
     title:
       wash:
@@ -130,6 +132,13 @@ params:
     - stories
     - poetry
     - audiobook
+    - book-reviews
+    - game-reviews
+
+  review:
+    rating:
+      scale: 5
+      image: /images/review-rating-stars.svg
 
   useCDN: false
 
@@ -189,6 +198,12 @@ menu:
     - name: Profile
       url: /profile/
       weight: 48
+    - name: Book Reviews
+      url: /book-reviews/
+      weight: 46
+    - name: Game Reviews
+      url: /game-reviews/
+      weight: 47
     - name: Tags
       url: /tags/
       weight: 50

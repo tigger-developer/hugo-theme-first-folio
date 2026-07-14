@@ -1,0 +1,13 @@
+baseURL: /
+languageCode: en-GB
+title: Review Fixture
+
+params:
+  review:
+    rating:
+      scale: 7
+      image: /images/review-hearts.svg
+  cardImage:
+    showReview: true
+  carousel:
+    showReview: true

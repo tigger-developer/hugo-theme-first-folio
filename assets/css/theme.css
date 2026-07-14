@@ -189,6 +189,27 @@ body {
   padding-left: 2rem;
 }
 
+.columns-article-header {
+  padding: 2rem 2rem 1rem;
+  margin-block-end: 0;
+}
+
+.post-banner .article-header {
+  padding: 2rem;
+}
+
+.post-banner .review-metadata,
+.post-container.dark-bg .review-metadata {
+  color: #e8e8e8;
+}
+
+.post-banner .review-creator,
+.post-banner .review-listing-creator,
+.post-container.dark-bg .review-creator,
+.post-container.dark-bg .review-listing-creator {
+  color: inherit;
+}
+
 @media screen and (max-width: 47.99rem) {
   .banner-meta {
     padding-left: 0.75rem;
@@ -668,7 +689,7 @@ article:has(.post-container.dark-bg) details.styled-details > summary > span {
   position: relative;
 }
 
-.post-banner img {
+.post-banner > img {
   position: absolute;
   top: 0;
   left: 0;
@@ -1499,7 +1520,7 @@ ol li {
 
 /* Accent border on article layout and inline content images */
 .post-hero img,
-.post-banner img,
+.post-banner > img,
 .post-featured img,
 .featured-image-col img,
 article .body img {
@@ -2067,6 +2088,12 @@ main.list .content {
 .masonry-item.has-image .masonry-author,
 .masonry-item.has-image .masonry-date {
   color: rgba(255, 255, 255, 0.85);
+}
+
+.masonry-item.has-image .review-listing-title,
+.masonry-item.has-image .review-listing-creator {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* Issue #22: Frosted glass per-pill for meta items on image cards */

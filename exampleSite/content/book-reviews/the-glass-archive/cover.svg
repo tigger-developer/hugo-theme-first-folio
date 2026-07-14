@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ABOUTME: Synthetic cover for the example book review. -->
+<!-- ABOUTME: Avoids third-party artwork while demonstrating portrait review artwork. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900">
+  <rect width="600" height="900" fill="#173c5c"/>
+  <path d="M90 90h420v720H90z" fill="none" stroke="#e0a843" stroke-width="18"/>
+  <path d="M300 90v720M90 450h420" stroke="#8ec4d9" stroke-width="10"/>
+  <circle cx="300" cy="450" r="105" fill="#e0a843" opacity=".82"/>
+  <text x="300" y="710" fill="#fff" font-family="serif" font-size="54" text-anchor="middle">THE GLASS</text>
+  <text x="300" y="770" fill="#fff" font-family="serif" font-size="54" text-anchor="middle">ARCHIVE</text>
+</svg>

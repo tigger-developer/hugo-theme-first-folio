@@ -1,0 +1,5 @@
+{{/* ABOUTME: Fixture override proving downstream item-type partial selection. */}}
+{{/* ABOUTME: Exposes normalized values through rendered attributes for boundary tests. */}}
+<div class="downstream-review-partial" data-title="{{ .Title }}" data-fraction="{{ .Rating.fraction }}">
+  {{ partial "review/item.html" (dict "Data" . "CreatorLabel" "Director") }}
+</div>

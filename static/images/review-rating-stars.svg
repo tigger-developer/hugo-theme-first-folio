@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ABOUTME: Default five-star horizontal strip for continuous review ratings. -->
+<!-- ABOUTME: The foreground copy is clipped to the normalized rating percentage. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 100">
+  <g fill="#ed3949">
+    <path d="M50 5 61 36h34L68 56l10 33-28-20-28 20 10-33L5 36h34z"/>
+    <path d="M150 5 161 36h34l-27 20 10 33-28-20-28 20 10-33-27-20h34z"/>
+    <path d="M250 5 261 36h34l-27 20 10 33-28-20-28 20 10-33-27-20h34z"/>
+    <path d="M350 5 361 36h34l-27 20 10 33-28-20-28 20 10-33-27-20h34z"/>
+    <path d="M450 5 461 36h34l-27 20 10 33-28-20-28 20 10-33-27-20h34z"/>
+  </g>
+</svg>

@@ -184,6 +184,14 @@
     color: #000 !important;
     text-decoration: none;
   }
+
+  .review-metadata {
+    break-inside: avoid;
+  }
+
+  .review-rating-base {
+    opacity: 0.25;
+  }
   /* TOC: full retained at top */
   .toc,
   .toc-mobile,

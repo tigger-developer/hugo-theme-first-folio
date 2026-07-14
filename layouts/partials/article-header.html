@@ -1,0 +1,8 @@
+{{/* ABOUTME: Shared article title, breadcrumb, and optional review metadata header. */}}
+{{/* ABOUTME: Keeps review metadata in a consistent pre-content position across layouts. */}}
+{{- $page := .Page -}}
+<header class="title article-header{{ with .Class }} {{ . }}{{ end }}">
+  <h1{{ with .HeadingClass }} class="{{ . }}"{{ end }}>{{ partial "display-title.html" $page }}</h1>
+  {{- if ne $page.Params.breadcrumb false }}<div class="meta">{{ partial "breadcrumb.html" $page }}</div>{{- end }}
+  {{- if isset $page.Params "review" }}{{ partial "review/metadata.html" $page }}{{ end }}
+</header>

@@ -93,6 +93,9 @@
             {{- end -}}
           </p>
           {{- end -}}
+          {{- if and .Params.review ($site.Params.carousel.showReview | default false) -}}
+          {{ partial "review/listing.html" (dict "Page" . "Prefix" "card") }}
+          {{- end -}}
         </div>
 
         <div class="carousel-card-bottom">

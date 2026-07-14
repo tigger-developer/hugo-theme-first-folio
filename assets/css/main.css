@@ -707,6 +707,101 @@ article .title {
   margin-block-end: 1em;
 }
 
+/* Review metadata — issue #78 */
+.review-metadata {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-block-start: 0.85rem;
+  max-inline-size: 44rem;
+}
+
+.review-artwork {
+  flex: 0 0 auto;
+  inline-size: clamp(4.5rem, 12vw, 7rem);
+  block-size: auto;
+  max-block-size: 9rem;
+  object-fit: contain;
+}
+
+.review-details {
+  min-inline-size: 0;
+}
+
+.review-title,
+.review-creator,
+.review-rating,
+.review-listing-metadata {
+  margin: 0;
+  margin-block: 0;
+}
+
+.review-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 2.5vw, 1.35rem);
+  font-weight: 700;
+}
+
+.review-creator {
+  color: var(--color-text-meta, #737373);
+  margin-block-start: 0.2rem;
+}
+
+.review-creator-label {
+  font-weight: 700;
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-block-start: 0.45rem;
+}
+
+.review-rating-strip {
+  inline-size: 9rem;
+  block-size: 1.8rem;
+  overflow: visible;
+}
+
+.review-rating-base {
+  opacity: 0.25;
+}
+
+.review-rating-value {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.review-listing-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.65rem;
+  font-size: 0.85rem;
+  margin-block: 0.3rem 0.65rem;
+}
+
+.review-listing-title {
+  font-weight: 700;
+}
+
+.review-listing-creator {
+  color: var(--color-text-meta, #737373);
+}
+
+@media screen and (max-width: 30rem) {
+  .review-metadata {
+    align-items: flex-start;
+  }
+
+  .review-rating {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+}
+
 
 /* Callouts */
 .callout {

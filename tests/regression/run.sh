@@ -7,11 +7,10 @@ IFS=$'\n\t'
 THEME_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 TESTS_ROOT="$THEME_ROOT/tests/regression"
 FIXTURES_ROOT="$THEME_ROOT/tests/fixtures"
-AGENT_TMP="$THEME_ROOT/.agent/tmp"
-REGRESSION_TMP="$AGENT_TMP/regression-run"
-mkdir -p "$AGENT_TMP"
-rm -rf "$REGRESSION_TMP"
-mkdir -p "$REGRESSION_TMP"
+REGRESSION_TMP="$(mktemp -d -t first-folio-regression.XXXXXX)"
+# Compatibility alias for existing helpers; all mutable state now lives in the
+# operating-system temporary tree owned by this test run.
+AGENT_TMP="$REGRESSION_TMP"
 
 export THEME_ROOT TESTS_ROOT FIXTURES_ROOT AGENT_TMP REGRESSION_TMP
 
