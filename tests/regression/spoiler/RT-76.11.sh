@@ -12,5 +12,5 @@ run_test() {
     grep -qF '.spoiler__toggle:checked' "$css_file" || return 1
     grep -qF ':focus-visible' "$css_file" || return 1
     grep -qF 'var(--color-secondary)' "$css_file" || return 1
-    grep -qF 'details.spoiler--block[open]' "$css_file"
+    grep -qF '.spoiler--block > .spoiler__toggle:checked' "$css_file"
 }

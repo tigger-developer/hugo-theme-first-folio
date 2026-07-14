@@ -10,6 +10,6 @@ run_test() {
 
     htmlq -f "$page" -a aria-label '.spoiler--inline > input' | grep -qF 'Spoiler' || return 1
     htmlq -f "$page" -a aria-label '.spoiler--inline > input' | grep -qF 'Character reveal' || return 1
-    [[ "$(htmlq -f "$page" 'details.spoiler--block > summary .spoiler__content' | grep -c 'spoiler__content')" -eq 0 ]] || return 1
-    [[ "$(htmlq -f "$page" -t 'details.spoiler--block > summary')" == 'Ending details' ]]
+    [[ "$(htmlq -f "$page" -a aria-label '.spoiler--block > input')" == 'Ending details' ]] || return 1
+    [[ "$(htmlq -f "$page" '.spoiler--block > label .spoiler__content' | grep -c 'spoiler__content')" -eq 0 ]]
 }
