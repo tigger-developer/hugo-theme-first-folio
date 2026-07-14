@@ -1,0 +1,7 @@
+baseURL: /
+languageCode: en-GB
+title: Spoiler Opacity Fixture
+
+params:
+  spoiler:
+    opacity: 0.52
