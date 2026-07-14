@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-76.18 - the compact block label uses a prominent solid accent treatment.
+# ABOUTME: RT-76.18 - the compact block label uses the unmodified theme accent.
 
 run_test() {
     local build_dir
@@ -15,8 +15,8 @@ run_test() {
     local label_rule
     label_rule="$(sed -n '/^\.spoiler--block > \.spoiler__label \.spoiler__control-label {$/,/^}$/p' "$main_css")"
     grep -qF 'border: 2px solid var(--color-secondary)' <<< "$label_rule" || return 1
-    grep -qF 'background-color: var(--color-secondary)' <<< "$label_rule" || return 1
-    grep -qF 'color: #1a1a1a' <<< "$label_rule" || return 1
+    grep -qF 'background-color: color-mix(in srgb, var(--color-secondary) 12%, transparent)' <<< "$label_rule" || return 1
+    grep -qF 'color: var(--color-secondary)' <<< "$label_rule" || return 1
     grep -qF 'font-weight: 600' <<< "$label_rule" || return 1
 
     local focus_rule
