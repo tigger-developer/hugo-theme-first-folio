@@ -1212,6 +1212,7 @@ details.styled-details > summary:hover > span {
 
 .spoiler--block > .spoiler__toggle:not(:checked) + .spoiler__label {
   inset: 0;
+  block-size: auto;
 }
 
 .spoiler--block > .spoiler__label .spoiler__control-label {
