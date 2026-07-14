@@ -1,0 +1,13 @@
+baseURL: /
+languageCode: en-GB
+title: Card Opacity Fixture
+
+params:
+  bgImage:
+    opacity: 0.4
+  cardImage:
+    opacity: 0.65
+  carousel:
+    interval: 6
+    bgImage:
+      opacity: 0.9
