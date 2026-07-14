@@ -1218,9 +1218,8 @@ details.styled-details > summary:hover > span {
 .spoiler--block > .spoiler__label .spoiler__control-label {
   position: absolute;
   inset-block-start: 0.35rem;
-  inset-inline-start: 0.35rem;
-  inline-size: max-content;
-  max-inline-size: calc(100% - 0.7rem);
+  inset-inline: 0;
+  inline-size: auto;
   padding: 0.1rem 0.75rem;
   border: 2px solid var(--color-secondary);
   border-radius: 0.15rem;
@@ -1230,6 +1229,7 @@ details.styled-details > summary:hover > span {
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1.4;
+  text-align: center;
 }
 
 .spoiler--block > .spoiler__label:hover .spoiler__control-label {
