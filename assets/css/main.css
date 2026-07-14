@@ -1222,22 +1222,24 @@ details.styled-details > summary:hover > span {
   inline-size: max-content;
   max-inline-size: calc(100% - 0.7rem);
   padding: 0.1rem 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--color-secondary) 55%, transparent);
+  border: 2px solid var(--color-secondary);
   border-radius: 0.15rem;
-  background-color: color-mix(in srgb, var(--color-secondary) 12%, transparent);
-  color: var(--color-secondary);
+  background-color: var(--color-secondary);
+  color: #1a1a1a;
   font-family: var(--font-accent);
   font-size: 0.75rem;
+  font-weight: 600;
   line-height: 1.4;
 }
 
 .spoiler--block > .spoiler__label:hover .spoiler__control-label {
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary-hover);
+  background-color: var(--color-secondary-hover);
 }
 
 .spoiler--block > .spoiler__toggle:focus-visible + .spoiler__label .spoiler__control-label {
-  outline: 0.15rem solid var(--color-secondary);
-  outline-offset: 0.15rem;
+  outline: 0.2rem solid var(--color-secondary);
+  outline-offset: 0.2rem;
 }
 
 .spoiler--block > .spoiler__mask,
