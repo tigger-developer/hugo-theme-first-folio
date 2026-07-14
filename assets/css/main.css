@@ -1179,19 +1179,16 @@ details.styled-details > summary:hover > span {
 }
 
 .spoiler__mask {
-  color: color-mix(in srgb, var(--color-text) 38%, transparent);
+  color: inherit;
   font-family: 'First Folio Spoiler Mask', monospace;
   font-weight: 400;
   letter-spacing: 0.04em;
+  opacity: var(--spoiler-mask-opacity, 0.38);
 }
 
 .spoiler--inline > .spoiler__toggle:not(:checked) + .spoiler__label .spoiler__content,
 .spoiler--inline > .spoiler__toggle:checked + .spoiler__label .spoiler__mask {
   display: none;
-}
-
-.spoiler--inline > .spoiler__label:hover .spoiler__mask {
-  color: color-mix(in srgb, var(--color-text) 55%, transparent);
 }
 
 .spoiler--inline > .spoiler__toggle:focus-visible + .spoiler__label {
@@ -1207,7 +1204,8 @@ details.styled-details > summary:hover > span {
 .spoiler--block > .spoiler__label {
   position: absolute;
   inset-block-start: 0;
-  inset-inline-end: 0;
+  inset-inline: 0;
+  block-size: 2rem;
   z-index: 1;
   cursor: pointer;
 }
@@ -1219,8 +1217,10 @@ details.styled-details > summary:hover > span {
 .spoiler--block > .spoiler__label .spoiler__control-label {
   position: absolute;
   inset-block-start: 0.35rem;
-  inset-inline-end: 0.35rem;
-  padding: 0.1rem 0.4rem;
+  inset-inline-start: 0.35rem;
+  inline-size: max-content;
+  max-inline-size: calc(100% - 0.7rem);
+  padding: 0.1rem 0.75rem;
   border: 1px solid color-mix(in srgb, var(--color-secondary) 55%, transparent);
   border-radius: 0.15rem;
   background-color: color-mix(in srgb, var(--color-secondary) 12%, transparent);
@@ -1247,6 +1247,10 @@ details.styled-details > summary:hover > span {
 
 .spoiler--block > .spoiler__mask {
   white-space: pre-wrap;
+}
+
+.spoiler--block > .spoiler__toggle:checked ~ .spoiler__content {
+  cursor: pointer;
 }
 
 .spoiler--block > .spoiler__toggle:not(:checked) ~ .spoiler__content,

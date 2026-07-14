@@ -6,7 +6,7 @@ run_test() {
     build_dir="$(build_fixture "spoiler-opacity")" || return 1
 
     local config_css
-    config_css="$(htmlq -f "$build_dir/index.html" -t 'style[data-spoiler-config]')"
+    config_css="$(htmlq -f "$build_dir/demo/index.html" -t 'style[data-spoiler-config]')"
     grep -qF -- '--spoiler-mask-opacity: 0.52;' <<< "$config_css" || return 1
 
     local main_css

@@ -1,5 +1,6 @@
 ---
 title: Spoiler Opacity
+description: Configurable concealed-text opacity fixture
 ---
 
 The answer is {{< spoiler "inherited colour" />}}.

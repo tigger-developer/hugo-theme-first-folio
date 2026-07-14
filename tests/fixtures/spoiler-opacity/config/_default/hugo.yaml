@@ -1,5 +1,5 @@
 baseURL: /
-languageCode: en-GB
+locale: en-GB
 title: Spoiler Opacity Fixture
 
 params:

@@ -47,5 +47,6 @@
         {{- if or (eq .Type "audiobook") (and (eq .Params.layout "audio") .Params.audiobook) }}
         <script src="{{ "js/audiobook-player.js" | relURL }}"></script>
         {{- end }}
+        <script type="module" src="{{ "js/spoiler.js" | relURL }}"></script>
     </body>
 </html>

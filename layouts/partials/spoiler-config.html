@@ -1,0 +1,12 @@
+{{/* ABOUTME: Emits the site-level opacity custom property for concealed spoiler symbols. */}}
+{{/* ABOUTME: The mask inherits surrounding text colour and changes only its opacity. */}}
+{{- $spoiler := .Site.Params.spoiler | default dict -}}
+{{- $opacity := 0.38 -}}
+{{- if isset $spoiler "opacity" -}}
+  {{- $opacity = index $spoiler "opacity" -}}
+{{- end -}}
+<style data-spoiler-config>
+  :root {
+    --spoiler-mask-opacity: {{ $opacity }};
+  }
+</style>

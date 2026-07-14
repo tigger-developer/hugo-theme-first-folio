@@ -72,6 +72,7 @@
 
 	{{ $style := resources.Get "css/main.css" | fingerprint }}
 	<link rel="stylesheet" type="text/css" media="screen" href="{{ $style.RelPermalink }}" />
+	{{- partial "spoiler-config.html" . -}}
 
 	{{- with resources.Get "css/theme.css" }}
 	{{ $themeStyle := . | fingerprint }}
