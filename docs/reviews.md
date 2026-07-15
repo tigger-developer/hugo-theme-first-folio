@@ -84,4 +84,17 @@ Likewise, article `image` and `review.artwork` are separate. A background-layout
 
 ## Demonstrations
 
-The example site includes a columns-layout [book review](/book-reviews/the-glass-archive/) with cover artwork and `4.9/5`, and a background-layout [game review](/game-reviews/signal-at-dusk/) without reviewed-item artwork and with `8/10`.
+The example site includes the complete layout matrix for both built-in item types:
+
+| Presentation | Book review | Game review |
+|---|---|---|
+| Text-only | [Book text-only](/book-reviews/book-text/) | [Game text-only](/game-reviews/game-text/) |
+| Banner | [Book banner](/book-reviews/book-banner/) | [Game banner](/game-reviews/game-banner/) |
+| Hero | [Book hero](/book-reviews/book-hero/) | [Game hero](/game-reviews/game-hero/) |
+| Featured | [Book featured](/book-reviews/book-featured/) | [Game featured](/game-reviews/game-featured/) |
+| Background | [Book background](/book-reviews/book-background/) | [Signal at Dusk](/game-reviews/signal-at-dusk/) |
+| Columns | [Book columns](/book-reviews/book-columns/) | [Game columns](/game-reviews/game-columns/) |
+| Columns left | [The Glass Archive](/book-reviews/the-glass-archive/) | [Game columns left](/game-reviews/game-columns-left/) |
+| Columns right | [Book columns right](/book-reviews/book-columns-right/) | [Game columns right](/game-reviews/game-columns-right/) |
+
+Every matrix page includes reviewed-item artwork and a rating except the primary `Signal at Dusk` background example, which deliberately omits reviewed-item artwork to demonstrate that it remains optional and separate from the article background.
