@@ -8,5 +8,6 @@ run_test() {
     local page
     page="$(review_cards_page)" || return 1
     [[ "$(htmlq -f "$page" -t '.masonry-item:not(.carousel-card) .card-review-title')" == "Masonry Subject" ]] || return 1
-    [[ "$(htmlq -f "$page" -t '.masonry-item:not(.carousel-card) .card-review-creator')" == "Masonry Creator" ]]
+    [[ "$(htmlq -f "$page" -t '.masonry-item:not(.carousel-card) .card-review-creator')" == "Masonry Creator" ]] || return 1
+    [[ -z "$(htmlq -f "$page" '.masonry-item:not(.carousel-card) .masonry-meta')" ]]
 }

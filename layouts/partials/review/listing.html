@@ -3,7 +3,7 @@
 {{- $review := .Page.Params.review -}}
 {{- $prefix := .Prefix -}}
 {{- with $review -}}
-<p class="{{ $prefix }}-review review-listing-metadata" data-review-title="{{ .title }}">
+<p class="{{ $prefix }}-review review-listing-metadata{{ with $.Modifier }} review-listing-metadata--{{ . }}{{ end }}" data-review-title="{{ .title }}">
   <span class="{{ $prefix }}-review-title review-listing-title">{{ .title }}</span>
   {{- with .creator }}<span class="{{ $prefix }}-review-creator review-listing-creator">{{ . }}</span>{{- end }}
 </p>

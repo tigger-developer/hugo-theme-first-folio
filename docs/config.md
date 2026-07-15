@@ -108,7 +108,7 @@ params:
     opacity: 0.9         # card image opacity (falls back to bgImage.opacity)
     blur: 2px            # card image blur (falls back to bgImage.blur)
     showAuthor: true     # show author name on card meta
-    showReview: false    # show reviewed-item title and creator on cards
+    showReview: false    # replace card meta with reviewed-item title and creator
     title:
       wash:
         opacity: 0.2     # title wash tint strength
@@ -128,7 +128,7 @@ params:
 | `opacity` | inherits `bgImage.opacity` | Image opacity on cards. |
 | `blur` | inherits `bgImage.blur` | Image blur on cards. |
 | `showAuthor` | `true` | Show the author name in the card meta strip. |
-| `showReview` | `false` | Show reviewed-item title and optional creator on masonry cards. |
+| `showReview` | `false` | On review pages, replace section/author/date card metadata with compact reviewed-item title and optional creator metadata. |
 
 ### Title wash
 
@@ -188,7 +188,7 @@ params:
   carousel:
     interval: 6          # seconds between slides
     showAuthor: true     # show author name on carousel meta
-    showReview: false    # show reviewed-item title and creator on carousel cards
+    showReview: false    # replace carousel meta with reviewed-item title and creator
     bgImage:
       opacity: 0.9       # carousel image opacity (falls back to bgImage.opacity)
       blur: 0px          # carousel image blur (falls back to bgImage.blur)
@@ -210,7 +210,7 @@ params:
 |-----|---------|-------------|
 | `interval` | `6` | Seconds between automatic slide transitions. |
 | `showAuthor` | `true` | Show the author name on carousel meta. |
-| `showReview` | `false` | Show reviewed-item title and optional creator on carousel cards. |
+| `showReview` | `false` | On review pages, replace section/author/date carousel metadata with a larger reviewed-item title and optional creator treatment. |
 | `bgImage.opacity` | inherits `bgImage.opacity` | Image opacity on carousel cards. |
 | `bgImage.blur` | inherits `bgImage.blur` | Image blur on carousel cards. |
 | `title.wash.opacity` | `0.2` | Tint strength behind the carousel title. |

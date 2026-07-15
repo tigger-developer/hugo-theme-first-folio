@@ -64,7 +64,7 @@ params:
     showReview: true
 ```
 
-Card and list metadata contains only the reviewed-item title and creator. Artwork, ratings, and item-type role labels remain on the article page.
+Plain-list metadata contains only the reviewed-item title and creator. When either card control is enabled, that review identity replaces the card's ordinary section, article-author, and date metadata rather than adding another row. Masonry uses compact meta-sized pills; carousel uses the same visual language at a larger size. Artwork, ratings, and item-type role labels remain on the article page.
 
 ## Item types and Hugo content types
 

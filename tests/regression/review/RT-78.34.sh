@@ -8,5 +8,6 @@ run_test() {
     local page
     page="$(review_cards_page)" || return 1
     [[ "$(htmlq -f "$page" -t '.carousel-card .card-review-title')" == "Carousel Subject" ]] || return 1
-    [[ "$(htmlq -f "$page" -t '.carousel-card .card-review-creator')" == "Carousel Creator" ]]
+    [[ "$(htmlq -f "$page" -t '.carousel-card .card-review-creator')" == "Carousel Creator" ]] || return 1
+    [[ -z "$(htmlq -f "$page" '.carousel-card .masonry-meta')" ]]
 }

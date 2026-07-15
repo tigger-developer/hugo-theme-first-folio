@@ -111,10 +111,11 @@
         <div class="masonry-content">
           <div class="masonry-card-top">
             <h3><a href="{{ .RelPermalink }}" class="header-interactive">{{ .Title }}</a></h3>
+            {{- $showReview := and .Params.review ($.Site.Params.cardImage.showReview | default false) -}}
             {{- $showDate := and .Date (not .Params.hideDate) -}}
             {{- $cardShowsAuthor := $.Site.Params.cardImage.showAuthor }}{{- if eq $cardShowsAuthor nil -}}{{- $cardShowsAuthor = true -}}{{- end -}}
             {{- $showAuthor := and .Params.author (not .Params.hideAuthor) $cardShowsAuthor -}}
-            {{- if or $showSection $showDate $showAuthor -}}
+            {{- if and (not $showReview) (or $showSection $showDate $showAuthor) -}}
             <p class="masonry-meta">
               {{- if $showSection -}}
               <span class="masonry-section">{{ if $sectionLabel }}{{ $sectionLabel }}{{ else }}{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}{{ end }}</span>
@@ -128,8 +129,8 @@
               {{- end -}}
             </p>
             {{- end -}}
-            {{- if and .Params.review ($.Site.Params.cardImage.showReview | default false) -}}
-            {{ partial "review/listing.html" (dict "Page" . "Prefix" "card") }}
+            {{- if $showReview -}}
+            {{ partial "review/listing.html" (dict "Page" . "Prefix" "card" "Modifier" "compact") }}
             {{- end -}}
           </div>
           <div class="masonry-card-bottom">

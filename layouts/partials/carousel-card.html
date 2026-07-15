@@ -77,10 +77,11 @@
       <div class="masonry-content">
         <div class="carousel-card-top">
           <h2><a href="{{ .RelPermalink }}" class="header-interactive">{{ .Title }}</a></h2>
+          {{- $showReview := and .Params.review ($site.Params.carousel.showReview | default false) -}}
           {{- $showDate := and .Date (not .Params.hideDate) -}}
           {{- $cardShowsAuthor := $site.Params.carousel.showAuthor }}{{- if eq $cardShowsAuthor nil -}}{{- $cardShowsAuthor = true -}}{{- end -}}
           {{- $showAuthor := and .Params.author (not .Params.hideAuthor) $cardShowsAuthor -}}
-          {{- if or $showSection $showDate $showAuthor -}}
+          {{- if and (not $showReview) (or $showSection $showDate $showAuthor) -}}
           <p class="masonry-meta">
             {{- if $showSection -}}
             <span class="masonry-section">{{ if $sectionLabel }}{{ $sectionLabel }}{{ else }}{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}{{ end }}</span>
@@ -93,8 +94,8 @@
             {{- end -}}
           </p>
           {{- end -}}
-          {{- if and .Params.review ($site.Params.carousel.showReview | default false) -}}
-          {{ partial "review/listing.html" (dict "Page" . "Prefix" "card") }}
+          {{- if $showReview -}}
+          {{ partial "review/listing.html" (dict "Page" . "Prefix" "card" "Modifier" "prominent") }}
           {{- end -}}
         </div>
 
