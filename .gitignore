@@ -71,6 +71,9 @@ profile.cov
 
 # misc
 .agent/
+.agents/
+.claude/
+.codex/
 dist
 tmp
 
