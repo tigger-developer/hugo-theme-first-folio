@@ -1288,6 +1288,11 @@ details.styled-details > summary:hover > span {
   cursor: pointer;
 }
 
+.spoiler__content {
+  color: inherit;
+  opacity: 1;
+}
+
 .spoiler__mask {
   color: inherit;
   font-family: 'First Folio Spoiler Mask', monospace;
@@ -1336,7 +1341,7 @@ details.styled-details > summary:hover > span {
   background-color: color-mix(in srgb, var(--color-secondary) 12%, transparent);
   color: var(--color-secondary);
   font-family: var(--font-accent);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
   text-align: center;
