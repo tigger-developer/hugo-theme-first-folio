@@ -761,6 +761,8 @@ article .title {
 .review-rating-strip {
   inline-size: 9rem;
   block-size: 1.8rem;
+  max-inline-size: none;
+  max-block-size: none;
   overflow: visible;
 }
 

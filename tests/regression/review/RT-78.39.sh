@@ -21,8 +21,13 @@ run_test() {
         "$build_dir/game-reviews/game-hero/index.html"
         "$build_dir/game-reviews/game-text/index.html"
     )
-    local -a image_sources
-    mapfile -t image_sources < <(htmlq -f "${pages[@]}" -a src 'img')
+    local -a image_sources=()
+    local page
+    for page in "${pages[@]}"; do
+        local -a page_sources
+        mapfile -t page_sources < <(htmlq -f "$page" -a src 'img')
+        image_sources+=("${page_sources[@]}")
+    done
 
     local image_source
     for image_source in "${image_sources[@]}"; do

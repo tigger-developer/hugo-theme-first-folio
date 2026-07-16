@@ -6,6 +6,9 @@ description: "A fictional archival mystery used to demonstrate book-review metad
 author: "Orla Fennell"
 hideAuthor: true
 layout: featured-columns-left
+image:
+  src: layout.svg
+  alt: "Reading room windows in The Glass Archive"
 review:
   itemType: book
   title: "The Glass Archive"
