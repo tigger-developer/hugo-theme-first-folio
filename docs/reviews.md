@@ -1,4 +1,4 @@
-<!-- Version: 1.3 | Last updated: 2026-07-16 -->
+<!-- Version: 1.4 | Last updated: 2026-07-16 -->
 
 # Review metadata
 
@@ -88,17 +88,18 @@ The example site demonstrates every image-based article-layout family for both b
 
 | Presentation | Book review | Game review |
 |---|---|---|
-| Banner | [Book banner](/book-reviews/book-banner/) | [Game banner](/game-reviews/game-banner/) |
-| Hero | [Book hero](/book-reviews/book-hero/) | [Game hero](/game-reviews/game-hero/) |
-| Featured | [Book featured](/book-reviews/book-featured/) | [Game featured](/game-reviews/game-featured/) |
-| Background | [Book background](/book-reviews/book-background/) | [Signal at Dusk](/game-reviews/signal-at-dusk/) |
-| Columns, image left (`featured-columns-left`) | [The Glass Archive](/book-reviews/the-glass-archive/) | [Game columns left](/game-reviews/game-columns/) |
-| Columns, image right (`featured-columns-right`) | [Book columns right](/book-reviews/book-columns-right/) | [Game columns right](/game-reviews/game-columns-right/) |
+| Banner | [Please Do Not Feed the Footnotes](/book-reviews/book-banner/) | [Goose Tribunal 3000](/game-reviews/game-banner/) |
+| Hero | [The Extremely Polite Volcano](/book-reviews/book-hero/) | [The Last Biscuit on Mars](/game-reviews/game-hero/) |
+| Featured | [The Moon's Least Reliable Librarian](/book-reviews/book-featured/) | [Competitive Napping Championship](/game-reviews/game-featured/) |
+| Background | [The Umbrella That Audited Tuesday](/book-reviews/book-background/) | [Wizard Tax Picnic](/game-reviews/signal-at-dusk/) |
+| Columns, image left (`featured-columns-left`) | [Catalogue of Invisible Sandwiches](/book-reviews/the-glass-archive/) | [Dungeon Janitor: Mop of Destiny](/game-reviews/game-columns/) |
+| Columns, image right (`featured-columns-right`) | [A Brief History of Competitive Moss](/book-reviews/book-columns-right/) | [Professor Turnip's Zero-G Laundrette](/game-reviews/game-columns-right/) |
 
-Every demonstration includes reviewed-item artwork and a rating except `Signal at Dusk`, which deliberately omits reviewed-item artwork to demonstrate that it remains optional and separate from the article background.
+Every demonstration includes a generated article image, separately generated reviewed-item cover art, and a rating. Article imagery and review artwork remain independent page-bundle resources.
 
 ## Changelog
 
+- 1.4 (2026-07-16): Replaced the demonstration identities and imagery with twelve distinct fictional works and twenty-four generated raster assets.
 - 1.3 (2026-07-16): Added both image-left and image-right column demonstrations to each review section.
 - 1.2 (2026-07-16): Expanded the demonstrations to one page for every image-based layout in both review sections and clarified the image-free fallback.
 - 1.1 (2026-07-15): Documented review metadata, ratings, listing controls, and item-type customization.
