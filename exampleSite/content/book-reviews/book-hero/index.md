@@ -1,12 +1,12 @@
 ---
-title: "Book Review - Banner"
-linkTitle: "Banner"
-date: 2026-05-02
-description: "Dummy book review demonstrating the banner article presentation."
-layout: banner
+title: "Book Review - Hero"
+linkTitle: "Hero"
+date: 2026-05-03
+description: "Dummy book review demonstrating the hero article presentation."
+layout: hero
 image:
   src: layout.svg
-  alt: "Banner illustration for the dummy book review"
+  alt: "Hero illustration for the dummy book review"
 review:
   itemType: book
   title: "The Paper Observatory"
@@ -19,6 +19,6 @@ review:
     scale: 5
 ---
 
-This dummy book review uses the **banner** article presentation so the review header can be inspected in that layout.
+This dummy book review uses the **hero** article presentation so the review header can be inspected in that layout.
 
 The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.

@@ -4,4 +4,4 @@ description: Fictional books reviewed through the generalized review metadata co
 list_style: list
 ---
 
-These demonstrations share the review model across the columns, banner, and featured article presentations. The game-review section supplies the complementary background, hero, and text-only examples without duplicating the layout set.
+This section demonstrates the review model in each image-based article presentation: banner, hero, featured, background, and columns.

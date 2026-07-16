@@ -707,6 +707,11 @@ article .title {
   margin-block-end: 1em;
 }
 
+.article-header {
+  display: block;
+  line-height: normal;
+}
+
 /* Review metadata — issue #78 */
 .review-metadata {
   display: flex;

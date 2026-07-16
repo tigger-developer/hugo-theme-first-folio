@@ -1,12 +1,12 @@
 ---
-title: "Game Review - Hero"
-linkTitle: "Hero"
-date: 2026-05-03
-description: "Dummy game review demonstrating the hero article presentation."
-layout: hero
+title: "Game Review - Banner"
+linkTitle: "Banner"
+date: 2026-05-02
+description: "Dummy game review demonstrating the banner article presentation."
+layout: banner
 image:
   src: layout.svg
-  alt: "Hero illustration for the dummy game review"
+  alt: "Banner illustration for the dummy game review"
 review:
   itemType: game
   title: "Drift Circuit"
@@ -19,6 +19,6 @@ review:
     scale: 10
 ---
 
-This dummy game review uses the **hero** article presentation so the review header can be inspected in that layout.
+This dummy game review uses the **banner** article presentation so the review header can be inspected in that layout.
 
 The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.

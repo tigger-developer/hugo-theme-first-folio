@@ -1,8 +1,8 @@
-<!-- Version: 1.1 | Last updated: 2026-07-15 -->
+<!-- Version: 1.2 | Last updated: 2026-07-16 -->
 
 # Review metadata
 
-First Folio adds reviewed-item metadata to an ordinary article when its frontmatter contains a `review` map. Review metadata does not select a page layout: banner, background, hero, featured, columns, and text-only layouts remain available.
+First Folio adds reviewed-item metadata to an ordinary article when its frontmatter contains a `review` map. Review metadata does not select a page layout: banner, background, hero, featured, and columns layouts remain available. An article without a layout continues to use the theme's image-free fallback.
 
 The article header is ordered as article title, breadcrumb/date, then reviewed item. The article body follows. In a banner layout the complete header remains on the banner surface.
 
@@ -84,15 +84,19 @@ Likewise, article `image` and `review.artwork` are separate. A background-layout
 
 ## Demonstrations
 
-The example site demonstrates each rendered article-layout family once across the two built-in item types. This keeps the listing pages concise while showing that review metadata remains independent of both layout and item type:
+The example site demonstrates every image-based article-layout family for both built-in item types. This shows that review metadata remains independent of both layout and item type:
 
-| Presentation | Demonstration |
-|---|---|
-| Text-only | [Game text-only](/game-reviews/game-text/) |
-| Banner | [Book banner](/book-reviews/book-banner/) |
-| Hero | [Game hero](/game-reviews/game-hero/) |
-| Featured | [Book featured](/book-reviews/book-featured/) |
-| Background | [Signal at Dusk](/game-reviews/signal-at-dusk/) |
-| Columns | [The Glass Archive](/book-reviews/the-glass-archive/) |
+| Presentation | Book review | Game review |
+|---|---|---|
+| Banner | [Book banner](/book-reviews/book-banner/) | [Game banner](/game-reviews/game-banner/) |
+| Hero | [Book hero](/book-reviews/book-hero/) | [Game hero](/game-reviews/game-hero/) |
+| Featured | [Book featured](/book-reviews/book-featured/) | [Game featured](/game-reviews/game-featured/) |
+| Background | [Book background](/book-reviews/book-background/) | [Signal at Dusk](/game-reviews/signal-at-dusk/) |
+| Columns | [The Glass Archive](/book-reviews/the-glass-archive/) | [Game columns](/game-reviews/game-columns/) |
 
 Every demonstration includes reviewed-item artwork and a rating except `Signal at Dusk`, which deliberately omits reviewed-item artwork to demonstrate that it remains optional and separate from the article background.
+
+## Changelog
+
+- 1.2 (2026-07-16): Expanded the demonstrations to one page for every image-based layout in both review sections and clarified the image-free fallback.
+- 1.1 (2026-07-15): Documented review metadata, ratings, listing controls, and item-type customization.

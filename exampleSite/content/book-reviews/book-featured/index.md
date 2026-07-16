@@ -1,5 +1,5 @@
 ---
-title: "Book Review — Featured"
+title: "Book Review - Featured"
 linkTitle: "Featured"
 date: 2026-05-04
 description: "Dummy book review demonstrating the featured article presentation."

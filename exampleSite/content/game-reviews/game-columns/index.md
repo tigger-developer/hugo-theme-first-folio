@@ -1,8 +1,12 @@
 ---
-title: "Game Review — Text-only"
-linkTitle: "Text-only"
-date: 2026-05-01
-description: "Dummy game review demonstrating the text-only article presentation."
+title: "Game Review - Columns"
+linkTitle: "Columns"
+date: 2026-05-05
+description: "Dummy game review demonstrating the columns article presentation."
+layout: columns
+image:
+  src: layout.svg
+  alt: "Columns illustration for the dummy game review"
 review:
   itemType: game
   title: "Drift Circuit"
@@ -15,6 +19,6 @@ review:
     scale: 10
 ---
 
-This dummy game review uses the **text-only** article presentation so the review header can be inspected in that layout.
+This dummy game review uses the **columns** article presentation so the review header can be inspected in that layout.
 
 The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
