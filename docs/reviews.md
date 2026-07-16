@@ -1,4 +1,4 @@
-<!-- Version: 1.2 | Last updated: 2026-07-16 -->
+<!-- Version: 1.3 | Last updated: 2026-07-16 -->
 
 # Review metadata
 
@@ -92,11 +92,13 @@ The example site demonstrates every image-based article-layout family for both b
 | Hero | [Book hero](/book-reviews/book-hero/) | [Game hero](/game-reviews/game-hero/) |
 | Featured | [Book featured](/book-reviews/book-featured/) | [Game featured](/game-reviews/game-featured/) |
 | Background | [Book background](/book-reviews/book-background/) | [Signal at Dusk](/game-reviews/signal-at-dusk/) |
-| Columns | [The Glass Archive](/book-reviews/the-glass-archive/) | [Game columns](/game-reviews/game-columns/) |
+| Columns, image left (`featured-columns-left`) | [The Glass Archive](/book-reviews/the-glass-archive/) | [Game columns left](/game-reviews/game-columns/) |
+| Columns, image right (`featured-columns-right`) | [Book columns right](/book-reviews/book-columns-right/) | [Game columns right](/game-reviews/game-columns-right/) |
 
 Every demonstration includes reviewed-item artwork and a rating except `Signal at Dusk`, which deliberately omits reviewed-item artwork to demonstrate that it remains optional and separate from the article background.
 
 ## Changelog
 
+- 1.3 (2026-07-16): Added both image-left and image-right column demonstrations to each review section.
 - 1.2 (2026-07-16): Expanded the demonstrations to one page for every image-based layout in both review sections and clarified the image-free fallback.
 - 1.1 (2026-07-15): Documented review metadata, ratings, listing controls, and item-type customization.

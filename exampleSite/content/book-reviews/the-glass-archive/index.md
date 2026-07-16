@@ -1,6 +1,6 @@
 ---
 title: "Reading The Glass Archive"
-linkTitle: "The Glass Archive"
+linkTitle: "Columns Left"
 date: 2026-06-18
 description: "A fictional archival mystery used to demonstrate book-review metadata."
 author: "Orla Fennell"

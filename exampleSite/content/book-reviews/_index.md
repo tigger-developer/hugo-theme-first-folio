@@ -4,4 +4,4 @@ description: Fictional books reviewed through the generalized review metadata co
 list_style: list
 ---
 
-This section demonstrates the review model in each image-based article presentation: banner, hero, featured, background, and columns.
+This section demonstrates the review model in each image-based article presentation: banner, hero, featured, background, image-left columns, and image-right columns.
