@@ -35,6 +35,22 @@ review_example_dir() {
     build_examplesite
 }
 
+review_demo_routes() {
+    printf '%s\n' \
+        'book-reviews/book-background' \
+        'book-reviews/book-banner' \
+        'book-reviews/book-columns-right' \
+        'book-reviews/book-featured' \
+        'book-reviews/book-hero' \
+        'book-reviews/the-glass-archive' \
+        'game-reviews/game-banner' \
+        'game-reviews/game-columns' \
+        'game-reviews/game-columns-right' \
+        'game-reviews/game-featured' \
+        'game-reviews/game-hero' \
+        'game-reviews/signal-at-dusk'
+}
+
 expect_review_build_failure() {
     local fixture="$1"
     local expected_message="$2"
