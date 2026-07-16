@@ -1,24 +1,24 @@
 ---
-title: "Game Review - Hero"
+title: "Reviewing The Last Biscuit on Mars"
 linkTitle: "Hero"
 date: 2026-05-03
-description: "Dummy game review demonstrating the hero article presentation."
+description: "A review of a snack-based Martian negotiation game in the hero layout."
 layout: hero
 image:
-  src: layout.svg
-  alt: "Hero illustration for the dummy game review"
+  src: article.jpg
+  alt: "Astronauts and red aliens negotiating over the last biscuit on Mars"
 review:
   itemType: game
-  title: "Drift Circuit"
-  creator: "North Quay Games"
+  title: "The Last Biscuit on Mars"
+  creator: "Red Crumb Cosmonautics"
   artwork:
-    src: artwork.svg
-    alt: "Drift Circuit key art"
+    src: cover.jpg
+    alt: "Cover art for The Last Biscuit on Mars"
   rating:
     value: 7.5
     scale: 10
 ---
 
-This dummy game review uses the **hero** article presentation so the review header can be inspected in that layout.
+*The Last Biscuit on Mars* is a diplomacy game in which every faction has tea, nobody has snacks, and the rover keeps changing sides.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene uses the **hero** presentation, with separately generated game-cover art alongside the review details.

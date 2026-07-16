@@ -1,24 +1,24 @@
 ---
-title: "Book Review - Featured"
+title: "Reviewing The Moon's Least Reliable Librarian"
 linkTitle: "Featured"
 date: 2026-05-04
-description: "Dummy book review demonstrating the featured article presentation."
+description: "A review of a lunar library comedy presented in the featured layout."
 layout: featured
 image:
-  src: layout.svg
-  alt: "Featured illustration for the dummy book review"
+  src: article.jpg
+  alt: "A lunar librarian accidentally shelving a comet among books"
 review:
   itemType: book
-  title: "The Paper Observatory"
-  creator: "Iona Vale"
+  title: "The Moon's Least Reliable Librarian"
+  creator: "Moppetina Quasar-Fidget"
   artwork:
-    src: artwork.svg
-    alt: "The Paper Observatory cover"
+    src: cover.jpg
+    alt: "Cover art for The Moon's Least Reliable Librarian"
   rating:
     value: 4
     scale: 5
 ---
 
-This dummy book review uses the **featured** article presentation so the review header can be inspected in that layout.
+*The Moon's Least Reliable Librarian* concerns a cataloguer who repeatedly files comets under cookery and loses an entire crater's overdue notices.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene uses the **featured** presentation, while the review component displays separately generated cover art.

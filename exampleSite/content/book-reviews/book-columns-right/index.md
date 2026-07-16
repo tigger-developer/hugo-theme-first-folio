@@ -1,24 +1,24 @@
 ---
-title: "Book Review - Columns Right"
+title: "Reviewing A Brief History of Competitive Moss"
 linkTitle: "Columns Right"
 date: 2026-05-06
-description: "Dummy book review demonstrating the image-right columns article presentation."
+description: "A review of a botanical sporting history presented with image-right columns."
 layout: featured-columns-right
 image:
-  src: layout.svg
-  alt: "Image-right columns illustration for the dummy book review"
+  src: article.jpg
+  alt: "Athletic moss and snail referees competing around teacups"
 review:
   itemType: book
-  title: "The Paper Observatory"
-  creator: "Iona Vale"
+  title: "A Brief History of Competitive Moss"
+  creator: "Bramblequoit J. Sneezewick"
   artwork:
-    src: artwork.svg
-    alt: "The Paper Observatory cover"
+    src: cover.jpg
+    alt: "Cover art for A Brief History of Competitive Moss"
   rating:
     value: 4
     scale: 5
 ---
 
-This dummy book review uses the **image-right columns** article presentation so the review header can be inspected in that layout.
+*A Brief History of Competitive Moss* traces the bitter rivalry between cushion moss sprinters and the undefeated sphagnum relay team.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene occupies the image side of the **image-right columns** presentation, separate from its generated cover.

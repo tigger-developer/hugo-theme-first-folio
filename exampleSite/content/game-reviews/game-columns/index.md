@@ -1,24 +1,24 @@
 ---
-title: "Game Review - Columns Left"
+title: "Reviewing Dungeon Janitor: Mop of Destiny"
 linkTitle: "Columns Left"
 date: 2026-05-05
-description: "Dummy game review demonstrating the image-left columns article presentation."
+description: "A review of an enchanted custodial adventure in image-left columns."
 layout: featured-columns-left
 image:
-  src: layout.svg
-  alt: "Columns illustration for the dummy game review"
+  src: article.jpg
+  alt: "A dungeon janitor battling slime monsters with an enchanted mop"
 review:
   itemType: game
-  title: "Drift Circuit"
-  creator: "North Quay Games"
+  title: "Dungeon Janitor: Mop of Destiny"
+  creator: "Pickled Comet Mopworks"
   artwork:
-    src: artwork.svg
-    alt: "Drift Circuit key art"
+    src: cover.jpg
+    alt: "Cover art for Dungeon Janitor: Mop of Destiny"
   rating:
     value: 7.5
     scale: 10
 ---
 
-This dummy game review uses the **image-left columns** article presentation so the review header can be inspected in that layout.
+*Dungeon Janitor: Mop of Destiny* makes every slime monster both a tactical encounter and an urgent workplace-safety violation.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene occupies the image side of the **image-left columns** presentation, separate from its generated cover.

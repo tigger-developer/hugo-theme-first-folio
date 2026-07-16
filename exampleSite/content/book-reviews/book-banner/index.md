@@ -1,24 +1,24 @@
 ---
-title: "Book Review - Banner"
+title: "Reviewing Please Do Not Feed the Footnotes"
 linkTitle: "Banner"
 date: 2026-05-02
-description: "Dummy book review demonstrating the banner article presentation."
+description: "A review of a bibliographic farce presented in the banner layout."
 layout: banner
 image:
-  src: layout.svg
-  alt: "Banner illustration for the dummy book review"
+  src: article.jpg
+  alt: "Mischievous footnotes escaping from a giant library book"
 review:
   itemType: book
-  title: "The Paper Observatory"
-  creator: "Iona Vale"
+  title: "Please Do Not Feed the Footnotes"
+  creator: "Plimsy Von Crankle"
   artwork:
-    src: artwork.svg
-    alt: "The Paper Observatory cover"
+    src: cover.jpg
+    alt: "Cover art for Please Do Not Feed the Footnotes"
   rating:
     value: 4
     scale: 5
 ---
 
-This dummy book review uses the **banner** article presentation so the review header can be inspected in that layout.
+*Please Do Not Feed the Footnotes* documents the disastrous afternoon when a junior librarian gives punctuation biscuits to the annotations.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene occupies the **banner** presentation, with separately generated cover art in the review metadata.

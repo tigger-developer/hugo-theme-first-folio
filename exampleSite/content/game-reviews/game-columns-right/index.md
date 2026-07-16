@@ -1,24 +1,24 @@
 ---
-title: "Game Review - Columns Right"
+title: "Reviewing Professor Turnip's Zero-G Laundrette"
 linkTitle: "Columns Right"
 date: 2026-05-06
-description: "Dummy game review demonstrating the image-right columns article presentation."
+description: "A review of an orbital washing game in image-right columns."
 layout: featured-columns-right
 image:
-  src: layout.svg
-  alt: "Image-right columns illustration for the dummy game review"
+  src: article.jpg
+  alt: "Professor Turnip surrounded by orbiting socks and space washing machines"
 review:
   itemType: game
-  title: "Drift Circuit"
-  creator: "North Quay Games"
+  title: "Professor Turnip's Zero-G Laundrette"
+  creator: "Biscuit Nebula Fun Concern"
   artwork:
-    src: artwork.svg
-    alt: "Drift Circuit key art"
+    src: cover.jpg
+    alt: "Cover art for Professor Turnip's Zero-G Laundrette"
   rating:
     value: 7.5
     scale: 10
 ---
 
-This dummy game review uses the **image-right columns** article presentation so the review header can be inspected in that layout.
+*Professor Turnip's Zero-G Laundrette* turns missing socks into orbital hazards and fabric softener into a limited propulsion resource.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene occupies the image side of the **image-right columns** presentation, separate from its generated cover.

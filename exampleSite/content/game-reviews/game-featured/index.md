@@ -1,24 +1,24 @@
 ---
-title: "Game Review - Featured"
+title: "Reviewing Competitive Napping Championship"
 linkTitle: "Featured"
 date: 2026-05-04
-description: "Dummy game review demonstrating the featured article presentation."
+description: "A review of an elite sleeping game presented in the featured layout."
 layout: featured
 image:
-  src: layout.svg
-  alt: "Featured illustration for the dummy game review"
+  src: article.jpg
+  alt: "Napping athletes competing on elaborate beds in a sunny stadium"
 review:
   itemType: game
-  title: "Drift Circuit"
-  creator: "North Quay Games"
+  title: "Competitive Napping Championship"
+  creator: "Velvet Pillow Directorate"
   artwork:
-    src: artwork.svg
-    alt: "Drift Circuit key art"
+    src: cover.jpg
+    alt: "Cover art for Competitive Napping Championship"
   rating:
     value: 7.5
     scale: 10
 ---
 
-This dummy game review uses the **featured** article presentation so the review header can be inspected in that layout.
+*Competitive Napping Championship* rewards perfect blanket technique, strategic snoring, and waking precisely three seconds after the final whistle.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene uses the **featured** presentation, while the review component displays separately generated cover art.

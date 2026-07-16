@@ -1,24 +1,24 @@
 ---
-title: "Book Review - Hero"
+title: "Reviewing The Extremely Polite Volcano"
 linkTitle: "Hero"
 date: 2026-05-03
-description: "Dummy book review demonstrating the hero article presentation."
+description: "A review of an impeccably mannered geological comedy in the hero layout."
 layout: hero
 image:
-  src: layout.svg
-  alt: "Hero illustration for the dummy book review"
+  src: article.jpg
+  alt: "A bow-tied volcano serving tea to nervous geologists"
 review:
   itemType: book
-  title: "The Paper Observatory"
-  creator: "Iona Vale"
+  title: "The Extremely Polite Volcano"
+  creator: "Wibblethane Crump"
   artwork:
-    src: artwork.svg
-    alt: "The Paper Observatory cover"
+    src: cover.jpg
+    alt: "Cover art for The Extremely Polite Volcano"
   rating:
     value: 4
     scale: 5
 ---
 
-This dummy book review uses the **hero** article presentation so the review header can be inspected in that layout.
+*The Extremely Polite Volcano* apologizes before every eruption and sends engraved thank-you cards to the geologists measuring its lava.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene uses the **hero** presentation, with separately generated cover art alongside the review details.

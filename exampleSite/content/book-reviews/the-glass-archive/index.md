@@ -1,26 +1,26 @@
 ---
-title: "Reading The Glass Archive"
+title: "Reviewing Catalogue of Invisible Sandwiches"
 linkTitle: "Columns Left"
 date: 2026-06-18
-description: "A fictional archival mystery used to demonstrate book-review metadata."
+description: "A review of an absurd culinary museum catalogue in image-left columns."
 author: "Orla Fennell"
 hideAuthor: true
 layout: featured-columns-left
 image:
-  src: layout.svg
-  alt: "Reading room windows in The Glass Archive"
+  src: article.jpg
+  alt: "Museum curators displaying invisible sandwiches on ornate pedestals"
 review:
   itemType: book
-  title: "The Glass Archive"
-  creator: "Mara Venn"
+  title: "Catalogue of Invisible Sandwiches"
+  creator: "Zozzlemina P. Thundersocks"
   artwork:
-    src: cover.svg
-    alt: "Blue and amber cover for The Glass Archive"
+    src: cover.jpg
+    alt: "Cover art for Catalogue of Invisible Sandwiches"
   rating:
     value: 4.9
     scale: 5
 ---
 
-*The Glass Archive* is a fictional novel about a conservator who discovers that repaired panes in an abandoned railway station preserve fragments of conversations.
+*Catalogue of Invisible Sandwiches* documents a museum collection that nobody can see, smell, taste, or convincingly prove was ever catered.
 
-The review component identifies the work and its author while the article keeps the existing columns presentation. Its cover is separate from the article-author field, and its decimal score remains continuous rather than snapping to half-stars.
+The generated article scene uses the **image-left columns** presentation. Its separately generated cover remains distinct from the article-author field, and its decimal score stays continuous.

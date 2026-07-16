@@ -1,24 +1,24 @@
 ---
-title: "Book Review - Background"
+title: "Reviewing The Umbrella That Audited Tuesday"
 linkTitle: "Background"
 date: 2026-05-05
-description: "Dummy book review demonstrating the background article presentation."
+description: "A review of an absurd bureaucratic fantasy presented in the background layout."
 layout: background
 image:
-  src: layout.svg
-  alt: "Background illustration for the dummy book review"
+  src: article.jpg
+  alt: "A suspicious umbrella auditing Tuesday beside a potted fern"
 review:
   itemType: book
-  title: "The Paper Observatory"
-  creator: "Iona Vale"
+  title: "The Umbrella That Audited Tuesday"
+  creator: "Quibblewump S. Noodlefax"
   artwork:
-    src: artwork.svg
-    alt: "The Paper Observatory cover"
+    src: cover.jpg
+    alt: "Cover art for The Umbrella That Audited Tuesday"
   rating:
     value: 4
     scale: 5
 ---
 
-This dummy book review uses the **background** article presentation so the review header can be inspected in that layout.
+*The Umbrella That Audited Tuesday* follows an officious parasol investigating why the middle of the week has misplaced three receipts and a thunderstorm.
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene fills the **background** presentation, while separately generated cover art identifies the reviewed book.

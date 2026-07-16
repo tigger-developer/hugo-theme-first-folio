@@ -19,7 +19,7 @@ run_test() {
         local article_url="/$route/article.jpg"
         local cover_url="/$route/cover.jpg"
         grep -qF "$article_url" "$page" || return 1
-        [[ "$(htmlq -f "$page" -a src '.review-artwork img')" == "$cover_url" ]] || return 1
+        [[ "$(htmlq -f "$page" -a src 'img.review-artwork')" == "$cover_url" ]] || return 1
 
         local asset_url
         for asset_url in "$article_url" "$cover_url"; do
@@ -27,7 +27,9 @@ run_test() {
             [[ -f "$asset_path" ]] || return 1
             local dimensions
             dimensions="$(identify -format '%w %h' "$asset_path")" || return 1
-            [[ "$dimensions" != '0 0' ]] || return 1
+            local width="${dimensions%% *}"
+            local height="${dimensions##* }"
+            [[ "$width" -gt 0 && "$height" -gt 0 ]] || return 1
             asset_urls+=("$asset_url")
             asset_hashes+=("$(shasum -a 256 "$asset_path" | cut -d ' ' -f 1)")
         done

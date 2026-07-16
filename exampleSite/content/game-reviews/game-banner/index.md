@@ -1,24 +1,24 @@
 ---
-title: "Game Review - Banner"
+title: "Reviewing Goose Tribunal 3000"
 linkTitle: "Banner"
 date: 2026-05-02
-description: "Dummy game review demonstrating the banner article presentation."
+description: "A review of a futuristic avian courtroom game in the banner layout."
 layout: banner
 image:
-  src: layout.svg
-  alt: "Banner illustration for the dummy game review"
+  src: article.jpg
+  alt: "Furious geese in powdered wigs occupying a futuristic courtroom"
 review:
   itemType: game
-  title: "Drift Circuit"
-  creator: "North Quay Games"
+  title: "Goose Tribunal 3000"
+  creator: "Wonky Teapot Megaforge"
   artwork:
-    src: artwork.svg
-    alt: "Drift Circuit key art"
+    src: cover.jpg
+    alt: "Cover art for Goose Tribunal 3000"
   rating:
     value: 7.5
     scale: 10
 ---
 
-This dummy game review uses the **banner** article presentation so the review header can be inspected in that layout.
+*Goose Tribunal 3000* asks players to defend bread-related misdemeanours before a jury that becomes hostile whenever anyone says "pond".
 
-The reviewed-item metadata intentionally includes artwork and a rating. This keeps the visual comparison focused on layout behaviour rather than optional-field differences.
+Its generated article scene occupies the **banner** presentation, with separately generated game-cover art in the review metadata.
