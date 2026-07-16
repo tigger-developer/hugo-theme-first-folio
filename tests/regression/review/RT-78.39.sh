@@ -1,6 +1,6 @@
 # shellcheck shell=bash
-# ABOUTME: RT-78.39 - all ten review demonstrations publish usable article and reviewed-item SVGs.
-# ABOUTME: Both column demonstrations include article media and every referenced SVG is well formed.
+# ABOUTME: RT-78.39 - all twelve review demonstrations publish usable article and reviewed-item SVGs.
+# ABOUTME: All four column demonstrations include article media and every referenced SVG is well formed.
 
 # shellcheck source=_helpers.sh
 source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
@@ -11,7 +11,9 @@ run_test() {
 
     local -a column_pages=(
         "$build_dir/book-reviews/the-glass-archive/index.html"
+        "$build_dir/book-reviews/book-columns-right/index.html"
         "$build_dir/game-reviews/game-columns/index.html"
+        "$build_dir/game-reviews/game-columns-right/index.html"
     )
     local column_page
     for column_page in "${column_pages[@]}"; do
@@ -25,11 +27,13 @@ run_test() {
         "$build_dir/book-reviews/book-featured/index.html"
         "$build_dir/book-reviews/book-hero/index.html"
         "$build_dir/book-reviews/book-background/index.html"
+        "$build_dir/book-reviews/book-columns-right/index.html"
         "$build_dir/game-reviews/signal-at-dusk/index.html"
         "$build_dir/game-reviews/game-hero/index.html"
         "$build_dir/game-reviews/game-banner/index.html"
         "$build_dir/game-reviews/game-featured/index.html"
         "$build_dir/game-reviews/game-columns/index.html"
+        "$build_dir/game-reviews/game-columns-right/index.html"
     )
     local -a image_sources=()
     local page
