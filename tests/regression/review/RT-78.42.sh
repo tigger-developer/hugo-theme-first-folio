@@ -13,7 +13,7 @@ run_test() {
     mapfile -t links < <(htmlq -f "$build_dir/book-reviews/index.html" -a href '.list-view-title a')
     [[ ${#links[@]} -eq 6 ]] || return 1
 
-    [[ -n "$(htmlq -f "$build_dir/book-reviews/book-banner/index.html" '.post-banner .review-metadata--book')" ]] || return 1
+    [[ -n "$(htmlq -f "$build_dir/book-reviews/book-banner/index.html" '.banner-content > .review-metadata--book')" ]] || return 1
     [[ -n "$(htmlq -f "$build_dir/book-reviews/book-hero/index.html" '.post-hero')" ]] || return 1
     [[ -n "$(htmlq -f "$build_dir/book-reviews/book-featured/index.html" '.post-featured')" ]] || return 1
     [[ -n "$(htmlq -f "$build_dir/book-reviews/book-background/index.html" '.post-container.dark-bg .review-metadata--book')" ]] || return 1
