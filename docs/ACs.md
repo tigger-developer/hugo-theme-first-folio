@@ -7,6 +7,8 @@ Central acceptance-criteria record for closed issues.
 
 **Key:** ✅ passing · ⏳ pending · ❌ failing · ~~🚫 removed~~
 
+> **Review metadata terminology:** The inherited "article header" and "header" wording in AC24 and AC27 names the pre-content review metadata region; it does not require that region to remain inside the semantic `.article-header` element. AC25 governs the exact media-aware placement for each article presentation.
+
 | ID | Source | AC | Tests |
 |---|---|---|---|
 | AC1 | Issue #62 `AC62.1` | Given a consuming site defines audiobook content using the documented theme interface, First Folio renders the audiobook with a theme-owned layout and one playable chapter entry per chapter. | ✅ RT-62.1: Example site build contains an audiobook page for the demo content.<br>✅ RT-62.2: The generated audiobook page contains one audio control per configured chapter.<br>✅ RT-62.3: Each chapter entry exposes its configured title, media URL, and stable chapter identifier in the rendered page markup.<br>✅ RT-62.4: A fixture with audiobook content and no site-local audiobook template still renders through the First Folio theme-owned layout.<br>✅ RT-66.1: Same-bundle relative media source resolves to the page-resource URL in HTML.<br>✅ RT-66.3: `./` relative media source resolves to the page-resource URL in HTML.<br>✅ RT-66.4: Nested page-bundle media source resolves to the page-resource URL in HTML.<br>✅ RT-66.5: `../sibling-bundle/` media source resolves to the sibling page-resource URL in HTML. |
