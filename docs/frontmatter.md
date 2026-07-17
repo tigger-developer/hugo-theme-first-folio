@@ -1,4 +1,4 @@
-<!-- Version: 1.3 | Last updated: 2026-07-14 -->
+<!-- Version: 1.5 | Last updated: 2026-07-17 -->
 
 # Frontmatter Reference
 
@@ -54,7 +54,7 @@ layout: banner
 
 ## Review metadata
 
-The presence of `review` adds reviewed-item metadata below the title and breadcrumb without changing `layout`:
+The presence of `review` adds reviewed-item metadata without changing `layout`:
 
 ```yaml
 review:
@@ -72,6 +72,8 @@ review:
 `review.title` is required. All other review fields are optional. `review.artwork.src` resolves within the page bundle; its `alt` falls back to the reviewed title. Rating scale precedence is page `review.rating.scale`, then `params.review.rating.scale`, then `5`. Values may be decimal but must remain between zero and the resolved scale.
 
 Article `author` identifies the writer of the page; `review.creator` identifies the creator of the reviewed work. Article `image` controls the selected page layout; `review.artwork` is the optional reviewed-item graphic. `review.itemType` selects an optional presentation partial and is distinct from Hugo's top-level `type`.
+
+Review metadata always precedes article prose. Background and image-free articles keep it below the breadcrumb; banner and hero articles place it below their principal media; featured articles begin the text flow with it beside the floated media; and column articles place it first in the text column.
 
 See [Review metadata](reviews.md) for listing controls, extension partials, validation, and demonstrations.
 
@@ -369,14 +371,14 @@ grid:
 
 | Field | Default | Description |
 |-------|---------|-------------|
-| `list_style` | `cards` | How pages in this section are listed. Options: `cards` (masonry grid), `list` (list view), `gallery` (gallery grid), `prose` (free-form landing page — see below). |
+| `list_style` | `cards` | How pages in this section are listed. Options: `cards` (masonry grid), `list` (list view), `gallery` (gallery grid), `prose` (free-form landing page --- see below). |
 | `list_recursive` | `false` | Include pages from sub-sections in the listing. |
 | `sidebar` | `false` | Show a sidebar on the section listing page. |
 | `grid` | site default | Per-section grid configuration override (see [Configuration Reference](config.md#grid-configuration)). |
 
 ### `list_style: prose`
 
-A free-form landing-page layout. The page renders only its `.Content` body — no carousel, no masonry grid, no pagination. Optional `signpost` and `signpost_footer` frontmatter render above and below the body (same partials as on article pages). Authors compose the page with shortcodes inside the body — testimonials via `quote`, stats rows via `stats`, hero copy as prose.
+A free-form landing-page layout. The page renders only its `.Content` body --- no carousel, no masonry grid, no pagination. Optional `signpost` and `signpost_footer` frontmatter render above and below the body (same partials as on article pages). Authors compose the page with shortcodes inside the body --- testimonials via `quote`, stats rows via `stats`, hero copy as prose.
 
 Applies to both the root homepage (`content/_index.md`) and any section index page (`content/<section>/_index.md`).
 
@@ -451,8 +453,9 @@ toc: true
 
 ## Changelog
 
+- **1.5** (2026-07-17): Clarified media-aware review placement across banner, hero, featured, background, image-free, and column presentations.
 - **1.4** (2026-07-14): #78 documentation. Added layout-independent reviewed-item metadata, artwork, continuous ratings, item types, and list/card presentation behaviour.
 - **1.3** (2026-07-14): #77 documentation. Added `image.card_opacity` and clarified that `image.opacity` applies to article layouts rather than masonry cards.
 - **1.2** (2026-07-09): #75 documentation. Added `layout: audio` to the layout table and documented audio item numbering fields including `startNumber`, `displayNumber`, `episode`, and `label` precedence.
-- **1.1** (2026-05-12): #54 documentation. Added `linkTitle` to the Display Options section (#54 item 4 — short label for sidebar / breadcrumb / related-articles nav contexts; Hugo built-in falls back to `title` when unset). Added `list_style: prose` to the Section Index Fields section with a dedicated subsection and full example (#54 item 2 — free-form landing-page layout). Noted that `signpost` and `signpost_footer` also render on `list_style: prose` section pages, bracketing `.Content` the same way as on article pages.
+- **1.1** (2026-05-12): #54 documentation. Added `linkTitle` to the Display Options section (#54 item 4 --- short label for sidebar / breadcrumb / related-articles nav contexts; Hugo built-in falls back to `title` when unset). Added `list_style: prose` to the Section Index Fields section with a dedicated subsection and full example (#54 item 2 --- free-form landing-page layout). Noted that `signpost` and `signpost_footer` also render on `list_style: prose` section pages, bracketing `.Content` the same way as on article pages.
 - **1.0** (2026-05-05): Initial frontmatter reference covering basic fields, layouts, image/video, homepage controls, signpost, display title, breadcrumb, gallery, section-index, and build control.

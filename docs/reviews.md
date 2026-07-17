@@ -1,10 +1,16 @@
-<!-- Version: 1.4 | Last updated: 2026-07-16 -->
+<!-- Version: 1.5 | Last updated: 2026-07-17 -->
 
 # Review metadata
 
 First Folio adds reviewed-item metadata to an ordinary article when its frontmatter contains a `review` map. Review metadata does not select a page layout: banner, background, hero, featured, and columns layouts remain available. An article without a layout continues to use the theme's image-free fallback.
 
-The article header is ordered as article title, breadcrumb/date, then reviewed item. The article body follows. In a banner layout the complete header remains on the banner surface.
+Review metadata remains before article prose, but its exact position follows the selected presentation:
+
+- Background and image-free articles place it in the article header after the title and breadcrumb/date.
+- Banner articles retain the title and breadcrumb/date on the banner, then place review metadata immediately below the banner.
+- Hero articles place it immediately below the hero media.
+- Featured articles place it immediately after the floated media element, where it begins the surrounding text flow.
+- Column articles retain a full-width title and breadcrumb/date, then place review metadata first in whichever column contains article text.
 
 ## Frontmatter
 
@@ -99,6 +105,7 @@ Every demonstration includes a generated article image, separately generated rev
 
 ## Changelog
 
+- 1.5 (2026-07-17): Documented the final media-aware review placement for banner, hero, featured, and both column directions.
 - 1.4 (2026-07-16): Replaced the demonstration identities and imagery with twelve distinct fictional works and twenty-four generated raster assets.
 - 1.3 (2026-07-16): Added both image-left and image-right column demonstrations to each review section.
 - 1.2 (2026-07-16): Expanded the demonstrations to one page for every image-based layout in both review sections and clarified the image-free fallback.

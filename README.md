@@ -14,7 +14,7 @@ The result is a theme that handles image galleries with EXIF metadata and lightb
 
 **Article layouts.** Six layout options controlled by a single frontmatter field: full-width banner with title overlay, hero image below title, side-by-side columns (image left or right), inline featured image, and background image with configurable blur and opacity. Plus a clean text-only default.
 
-**Review metadata.** A layout-independent review block identifies books, games, music, film, or other reviewed items below the article breadcrumb. Optional artwork and continuously filled ratings support author-selected scales without conflating the reviewed creator with the article author.
+**Review metadata.** A layout-independent review block identifies books, games, music, film, or other reviewed items before article prose. Its position adapts to the selected presentation so that it follows banner or hero media, begins the text flow beside featured media, and occupies the text column in column layouts. Optional artwork and continuously filled ratings support author-selected scales without conflating the reviewed creator with the article author.
 
 **The masonry grid.** A hybrid CSS Grid and JavaScript approach that adapts to viewport width using em-based breakpoints (WCAG 2.1 compliant - respects browser font size). Configurable columns, gaps, and breakpoints. A carousel card rotates featured content above the grid. Pin values control homepage ordering.
 
@@ -1239,7 +1239,7 @@ window.masonryInit();    // Full re-initialization
 
 **Features:**
 - Click to open, click outside to close
-- Keyboard navigation (←, ->, Escape)
+- Keyboard navigation (<-, ->, Escape)
 - WebP source detection for best quality
 - EXIF-based captions
 

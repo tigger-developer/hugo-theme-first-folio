@@ -1,4 +1,4 @@
-<!-- Version: 1.2 | Last updated: 2026-07-14 -->
+<!-- Version: 1.3 | Last updated: 2026-07-14 -->
 
 # Configuration Reference
 
