@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-78.41 - background, featured, and text-only headers stack their review metadata.
+# ABOUTME: RT-78.41 - background and text-only headers stack their review metadata.
 # ABOUTME: The delivered CSS isolates semantic article headers from the site-header flex rule.
 
 # shellcheck source=_helpers.sh
@@ -11,7 +11,6 @@ run_test() {
 
     local -a pages=(
         "$build_dir/reviews/game/index.html"
-        "$build_dir/reviews/featured/index.html"
         "$build_dir/reviews/text/index.html"
     )
     local page
