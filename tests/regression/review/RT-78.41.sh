@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-# ABOUTME: RT-78.41 - article headers stack title, breadcrumb, and review metadata in source order.
+# ABOUTME: RT-78.41 - non-banner article headers stack title, breadcrumb, and review metadata.
 # ABOUTME: The delivered CSS isolates semantic article headers from the site-header flex rule.
 
 # shellcheck source=_helpers.sh
@@ -10,7 +10,7 @@ run_test() {
     build_dir="$(review_example_dir)" || return 1
 
     local -a pages=(
-        "$build_dir/book-reviews/book-banner/index.html"
+        "$build_dir/book-reviews/book-columns-right/index.html"
         "$build_dir/book-reviews/the-glass-archive/index.html"
         "$build_dir/game-reviews/signal-at-dusk/index.html"
         "$build_dir/game-reviews/game-hero/index.html"
