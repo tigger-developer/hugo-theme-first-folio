@@ -52,7 +52,7 @@
     {{ partial "signpost.html" . }}
     <div class="post-container soft-edge columns-layout">
       <!-- Title - full width -->
-      {{ partial "article-header.html" (dict "Page" . "Class" "columns-article-header" "HeadingClass" "title") }}
+      {{ partial "article-header.html" (dict "Page" . "Class" "columns-article-header" "HeadingClass" "title" "ShowReview" false) }}
 
       <!-- Two-column content area -->
       <div class="post-featured-columns">
@@ -71,6 +71,7 @@
           {{ end }}
         </div>
         <div class="featured-text-col">
+          {{ if isset .Params "review" }}{{ partial "review/metadata.html" . }}{{ end }}
           {{ if isset .Params "tldr" }}
           <div class="tldr">
             <strong>tl;dr:</strong>
@@ -85,6 +86,7 @@
         {{ else }}
         <!-- Text on left, image on right -->
         <div class="featured-text-col">
+          {{ if isset .Params "review" }}{{ partial "review/metadata.html" . }}{{ end }}
           {{ if isset .Params "tldr" }}
           <div class="tldr">
             <strong>tl;dr:</strong>
@@ -145,7 +147,7 @@
     {{- with .Params.image.opacity -}}{{- $bgOpacity = . -}}{{- end -}}
     <div class="post-container{{ if and .Params.image (eq $effectiveLayout "background") }} dark-bg{{ end }} soft-edge"{{ if and .Params.image (eq $effectiveLayout "background") }} style="--background-image: url('{{ .RelPermalink }}{{ .Params.image.src }}'); --image-opacity: {{ $bgOpacity }}; --image-blur: {{ if .Params.image.blur }}{{ .Params.image.blur }}{{ else }}{{ .Site.Params.bgImage.blur | default "2px" }}{{ end }}{{ with .Params.image.size }}; --background-size: {{ . }}{{ end }};"{{ end }}>
       <div class="post-content">
-        {{ partial "article-header.html" (dict "Page" . "HeadingClass" "title") }}
+        {{ partial "article-header.html" (dict "Page" . "HeadingClass" "title" "ShowReview" (ne $effectiveLayout "hero")) }}
 
         <!-- Hero Image/Video -->
         {{ if eq .Params.layout "hero" }}
@@ -163,6 +165,7 @@
           {{ end }}
         </div>
         {{ end }}
+        {{ if isset .Params "review" }}{{ partial "review/metadata.html" . }}{{ end }}
         {{ partial "signpost.html" . }}
         {{ end }}
 
