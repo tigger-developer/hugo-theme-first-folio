@@ -147,7 +147,7 @@
     {{- with .Params.image.opacity -}}{{- $bgOpacity = . -}}{{- end -}}
     <div class="post-container{{ if and .Params.image (eq $effectiveLayout "background") }} dark-bg{{ end }} soft-edge"{{ if and .Params.image (eq $effectiveLayout "background") }} style="--background-image: url('{{ .RelPermalink }}{{ .Params.image.src }}'); --image-opacity: {{ $bgOpacity }}; --image-blur: {{ if .Params.image.blur }}{{ .Params.image.blur }}{{ else }}{{ .Site.Params.bgImage.blur | default "2px" }}{{ end }}{{ with .Params.image.size }}; --background-size: {{ . }}{{ end }};"{{ end }}>
       <div class="post-content">
-        {{ partial "article-header.html" (dict "Page" . "HeadingClass" "title" "ShowReview" (ne $effectiveLayout "hero")) }}
+        {{ partial "article-header.html" (dict "Page" . "HeadingClass" "title" "ShowReview" (and (ne $effectiveLayout "hero") (ne $effectiveLayout "featured"))) }}
 
         <!-- Hero Image/Video -->
         {{ if eq .Params.layout "hero" }}
@@ -185,6 +185,7 @@
           {{ end }}
         </div>
         {{ end }}
+        {{ if isset .Params "review" }}{{ partial "review/metadata.html" . }}{{ end }}
         {{ end }}
 
         {{ if isset .Params "tldr" }}
