@@ -9,6 +9,7 @@ run_test() {
     page="$(review_home_page)" || return 1
     [[ -n "$(htmlq -f "$page" '.masonry-item.masonry-cards:not(.carousel-card) .masonry-section')" ]] || return 1
     [[ -n "$(htmlq -f "$page" '.masonry-item.masonry-cards:not(.carousel-card) .review-listing-metadata--compact')" ]] || return 1
+    [[ -n "$(htmlq -f "$page" '.masonry-item.masonry-cards:not(.carousel-card) .review-listing-metadata--compact + .masonry-meta')" ]] || return 1
     [[ -z "$(htmlq -f "$page" '.masonry-item.masonry-cards:not(.carousel-card) .masonry-author')" ]] || return 1
     [[ -z "$(htmlq -f "$page" '.masonry-item.masonry-cards:not(.carousel-card) .masonry-date')" ]]
 }
