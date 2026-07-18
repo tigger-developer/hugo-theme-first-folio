@@ -1,4 +1,4 @@
-<!-- Version: 1.3 | Last updated: 2026-07-14 -->
+<!-- Version: 1.4 | Last updated: 2026-07-18 -->
 
 # Configuration Reference
 
@@ -66,6 +66,9 @@ Controls the default denominator and horizontal image strip for article ratings:
 ```yaml
 params:
   review:
+    attribution:
+      en: by
+      fr: de
     rating:
       scale: 5
       image: /images/review-rating-stars.svg
@@ -73,10 +76,11 @@ params:
 
 | Key | Default | Description |
 |---|---|---|
+| `review.attribution.en` | `by` | English connector between a reviewed-item title and creator on review-enabled cards. Other language keys may be added using the same map. |
 | `review.rating.scale` | `5` | Rating denominator when the page omits `review.rating.scale`. |
 | `review.rating.image` | `/images/review-rating-stars.svg` | Horizontal strip used for the continuously clipped visual rating. |
 
-Page-level scale wins over the site default. The visible authored score remains authoritative and accessible; the strip is decorative. See [Review metadata](reviews.md) for the frontmatter and item-type extension contract.
+Card attribution resolves the connector from the page language, site language, `en`, and finally the built-in `by`. Page-level rating scale wins over the site default. The visible authored score remains authoritative and accessible; the strip is decorative. See [Review metadata](reviews.md) for the frontmatter and item-type extension contract.
 
 ## Background image defaults
 
@@ -108,7 +112,7 @@ params:
     opacity: 0.9         # card image opacity (falls back to bgImage.opacity)
     blur: 2px            # card image blur (falls back to bgImage.blur)
     showAuthor: true     # show author name on card meta
-    showReview: false    # replace card meta with reviewed-item title and creator
+    showReview: false    # retain section; replace article author/date with review attribution
     title:
       wash:
         opacity: 0.2     # title wash tint strength
@@ -128,7 +132,7 @@ params:
 | `opacity` | inherits `bgImage.opacity` | Image opacity on cards. |
 | `blur` | inherits `bgImage.blur` | Image blur on cards. |
 | `showAuthor` | `true` | Show the author name in the card meta strip. |
-| `showReview` | `false` | On review pages, replace section/author/date card metadata with compact reviewed-item title and optional creator metadata. |
+| `showReview` | `false` | On review pages, retain the section/topic, omit article author/date, and add compact reviewed-item attribution. |
 
 ### Title wash
 
@@ -188,7 +192,7 @@ params:
   carousel:
     interval: 6          # seconds between slides
     showAuthor: true     # show author name on carousel meta
-    showReview: false    # replace carousel meta with reviewed-item title and creator
+    showReview: false    # retain section; replace article author/date with review attribution
     bgImage:
       opacity: 0.9       # carousel image opacity (falls back to bgImage.opacity)
       blur: 0px          # carousel image blur (falls back to bgImage.blur)
@@ -210,7 +214,7 @@ params:
 |-----|---------|-------------|
 | `interval` | `6` | Seconds between automatic slide transitions. |
 | `showAuthor` | `true` | Show the author name on carousel meta. |
-| `showReview` | `false` | On review pages, replace section/author/date carousel metadata with a larger reviewed-item title and optional creator treatment. |
+| `showReview` | `false` | On review pages, retain the section/topic, omit article author/date, and add prominent reviewed-item attribution. |
 | `bgImage.opacity` | inherits `bgImage.opacity` | Image opacity on carousel cards. |
 | `bgImage.blur` | inherits `bgImage.blur` | Image blur on carousel cards. |
 | `title.wash.opacity` | `0.2` | Tint strength behind the carousel title. |
@@ -585,6 +589,7 @@ See `exampleSite/config/_default/hugo.yaml` for a complete working configuration
 
 ## Changelog
 
+- **1.4** (2026-07-18): #79 documentation. Added localized review-attribution connectors and clarified retained section metadata on review-enabled cards and carousel items.
 - **1.3** (2026-07-14): #78 documentation. Added review rating defaults and the independent masonry/carousel review metadata controls.
 - **1.2** (2026-07-14): #76 documentation. Added `params.spoiler.opacity` and documented inherited spoiler mask colour.
 - **1.1** (2026-05-10): Added `prereleaseKey`, `mainImage` / `mainImageDark`, `og_image`, `footerLinks`, `excludedTypes`, `tocTitle`, site-level `description`, `carousel.showAuthor`. Corrected stale defaults across `cardImage`, `cardGalleryImage`, and `carousel` wash sections. Added missing wash sub-keys: `coverage` and `blur` on description washes, `gradientV` / `gradientH` on gallery card title wash.

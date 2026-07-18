@@ -1,4 +1,4 @@
-<!-- Version: 1.5 | Last updated: 2026-07-17 -->
+<!-- Version: 1.6 | Last updated: 2026-07-18 -->
 
 # Review metadata
 
@@ -64,13 +64,19 @@ Plain `list_style: list` entries show the reviewed-item title and optional creat
 
 ```yaml
 params:
+  review:
+    attribution:
+      en: by
+      fr: de
   cardImage:
     showReview: true
   carousel:
     showReview: true
 ```
 
-Plain-list metadata contains only the reviewed-item title and creator. When either card control is enabled, that review identity replaces the card's ordinary section, article-author, and date metadata rather than adding another row. Masonry uses compact meta-sized pills; carousel uses the same visual language at a larger size. Artwork, ratings, and item-type role labels remain on the article page.
+Plain-list metadata contains only the reviewed-item title and creator. When either card control is enabled, the section/topic remains visible while the article author and publication date are omitted. The reviewed-item title and optional creator appear together as a separate accent group: the title is bold, while the localized connector and creator are italic. A review without a creator shows its title without a connector.
+
+Masonry uses compact meta sizing; carousel uses the same visual language at a larger size. The connector is selected from `params.review.attribution` using the page language, then the site language, then `en`; when none is configured, the built-in `by` is used. Artwork, ratings, and item-type role labels remain on the article page.
 
 ## Item types and Hugo content types
 
@@ -105,6 +111,7 @@ Every demonstration includes a generated article image, separately generated rev
 
 ## Changelog
 
+- 1.6 (2026-07-18): Documented localized reviewed-item attribution on masonry and carousel cards, including retained section metadata and connector fallback.
 - 1.5 (2026-07-17): Documented the final media-aware review placement for banner, hero, featured, and both column directions.
 - 1.4 (2026-07-16): Replaced the demonstration identities and imagery with twelve distinct fictional works and twenty-four generated raster assets.
 - 1.3 (2026-07-16): Added both image-left and image-right column demonstrations to each review section.

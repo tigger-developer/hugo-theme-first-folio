@@ -1,4 +1,4 @@
-<!-- Version: 1.5 | Last updated: 2026-07-17 -->
+<!-- Version: 1.6 | Last updated: 2026-07-18 -->
 
 # Frontmatter Reference
 
@@ -74,6 +74,8 @@ review:
 Article `author` identifies the writer of the page; `review.creator` identifies the creator of the reviewed work. Article `image` controls the selected page layout; `review.artwork` is the optional reviewed-item graphic. `review.itemType` selects an optional presentation partial and is distinct from Hugo's top-level `type`.
 
 Review metadata always precedes article prose. Background and image-free articles keep it below the breadcrumb; banner and hero articles place it below their principal media; featured articles begin the text flow with it beside the floated media; and column articles place it first in the text column.
+
+When review metadata is enabled for masonry or carousel listings, the section/topic remains visible while the article author and publication date are omitted. The reviewed-item title is bold; the localized connector plus creator are italic and share one accent treatment with the title. A missing creator also omits the connector. Connector text is configured under `params.review.attribution`, not in page frontmatter.
 
 See [Review metadata](reviews.md) for listing controls, extension partials, validation, and demonstrations.
 
@@ -453,6 +455,7 @@ toc: true
 
 ## Changelog
 
+- **1.6** (2026-07-18): Clarified review-enabled card and carousel metadata, semantic attribution styling, and site-level connector localization.
 - **1.5** (2026-07-17): Clarified media-aware review placement across banner, hero, featured, background, image-free, and column presentations.
 - **1.4** (2026-07-14): #78 documentation. Added layout-independent reviewed-item metadata, artwork, continuous ratings, item types, and list/card presentation behaviour.
 - **1.3** (2026-07-14): #77 documentation. Added `image.card_opacity` and clarified that `image.opacity` applies to article layouts rather than masonry cards.
