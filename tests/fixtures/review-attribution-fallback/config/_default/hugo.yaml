@@ -1,0 +1,7 @@
+baseURL: /
+languageCode: cy
+title: Review Attribution Fallback Fixture
+
+params:
+  cardImage:
+    showReview: true

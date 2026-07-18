@@ -1,13 +1,7 @@
 # shellcheck shell=bash
-# ABOUTME: RT-78.34 - enabled carousel cards show review title and creator.
+# ABOUTME: RT-78.34 - removed carousel replacement-metadata regression.
+# ABOUTME: Superseded by RT-79.2 after review carousel items retained their section/topic.
 
-# shellcheck source=_helpers.sh
-source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
-
-run_test() {
-    local page
-    page="$(review_cards_page)" || return 1
-    [[ "$(htmlq -f "$page" -t '.carousel-card .card-review-title')" == "Carousel Subject" ]] || return 1
-    [[ "$(htmlq -f "$page" -t '.carousel-card .card-review-creator')" == "Carousel Creator" ]] || return 1
-    [[ -z "$(htmlq -f "$page" '.carousel-card .masonry-meta')" ]]
-}
+# REMOVED: The original test required review metadata to replace the complete
+# section/author/date strip. Issue #79 retains the section and replaces only the
+# article author and date. The artifact remains for acceptance-history continuity.

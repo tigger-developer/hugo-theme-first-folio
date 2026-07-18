@@ -3,7 +3,12 @@ languageCode: en-GB
 title: Review Fixture
 
 params:
+  mainSections:
+    - cards
   review:
+    attribution:
+      en: by
+      fr: de
     rating:
       scale: 7
       image: /images/review-hearts.svg

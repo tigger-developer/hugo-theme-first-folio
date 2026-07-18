@@ -136,6 +136,9 @@ params:
     - game-reviews
 
   review:
+    attribution:
+      en: by
+      fr: de
     rating:
       scale: 5
       image: /images/review-rating-stars.svg

@@ -115,22 +115,22 @@
             {{- $showDate := and .Date (not .Params.hideDate) -}}
             {{- $cardShowsAuthor := $.Site.Params.cardImage.showAuthor }}{{- if eq $cardShowsAuthor nil -}}{{- $cardShowsAuthor = true -}}{{- end -}}
             {{- $showAuthor := and .Params.author (not .Params.hideAuthor) $cardShowsAuthor -}}
-            {{- if and (not $showReview) (or $showSection $showDate $showAuthor) -}}
+            {{- if or $showSection (and (not $showReview) (or $showDate $showAuthor)) -}}
             <p class="masonry-meta">
               {{- if $showSection -}}
               <span class="masonry-section">{{ if $sectionLabel }}{{ $sectionLabel }}{{ else }}{{ with site.GetPage $section }}{{ .Title }}{{ else }}{{ $section | humanize | title }}{{ end }}{{ end }}</span>
               {{- end -}}
-              {{- if $showAuthor -}}
+              {{- if and (not $showReview) $showAuthor -}}
               <span class="masonry-author">{{ .Params.author }}</span>
               {{- end -}}
               {{- /* Issue #79: Support hideDate frontmatter */ -}}
-              {{- if $showDate -}}
+              {{- if and (not $showReview) $showDate -}}
               <span class="masonry-date">{{ .Date.Format "2 Jan 2006" }}</span>
               {{- end -}}
             </p>
             {{- end -}}
             {{- if $showReview -}}
-            {{ partial "review/listing.html" (dict "Page" . "Prefix" "card" "Modifier" "compact") }}
+            {{ partial "review/listing.html" (dict "Page" . "Prefix" "card" "Modifier" "compact" "Attribution" true) }}
             {{- end -}}
           </div>
           <div class="masonry-card-bottom">

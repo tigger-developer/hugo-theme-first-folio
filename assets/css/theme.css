@@ -2090,51 +2090,15 @@ main.list .content {
   color: rgba(255, 255, 255, 0.85);
 }
 
-.masonry-item.has-image .review-listing-title,
-.masonry-item.has-image .review-listing-creator {
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-}
-
 .masonry-item.has-image .masonry-content:not(.masonry-overlay) .review-listing-metadata {
   display: inline-flex;
   align-self: flex-start;
-  gap: 0.25rem 0;
-}
-
-.masonry-item.has-image .masonry-content:not(.masonry-overlay) .review-listing-metadata > span {
-  padding: 0.1rem 0.4rem;
-  background: var(--frosted-glass-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 0.25rem;
-  text-shadow: none;
-}
-
-.masonry-item.has-image .masonry-content:not(.masonry-overlay) .review-listing-metadata > .review-listing-title {
-  background: var(--color-secondary);
-  color: #1a1a1a;
 }
 
 .carousel-card .review-listing-metadata--prominent {
   display: inline-flex;
   align-self: flex-start;
-  gap: 0.25rem 0;
   line-height: 1.35;
-}
-
-.carousel-card .review-listing-metadata--prominent > span {
-  padding: 0.15rem 0.55rem;
-  background: var(--frosted-glass-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-radius: 0.25rem;
-  text-shadow: none;
-}
-
-.carousel-card .review-listing-metadata--prominent > .review-listing-title {
-  background: var(--color-secondary);
-  color: #1a1a1a;
 }
 
 /* Issue #22: Frosted glass per-pill for meta items on image cards */

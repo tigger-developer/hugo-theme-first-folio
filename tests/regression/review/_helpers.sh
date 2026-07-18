@@ -19,6 +19,12 @@ review_cards_page() {
     echo "$build_dir/cards/index.html"
 }
 
+review_home_page() {
+    local build_dir
+    build_dir="$(review_fixture_dir)" || return 1
+    echo "$build_dir/index.html"
+}
+
 review_hardcoded_page() {
     local build_dir
     build_dir="$(build_fixture "review-hardcoded-scale")" || return 1

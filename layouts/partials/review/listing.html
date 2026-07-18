@@ -1,10 +1,27 @@
 {{/* ABOUTME: Compact review identity for list, masonry, and carousel presentations. */}}
-{{/* ABOUTME: Shows only the reviewed-item title and optional creator. */}}
+{{/* ABOUTME: Card presentations localize the connector between the reviewed title and creator. */}}
 {{- $review := .Page.Params.review -}}
 {{- $prefix := .Prefix -}}
 {{- with $review -}}
 <p class="{{ $prefix }}-review review-listing-metadata{{ with $.Modifier }} review-listing-metadata--{{ . }}{{ end }}" data-review-title="{{ .title }}">
-  <span class="{{ $prefix }}-review-title review-listing-title">{{ .title }}</span>
-  {{- with .creator }}<span class="{{ $prefix }}-review-creator review-listing-creator">{{ . }}</span>{{- end }}
+  {{- if $.Attribution -}}
+    {{- $attribution := $.Page.Site.Params.review.attribution | default dict -}}
+    {{- $pageLanguage := $.Page.Params.contentLang | default $.Page.Language.Lang | default "" -}}
+    {{- $siteLanguage := $.Page.Site.Language.Lang | default "" -}}
+    {{- $connector := "" -}}
+    {{- range slice $pageLanguage $siteLanguage "en" -}}
+      {{- if and (not $connector) . -}}
+        {{- with index $attribution . -}}{{- $connector = . -}}{{- end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $connector = $connector | default "by" -}}
+    <strong class="{{ $prefix }}-review-title review-listing-title">{{ .title }}</strong>
+    {{- with .creator }}
+    <em class="review-listing-attribution"><span class="review-listing-connector">{{ $connector }}</span> <span class="{{ $prefix }}-review-creator review-listing-creator">{{ . }}</span></em>
+    {{- end -}}
+  {{- else -}}
+    <span class="{{ $prefix }}-review-title review-listing-title">{{ .title }}</span>
+    {{- with .creator }}<span class="{{ $prefix }}-review-creator review-listing-creator">{{ . }}</span>{{- end }}
+  {{- end -}}
 </p>
 {{- end -}}
