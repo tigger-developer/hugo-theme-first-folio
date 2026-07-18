@@ -2091,12 +2091,12 @@ main.list .content {
 }
 
 .masonry-item.has-image .masonry-content:not(.masonry-overlay) .review-listing-metadata {
-  display: inline-flex;
+  display: block;
   align-self: flex-start;
 }
 
 .carousel-card .review-listing-metadata--prominent {
-  display: inline-flex;
+  display: block;
   align-self: flex-start;
   line-height: 1.35;
 }

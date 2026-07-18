@@ -15,10 +15,7 @@
       {{- end -}}
     {{- end -}}
     {{- $connector = $connector | default "by" -}}
-    <strong class="{{ $prefix }}-review-title review-listing-title">{{ .title }}</strong>
-    {{- with .creator }}
-    <em class="review-listing-attribution"><span class="review-listing-connector">{{ $connector }}</span> <span class="{{ $prefix }}-review-creator review-listing-creator">{{ . }}</span></em>
-    {{- end -}}
+    <span class="review-listing-accent"><strong class="{{ $prefix }}-review-title review-listing-title">{{ .title }}</strong>{{ with .creator }} <em class="review-listing-attribution"><span class="review-listing-connector">{{ $connector }}</span> <span class="{{ $prefix }}-review-creator review-listing-creator">{{ . }}</span></em>{{ end }}</span>
   {{- else -}}
     <span class="{{ $prefix }}-review-title review-listing-title">{{ .title }}</span>
     {{- with .creator }}<span class="{{ $prefix }}-review-creator review-listing-creator">{{ . }}</span>{{- end }}
