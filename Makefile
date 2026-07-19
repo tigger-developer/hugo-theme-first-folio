@@ -4,7 +4,6 @@
 SHELL := /usr/bin/env bash
 SMOKE_DIR := /tmp/ff-smoke-build
 HUGO_BIND ?= 127.0.0.1
-HUGO_PORT ?= 1313
 FIRST_FOLIO_MEDIA_CONTENT ?= exampleSite/content/audiobook-demo/index.md exampleSite/content/podcast-demo/index.md
 FIRST_FOLIO_MEDIA_STATIC_DIR ?= exampleSite/static
 FIRST_FOLIO_MEDIA_OUTPUT ?= exampleSite/data/first_folio_media.yaml
@@ -20,7 +19,7 @@ help:
 	@printf '  test          run regression tests (tests/regression/)\n'
 	@printf '  test-one-off  run one-off tests (tests/one_off/); use ISSUE=N to filter\n'
 	@printf '  smoke         build exampleSite and link-check it with htmltest\n'
-	@printf '  serve         run hugo server for exampleSite; override HUGO_BIND/HUGO_PORT as needed\n'
+	@printf '  serve         run hugo server for exampleSite\n'
 	@printf '  lint          shellcheck on test scripts\n'
 
 build: verify-audiobook-metadata
@@ -61,7 +60,7 @@ smoke: verify-audiobook-metadata
 	@htmltest
 
 serve:
-	@hugo server --source exampleSite --bind "$(HUGO_BIND)" --port "$(HUGO_PORT)" --baseURL "http://$(HUGO_BIND):$(HUGO_PORT)/" --disableFastRender
+	@hugo server --source exampleSite --bind "$(HUGO_BIND)" --baseURL "http://$(HUGO_BIND):$(HUGO_PORT)/" --disableFastRender
 
 lint:
 	@if command -v shellcheck >/dev/null 2>&1; then \
