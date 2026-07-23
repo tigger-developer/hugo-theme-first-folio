@@ -19,10 +19,10 @@ image:
   carousel_position: center  # crop position on carousel  
 signpost:
   text: "THEME DOCUMENTATION"
-  url: "https://github.com/tadg-paul/hugo-theme-first-folio"
+  url: "https://github.com/tigger-developer/hugo-theme-first-folio"
 signpost_footer:
   text: "VIEW SOURCE ON GITHUB"
-  url: "https://github.com/tadg-paul/hugo-theme-first-folio"
+  url: "https://github.com/tigger-developer/hugo-theme-first-folio"
 resources:
   - src: "gallery-1.jpg"
     params:
@@ -316,7 +316,7 @@ Self-hosted contact form with Cloudflare Turnstile CAPTCHA:
 {{</* contactform newsletter="true" */>}}
 ```
 
-(Requires Cloudflare Worker configuration. See [docs/contactform.md](https://github.com/tadg-paul/hugo-theme-first-folio/blob/main/docs/contactform.md) for setup.)
+(Requires Cloudflare Worker configuration. See [docs/contactform.md](https://github.com/tigger-developer/hugo-theme-first-folio/blob/main/docs/contactform.md) for setup.)
 
 ## Formspree
 

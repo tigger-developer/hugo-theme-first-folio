@@ -29,7 +29,7 @@ This creates a new Hugo project with the standard directory structure.
 
 ```bash
 git init
-git submodule add https://github.com/tadg-paul/hugo-theme-first-folio.git themes/first-folio
+git submodule add https://github.com/tigger-developer/hugo-theme-first-folio.git themes/first-folio
 ```
 
 Then tell Hugo to use it. Open `hugo.yaml` and set:

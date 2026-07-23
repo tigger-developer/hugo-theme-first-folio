@@ -6,8 +6,8 @@ source "$(dirname "${BASH_SOURCE[0]}")/_helpers.sh"
 run_test() {
     [[ "$(theme_toml_value '.name')" == "First Folio" ]] || return 1
     [[ "$(theme_toml_value '.license')" == "Apache-2.0" ]] || return 1
-    [[ "$(theme_toml_value '.licenselink')" == "https://github.com/tadg-paul/hugo-theme-first-folio/blob/main/LICENSE" ]] || return 1
-    [[ "$(theme_toml_value '.homepage')" == "https://github.com/tadg-paul/hugo-theme-first-folio" ]] || return 1
+    [[ "$(theme_toml_value '.licenselink')" == "https://github.com/tigger-developer/hugo-theme-first-folio/blob/main/LICENSE" ]] || return 1
+    [[ "$(theme_toml_value '.homepage')" == "https://github.com/tigger-developer/hugo-theme-first-folio" ]] || return 1
     [[ "$(theme_toml_value '.demosite')" == "https://demo.theme.tadg.ie/" ]] || return 1
     [[ "$(theme_toml_value '.author.name')" == "Taḋg Paul" ]] || return 1
     [[ "$(theme_toml_value '.author.homepage')" == "https://tadg.ie" ]] || return 1

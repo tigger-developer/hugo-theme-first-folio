@@ -9,7 +9,7 @@ if [[ -z "$expected" ]]; then
     exit 2
 fi
 
-resolved="$(go list -m -json "github.com/tadg-paul/hugo-theme-first-folio@$expected" | yq -p json -r '.Version')"
+resolved="$(go list -m -json "github.com/tigger-developer/hugo-theme-first-folio@$expected" | yq -p json -r '.Version')"
 if [[ "$resolved" != "$expected" ]]; then
     printf 'expected module version %s, got %s\n' "$expected" "$resolved" >&2
     exit 1

@@ -10,7 +10,7 @@ if [[ -z "$repo" || ! -d "$repo/.git" ]]; then
 fi
 
 themes_file="$repo/themes.txt"
-theme_url="github.com/tadg-paul/hugo-theme-first-folio"
+theme_url="github.com/tigger-developer/hugo-theme-first-folio"
 
 if [[ ! -f "$themes_file" ]]; then
     printf 'themes.txt not found in %s\n' "$repo" >&2

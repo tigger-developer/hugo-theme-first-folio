@@ -7,7 +7,7 @@ title: example.site
 
 module:
   imports:
-    - path: github.com/tadg-paul/hugo-theme-first-folio
+    - path: github.com/tigger-developer/hugo-theme-first-folio
 
 copyright: "© 2023-2026 Taḋg Paul — Apache License 2.0"
 
@@ -168,7 +168,7 @@ params:
       url: https://bsky.app/profile/example
     - name: GitHub
       icon: github                                   # Feather icon (default)
-      url: https://github.com/tadg-paul/hugo-theme-first-folio
+      url: https://github.com/tigger-developer/hugo-theme-first-folio
     - name: Mastodon
       icon: "simple:mastodon"                        # Simple Icons
       url: https://mastodon.social/@example
@@ -176,7 +176,7 @@ params:
       icon: rss                                      # Feather icon
       url: /index.xml
 
-  subtitle: "A demo of the [First Folio](https://github.com/tadg-paul/hugo-theme-first-folio) theme. All content and authors are fictitious."
+  subtitle: "A demo of the [First Folio](https://github.com/tigger-developer/hugo-theme-first-folio) theme. All content and authors are fictitious."
 
 menu:
   main:

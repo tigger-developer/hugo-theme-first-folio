@@ -1,6 +1,6 @@
 # First Folio Example Site
 
-A demonstration site for the [First Folio Hugo theme](https://github.com/tadg-paul/hugo-theme-first-folio).
+A demonstration site for the [First Folio Hugo theme](https://github.com/tigger-developer/hugo-theme-first-folio).
 
 ## Quick Start
 

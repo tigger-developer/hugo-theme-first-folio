@@ -34,12 +34,12 @@ For non-developers who need to edit content on an existing site, see the [Conten
 
 1. Add the theme to your Hugo site:
    ```bash
-   git submodule add https://github.com/tadg-paul/hugo-theme-first-folio.git themes/first-folio
+   git submodule add https://github.com/tigger-developer/hugo-theme-first-folio.git themes/first-folio
    ```
 
    Or clone directly:
    ```bash
-   git clone https://github.com/tadg-paul/hugo-theme-first-folio.git themes/first-folio
+   git clone https://github.com/tigger-developer/hugo-theme-first-folio.git themes/first-folio
    ```
 
 2. Update your `hugo.yaml`:
@@ -56,7 +56,7 @@ For non-developers who need to edit content on an existing site, see the [Conten
 
 ## Compatibility
 
-First Folio targets Hugo Extended 0.155.0 or newer. The theme is published as the Hugo module `github.com/tadg-paul/hugo-theme-first-folio`, with the live example site at https://demo.theme.tadg.ie.
+First Folio targets Hugo Extended 0.155.0 or newer. The theme is published as the Hugo module `github.com/tigger-developer/hugo-theme-first-folio`, with the live example site at https://demo.theme.tadg.ie.
 
 The repository includes portal metadata in `theme.toml` and preview assets under `images/` for submission to the public Hugo theme directory.
 

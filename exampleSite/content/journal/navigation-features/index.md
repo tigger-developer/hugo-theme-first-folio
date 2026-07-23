@@ -14,10 +14,10 @@ image:
 toc: "Navigation features"
 signpost:
   text: "THEME DOCUMENTATION"
-  url: "https://github.com/tadg-paul/hugo-theme-first-folio"
+  url: "https://github.com/tigger-developer/hugo-theme-first-folio"
 signpost_footer:
   text: "VIEW ON GITHUB"
-  url: "https://github.com/tadg-paul/hugo-theme-first-folio"
+  url: "https://github.com/tigger-developer/hugo-theme-first-folio"
 ---
 
 This page demonstrates the navigation features of the First Folio theme.
