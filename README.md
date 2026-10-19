@@ -1,5 +1,7 @@
 # First Folio
 
+![First Folio theme screenshot](images/screenshot.png)
+
 [Live demo](https://demo.theme.tadg.ie) | [In production](https://tadg.ie) | [Shortcode reference](docs/shortcodes.md) | [Review metadata](docs/reviews.md) | [Audiobook pages](docs/audiobook.md)
 
 ## What this is
