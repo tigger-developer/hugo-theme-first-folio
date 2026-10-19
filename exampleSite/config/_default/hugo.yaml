@@ -15,7 +15,7 @@ pagination:
   pagerSize: 12
 
 imaging:
-  quality: 85
+  # quality: 85 $ deprecated by hugo
   resampleFilter: "CatmullRom"
   exif:
     disableDate: false
