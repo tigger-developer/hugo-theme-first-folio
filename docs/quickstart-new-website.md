@@ -77,7 +77,6 @@ taxonomies:
   tag: tags
 
 imaging:
-  quality: 90
   exif:
     disableLatLong: true
 ```
