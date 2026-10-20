@@ -20,6 +20,10 @@ imaging:
     disableDate: false
     disableLatLong: true
 
+# Required from Hugo v0.168.0
+security:
+  allowContent:
+    - '! ^text/html$'
 
 params:
   # prereleaseKey: testpass
