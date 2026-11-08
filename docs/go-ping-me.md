@@ -174,3 +174,28 @@ A bounded helper request and preflight for the demo origin could not resolve
 `gopingme.lobb.ie` from the development machine. No mail was submitted. Live
 Turnstile, cross-origin submission, redirects and received-email acceptance
 remain unverified. The form page remains enabled pending that validation.
+
+## Deployment handoff, 2026-11-08
+
+The operator confirmed GitHub Pages was unpublished and authorized deployment
+to `kepler452`, including replacement of conflicting DNS for
+`demo.theme.tadg.ie`. The Pages deploy job remains disabled.
+
+The implementation was published in commit `a34334e` (reusable Go Ping Me forms
+and Exodan demo configuration). This supported CLI invocation was attempted:
+
+```sh
+deploy-nix --verbose --force-dns-overwrite /Users/tigger/code/www/hugo-theme-first-folio/exampleSite kepler452 master
+```
+
+It exited 1 with `invalid application directory name`, following a fleet-alert
+notice. No successful Exodan deployment is evidenced. The integration contract
+needs a supported route for this repository's `exampleSite` subdirectory;
+application-side directory renaming or copied deployment machinery has not been
+introduced to bypass the failure. Resolve that interface with the infrastructure
+owner before retrying the authorized cutover.
+
+Outstanding external evidence is the published `customform` schema contract,
+service DNS and origin authorization, a successful demo deployment, and the
+operator's real Turnstile and received-email checks. The demo form must not be
+marked validated or disabled as a proven example until those checks occur.
