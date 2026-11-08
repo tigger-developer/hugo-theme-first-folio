@@ -1,0 +1,8 @@
+{{/* ABOUTME: Published Go Ping Me schema field definitions. */}}
+{{/* ABOUTME: Keep schema-specific controls separate from the shared form renderer. */}}
+{{ return (dict "contact" (slice
+  (dict "name" "name" "type" "text" "label" "Name" "required" true "autocomplete" "name" "maxlength" 120)
+  (dict "name" "email" "type" "email" "label" "Email" "required" true "autocomplete" "email" "maxlength" 254)
+  (dict "name" "subject" "type" "text" "label" "Subject (optional)" "maxlength" 160)
+  (dict "name" "message" "type" "textarea" "label" "Message" "required" true "maxlength" 10000)
+)) }}

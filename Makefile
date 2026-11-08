@@ -45,6 +45,7 @@ generate-audiobook-metadata:
 	@bash scripts/generate-audiobook-metadata.sh
 
 test: lint
+	@./tests/go-ping-me/render.mjs
 	@bash tests/regression/run.sh
 
 test-one-off:

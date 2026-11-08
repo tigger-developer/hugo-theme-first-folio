@@ -1,0 +1,16 @@
+{{- /* ABOUTME: Register a bounded additional control with its enclosing Go Ping Me form. */ -}}
+{{- /* ABOUTME: Emit no HTML; the parent validates and renders the structured declaration. */ -}}
+{{- if not .Parent -}}
+  {{- errorf "go-ping-me: %s: go-ping-me-field requires a go-ping-me parent" .Position -}}
+{{- else if ne .Parent.Name "go-ping-me" -}}
+  {{- errorf "go-ping-me: %s: go-ping-me-field requires a direct go-ping-me parent" .Position -}}
+{{- else -}}
+  {{- $field := dict -}}
+  {{- range $key, $value := .Params -}}
+    {{- if not (in (slice "name" "type" "label" "autocomplete" "required" "value") $key) -}}
+      {{- errorf "go-ping-me: %s: unknown field attribute %v" $.Position $key -}}
+    {{- end -}}
+    {{- $field = merge $field (dict (printf "%v" $key) $value) -}}
+  {{- end -}}
+  {{- .Parent.Store.Add "fields" (slice $field) -}}
+{{- end -}}

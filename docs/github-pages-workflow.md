@@ -1,5 +1,12 @@
 # Deploying to GitHub Pages
 
+> Demo migration, 2026-11-08: the operator has unpublished this repository's
+> GitHub Pages site. Its Pages deploy job is disabled to prevent a push from
+> republishing it. The intended replacement is Exodan host `kepler452` at the
+> same `https://demo.theme.tadg.ie/` URL. The workflow and demo-specific notes
+> below are retained as the previous deployment instructions; generic guidance
+> still applies to consuming sites that choose GitHub Pages.
+
 A ready-to-use GitHub Actions workflow for deploying a Hugo site with the First Folio theme to GitHub Pages.
 
 ## Prerequisites

@@ -1,0 +1,75 @@
+{{/* ABOUTME: Validate the public Go Ping Me site configuration at the rendering boundary. */}}
+{{/* ABOUTME: Reject unknown policy and malformed values with the source page identified. */}}
+{{ $page := . }}
+{{ $where := $page.RelPermalink }}
+{{ with $page.File }}{{ $where = .Path }}{{ end }}
+{{ $config := $page.Site.Params.go_ping_me | default dict }}
+{{ if not (reflect.IsMap $config) }}
+  {{ errorf "go-ping-me: %s: params.go_ping_me must be a map" $where }}
+  {{ $config = dict }}
+{{ end }}
+{{ range $key, $value := $config }}
+  {{ if not (in (slice "service_origin" "helper_path" "turnstile" "forms") $key) }}
+    {{ errorf "go-ping-me: %s: unknown configuration key %s" $where $key }}
+  {{ end }}
+{{ end }}
+{{ $origin := $config.service_origin }}
+{{ if ne (printf "%T" $origin) "string" }}
+  {{ errorf "go-ping-me: %s: service_origin must be an HTTPS root URL" $where }}
+{{ else }}
+  {{ $parsed := try (urls.Parse $origin) }}
+  {{ if $parsed.Err }}
+    {{ errorf "go-ping-me: %s: service_origin is not a valid URL" $where }}
+  {{ else }}
+    {{ $url := $parsed.Value }}
+    {{ $port := $url.Port }}
+    {{ if or (ne $url.Scheme "https") (not $url.Hostname) $url.User (ne $url.Path "/") $url.RawQuery $url.ForceQuery $url.Fragment (strings.Contains $origin "#") (and $port (ne $port "443")) (not (strings.HasSuffix $origin "/")) }}
+      {{ errorf "go-ping-me: %s: service_origin must be an HTTPS root URL without credentials, query, fragment or non-default port" $where }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $turnstile := $config.turnstile | default dict }}
+{{ if not (reflect.IsMap $turnstile) }}
+  {{ errorf "go-ping-me: %s: turnstile must be a map" $where }}{{ $turnstile = dict }}
+{{ end }}
+{{ range $key, $value := $turnstile }}
+  {{ if not (in (slice "enabled" "site_key" "action") $key) }}
+    {{ errorf "go-ping-me: %s: unknown turnstile key %s" $where $key }}
+  {{ end }}
+{{ end }}
+{{ if ne (printf "%T" $turnstile.enabled) "bool" }}
+  {{ errorf "go-ping-me: %s: turnstile.enabled must be a boolean" $where }}
+{{ end }}
+{{ range $key := slice "site_key" "action" }}
+  {{ $value := index $turnstile $key }}
+  {{ if eq $turnstile.enabled true }}
+    {{ if or (ne (printf "%T" $value) "string") (eq (strings.TrimSpace (printf "%v" $value)) "") }}
+      {{ errorf "go-ping-me: %s: turnstile.%s must be a non-blank string when enabled" $where $key }}
+    {{ end }}
+  {{ else if isset $turnstile $key }}
+    {{ errorf "go-ping-me: %s: turnstile.%s is forbidden when disabled" $where $key }}
+  {{ end }}
+{{ end }}
+{{ $forms := $config.forms | default dict }}
+{{ if not (reflect.IsMap $forms) }}
+  {{ errorf "go-ping-me: %s: forms must be a non-empty map" $where }}{{ $forms = dict }}
+{{ end }}
+{{ if not $forms }}{{ errorf "go-ping-me: %s: forms must be a non-empty map" $where }}{{ end }}
+{{ $schemas := partial "go-ping-me/schemas.html" . }}
+{{ $needsHelper := false }}
+{{ range $name, $form := $forms }}
+  {{ if not (reflect.IsMap $form) }}
+    {{ errorf "go-ping-me: %s: form %s must be a map" $where $name }}
+  {{ else }}
+    {{ range $key, $value := $form }}
+      {{ if not (in (slice "schema" "enhanced") $key) }}{{ errorf "go-ping-me: %s: unknown key %s in form %s" $where $key $name }}{{ end }}
+    {{ end }}
+    {{ if not (isset $schemas (printf "%v" $form.schema)) }}{{ errorf "go-ping-me: %s: unsupported schema in form %s" $where $name }}{{ end }}
+    {{ if ne (printf "%T" $form.enhanced) "bool" }}{{ errorf "go-ping-me: %s: enhanced must be a boolean in form %s" $where $name }}{{ end }}
+    {{ if eq $form.enhanced true }}{{ $needsHelper = true }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ if or $needsHelper (isset $config "helper_path") }}
+  {{ if ne $config.helper_path "contact-helper.js" }}{{ errorf "go-ping-me: %s: helper_path must equal contact-helper.js" $where }}{{ end }}
+{{ end }}
+{{ return $config }}

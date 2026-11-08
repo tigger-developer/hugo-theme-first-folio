@@ -1,0 +1,13 @@
+{{/* ABOUTME: Render a labelled native control from a reviewed field definition. */}}
+{{/* ABOUTME: Attributes are emitted explicitly so content cannot override submission. */}}
+{{ $field := .field }}
+{{ $kind := $field.type | default "text" }}
+{{ $required := eq (printf "%v" ($field.required | default false)) "true" }}
+<div class="form-field{{ if eq $kind "checkbox" }} checkbox-field{{ end }}">
+  <label for="{{ .id }}">{{ $field.label }}</label>
+  {{ if eq $kind "textarea" }}
+    <textarea id="{{ .id }}" name="{{ $field.name }}" rows="6" maxlength="{{ $field.maxlength | default 2000 }}"{{ if $required }} required{{ end }}{{ with $field.autocomplete }} autocomplete="{{ . }}"{{ end }}></textarea>
+  {{ else }}
+    <input id="{{ .id }}" name="{{ $field.name }}" type="{{ $kind }}"{{ if ne $kind "checkbox" }} maxlength="{{ $field.maxlength | default 2000 }}"{{ end }}{{ if $required }} required{{ end }}{{ with $field.autocomplete }} autocomplete="{{ . }}"{{ end }}{{ if eq $kind "checkbox" }} value="{{ $field.value }}"{{ end }}>
+  {{ end }}
+</div>

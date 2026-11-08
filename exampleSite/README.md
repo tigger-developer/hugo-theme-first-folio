@@ -111,3 +111,11 @@ See `hugo.yaml` for all theme parameters. Key settings demonstrated:
 ## License
 
 MIT License. Content is fictional and for demonstration purposes only.
+
+## Go Ping Me demonstration
+
+`/contact/` demonstrates enhanced and native named forms with bounded additional
+fields. Default configuration is offline-safe. The `kepler452` environment uses
+the operator-supplied public service settings for the temporary live test. See
+[the form integration guide](../docs/go-ping-me.md) for restrictions, CSP and
+post-validation disabling instructions.

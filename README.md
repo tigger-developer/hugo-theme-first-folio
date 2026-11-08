@@ -34,6 +34,13 @@ If this is your first Hugo site, start with the [Quickstart guide](docs/quicksta
 
 For non-developers who need to edit content on an existing site, see the [Content editing guide](docs/content-editing-guide.md) - covers Markdown, front matter, images, and editing through GitHub's web interface.
 
+## Go Ping Me forms
+
+Use the shared `go-ping-me` shortcode for accessible native and enhanced forms.
+Each site configures its own service and public Turnstile settings. See the
+[Go Ping Me guide](docs/go-ping-me.md) for configuration, child fields, multiple
+forms and the temporary `exampleSite` contact demonstration.
+
 ## Quick Start
 
 1. Add the theme to your Hugo site:

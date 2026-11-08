@@ -1,0 +1,11 @@
+# ABOUTME: Public configuration for the temporary live Go Ping Me demonstration.
+# ABOUTME: The endpoint must authorize this demo origin and the configured Turnstile pair.
+baseURL: https://demo.theme.tadg.ie/
+title: demo.theme.tadg.ie
+params:
+  go_ping_me:
+    service_origin: https://gopingme.lobb.ie/
+    turnstile:
+      enabled: true
+      site_key: 0x4AAAAAAFtiYReTdb-HkdwT
+      action: contact-stinky14

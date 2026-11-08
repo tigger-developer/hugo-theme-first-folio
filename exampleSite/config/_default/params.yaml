@@ -1,0 +1,14 @@
+# ABOUTME: Offline-safe configuration for the Go Ping Me example forms.
+# ABOUTME: The deployed demo overrides only public service and Turnstile settings.
+go_ping_me:
+  service_origin: https://forms.example.invalid/
+  helper_path: contact-helper.js
+  turnstile:
+    enabled: false
+  forms:
+    general-enquiry:
+      schema: contact
+      enhanced: true
+    project-enquiry:
+      schema: contact
+      enhanced: false

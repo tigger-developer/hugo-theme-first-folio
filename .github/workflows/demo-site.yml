@@ -1,4 +1,4 @@
-# ABOUTME: Build the exampleSite with Hugo and deploy to GitHub Pages.
+# ABOUTME: Build the exampleSite; GitHub Pages deployment is retired.
 # ABOUTME: Uses the theme-demo-live environment for production baseURL.
 name: Deploy demo site to Pages
 
@@ -49,6 +49,8 @@ jobs:
           path: exampleSite/public
 
   deploy:
+    # Retained as migration history. The demo now targets Exodan kepler452.
+    if: ${{ false }}
     needs: build
     runs-on: ubuntu-latest
     environment:

@@ -1,0 +1,43 @@
+{{/* ABOUTME: Validate bounded additional controls before rendering any form fields. */}}
+{{/* ABOUTME: Enforce protected names, repeated checkbox cardinality and service field limits. */}}
+{{ $fields := .fields }}
+{{ $where := .where }}
+{{ $counts := newScratch }}
+{{ $counts.Set "seen" dict }}
+{{ $protected := slice "schema" "cf-turnstile-response" "recipient" "recipients" "to" "from" "cc" "bcc" "sender" "headers" "action" "success_url" "failure_url" "redirect" "name" "email" "subject" "message" }}
+{{ range $field := $fields }}
+  {{ $name := printf "%v" ($field.name | default "") }}
+  {{ $kind := $field.type | default "text" }}
+  {{ if or (not (findRE `^[A-Za-z][A-Za-z0-9_.-]{0,63}$` $name)) (in $protected (lower $name)) }}
+    {{ errorf "go-ping-me: %s: invalid or protected additional field name %s" $where $name }}
+  {{ end }}
+  {{ if not (in (slice "text" "email" "tel" "url" "textarea" "checkbox") $kind) }}
+    {{ errorf "go-ping-me: %s: unsupported control type %v" $where $kind }}
+  {{ end }}
+  {{ if or (ne (printf "%T" $field.label) "string") (not (strings.TrimSpace (printf "%v" ($field.label | default "")))) }}
+    {{ errorf "go-ping-me: %s: field %s requires a visible label" $where $name }}
+  {{ end }}
+  {{ if isset $field "required" }}
+    {{ if not (in (slice "true" "false") (printf "%v" $field.required)) }}{{ errorf "go-ping-me: %s: required must be true or false" $where }}{{ end }}
+  {{ end }}
+  {{ if isset $field "autocomplete" }}
+    {{ if or (eq $kind "checkbox") (not (findRE `^[A-Za-z][A-Za-z0-9 -]*$` (printf "%v" $field.autocomplete))) }}{{ errorf "go-ping-me: %s: invalid autocomplete" $where }}{{ end }}
+  {{ end }}
+  {{ $value := printf "%v" ($field.value | default "") }}
+  {{ if eq $kind "checkbox" }}
+    {{ if or (not $value) (gt (strings.RuneCount $value) 2000) (findRE `[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]` $value) }}{{ errorf "go-ping-me: %s: checkbox value must contain 1 through 2000 permitted characters" $where }}{{ end }}
+  {{ else if isset $field "value" }}
+    {{ errorf "go-ping-me: %s: only checkboxes accept a configured value" $where }}
+  {{ end }}
+  {{ $prior := index ($counts.Get "seen") (lower $name) | default (dict "count" 0 "type" $kind "name" $name "values" slice) }}
+  {{ if and (gt $prior.count 0) (or (ne $kind "checkbox") (ne $prior.type "checkbox") (ne $prior.name $name) (in $prior.values $value)) }}
+    {{ errorf "go-ping-me: %s: duplicate field %s; only distinct checkbox values may repeat an exact name" $where $name }}
+  {{ end }}
+  {{ $count := add $prior.count 1 }}
+  {{ if gt $count 16 }}{{ errorf "go-ping-me: %s: field %s exceeds 16 values" $where $name }}{{ end }}
+  {{ $counts.SetInMap "seen" (lower $name) (dict "count" $count "type" $kind "name" $name "values" ($prior.values | append $value)) }}
+{{ end }}
+{{ $reservedCount := 5 }}
+{{ if .turnstile }}{{ $reservedCount = 6 }}{{ end }}
+{{ if gt (add (len ($counts.Get "seen")) $reservedCount) 32 }}{{ errorf "go-ping-me: %s: form exceeds 32 distinct field names" $where }}{{ end }}
+{{ return $fields }}

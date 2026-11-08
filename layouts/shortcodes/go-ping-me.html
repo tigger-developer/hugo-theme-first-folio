@@ -1,0 +1,35 @@
+{{- /* ABOUTME: Render a named Go Ping Me form using the published service contract. */ -}}
+{{- /* ABOUTME: Share native markup across schemas and delegate enhancement to the service. */ -}}
+{{- $config := partial "go-ping-me/config.html" .Page -}}
+{{- range $key, $value := .Params -}}
+  {{- if ne $key "form" }}{{ errorf "go-ping-me: %s: only the named form argument is supported" $.Position }}{{ end -}}
+{{- end -}}
+{{- $name := .Get "form" -}}
+{{- $form := index $config.forms (printf "%v" $name) -}}
+{{- if not $form -}}
+  {{- errorf "go-ping-me: %s: missing or unknown form name %v" .Position $name -}}
+{{- else -}}
+  {{- $inner := .Inner -}}
+  {{- if strings.TrimSpace $inner -}}
+    {{- errorf "go-ping-me: %s: raw inner HTML or text is forbidden; use go-ping-me-field children" .Position -}}
+  {{- end -}}
+  {{- $extra := .Store.Get "fields" | default slice -}}
+  {{- $extra = partial "go-ping-me/fields.html" (dict "fields" $extra "where" .Position "turnstile" $config.turnstile.enabled) -}}
+  {{- $schemas := partial "go-ping-me/schemas.html" . -}}
+  {{- $fields := index $schemas $form.schema | default slice -}}
+  {{- $fields = $fields | append $extra -}}
+  {{- $id := printf "gpm-%s-%d" (substr (crypto.SHA256 .Page.RelPermalink) 0 12) .Ordinal -}}
+  {{- if $form.enhanced }}{{ .Page.Store.Set "go-ping-me-helper" true }}{{ end -}}
+  {{- if $config.turnstile.enabled }}{{ .Page.Store.Set "go-ping-me-turnstile" true }}{{ end -}}
+<form class="contact-form go-ping-me" id="{{ $id }}" method="post" action="{{ $config.service_origin }}" enctype="application/x-www-form-urlencoded"{{ if $form.enhanced }} data-go-ping-me{{ end }}>
+  <input type="hidden" name="schema" value="{{ $form.schema }}">
+  {{ range $index, $field := $fields }}
+    {{ partial "go-ping-me/control.html" (dict "field" $field "id" (printf "%s-%d" $id $index)) }}
+  {{ end }}
+  {{ if $config.turnstile.enabled }}
+    <div class="cf-turnstile" data-sitekey="{{ $config.turnstile.site_key }}" data-action="{{ $config.turnstile.action }}"></div>
+  {{ end }}
+  <div class="form-actions"><button type="submit">Send</button></div>
+  {{ if $form.enhanced }}<p data-go-ping-me-status role="status" aria-live="polite"></p>{{ end }}
+</form>
+{{- end -}}
