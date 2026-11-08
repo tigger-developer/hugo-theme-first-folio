@@ -22,11 +22,9 @@ params:
       general-enquiry:
         schema: contact
         enhanced: true
-        action: general-enquiry
       project-enquiry:
         schema: contact
         enhanced: false
-        action: project-enquiry
 ```
 
 The service origin must be an absolute HTTPS root URL with a trailing slash,
@@ -34,11 +32,8 @@ without credentials, query, fragment or a non-default port. Explicit port 443
 is accepted. Every form posts to that exact URL. The helper path must equal
 `contact-helper.js`; it is required when any configured form is enhanced.
 
-`forms` must be a non-empty map. Each entry requires `schema`, a strict boolean
-`enhanced`, and its own non-blank `action`. The action remains part of the form's
-service policy when Turnstile is disabled; when Turnstile is enabled, the same
-value is also rendered into that form's widget. Only the published `contact`
-schema is currently supported. Unknown
+`forms` must be a non-empty map. Each entry requires `schema` and a strict boolean
+`enhanced`. Only the published `contact` schema is currently supported. Unknown
 schemas and configuration keys fail the build with the source page identified.
 The service's current published contract does not yet define `customform`.
 Schema definitions live separately from the shared renderer, so another published
@@ -53,10 +48,9 @@ turnstile:
 ```
 
 `enabled` must be a boolean. The public key is required when enabled and forbidden
-when disabled. The action belongs to each named form, so forms on one website can
-use different actions while sharing the site's public key.
+when disabled. The theme does not configure or render a Turnstile action.
 The receiving service endpoint must recognize this public key and authorize the
-website's exact origin and action. No secret belongs in Hugo configuration.
+website's exact origin. No secret belongs in Hugo configuration.
 
 ## Standard and extended forms
 

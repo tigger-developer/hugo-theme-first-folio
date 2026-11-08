@@ -8,8 +8,3 @@ params:
     turnstile:
       enabled: true
       site_key: 0x4AAAAAAFtiYReTdb-HkdwT
-    forms:
-      general-enquiry:
-        action: contact-stinky14
-      project-enquiry:
-        action: contact-stinky14

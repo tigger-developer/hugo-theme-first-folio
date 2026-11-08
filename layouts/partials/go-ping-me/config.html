@@ -62,13 +62,10 @@
     {{ errorf "go-ping-me: %s: form %s must be a map" $where $name }}
   {{ else }}
     {{ range $key, $value := $form }}
-      {{ if not (in (slice "schema" "enhanced" "action") $key) }}{{ errorf "go-ping-me: %s: unknown key %s in form %s" $where $key $name }}{{ end }}
+      {{ if not (in (slice "schema" "enhanced") $key) }}{{ errorf "go-ping-me: %s: unknown key %s in form %s" $where $key $name }}{{ end }}
     {{ end }}
     {{ if not (isset $schemas (printf "%v" $form.schema)) }}{{ errorf "go-ping-me: %s: unsupported schema in form %s" $where $name }}{{ end }}
     {{ if ne (printf "%T" $form.enhanced) "bool" }}{{ errorf "go-ping-me: %s: enhanced must be a boolean in form %s" $where $name }}{{ end }}
-    {{ if or (ne (printf "%T" $form.action) "string") (eq (strings.TrimSpace (printf "%v" $form.action)) "") }}
-      {{ errorf "go-ping-me: %s: action must be a non-blank string in form %s" $where $name }}
-    {{ end }}
     {{ if eq $form.enhanced true }}{{ $needsHelper = true }}{{ end }}
   {{ end }}
 {{ end }}

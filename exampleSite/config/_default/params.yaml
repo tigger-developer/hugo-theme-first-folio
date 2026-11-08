@@ -9,8 +9,6 @@ go_ping_me:
     general-enquiry:
       schema: contact
       enhanced: true
-      action: general-enquiry
     project-enquiry:
       schema: contact
       enhanced: false
-      action: project-enquiry
