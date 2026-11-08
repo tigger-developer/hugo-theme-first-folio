@@ -10,7 +10,7 @@ import {spawnSync} from 'node:child_process';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const temporary = mkdtempSync(join(tmpdir(), 'folio-gpm-'));
 let count = 0;
-const settings = () => ({service_origin: 'https://forms.example.test/', helper_path: 'contact-helper.js', turnstile: {enabled: false}, forms: {contact: {schema: 'contact', enhanced: true}, native: {schema: 'contact', enhanced: false}}});
+const settings = () => ({service_origin: 'https://forms.example.test/', turnstile: {enabled: false}, forms: {contact: {schema: 'contact'}, alternate: {schema: 'contact'}}});
 function build(config, content, failure) {
   const source = join(temporary, `site-${++count}`);
   mkdirSync(join(source, 'content'), {recursive: true});
@@ -44,22 +44,18 @@ try {
   assert.equal(query(single, 'input[name=name]', 'autocomplete'), 'name');
   assert.equal(query(single, 'input[name=email]', 'autocomplete'), 'email');
   assert.equal(query(single, 'input[name=email]', 'type'), 'email');
-  assert.equal(query(single, '[data-go-ping-me-status]', 'role'), 'status');
-  assert.equal(query(single, '[data-go-ping-me-status]', 'aria-live'), 'polite');
-  assert.equal(query(single, 'script[src$="contact-helper.js"]', 'src'), 'https://forms.example.test/contact-helper.js');
+  assert.equal(query(single, '[data-go-ping-me], [data-go-ping-me-status], script[src$="contact-helper.js"]'), '');
   assert.equal(query(single, '.cf-turnstile, [name=cf-turnstile-response], script[src*=challenges]'), '');
   const controls = '{{< go-ping-me-field name="company" type="text" label="Company" autocomplete="organization" >}}\n{{< go-ping-me-field name="interest" type="checkbox" label="Writing" value="writing" >}}\n{{< go-ping-me-field name="interest" type="checkbox" label="Technology" value="technology" >}}';
   const paired = '{{< go-ping-me form="contact" >}}\n' + controls + '\n{{< /go-ping-me >}}';
   const enabled = settings();
   enabled.turnstile = {enabled: true, site_key: 'PUBLIC_TEST_KEY'};
-  const multiple = build(enabled, paired + '\n{{< go-ping-me form="native" />}}\n{{< go-ping-me form="contact" />}}');
+  const multiple = build(enabled, paired + '\n{{< go-ping-me form="alternate" />}}\n{{< go-ping-me form="contact" />}}');
   assert.equal(query(multiple, 'form.go-ping-me', 'id').split('\n').length, 3);
-  assert.equal(query(multiple, 'form[data-go-ping-me]', 'id').split('\n').length, 2);
+  assert.equal(query(multiple, 'form[data-go-ping-me], [data-go-ping-me-status], script[src$="contact-helper.js"]'), '');
   assert.equal(query(multiple, '.cf-turnstile', 'data-sitekey'), ['PUBLIC_TEST_KEY','PUBLIC_TEST_KEY','PUBLIC_TEST_KEY'].join('\n'));
   assert.equal(query(multiple, '.cf-turnstile[data-action]'), '');
   assert.equal(query(multiple, 'script[src*=challenges]', 'src').split('\n').length, 1);
-  assert.equal(query(multiple, 'script[src$="contact-helper.js"]', 'src').split('\n').length, 1);
-  assert.ok(query(multiple, 'script[src$="contact-helper.js"][defer]'));
   assert.equal(query(multiple, 'form input[name=interest]', 'value'), 'writing\ntechnology');
   assert.equal(query(multiple, 'form input[name=company]', 'autocomplete'), 'organization');
   const ids = query(multiple, 'form [id], form[id]', 'id').split('\n');
@@ -67,9 +63,9 @@ try {
   const labels = query(multiple, 'form label', 'for').split('\n');
   assert.equal(new Set(labels).size, labels.length);
   for (const id of labels) assert.ok(ids.includes(id), 'label targets existing unique control');
-  const native = build(settings(), '{{< go-ping-me form="native" />}}');
-  assert.equal(query(native, '[data-go-ping-me-status], script[src$="contact-helper.js"], .cf-turnstile'), '');
-  assert.equal(query(native, 'form button[type=submit]').split('</button>').length - 1, 1);
+  const standard = build(settings(), '{{< go-ping-me form="alternate" />}}');
+  assert.equal(query(standard, '[data-go-ping-me], [data-go-ping-me-status], script[src$="contact-helper.js"], .cf-turnstile'), '');
+  assert.equal(query(standard, 'form button[type=submit]').split('</button>').length - 1, 1);
   const other = settings();
   other.service_origin = 'https://other.example.test:443/';
   other.turnstile = {enabled: true, site_key: 'OTHER_KEY'};
@@ -77,17 +73,12 @@ try {
   assert.equal(query(isolated, 'form', 'action'), other.service_origin);
   assert.equal(query(isolated, '.cf-turnstile', 'data-sitekey'), 'OTHER_KEY');
   assert.equal(query(isolated, '.cf-turnstile[data-action]'), '');
-  assert.equal(query(isolated, 'script[src$="contact-helper.js"]', 'src'), other.service_origin + 'contact-helper.js');
   assert.ok(!isolated.includes('PUBLIC_TEST_KEY'));
   assert.ok(!multiple.includes('OTHER_KEY'));
   const invocation = '{{< go-ping-me form="contact" />}}';
   for (const origin of ['http://forms.test/', 'https://forms.test', 'https://user@forms.test/', 'https://forms.test:8443/', 'https://forms.test/path/', 'https://forms.test/?x', 'https://forms.test/#x', '//forms.test/', 42]) {
     const config = settings(); config.service_origin = origin;
     build(config, invocation, /service_origin/);
-  }
-  for (const path of ['//evil.test/helper.js', '../contact-helper.js', 'https://evil.test/helper.js', '', 1]) {
-    const config = settings(); config.helper_path = path;
-    build(config, invocation, /helper_path/);
   }
   for (const mutate of [
     c => {c.turnstile.enabled = 'false';},
@@ -96,8 +87,8 @@ try {
     c => {c.turnstile.action = 'unused';},
     c => {c.turnstile = {enabled: true};},
     c => {c.turnstile.secret = 'forbidden';},
-    c => {c.forms.contact.enhanced = 'true';},
-    c => {delete c.forms.contact.enhanced;},
+    c => {c.helper_path = 'contact-helper.js';},
+    c => {c.forms.contact.enhanced = true;},
     c => {c.forms.contact.schema = 'unknown';},
     c => {c.forms.contact.action = 'unsupported';},
     c => {c.forms.contact.recipient = 'no@example.test';},
@@ -130,7 +121,7 @@ try {
   const escaped = build(settings(), wrap('{{< go-ping-me-field name="company" label="<script>bad</script>" >}}'));
   assert.equal(query(escaped, 'form script'), '');
   assert.ok(query(escaped, 'form label').includes('&lt;script&gt;'));
-  console.log('PASS ' + count + ' isolated Hugo builds: native/enhanced, multiple instances, independent sites and rejected declarations');
+  console.log('PASS ' + count + ' isolated Hugo builds: native forms, multiple instances, independent sites and rejected declarations');
 } finally {
   rmSync(temporary, {recursive: true, force: true});
 }

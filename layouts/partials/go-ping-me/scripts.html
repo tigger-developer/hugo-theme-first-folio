@@ -3,6 +3,3 @@
 {{ if .Store.Get "go-ping-me-turnstile" }}
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
 {{ end }}
-{{ if .Store.Get "go-ping-me-helper" }}
-<script src="{{ printf "%s%s" .Site.Params.go_ping_me.service_origin .Site.Params.go_ping_me.helper_path }}" defer></script>
-{{ end }}

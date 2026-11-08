@@ -9,7 +9,7 @@
   {{ $config = dict }}
 {{ end }}
 {{ range $key, $value := $config }}
-  {{ if not (in (slice "service_origin" "helper_path" "turnstile" "forms") $key) }}
+  {{ if not (in (slice "service_origin" "turnstile" "forms") $key) }}
     {{ errorf "go-ping-me: %s: unknown configuration key %s" $where $key }}
   {{ end }}
 {{ end }}
@@ -56,20 +56,14 @@
 {{ end }}
 {{ if not $forms }}{{ errorf "go-ping-me: %s: forms must be a non-empty map" $where }}{{ end }}
 {{ $schemas := partial "go-ping-me/schemas.html" . }}
-{{ $needsHelper := false }}
 {{ range $name, $form := $forms }}
   {{ if not (reflect.IsMap $form) }}
     {{ errorf "go-ping-me: %s: form %s must be a map" $where $name }}
   {{ else }}
     {{ range $key, $value := $form }}
-      {{ if not (in (slice "schema" "enhanced") $key) }}{{ errorf "go-ping-me: %s: unknown key %s in form %s" $where $key $name }}{{ end }}
+      {{ if ne $key "schema" }}{{ errorf "go-ping-me: %s: unknown key %s in form %s" $where $key $name }}{{ end }}
     {{ end }}
     {{ if not (isset $schemas (printf "%v" $form.schema)) }}{{ errorf "go-ping-me: %s: unsupported schema in form %s" $where $name }}{{ end }}
-    {{ if ne (printf "%T" $form.enhanced) "bool" }}{{ errorf "go-ping-me: %s: enhanced must be a boolean in form %s" $where $name }}{{ end }}
-    {{ if eq $form.enhanced true }}{{ $needsHelper = true }}{{ end }}
   {{ end }}
-{{ end }}
-{{ if or $needsHelper (isset $config "helper_path") }}
-  {{ if ne $config.helper_path "contact-helper.js" }}{{ errorf "go-ping-me: %s: helper_path must equal contact-helper.js" $where }}{{ end }}
 {{ end }}
 {{ return $config }}

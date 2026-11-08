@@ -36,10 +36,10 @@ For non-developers who need to edit content on an existing site, see the [Conten
 
 ## Go Ping Me forms
 
-Use the shared `go-ping-me` shortcode for accessible native and enhanced forms.
+Use the shared `go-ping-me` shortcode for accessible native HTML forms.
 Each site configures its own service and public Turnstile settings. See the
 [Go Ping Me guide](docs/go-ping-me.md) for configuration, child fields, multiple
-forms and the temporary `exampleSite` contact demonstration.
+forms and configuration validation.
 
 ## Quick Start
 

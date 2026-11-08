@@ -19,9 +19,8 @@
   {{- $fields := index $schemas $form.schema | default slice -}}
   {{- $fields = $fields | append $extra -}}
   {{- $id := printf "gpm-%s-%d" (substr (crypto.SHA256 .Page.RelPermalink) 0 12) .Ordinal -}}
-  {{- if $form.enhanced }}{{ .Page.Store.Set "go-ping-me-helper" true }}{{ end -}}
   {{- if $config.turnstile.enabled }}{{ .Page.Store.Set "go-ping-me-turnstile" true }}{{ end -}}
-<form class="contact-form go-ping-me" id="{{ $id }}" method="post" action="{{ $config.service_origin }}" enctype="application/x-www-form-urlencoded"{{ if $form.enhanced }} data-go-ping-me{{ end }}>
+<form class="contact-form go-ping-me" id="{{ $id }}" method="post" action="{{ $config.service_origin }}" enctype="application/x-www-form-urlencoded">
   <input type="hidden" name="schema" value="{{ $form.schema }}">
   {{ range $index, $field := $fields }}
     {{ partial "go-ping-me/control.html" (dict "field" $field "id" (printf "%s-%d" $id $index)) }}
@@ -30,6 +29,5 @@
     <div class="cf-turnstile" data-sitekey="{{ $config.turnstile.site_key }}"></div>
   {{ end }}
   <div class="form-actions"><button type="submit">Send</button></div>
-  {{ if $form.enhanced }}<p data-go-ping-me-status role="status" aria-live="polite"></p>{{ end }}
 </form>
 {{- end -}}
