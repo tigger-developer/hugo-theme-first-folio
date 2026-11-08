@@ -27,7 +27,7 @@
     {{ partial "go-ping-me/control.html" (dict "field" $field "id" (printf "%s-%d" $id $index)) }}
   {{ end }}
   {{ if $config.turnstile.enabled }}
-    <div class="cf-turnstile" data-sitekey="{{ $config.turnstile.site_key }}" data-action="{{ $config.turnstile.action }}"></div>
+    <div class="cf-turnstile" data-sitekey="{{ $config.turnstile.site_key }}" data-action="{{ $form.action }}"></div>
   {{ end }}
   <div class="form-actions"><button type="submit">Send</button></div>
   {{ if $form.enhanced }}<p data-go-ping-me-status role="status" aria-live="polite"></p>{{ end }}

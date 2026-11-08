@@ -10,7 +10,7 @@ import {spawnSync} from 'node:child_process';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const temporary = mkdtempSync(join(tmpdir(), 'folio-gpm-'));
 let count = 0;
-const settings = () => ({service_origin: 'https://forms.example.test/', helper_path: 'contact-helper.js', turnstile: {enabled: false}, forms: {contact: {schema: 'contact', enhanced: true}, native: {schema: 'contact', enhanced: false}}});
+const settings = () => ({service_origin: 'https://forms.example.test/', helper_path: 'contact-helper.js', turnstile: {enabled: false}, forms: {contact: {schema: 'contact', enhanced: true, action: 'contact-action'}, native: {schema: 'contact', enhanced: false, action: 'native-action'}}});
 function build(config, content, failure) {
   const source = join(temporary, `site-${++count}`);
   mkdirSync(join(source, 'content'), {recursive: true});
@@ -51,12 +51,14 @@ try {
   const controls = '{{< go-ping-me-field name="company" type="text" label="Company" autocomplete="organization" >}}\n{{< go-ping-me-field name="interest" type="checkbox" label="Writing" value="writing" >}}\n{{< go-ping-me-field name="interest" type="checkbox" label="Technology" value="technology" >}}';
   const paired = '{{< go-ping-me form="contact" >}}\n' + controls + '\n{{< /go-ping-me >}}';
   const enabled = settings();
-  enabled.turnstile = {enabled: true, site_key: 'PUBLIC_TEST_KEY', action: 'site-action'};
+  enabled.turnstile = {enabled: true, site_key: 'PUBLIC_TEST_KEY'};
+  enabled.forms.contact.action = 'contact-action';
+  enabled.forms.native.action = 'native-action';
   const multiple = build(enabled, paired + '\n{{< go-ping-me form="native" />}}\n{{< go-ping-me form="contact" />}}');
   assert.equal(query(multiple, 'form.go-ping-me', 'id').split('\n').length, 3);
   assert.equal(query(multiple, 'form[data-go-ping-me]', 'id').split('\n').length, 2);
   assert.equal(query(multiple, '.cf-turnstile', 'data-sitekey'), ['PUBLIC_TEST_KEY','PUBLIC_TEST_KEY','PUBLIC_TEST_KEY'].join('\n'));
-  assert.equal(query(multiple, '.cf-turnstile', 'data-action'), ['site-action','site-action','site-action'].join('\n'));
+  assert.equal(query(multiple, '.cf-turnstile', 'data-action'), ['contact-action','native-action','contact-action'].join('\n'));
   assert.equal(query(multiple, 'script[src*=challenges]', 'src').split('\n').length, 1);
   assert.equal(query(multiple, 'script[src$="contact-helper.js"]', 'src').split('\n').length, 1);
   assert.ok(query(multiple, 'script[src$="contact-helper.js"][defer]'));
@@ -72,11 +74,13 @@ try {
   assert.equal(query(native, 'form button[type=submit]').split('</button>').length - 1, 1);
   const other = settings();
   other.service_origin = 'https://other.example.test:443/';
-  other.turnstile = {enabled: true, site_key: 'OTHER_KEY', action: 'other-action'};
+  other.turnstile = {enabled: true, site_key: 'OTHER_KEY'};
+  other.forms.contact.action = 'other-contact-action';
+  other.forms.native.action = 'other-native-action';
   const isolated = build(other, '{{< go-ping-me form="contact" />}}');
   assert.equal(query(isolated, 'form', 'action'), other.service_origin);
   assert.equal(query(isolated, '.cf-turnstile', 'data-sitekey'), 'OTHER_KEY');
-  assert.equal(query(isolated, '.cf-turnstile', 'data-action'), 'other-action');
+  assert.equal(query(isolated, '.cf-turnstile', 'data-action'), 'other-contact-action');
   assert.equal(query(isolated, 'script[src$="contact-helper.js"]', 'src'), other.service_origin + 'contact-helper.js');
   assert.ok(!isolated.includes('PUBLIC_TEST_KEY'));
   assert.ok(!multiple.includes('OTHER_KEY'));
@@ -99,6 +103,9 @@ try {
     c => {c.forms.contact.enhanced = 'true';},
     c => {delete c.forms.contact.enhanced;},
     c => {c.forms.contact.schema = 'unknown';},
+    c => {delete c.forms.contact.action;},
+    c => {c.forms.contact.action = '';},
+    c => {c.forms.contact.action = 1;},
     c => {c.forms.contact.recipient = 'no@example.test';},
     c => {c.recipient = 'no@example.test';},
     c => {c.forms = {};},
