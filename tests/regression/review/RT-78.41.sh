@@ -15,7 +15,7 @@ run_test() {
     )
     local page
     for page in "${pages[@]}"; do
-        [[ -n "$(htmlq -f "$page" '.article-header > h1 + .meta + .review-metadata')" ]] || return 1
+        [[ -n "$(htmlq -f "$page" '.article-header > h1 + .article-header-meta + .review-metadata')" ]] || return 1
     done
 
     local main_css

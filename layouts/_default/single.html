@@ -32,17 +32,7 @@
           {{ partial "signpost-footer.html" . }}
         </section>
         <div class="post-tags">
-          {{ if ne .Type "page" }}
-          {{ if gt .Params.tags 0 }}
-          <nav class="nav tags">
-            <ul class="tags">
-              {{ range .Params.tags }}
-              <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
-              {{ end }}
-            </ul>
-          </nav>
-          {{ end }}
-          {{ end }}
+          {{ partial "article-tags.html" (dict "Page" . "Class" "article-footer-tags") }}
         </div>
       </div>
     </div>
@@ -116,17 +106,7 @@
       <!-- Footer with tags - full width -->
       <div class="post-footer" style="padding: 0 2rem 2rem 2rem;">
         <div class="post-tags">
-          {{ if ne .Type "page" }}
-          {{ if gt .Params.tags 0 }}
-          <nav class="nav tags">
-            <ul class="tags">
-              {{ range .Params.tags }}
-              <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
-              {{ end }}
-            </ul>
-          </nav>
-          {{ end }}
-          {{ end }}
+          {{ partial "article-tags.html" (dict "Page" . "Class" "article-footer-tags") }}
         </div>
       </div>
     </div>
@@ -199,17 +179,7 @@
           {{ partial "signpost-footer.html" . }}
         </section>
         <div class="post-tags">
-          {{ if ne .Type "page" }}
-          {{ if gt .Params.tags 0 }}
-          <nav class="nav tags">
-            <ul class="tags">
-              {{ range .Params.tags }}
-              <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
-              {{ end }}
-            </ul>
-          </nav>
-          {{ end }}
-          {{ end }}
+          {{ partial "article-tags.html" (dict "Page" . "Class" "article-footer-tags") }}
         </div>
       </div>
     </div>

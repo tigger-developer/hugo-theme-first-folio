@@ -5,8 +5,16 @@
 {{- if isset . "ShowReview" -}}
   {{- $showReview = .ShowReview -}}
 {{- end -}}
+{{- $showBreadcrumb := ne $page.Params.breadcrumb false -}}
+{{- $tags := $page.Params.tags | default slice -}}
+{{- $showTags := and (ne $page.Type "page") (not $page.Params.hideTags) (gt (len $tags) 0) -}}
 <header class="title article-header{{ with .Class }} {{ . }}{{ end }}">
   <h1{{ with .HeadingClass }} class="{{ . }}"{{ end }}>{{ partial "display-title.html" $page }}</h1>
-  {{- if ne $page.Params.breadcrumb false }}<div class="meta">{{ partial "breadcrumb.html" $page }}</div>{{- end }}
+  {{- if or $showBreadcrumb $showTags }}
+  <div class="article-header-meta">
+    {{- if $showBreadcrumb }}<div class="meta">{{ partial "breadcrumb.html" $page }}</div>{{- end }}
+    {{- if $showTags }}{{ partial "article-tags.html" (dict "Page" $page "Class" "article-header-tags") }}{{- end }}
+  </div>
+  {{- end }}
   {{- if and $showReview (isset $page.Params "review") }}{{ partial "review/metadata.html" $page }}{{ end }}
 </header>

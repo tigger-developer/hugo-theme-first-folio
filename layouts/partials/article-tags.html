@@ -1,0 +1,13 @@
+{{/* ABOUTME: Render an article's linked tags in a reusable, accessible navigation region. */}}
+{{/* ABOUTME: Honour hideTags consistently in article headers and footers. */}}
+{{- $page := .Page -}}
+{{- $tags := $page.Params.tags | default slice -}}
+{{- if and (ne $page.Type "page") (not $page.Params.hideTags) (gt (len $tags) 0) -}}
+<nav class="nav tags-nav{{ with .Class }} {{ . }}{{ end }}" aria-label="{{ i18n "articleTags" }}">
+  <ul class="tags">
+    {{- range $tags }}
+    <li><a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a></li>
+    {{- end }}
+  </ul>
+</nav>
+{{- end -}}

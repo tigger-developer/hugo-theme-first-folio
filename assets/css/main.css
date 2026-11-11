@@ -712,6 +712,70 @@ article .title {
   line-height: normal;
 }
 
+.article-header-meta {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: start;
+  gap: 0.5rem 1rem;
+}
+
+.article-header-tags .tags {
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.article-header-tags:only-child {
+  grid-column: 1 / -1;
+}
+
+.article-header-tags .tags li::before {
+  content: none;
+  margin: 0;
+}
+
+.article-header-tags .tags a {
+  --article-tag-bg: color-mix(in srgb, var(--color-primary) 55%, black);
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  block-size: 1.5rem;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  line-height: 1;
+  margin-inline-start: 0.4rem;
+  padding: 0.15rem 0.55rem 0.15rem 0.4rem;
+  border: 0;
+  border-block-end: 0;
+  border-radius: 0 0.75rem 0.75rem 0;
+  background: var(--article-tag-bg);
+  color: #fff;
+}
+
+.article-header-tags .tags a::before {
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: -0.4rem;
+  border-block: 0.75rem solid transparent;
+  border-inline-end: 0.4rem solid var(--article-tag-bg);
+}
+
+.article-header-tags .tags a:hover,
+.article-header-tags .tags a:focus {
+  color: #fff;
+  filter: brightness(1.2);
+}
+
+@media screen and (max-width: 30em) {
+  .article-header-meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .article-header-tags .tags {
+    justify-content: flex-start;
+  }
+}
+
 /* Review metadata — issue #78 */
 .review-metadata {
   display: flex;

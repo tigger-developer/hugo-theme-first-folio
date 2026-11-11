@@ -310,6 +310,7 @@ Lower numbers appear first. A page can have both `carousel` and `pin` - it appea
 ```yaml
 hideDate: true
 hideAuthor: true
+hideTags: true
 toc: true
 tocTitle: "Contents"
 tldr: "A one-sentence summary shown at the top of the article."
@@ -321,6 +322,7 @@ linkTitle: "Short Label"
 |-------|---------|-------------|
 | `hideDate` | `false` | Hides the publication date on cards and article pages. |
 | `hideAuthor` | `false` | Hides the author name. |
+| `hideTags` | `false` | Hides article tags from both the header metadata and footer tag list. |
 | `toc` | `false` | Enables a table of contents sidebar. Set to `true` or a string (used as the ToC heading). |
 | `tocTitle` | `"Contents"` | Custom heading for the table of contents. |
 | `tldr` | - | Summary box displayed at the top of the article. |
@@ -370,6 +372,11 @@ breadcrumb: false
 ```
 
 Set to `false` to hide breadcrumbs on a specific page. Breadcrumbs are shown by default.
+
+Article tags appear as linked tag shapes alongside the breadcrumb. The
+breadcrumb retains layout priority; tags use the remaining width and move
+below it on narrow screens. Set `hideTags: true` on a page or in a cascade to
+remove tags from both the article header and the existing footer tag list.
 
 Top-level articles begin their breadcrumb with a link to the site home page. The
 label uses Hugo's `breadcrumbHome` translation key and defaults to `Home` in
