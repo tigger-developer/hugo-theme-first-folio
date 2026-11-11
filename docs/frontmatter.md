@@ -371,6 +371,16 @@ breadcrumb: false
 
 Set to `false` to hide breadcrumbs on a specific page. Breadcrumbs are shown by default.
 
+Top-level articles begin their breadcrumb with a link to the site home page. The
+label uses Hugo's `breadcrumbHome` translation key and defaults to `Home` in
+English. A consuming site can override the label in its own `i18n/en.yaml` (or
+the corresponding file for another language):
+
+```yaml
+breadcrumbHome:
+  other: Start
+```
+
 ---
 
 ## Gallery mode
